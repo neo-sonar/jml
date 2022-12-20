@@ -87,6 +87,8 @@ set(sources
     "Layer/Effect/LayerEffect.hpp"
     "Layer/Effect/LayerEffectList.cpp"
     "Layer/Effect/LayerEffectList.hpp"
+    "Layer/Effect/StackBlurEffect.cpp"
+    "Layer/Effect/StackBlurEffect.hpp"
 
     "Layer/Export/Exporter.hpp"
     "Layer/Export/ImageExporter.cpp"
