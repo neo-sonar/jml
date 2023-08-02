@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: BSL-1.0
-
 import re
 import os
 
