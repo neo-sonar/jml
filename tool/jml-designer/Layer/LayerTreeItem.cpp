@@ -5,9 +5,9 @@
 
 namespace mc {
 
-static auto getSelectedValueTrees(juce::TreeView& treeView) -> Vector<juce::ValueTree>
+static auto getSelectedValueTrees(juce::TreeView& treeView) -> std::vector<juce::ValueTree>
 {
-    auto items        = Vector<juce::ValueTree>{};
+    auto items        = std::vector<juce::ValueTree>{};
     auto addValueTree = [&items](auto const& i) { items.push_back(i.getState()); };
     forEachSelectedItemWithType<LayerTreeItem>(treeView, addValueTree);
     return items;

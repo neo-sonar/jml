@@ -23,7 +23,7 @@ private:
     LayerSelection& _selection;
     juce::PropertyPanel _panel;
 
-    UniquePtr<juce::FileChooser> _fileChooser{nullptr};
+    std::unique_ptr<juce::FileChooser> _fileChooser{nullptr};
 };
 
 } // namespace mc

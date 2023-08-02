@@ -9,7 +9,7 @@ namespace mc {
 Document::Document(juce::ValueTree valueTree, juce::UndoManager* um)
     : _valueTree{std::move(valueTree)}, _undoManager{um}
 {
-    auto group = makeUnique<GroupLayer>(_valueTree.getOrCreateChildWithName(GroupLayer::IDs::type, um), *um);
+    auto group = std::make_unique<GroupLayer>(_valueTree.getOrCreateChildWithName(GroupLayer::IDs::type, um), *um);
     group->setX(0.0F);
     group->setY(0.0F);
     group->setWidth(750.0F);
@@ -75,12 +75,12 @@ auto Document::save(juce::File const& file) -> void
     saveValueTree(getValueTree(), file, true);
 }
 
-auto Document::load(juce::File const& file, juce::UndoManager* um) -> UniquePtr<Document>
+auto Document::load(juce::File const& file, juce::UndoManager* um) -> std::unique_ptr<Document>
 {
     auto vt = loadValueTree(file, true);
     if (not vt.isValid()) { return {}; }
     if (not vt.hasType("JML")) { return {}; }
-    return makeUnique<Document>(std::move(vt), um);
+    return std::make_unique<Document>(std::move(vt), um);
 }
 
 } // namespace mc

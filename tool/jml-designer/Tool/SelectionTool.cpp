@@ -5,6 +5,15 @@
 
 namespace mc {
 
+struct RepaintOnExit
+{
+    explicit RepaintOnExit(DocumentCanvas& canvas) : _canvas{canvas} {}
+    ~RepaintOnExit() { _canvas.repaint(); }
+
+private:
+    DocumentCanvas& _canvas;
+};
+
 SelectionTool::SelectionTool(DocumentCanvas& c) noexcept : Tool{c}
 {
     getDocumentCanvas().addMouseListener(this, true);
@@ -30,7 +39,7 @@ auto SelectionTool::paintTool(juce::Graphics& g) -> void
 
 auto SelectionTool::mouseDown(juce::MouseEvent const& event) -> void
 {
-    SCOPE_EXIT { getDocumentCanvas().repaint(); };
+    auto paintOnExit = RepaintOnExit{getDocumentCanvas()};
 
     getLayerSelection().clear();
     auto* layerCanvas = dynamic_cast<Layer::Canvas*>(event.eventComponent);

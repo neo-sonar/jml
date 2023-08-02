@@ -57,7 +57,7 @@ auto LayerExportPanel::launchExportFileChooser() -> void
     auto const* msg       = "Please select the image file you want to save to...";
     auto const dir        = juce::File::getCurrentWorkingDirectory();
     auto const* const ext = format == ImageExporter::Format::png ? "*.png" : "*.jpg";
-    _fileChooser          = makeUnique<juce::FileChooser>(msg, dir, ext);
+    _fileChooser          = std::make_unique<juce::FileChooser>(msg, dir, ext);
 
     auto const chooserFlags = juce::FileBrowserComponent::saveMode | juce::FileBrowserComponent::warnAboutOverwriting;
     auto const load = [this, format](juce::FileChooser const& chooser) { exportToImage(chooser.getResult(), format); };

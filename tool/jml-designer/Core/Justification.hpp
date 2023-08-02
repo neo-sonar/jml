@@ -4,7 +4,7 @@
 
 namespace mc {
 [[nodiscard]] auto makeJustificationProperty(juce::Value value, juce::String const& name)
-    -> UniquePtr<juce::PropertyComponent>;
+    -> std::unique_ptr<juce::PropertyComponent>;
 }
 
 template<>

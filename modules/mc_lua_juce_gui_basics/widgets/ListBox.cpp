@@ -37,7 +37,7 @@ auto juce_ListBox(sol::table& state) -> void
     );
     // clang-format on
 
-    listBox["getModel"]                       = &juce::ListBox::getModel;
+    listBox["getListBoxModel"]                = &juce::ListBox::getListBoxModel;
     listBox["updateContent"]                  = &juce::ListBox::updateContent;
     listBox["setMultipleSelectionEnabled"]    = &juce::ListBox::setMultipleSelectionEnabled;
     listBox["setClickingTogglesRowSelection"] = &juce::ListBox::setClickingTogglesRowSelection;

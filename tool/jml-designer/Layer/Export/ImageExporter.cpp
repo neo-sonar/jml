@@ -7,10 +7,10 @@
 namespace mc {
 
 [[nodiscard]] static auto makeImageFileFormatForExporter(ImageExporter::Format format)
-    -> UniquePtr<juce::ImageFileFormat>
+    -> std::unique_ptr<juce::ImageFileFormat>
 {
-    if (format == ImageExporter::Format::jpg) { return makeUnique<juce::JPEGImageFormat>(); }
-    if (format == ImageExporter::Format::png) { return makeUnique<juce::PNGImageFormat>(); }
+    if (format == ImageExporter::Format::jpg) { return std::make_unique<juce::JPEGImageFormat>(); }
+    if (format == ImageExporter::Format::png) { return std::make_unique<juce::PNGImageFormat>(); }
     return nullptr;
 }
 

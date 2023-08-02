@@ -20,13 +20,13 @@ struct Document
     [[nodiscard]] auto getUndoManager() const -> juce::UndoManager*;
 
     auto save(juce::File const& file) -> void;
-    [[nodiscard]] static auto load(juce::File const& file, juce::UndoManager* um) -> UniquePtr<Document>;
+    [[nodiscard]] static auto load(juce::File const& file, juce::UndoManager* um) -> std::unique_ptr<Document>;
 
 private:
     juce::ValueTree _valueTree;
     juce::UndoManager* _undoManager;
 
-    UniquePtr<Layer> _root;
+    std::unique_ptr<Layer> _root;
     LayerSelection _layerSelection;
 };
 

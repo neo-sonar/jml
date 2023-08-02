@@ -109,13 +109,13 @@ auto MainComponent::documentLoad() -> void
 
         _documentFile = file;
         _document     = std::move(newDoc);
-        _editor       = makeUnique<DocumentEditor>(*_document);
+        _editor       = std::make_unique<DocumentEditor>(*_document);
         jassert(_editor != nullptr);
         addAndMakeVisible(*_editor);
         resized();
     };
 
-    _fileChooser = makeUnique<juce::FileChooser>(msg, dir, "*.jml-designer");
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
     _fileChooser->launchAsync(juce::FileBrowserComponent::openMode, load);
 }
 
@@ -129,7 +129,7 @@ auto MainComponent::documentSaveAs() -> void
         _document->save(juce::File{results[0]});
     };
 
-    _fileChooser = makeUnique<juce::FileChooser>(msg, dir, "*.jml-designer");
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
     _fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, load);
 }
 

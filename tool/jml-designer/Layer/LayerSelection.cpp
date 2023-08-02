@@ -1,7 +1,7 @@
 #include "LayerSelection.hpp"
 
 namespace mc {
-auto LayerSelection::getLayers() const -> Span<juce::WeakReference<Layer> const> { return _layers; }
+auto LayerSelection::getLayers() const -> std::span<juce::WeakReference<Layer> const> { return _layers; }
 
 auto LayerSelection::clear() -> void
 {

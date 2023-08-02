@@ -2,7 +2,7 @@
 
 namespace mc {
 
-auto makeJustificationProperty(juce::Value value, juce::String const& name) -> UniquePtr<juce::PropertyComponent>
+auto makeJustificationProperty(juce::Value value, juce::String const& name) -> std::unique_ptr<juce::PropertyComponent>
 {
     auto const optionNames = juce::StringArray{
         "Left",
@@ -42,7 +42,7 @@ auto makeJustificationProperty(juce::Value value, juce::String const& name) -> U
         toVar(juce::Justification::bottomRight),
     };
 
-    return makeUnique<juce::ChoicePropertyComponent>(value, name, optionNames, optionValues);
+    return std::make_unique<juce::ChoicePropertyComponent>(value, name, optionNames, optionValues);
 }
 
 } // namespace mc

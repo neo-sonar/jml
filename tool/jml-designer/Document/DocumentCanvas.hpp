@@ -23,7 +23,7 @@ private:
     auto updateTool(ToolType type) -> void;
 
     Document& _document;
-    UniquePtr<Tool> _tool;
+    std::unique_ptr<Tool> _tool;
 };
 
 } // namespace mc

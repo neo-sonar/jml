@@ -8,7 +8,7 @@
 namespace mc {
 
 DocumentCanvas::DocumentCanvas(Document& doc, ToolBar& toolBar)
-    : _document{doc}, _tool{makeUnique<SelectionTool>(*this)}
+    : _document{doc}, _tool{std::make_unique<SelectionTool>(*this)}
 {
     addAndMakeVisible(_document.getRootLayer()->getCanvas());
     toolBar.onToolChange = [this](ToolType type) { updateTool(type); };
@@ -36,9 +36,9 @@ auto DocumentCanvas::resized() -> void
 auto DocumentCanvas::updateTool(ToolType type) -> void
 {
     _tool.reset(nullptr);
-    if (type == ToolType::select) { _tool = makeUnique<SelectionTool>(*this); }
-    if (type == ToolType::rectangle) { _tool = makeUnique<ShapeTool>(*this, Shape::Drawable); }
-    if (type == ToolType::ellipse) { _tool = makeUnique<ShapeTool>(*this, Shape::Ellipse); }
+    if (type == ToolType::select) { _tool = std::make_unique<SelectionTool>(*this); }
+    if (type == ToolType::rectangle) { _tool = std::make_unique<ShapeTool>(*this, Shape::Drawable); }
+    if (type == ToolType::ellipse) { _tool = std::make_unique<ShapeTool>(*this, Shape::Ellipse); }
     repaint();
 }
 } // namespace mc

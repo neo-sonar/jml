@@ -22,7 +22,7 @@ struct Application final : juce::JUCEApplication
 
 private:
     juce::LookAndFeel_V4 _lnf{makeColorScheme()};
-    UniquePtr<juce::DocumentWindow> _mainWindow{nullptr};
+    std::unique_ptr<juce::DocumentWindow> _mainWindow{nullptr};
 };
 
 } // namespace mc

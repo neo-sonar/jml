@@ -5,7 +5,7 @@
 namespace mc {
 
 LayerTree::LayerTree(Document& document)
-    : _document{document}, _root{makeUnique<LayerTreeItem>(*document.getRootLayer())}
+    : _document{document}, _root{std::make_unique<LayerTreeItem>(*document.getRootLayer())}
 {
     // setRootItemVisible(false);
     setMultiSelectEnabled(true);

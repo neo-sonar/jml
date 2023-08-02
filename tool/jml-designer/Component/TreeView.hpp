@@ -23,12 +23,12 @@ auto forEachSelectedItemWithType(juce::TreeView& treeView, auto callback) -> voi
     });
 }
 
-inline void moveItems(Span<juce::ValueTree const> items, juce::ValueTree newParent, int insertIndex,
+inline void moveItems(std::span<juce::ValueTree const> items, juce::ValueTree newParent, int insertIndex,
                       juce::UndoManager& undoManager)
 {
     if (items.empty()) { return; }
 
-    for (auto i{mc::ssize(items) - 1}; i >= 0; --i) {
+    for (auto i{std::ssize(items) - 1}; i >= 0; --i) {
         auto const& v  = items[static_cast<size_t>(i)];
         auto oldParent = v.getParent();
 

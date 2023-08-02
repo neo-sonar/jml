@@ -28,12 +28,12 @@ private:
 
     juce::UndoManager _undoManager;
     juce::ApplicationCommandManager _commandManager{};
-    UniquePtr<juce::FileChooser> _fileChooser{};
+    std::unique_ptr<juce::FileChooser> _fileChooser{};
     MenuBar _menuBar{_commandManager};
 
     juce::File _documentFile;
-    UniquePtr<Document> _document{makeUnique<Document>(juce::ValueTree{"JML"}, &_undoManager)};
-    UniquePtr<DocumentEditor> _editor{makeUnique<DocumentEditor>(*_document)};
+    std::unique_ptr<Document> _document{std::make_unique<Document>(juce::ValueTree{"JML"}, &_undoManager)};
+    std::unique_ptr<DocumentEditor> _editor{std::make_unique<DocumentEditor>(*_document)};
 };
 
 } // namespace mc

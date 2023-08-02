@@ -18,7 +18,7 @@ struct LayerSelection
 
     LayerSelection() = default;
 
-    [[nodiscard]] auto getLayers() const -> Span<juce::WeakReference<Layer> const>;
+    [[nodiscard]] auto getLayers() const -> std::span<juce::WeakReference<Layer> const>;
 
     auto add(Layer* layer) -> void;
     auto remove(Layer* layer) -> void;
@@ -32,7 +32,7 @@ struct LayerSelection
 
 private:
     juce::ListenerList<Listener> _listeners;
-    Vector<juce::WeakReference<Layer>> _layers{};
+    std::vector<juce::WeakReference<Layer>> _layers{};
 };
 
 } // namespace mc

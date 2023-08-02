@@ -23,8 +23,8 @@ struct ShapeTool final
 
 private:
     Shape _shape;
-    Optional<juce::Point<float>> _start;
-    Optional<juce::Point<float>> _current;
+    std::optional<juce::Point<float>> _start;
+    std::optional<juce::Point<float>> _current;
 };
 
 } // namespace mc

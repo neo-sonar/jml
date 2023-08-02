@@ -20,7 +20,7 @@ struct LayerTree final
 
 private:
     Document& _document;
-    UniquePtr<LayerTreeItem> _root;
+    std::unique_ptr<LayerTreeItem> _root;
 };
 
 } // namespace mc
