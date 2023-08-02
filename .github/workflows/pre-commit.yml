@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check Pre-Commit Hooks
-        run: make check
+        run: pre-commit run -a
