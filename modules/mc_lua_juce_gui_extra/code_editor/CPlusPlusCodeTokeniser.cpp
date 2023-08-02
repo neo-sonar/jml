@@ -2,7 +2,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void
 {
@@ -15,4 +15,4 @@ auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void
     tokeniser["isReservedKeyword"] = &juce::CPlusPlusCodeTokeniser::isReservedKeyword;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

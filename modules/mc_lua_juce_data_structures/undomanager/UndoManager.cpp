@@ -2,7 +2,7 @@
 
 #include <juce_data_structures/juce_data_structures.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_UndoManager(sol::table& state) -> void
 {
@@ -42,4 +42,4 @@ auto juce_UndoManager(sol::table& state) -> void
     um["isPerformingUndoRedo"]                    = &juce::UndoManager::isPerformingUndoRedo;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

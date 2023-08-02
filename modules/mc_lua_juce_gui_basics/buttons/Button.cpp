@@ -4,7 +4,7 @@
 
 SOL_BASE_CLASSES(juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_Button(sol::table& state) -> void
 {
     // clang-format off
@@ -27,4 +27,4 @@ auto juce_Button(sol::table& state) -> void
     button["getX"]      = &juce::Component::getX;
     button["getY"]      = &juce::Component::getY;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

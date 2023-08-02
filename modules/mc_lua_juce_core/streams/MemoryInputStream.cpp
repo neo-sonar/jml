@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_MemoryInputStream(sol::table& state) -> void
 {
@@ -20,4 +20,4 @@ auto juce_MemoryInputStream(sol::table& state) -> void
     stream["getDataSize"] = &juce::MemoryInputStream::getDataSize;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

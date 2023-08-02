@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_TreeView(sol::table& state) -> void
 {
@@ -49,4 +49,4 @@ auto juce_TreeView(sol::table& state) -> void
     treeView["restoreOpennessState"]         = &juce::TreeView::restoreOpennessState;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

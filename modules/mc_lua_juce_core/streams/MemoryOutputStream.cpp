@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_MemoryOutputStream(sol::table& state) -> void
 {
@@ -27,4 +27,4 @@ auto juce_MemoryOutputStream(sol::table& state) -> void
     stream["getMemoryBlock"] = &juce::MemoryOutputStream::getMemoryBlock;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

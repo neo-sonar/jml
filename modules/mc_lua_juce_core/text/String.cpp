@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_String(sol::table& state) -> void
 {
     auto str = state.new_usertype<juce::String>("String", sol::constructors<juce::String(), juce::String(char const*)>());
@@ -15,4 +15,4 @@ auto juce_String(sol::table& state) -> void
     str["hash"]       = &juce::String::hash;
     str["length"]     = &juce::String::length;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

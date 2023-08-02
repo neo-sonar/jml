@@ -2,7 +2,7 @@
 
 #include <juce_data_structures/juce_data_structures.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_ValueTree(sol::table& state) -> void
 {
@@ -74,4 +74,4 @@ auto juce_ValueTree(sol::table& state) -> void
     um["readFromGZIPData"] = &juce::ValueTree::readFromGZIPData;
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

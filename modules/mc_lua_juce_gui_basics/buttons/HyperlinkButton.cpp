@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_HyperlinkButton(sol::table& state) -> void
 {
     // clang-format off
@@ -29,4 +29,4 @@ auto juce_HyperlinkButton(sol::table& state) -> void
     button["setJustificationType"] = &juce::HyperlinkButton::setJustificationType;
     button["getJustificationType"] = &juce::HyperlinkButton::getJustificationType;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

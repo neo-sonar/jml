@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 struct LuaLookAndFeel_V4 final : juce::LookAndFeel_V4
 {
     LuaLookAndFeel_V4()           = default;
@@ -68,4 +68,4 @@ auto juce_LuaLookAndFeel_V4(sol::table& state) -> void
     lnf["drawToggleButton"]     = &LuaLookAndFeel_V4::lua_drawToggleButton;
     lnf["dummy"]                = &LuaLookAndFeel_V4::dummy;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

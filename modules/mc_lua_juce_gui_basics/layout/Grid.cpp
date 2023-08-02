@@ -8,7 +8,7 @@ namespace juce {
 [[maybe_unused]] static auto operator==(Grid::TrackInfo const&, Grid::TrackInfo const&) -> bool { return false; }
 [[maybe_unused]] static auto operator!=(Grid::TrackInfo const&, Grid::TrackInfo const&) -> bool { return true; }
 } // namespace juce
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_Grid(sol::table& state) -> void
 {
     auto table = state["Grid"].get_or_create<sol::table>();
@@ -277,4 +277,4 @@ auto juce_Grid(sol::table& state) -> void
     gridItemStartAndEndProperty["start"] = &GI::StartAndEndProperty::start;
     gridItemStartAndEndProperty["end"]   = &GI::StartAndEndProperty::end;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

@@ -1,7 +1,7 @@
 #include "Graphics.hpp"
 
 #include <juce_graphics/juce_graphics.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_Graphics(sol::table& state) -> void
 {
     // TODO(tobi):
@@ -126,4 +126,4 @@ auto juce_Graphics(sol::table& state) -> void
     );
     // clang-format on
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

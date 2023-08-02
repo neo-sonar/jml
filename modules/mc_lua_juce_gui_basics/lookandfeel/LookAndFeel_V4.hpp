@@ -1,5 +1,5 @@
 #pragma once
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_LookAndFeel_V4(sol::table& state) -> void;
 }

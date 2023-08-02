@@ -78,7 +78,7 @@ private:
 SOL_BASE_CLASSES(LuaComponent, juce::Component, juce::MouseListener);
 SOL_DERIVED_CLASSES(juce::Component, LuaComponent);
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_LuaComponent(sol::table& state) -> void
 {
     // clang-format off
@@ -100,4 +100,4 @@ auto juce_LuaComponent(sol::table& state) -> void
     comp["mouseWheelMove"]   = &LuaComponent::lua_mouseWheelMove;
     comp["mouseMagnify"]     = &LuaComponent::lua_mouseMagnify;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

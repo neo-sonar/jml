@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_MemoryBlock(sol::table& state) -> void
 {
     // clang-format off
@@ -36,4 +36,4 @@ auto juce_MemoryBlock(sol::table& state) -> void
     mb["toBase64Encoding"]   = &juce::MemoryBlock::toBase64Encoding;
     mb["fromBase64Encoding"] = &juce::MemoryBlock::fromBase64Encoding;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

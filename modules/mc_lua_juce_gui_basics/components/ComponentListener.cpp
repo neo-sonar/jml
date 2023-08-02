@@ -1,6 +1,6 @@
 #include "ComponentListener.hpp"
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 namespace {
 struct LuaComponentListener final : juce::ComponentListener
 {
@@ -92,4 +92,4 @@ auto juce_ComponentListener(sol::table& state) -> void
     luaCL["componentBeingDeleted"]           = &LuaComponentListener::lua_componentBeingDeleted;
     luaCL["componentEnablementChanged"]      = &LuaComponentListener::lua_componentEnablementChanged;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

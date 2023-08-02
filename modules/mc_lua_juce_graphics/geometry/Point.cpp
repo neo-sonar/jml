@@ -1,7 +1,7 @@
 #include "Point.hpp"
 
 #include <juce_graphics/juce_graphics.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 template<typename T>
 auto juce_PointImpl(sol::table& state, char const* name) -> void
 {
@@ -43,4 +43,4 @@ auto juce_Point(sol::table& state) -> void
     juce_PointImpl<float>(state, "PointFloat");
     juce_PointImpl<double>(state, "PointDouble");
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_InputStream(sol::table& state) -> void
 {
     auto stream                        = state.new_usertype<juce::InputStream>("InputStream", sol::no_constructor);
@@ -30,4 +30,4 @@ auto juce_InputStream(sol::table& state) -> void
     stream["setPosition"]              = &juce::InputStream::setPosition;
     stream["skipNextBytes"]            = &juce::InputStream::skipNextBytes;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

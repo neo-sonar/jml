@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 template<typename T>
 auto juce_RangeImpl(sol::table& state, char const* name) -> void
 {
@@ -25,4 +25,4 @@ auto juce_Range(sol::table& state) -> void
     juce_RangeImpl<float>(state, "RangeFloat");
     juce_RangeImpl<double>(state, "RangeDouble");
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

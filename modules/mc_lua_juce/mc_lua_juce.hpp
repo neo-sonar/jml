@@ -27,6 +27,6 @@ END_JUCE_MODULE_DECLARATION
 #include <mc_lua_juce_gui_basics/mc_lua_juce_gui_basics.hpp>
 #include <mc_lua_juce_gui_extra/mc_lua_juce_gui_extra.hpp>
 
-namespace mc::lua::bindings {
-auto allJuceModules(sol::state& lua) -> void;
+namespace lua_juce {
+auto allModules(sol::state& lua) -> void;
 }

@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_OutputStream(sol::table& state) -> void
 {
     auto stream                    = state.new_usertype<juce::OutputStream>("OutputStream", sol::no_constructor);
@@ -30,4 +30,4 @@ auto juce_OutputStream(sol::table& state) -> void
     stream["setNewLineString"]     = &juce::OutputStream::setNewLineString;
     stream["getNewLineString"]     = &juce::OutputStream::getNewLineString;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

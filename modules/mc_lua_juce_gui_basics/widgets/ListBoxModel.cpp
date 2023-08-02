@@ -1,5 +1,5 @@
 #include "ListBoxModel.hpp"
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 static auto juce_LuaListBoxModel(sol::table& state) -> void
 {
@@ -46,4 +46,4 @@ auto juce_ListBoxModel(sol::table& state) -> void
 
     juce_LuaListBoxModel(state);
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

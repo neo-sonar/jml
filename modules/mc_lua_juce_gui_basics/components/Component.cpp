@@ -1,7 +1,7 @@
 #include "Component.hpp"
 
 #include <juce_gui_basics/juce_gui_basics.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 struct SolObjectSet final : juce::ReferenceCountedObject
 {
     using Ptr = juce::ReferenceCountedObjectPtr<SolObjectSet>;
@@ -92,4 +92,4 @@ auto juce_Component(sol::table& state) -> void
         self->addAndMakeVisible(component);
     };
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

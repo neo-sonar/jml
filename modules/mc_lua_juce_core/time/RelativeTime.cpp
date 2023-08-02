@@ -2,7 +2,7 @@
 
 #include <juce_core/juce_core.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_RelativeTime(sol::table& state) -> void
 {
     auto t = state.new_usertype<juce::RelativeTime>("RelativeTime", sol::constructors<juce::RelativeTime(double)>());
@@ -25,4 +25,4 @@ auto juce_RelativeTime(sol::table& state) -> void
     t["days"]         = &juce::RelativeTime::days;
     t["weeks"]        = &juce::RelativeTime::weeks;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

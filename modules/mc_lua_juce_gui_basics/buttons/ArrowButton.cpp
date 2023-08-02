@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_ArrowButton(sol::table& state) -> void
 {
     // clang-format off
@@ -21,4 +21,4 @@ auto juce_ArrowButton(sol::table& state) -> void
     );
     // clang-format on
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

@@ -2,7 +2,7 @@
 
 #include <juce_graphics/juce_graphics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_Colour(sol::table& state) -> void
 {
     // clang-format off
@@ -14,4 +14,4 @@ auto juce_Colour(sol::table& state) -> void
     );
     // clang-format on
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

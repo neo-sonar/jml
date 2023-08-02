@@ -1,7 +1,7 @@
 #include "Justification.hpp"
 
 #include <juce_graphics/juce_graphics.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_Justification(sol::table& state) -> void
 {
     using Type = juce::Justification;
@@ -31,4 +31,4 @@ auto juce_Justification(sol::table& state) -> void
     );
     // clang-format on
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

@@ -1,7 +1,7 @@
 #include "BigInteger.hpp"
 
 #include <juce_core/juce_core.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_BigInteger(sol::table& state) -> void
 {
     // clang-format off
@@ -52,4 +52,4 @@ auto juce_BigInteger(sol::table& state) -> void
     bigInt["toMemoryBlock"]             = &juce::BigInteger::toMemoryBlock;
     bigInt["loadFromMemoryBlock"]       = &juce::BigInteger::loadFromMemoryBlock;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

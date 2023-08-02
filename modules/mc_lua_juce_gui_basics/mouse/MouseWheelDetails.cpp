@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_MouseWheelDetails(sol::table& state) -> void
 {
     auto wheel          = state.new_usertype<juce::MouseWheelDetails>("MouseWheelDetails");
@@ -12,4 +12,4 @@ auto juce_MouseWheelDetails(sol::table& state) -> void
     wheel["isSmooth"]   = &juce::MouseWheelDetails::isSmooth;
     wheel["isInertial"] = &juce::MouseWheelDetails::isInertial;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

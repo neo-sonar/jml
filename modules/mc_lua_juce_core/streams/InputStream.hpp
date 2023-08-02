@@ -1,5 +1,5 @@
 #pragma once
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_InputStream(sol::table& state) -> void;
 }

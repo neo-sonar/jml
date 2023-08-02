@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_ImageButton(sol::table& state) -> void
 {
     // clang-format off
@@ -26,4 +26,4 @@ auto juce_ImageButton(sol::table& state) -> void
     button["getOverImage"]   = &juce::ImageButton::getOverImage;
     button["getDownImage"]   = &juce::ImageButton::getDownImage;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

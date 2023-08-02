@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_TextEditor(sol::table& state) -> void
 {
@@ -120,4 +120,4 @@ auto juce_TextEditor(sol::table& state) -> void
     );
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

@@ -2,7 +2,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_LuaTokeniser(sol::table& state) -> void
 {
@@ -14,4 +14,4 @@ auto juce_LuaTokeniser(sol::table& state) -> void
     // clang-format on
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

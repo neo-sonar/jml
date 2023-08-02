@@ -7,7 +7,7 @@ inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
 {
     auto state = sol::state{};
     state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
-    lua::bindings::allJuceModules(state);
+    lua_juce::allModules(state);
 
     auto const scriptFile = juce::File{cli.scriptPath};
     if (cli.verbose) { std::cout << "Run test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n'; }

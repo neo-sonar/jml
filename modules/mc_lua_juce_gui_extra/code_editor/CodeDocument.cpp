@@ -2,7 +2,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 
 auto juce_CodeDocument(sol::table& state) -> void
 {
@@ -42,4 +42,4 @@ auto juce_CodeDocument(sol::table& state) -> void
     table["new"] = [] { return std::unique_ptr<juce::CodeDocument>(); };
 }
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

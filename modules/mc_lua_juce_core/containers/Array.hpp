@@ -1,6 +1,6 @@
 #pragma once
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 template<typename T>
 auto juce_ArrayImpl(sol::table& state, char const* name) -> void
 {
@@ -63,4 +63,4 @@ auto juce_ArrayImpl(sol::table& state, char const* name) -> void
 
 auto juce_Array(sol::table& state) -> void;
 
-} // namespace mc::lua::bindings
+} // namespace lua_juce

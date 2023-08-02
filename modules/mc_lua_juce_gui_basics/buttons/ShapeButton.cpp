@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_ShapeButton(sol::table& state) -> void
 {
     // clang-format off
@@ -28,4 +28,4 @@ auto juce_ShapeButton(sol::table& state) -> void
     button["setOutline"]         = &juce::ShapeButton::setOutline;
     button["setBorderSize"]      = &juce::ShapeButton::setBorderSize;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce

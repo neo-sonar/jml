@@ -1,7 +1,7 @@
 #include "ColourGradient.hpp"
 
 #include <juce_graphics/juce_graphics.h>
-namespace mc::lua::bindings {
+namespace lua_juce {
 auto juce_ColourGradient(sol::table& state) -> void
 {
     // TODO(tobi):
@@ -47,4 +47,4 @@ auto juce_ColourGradient(sol::table& state) -> void
     gradient["point2"]   = &juce::ColourGradient::point2;
     gradient["isRadial"] = &juce::ColourGradient::isRadial;
 }
-} // namespace mc::lua::bindings
+} // namespace lua_juce
