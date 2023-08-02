@@ -36,7 +36,7 @@ target_compile_definitions(jml-cli
 
 target_link_libraries(jml-cli
     PRIVATE
-        mc::lua_juce
+        lua_juce::lua_juce
 
     PUBLIC
         lua::lua

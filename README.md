@@ -15,11 +15,11 @@ add_subdirectory(path/to/jml/modules)
 target_link_libraries(YourApplication
     PRIVATE
         # This includes all JUCE modules for which bindings have been created
-        mc::lua_juce
+        lua_juce::lua_juce
 
         # You could also only link to individual modules
-        # mc::lua_juce_core
-        # mc::lua_juce_events
+        # lua_juce::lua_juce_core
+        # lua_juce::lua_juce_events
         # ...
     PUBLIC
         # Required for bindings
