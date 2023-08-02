@@ -2,12 +2,12 @@
 BEGIN_JUCE_MODULE_DECLARATION
 
     ID:                 lua_juce_events
-    vendor:             Modern Circuits
+    vendor:             neo-sonar
     version:            0.1.0
     name:               Lua bindings for juce_events
     description:        Lua/Sol2 bindings for juce_events
     dependencies:       lua_juce_core, juce_events
-    website:            http://github.com/ModernCircuits/jml
+    website:            http://github.com/neo-sonar/jml
     license:            BSL-1.0
     minimumCppStandard: 20
 

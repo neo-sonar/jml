@@ -2,12 +2,12 @@
 BEGIN_JUCE_MODULE_DECLARATION
 
     ID:                 lua_juce_gui_extra
-    vendor:             Modern Circuits
+    vendor:             neo-sonar
     version:            0.1.0
     name:               Lua bindings for juce_gui_extra
     description:        Lua/Sol2 bindings for juce_gui_extra
     dependencies:       lua_juce_gui_basics, juce_gui_extra
-    website:            http://github.com/ModernCircuits/jml
+    website:            http://github.com/neo-sonar/jml
     license:            GPL/Commercial
     minimumCppStandard: 20
 

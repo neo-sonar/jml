@@ -1,11 +1,5 @@
 project(jml-designer VERSION 0.1.0)
 
-set_directory_properties(
-    PROPERTIES
-        JUCE_COMPANY_NAME       "Modern Circuits"
-        JUCE_COMPANY_COPYRIGHT  "Copyright 2022 Modern Circuits. All rights reserved."
-)
-
 juce_add_binary_data(JMLDesigner_BinaryData
     HEADER_NAME
         "BinaryData.hpp"
@@ -124,7 +118,6 @@ target_compile_definitions(jml-designer
         JUCE_USE_CURL=0
         JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:jml-designer,JUCE_PRODUCT_NAME>"
         JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:jml-designer,JUCE_VERSION>"
-        _SILENCE_CXX23_ALIGNED_STORAGE_DEPRECATION_WARNING=1
 )
 
 target_include_directories(jml-designer

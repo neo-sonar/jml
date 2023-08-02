@@ -36,6 +36,9 @@ FetchContent_Declare(JUCE GIT_REPOSITORY "https://github.com/juce-framework/JUCE
 FetchContent_MakeAvailable(JUCE)
 juce_disable_default_flags()
 
+set_directory_properties(PROPERTIES JUCE_COMPANY_COPYRIGHT "Copyright 2023 neo-sonar. All rights reserved.")
+set_directory_properties(PROPERTIES JUCE_COMPANY_NAME "neo-sonar")
+
 add_subdirectory(3rd_party/mc-juce/modules EXCLUDE_FROM_ALL)
 add_subdirectory(modules)
 add_subdirectory(tool/jml-cli)

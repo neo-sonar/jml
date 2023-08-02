@@ -2,12 +2,12 @@
 BEGIN_JUCE_MODULE_DECLARATION
 
     ID:                 lua_juce_data_structures
-    vendor:             Modern Circuits
+    vendor:             neo-sonar
     version:            0.1.0
     name:               Lua bindings for juce_data_structures
     description:        Lua/Sol2 bindings for juce_data_structures
     dependencies:       lua_juce_events, juce_data_structures
-    website:            http://github.com/ModernCircuits/jml
+    website:            http://github.com/neo-sonar/jml
     license:            GPL/Commercial
     minimumCppStandard: 20
 

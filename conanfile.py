@@ -7,9 +7,9 @@ from conan.tools.files import load
 required_conan_version = ">=1.50.0"
 
 
-class ModernCircuitsJML(ConanFile):
+class JML(ConanFile):
     name = "jml"
-    url = "https://github.com/ModernCircuits/jml"
+    url = "https://github.com/neo-sonar/jml"
     description = "JUCE Meets Lua"
     license = "BSL-1.0"
     settings = "os", "compiler", "build_type", "arch"
