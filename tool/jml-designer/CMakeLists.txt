@@ -1,5 +1,10 @@
 project(jml-designer VERSION 0.1.0)
 
+find_package(Boost 1.78 REQUIRED COMPONENTS boost)
+find_package(concurrentqueue REQUIRED)
+find_package(fmt REQUIRED)
+find_package(range-v3 REQUIRED)
+
 juce_add_binary_data(JMLDesigner_BinaryData
     HEADER_NAME
         "BinaryData.hpp"

@@ -55,16 +55,10 @@ target_compile_definitions(jml-viewer
 target_link_libraries(jml-viewer
     PRIVATE
         lua_juce::lua_juce
-        mc::mc_gui_extra
 
     PUBLIC
         lua::lua
         sol2::sol2
-
-        Boost::headers
-        concurrentqueue::concurrentqueue
-        fmt::fmt
-        range-v3::range-v3
 
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

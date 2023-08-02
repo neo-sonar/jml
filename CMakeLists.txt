@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(CMAKE_UNITY_BUILD ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
@@ -25,10 +26,6 @@ include(mcConan)
 enable_testing()
 include(CTest)
 
-find_package(Boost 1.78 REQUIRED COMPONENTS boost)
-find_package(concurrentqueue REQUIRED)
-find_package(fmt REQUIRED)
-find_package(range-v3 REQUIRED)
 find_package(sol2 REQUIRED)
 
 include(FetchContent)
@@ -41,9 +38,9 @@ set_directory_properties(PROPERTIES JUCE_COMPANY_NAME "neo-sonar")
 
 add_subdirectory(modules)
 
-add_subdirectory(3rd_party/mc-juce/modules EXCLUDE_FROM_ALL)
 add_subdirectory(tool/jml-cli)
-add_subdirectory(tool/jml-designer)
 add_subdirectory(tool/jml-viewer)
-
 add_subdirectory(test)
+
+add_subdirectory(3rd_party/mc-juce/modules EXCLUDE_FROM_ALL)
+add_subdirectory(tool/jml-designer)
