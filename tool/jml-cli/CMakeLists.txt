@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.21)
 project(jml-cli VERSION 0.1.0)
 
 find_package(CLI11 REQUIRED)
-find_package(sol2 REQUIRED)
 
 juce_add_console_app(jml-cli
     PRODUCT_NAME
@@ -38,7 +37,7 @@ target_compile_definitions(jml-cli
 
 target_link_libraries(jml-cli
     PRIVATE
-        mc::mc_lua_juce
+        mc::lua_juce
 
     PUBLIC
         lua::lua

@@ -1,7 +1,7 @@
 /*
 BEGIN_JUCE_MODULE_DECLARATION
 
-    ID:                 mc_lua_juce_core
+    ID:                 lua_juce_core
     vendor:             Modern Circuits
     version:            0.1.0
     name:               Lua bindings for juce_core
@@ -16,8 +16,8 @@ END_JUCE_MODULE_DECLARATION
 
 #pragma once
 
-#ifndef USE_MC_LUA_JUCE_CORE
-    #define USE_MC_LUA_JUCE_CORE
+#ifndef USE_LUA_JUCE_CORE
+    #define USE_LUA_JUCE_CORE
 #endif
 
 #include <juce_core/juce_core.h>

@@ -20,11 +20,11 @@ add_subdirectory(path/to/jml/modules)
 target_link_libraries(YourApplication
     PRIVATE
         # This includes all JUCE modules for which bindings have been created
-        mc::mc_lua_juce
+        mc::lua_juce
 
         # You could also only link to individual modules
-        # mc::mc_lua_juce_core
-        # mc::mc_lua_juce_events
+        # mc::lua_juce_core
+        # mc::lua_juce_events
         # ...
     PUBLIC
         # Required for bindings
@@ -35,7 +35,7 @@ target_link_libraries(YourApplication
 In your source code:
 
 ```cpp
-#include <mc_lua_juce/mc_lua_juce.hpp>
+#include <lua_juce/lua_juce.hpp>
 
 auto state = sol::state{};
 state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);

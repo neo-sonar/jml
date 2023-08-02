@@ -1,8 +1,5 @@
 project(jml-gui-tester VERSION 0.1.0)
 
-find_package(mc-core REQUIRED)
-find_package(sol2 REQUIRED)
-
 juce_add_gui_app(jml-gui-tester
     # VERSION ...                       # Set this if the app version is different to the project version
     # ICON_BIG ...                      # ICON_* arguments specify a path to an image file to use as an icon
@@ -39,14 +36,18 @@ target_compile_definitions(jml-gui-tester
 
 target_link_libraries(jml-gui-tester
     PRIVATE
-        mc::mc_lua_juce
+        mc::lua_juce
         mc::mc_gui_testing
         mc::mc_gui_extra
 
     PUBLIC
         lua::lua
         sol2::sol2
-        mc-core::mc-core
+
+        Boost::headers
+        concurrentqueue::concurrentqueue
+        fmt::fmt
+        range-v3::range-v3
 
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

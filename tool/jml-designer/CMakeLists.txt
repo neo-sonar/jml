@@ -1,7 +1,5 @@
 project(jml-designer VERSION 0.1.0)
 
-find_package(mc-core REQUIRED)
-
 set_directory_properties(
     PROPERTIES
         JUCE_COMPANY_NAME       "Modern Circuits"
@@ -140,7 +138,10 @@ target_link_libraries(jml-designer
     PUBLIC
         JMLDesigner_BinaryData
 
-        mc-core::mc-core
+        Boost::headers
+        concurrentqueue::concurrentqueue
+        fmt::fmt
+        range-v3::range-v3
 
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
