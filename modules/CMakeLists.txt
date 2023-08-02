@@ -8,6 +8,4 @@ juce_add_modules(ALIAS_NAMESPACE mc
     lua_juce_gui_basics
     lua_juce_gui_extra
     lua_juce
-
-    mc_gui_testing
 )

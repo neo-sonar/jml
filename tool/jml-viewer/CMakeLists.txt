@@ -56,7 +56,6 @@ target_compile_definitions(jml-viewer
 target_link_libraries(jml-viewer
     PRIVATE
         mc::lua_juce
-        mc::mc_gui_testing
         mc::mc_gui_extra
 
     PUBLIC
