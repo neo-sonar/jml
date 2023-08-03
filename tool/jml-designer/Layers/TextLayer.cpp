@@ -5,7 +5,7 @@
 namespace jml::designer {
 
 static auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
-                        juce::UndoManager* um)
+                               juce::UndoManager* um)
 {
     if (not tree.hasProperty(property)) { tree.setProperty(property, value, um); }
 }
