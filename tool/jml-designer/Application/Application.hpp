@@ -4,7 +4,7 @@
 
 #include "LookAndFeel/LookAndFeel.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct Application final : juce::JUCEApplication
 {
@@ -25,4 +25,4 @@ private:
     std::unique_ptr<juce::DocumentWindow> _mainWindow{nullptr};
 };
 
-} // namespace mc
+} // namespace jml::designer

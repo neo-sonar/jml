@@ -2,7 +2,7 @@
 
 #include <juce_graphics/juce_graphics.h>
 
-namespace mc {
+namespace jml::designer {
 
 struct StackBlurEffect final : juce::ImageEffectFilter
 {
@@ -51,4 +51,4 @@ private:
     JUCE_LEAK_DETECTOR(StackBlurEffect)
 };
 
-} // namespace mc
+} // namespace jml::designer

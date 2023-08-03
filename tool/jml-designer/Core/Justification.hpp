@@ -2,7 +2,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 [[nodiscard]] auto makeJustificationProperty(juce::Value value, juce::String const& name)
     -> std::unique_ptr<juce::PropertyComponent>;
 }

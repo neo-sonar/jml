@@ -3,7 +3,7 @@
 #include "Document/DocumentCanvas.hpp"
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct RepaintOnExit
 {
@@ -62,4 +62,4 @@ auto SelectionTool::getLayerSelection() const -> LayerSelection const&
     return getDocumentCanvas().document().getLayerSelection();
 }
 
-} // namespace mc
+} // namespace jml::designer

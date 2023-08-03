@@ -1,6 +1,6 @@
 #include "FileChangeListener.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 FileChangeListener::FileChangeListener(juce::File file)
     : _file{std::move(file)}, _writeTime{_file.getLastModificationTime()}
@@ -17,4 +17,4 @@ auto FileChangeListener::timerCallback() -> void
     if (onChange) { onChange(); }
 }
 
-} // namespace mc
+} // namespace jml::viewer

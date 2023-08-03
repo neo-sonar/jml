@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc {
+namespace jml::viewer {
 struct FileChangeListener final : juce::Timer
 {
     explicit FileChangeListener(juce::File file);
@@ -17,4 +17,4 @@ private:
     juce::Time _writeTime;
 };
 
-} // namespace mc
+} // namespace jml::viewer

@@ -3,7 +3,7 @@
 #include "Document/DocumentCanvas.hpp"
 #include "Layers/ShapeLayer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 ShapeTool::ShapeTool(DocumentCanvas& c, Shape shape) noexcept : Tool{c}, _shape{shape}
 {
@@ -45,7 +45,7 @@ auto ShapeTool::mouseUp(juce::MouseEvent const& /*event*/) -> void
     shape.setProperty(Layer::IDs::y, bounds.getY(), nullptr);
     shape.setProperty(Layer::IDs::width, bounds.getWidth(), nullptr);
     shape.setProperty(Layer::IDs::height, bounds.getHeight(), nullptr);
-    shape.setProperty(Layer::IDs::backgroundFill, toVar(juce::Colours::white), nullptr);
+    shape.setProperty(Layer::IDs::backgroundFill, mc::toVar(juce::Colours::white), nullptr);
     shape.setProperty(Layer::IDs::opacity, 1.0F, nullptr);
 
     auto& doc = getDocumentCanvas().document();
@@ -56,4 +56,4 @@ auto ShapeTool::mouseUp(juce::MouseEvent const& /*event*/) -> void
     getDocumentCanvas().repaint();
 }
 
-} // namespace mc
+} // namespace jml::designer

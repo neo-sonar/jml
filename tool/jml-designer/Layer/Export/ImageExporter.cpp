@@ -4,7 +4,7 @@
 
 #include <mc_graphics/mc_graphics.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 [[nodiscard]] static auto makeImageFileFormatForExporter(ImageExporter::Format format)
     -> std::unique_ptr<juce::ImageFileFormat>
@@ -20,33 +20,37 @@ auto ImageExporter::exportLayer(juce::OutputStream& out, Layer& layer, float sca
 {
     auto& canvas = layer.getCanvas();
     auto image   = canvas.createComponentSnapshot(canvas.getLocalBounds(), true, scale);
-    if (not image.isValid()) { return fail("invalid image returned for layer: {}", layer.getName()); }
+    if (not image.isValid()) { return mc::fail("invalid image returned for layer: {}", layer.getName()); }
 
     auto format = makeImageFileFormatForExporter(_format);
-    if (format == nullptr) { return fail("failed to create image format writer"); }
-    if (not format->writeImageToStream(image, out)) { return fail("couldn't write image for: {}", layer.getName()); }
+    if (format == nullptr) { return mc::fail("failed to create image format writer"); }
+    if (not format->writeImageToStream(image, out)) {
+        return mc::fail("couldn't write image for: {}", layer.getName());
+    }
 
     return juce::Result::ok();
 }
 
-} // namespace mc
+} // namespace jml::designer
 
-auto juce::VariantConverter<mc::ImageExporter::Format>::toVar(mc::ImageExporter::Format const& format) -> juce::var
+auto juce::VariantConverter<jml::designer::ImageExporter::Format>::toVar(
+    jml::designer::ImageExporter::Format const& format) -> juce::var
 {
-    if (format == mc::ImageExporter::Format::invalid) { return "invalid"; }
-    if (format == mc::ImageExporter::Format::jpg) { return "jpg"; }
-    if (format == mc::ImageExporter::Format::png) { return "png"; }
+    if (format == jml::designer::ImageExporter::Format::invalid) { return "invalid"; }
+    if (format == jml::designer::ImageExporter::Format::jpg) { return "jpg"; }
+    if (format == jml::designer::ImageExporter::Format::png) { return "png"; }
 
     jassertfalse;
     return {};
 }
 
-auto juce::VariantConverter<mc::ImageExporter::Format>::fromVar(juce::var const& v) -> mc::ImageExporter::Format
+auto juce::VariantConverter<jml::designer::ImageExporter::Format>::fromVar(juce::var const& v)
+    -> jml::designer::ImageExporter::Format
 {
-    if (v == "invalid") { return mc::ImageExporter::Format::invalid; }
-    if (v == "jpg") { return mc::ImageExporter::Format::jpg; }
-    if (v == "png") { return mc::ImageExporter::Format::png; }
+    if (v == "invalid") { return jml::designer::ImageExporter::Format::invalid; }
+    if (v == "jpg") { return jml::designer::ImageExporter::Format::jpg; }
+    if (v == "png") { return jml::designer::ImageExporter::Format::png; }
 
     jassertfalse;
-    return mc::ImageExporter::Format::invalid;
+    return jml::designer::ImageExporter::Format::invalid;
 }

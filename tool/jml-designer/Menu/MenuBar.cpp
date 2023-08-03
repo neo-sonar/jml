@@ -3,7 +3,7 @@
 #include "BinaryData.hpp"
 #include "CommandIDs.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 MenuBar::MenuBar(juce::ApplicationCommandManager& commandManager) : _commandManager{commandManager}
 {
@@ -51,4 +51,4 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
 
 auto MenuBar::menuItemSelected(int /*menuItemID*/, int /*topLevelMenuIndex*/) -> void {}
 
-} // namespace mc
+} // namespace jml::designer

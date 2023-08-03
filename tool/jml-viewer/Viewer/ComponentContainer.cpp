@@ -1,6 +1,6 @@
 #include "ComponentContainer.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 auto ComponentContainer::setContentComponent(juce::Component* component) -> void
 {
@@ -22,4 +22,4 @@ auto ComponentContainer::resized() -> void
     _component->setBounds(size.withCentre(area.getCentre()));
 }
 
-} // namespace mc
+} // namespace jml::viewer

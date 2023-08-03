@@ -2,7 +2,7 @@
 
 #include "LookAndFeel/JmlViewerColors.hpp"
 
-namespace mc {
+namespace jml::viewer {
 JmlViewerLookAndFeel::JmlViewerLookAndFeel()
     : juce::LookAndFeel_V4{{
         JmlViewerColors::whiteDirt,      // windowBackground
@@ -34,4 +34,4 @@ JmlViewerLookAndFeel::JmlViewerLookAndFeel()
     // setColour(juce::Slider::thumbColourId, JmlViewerColors::black);
 }
 
-} // namespace mc
+} // namespace jml::viewer

@@ -5,7 +5,7 @@
 
 #include <mc_data_structures/mc_data_structures.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct Document
 {
@@ -30,4 +30,4 @@ private:
     LayerSelection _layerSelection;
 };
 
-} // namespace mc
+} // namespace jml::designer

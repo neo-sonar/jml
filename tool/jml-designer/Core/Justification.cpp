@@ -1,6 +1,6 @@
 #include "Justification.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 auto makeJustificationProperty(juce::Value value, juce::String const& name) -> std::unique_ptr<juce::PropertyComponent>
 {
@@ -24,28 +24,28 @@ auto makeJustificationProperty(juce::Value value, juce::String const& name) -> s
     };
 
     auto const optionValues = juce::Array{
-        toVar(juce::Justification::left),
-        toVar(juce::Justification::right),
-        toVar(juce::Justification::horizontallyCentred),
-        toVar(juce::Justification::top),
-        toVar(juce::Justification::bottom),
-        toVar(juce::Justification::verticallyCentred),
-        toVar(juce::Justification::horizontallyJustified),
-        toVar(juce::Justification::centred),
-        toVar(juce::Justification::centredLeft),
-        toVar(juce::Justification::centredRight),
-        toVar(juce::Justification::centredTop),
-        toVar(juce::Justification::centredBottom),
-        toVar(juce::Justification::topLeft),
-        toVar(juce::Justification::topRight),
-        toVar(juce::Justification::bottomLeft),
-        toVar(juce::Justification::bottomRight),
+        mc::toVar(juce::Justification::left),
+        mc::toVar(juce::Justification::right),
+        mc::toVar(juce::Justification::horizontallyCentred),
+        mc::toVar(juce::Justification::top),
+        mc::toVar(juce::Justification::bottom),
+        mc::toVar(juce::Justification::verticallyCentred),
+        mc::toVar(juce::Justification::horizontallyJustified),
+        mc::toVar(juce::Justification::centred),
+        mc::toVar(juce::Justification::centredLeft),
+        mc::toVar(juce::Justification::centredRight),
+        mc::toVar(juce::Justification::centredTop),
+        mc::toVar(juce::Justification::centredBottom),
+        mc::toVar(juce::Justification::topLeft),
+        mc::toVar(juce::Justification::topRight),
+        mc::toVar(juce::Justification::bottomLeft),
+        mc::toVar(juce::Justification::bottomRight),
     };
 
     return std::make_unique<juce::ChoicePropertyComponent>(value, name, optionNames, optionValues);
 }
 
-} // namespace mc
+} // namespace jml::designer
 
 auto juce::VariantConverter<juce::Justification>::toVar(juce::Justification const& justification) -> juce::var
 {

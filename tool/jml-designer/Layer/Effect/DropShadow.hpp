@@ -2,7 +2,7 @@
 
 #include "Layer/Effect/LayerEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct DropShadowIDs
 {
@@ -27,4 +27,4 @@ private:
     juce::DropShadowEffect _effect;
 };
 
-} // namespace mc
+} // namespace jml::designer

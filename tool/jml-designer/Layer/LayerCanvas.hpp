@@ -4,7 +4,7 @@
 
 #include <mc_gui_extra/mc_gui_extra.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct Layer;
 
@@ -28,4 +28,4 @@ private:
     Layer& _layer;
 };
 
-} // namespace mc
+} // namespace jml::designer

@@ -18,10 +18,10 @@ auto main(int argc, char* argv[]) -> int
 {
     auto init = juce::ScopedJuceInitialiser_GUI{};
 
-    auto cli = mc::makeJmlCommandline();
+    auto cli = jml::cli::makeJmlCommandline();
     CLI11_PARSE(cli->app, argc, argv);
 
-    if (cli->app.got_subcommand("test")) { return run(mc::runTestScript, *cli); }
-    if (cli->app.got_subcommand("snapshot")) { return run(mc::runSnapshotScript, *cli); }
+    if (cli->app.got_subcommand("test")) { return run(jml::cli::runTestScript, *cli); }
+    if (cli->app.got_subcommand("snapshot")) { return run(jml::cli::runSnapshotScript, *cli); }
     return EXIT_SUCCESS;
 }

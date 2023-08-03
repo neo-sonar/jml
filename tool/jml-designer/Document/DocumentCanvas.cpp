@@ -5,7 +5,7 @@
 #include "Tool/SelectionTool.hpp"
 #include "Tool/ShapeTool.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 DocumentCanvas::DocumentCanvas(Document& doc, ToolBar& toolBar)
     : _document{doc}, _tool{std::make_unique<SelectionTool>(*this)}
@@ -41,4 +41,4 @@ auto DocumentCanvas::updateTool(ToolType type) -> void
     if (type == ToolType::ellipse) { _tool = std::make_unique<ShapeTool>(*this, Shape::Ellipse); }
     repaint();
 }
-} // namespace mc
+} // namespace jml::designer

@@ -6,7 +6,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 struct DocumentCanvas final : juce::Component
 {
     DocumentCanvas(Document& doc, ToolBar& toolBar);
@@ -26,4 +26,4 @@ private:
     std::unique_ptr<Tool> _tool;
 };
 
-} // namespace mc
+} // namespace jml::designer

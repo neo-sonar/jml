@@ -2,7 +2,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc {
+namespace jml::viewer {
 
 struct CodeEditor : juce::Component
 {
@@ -21,4 +21,4 @@ private:
     juce::CodeEditorComponent _editor{_document, &_tokenizer};
 };
 
-} // namespace mc
+} // namespace jml::viewer

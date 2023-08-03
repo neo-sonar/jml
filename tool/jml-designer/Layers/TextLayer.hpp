@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct TextLayerIDs : Layer::IDs
 {
@@ -36,4 +36,4 @@ struct TextLayer final : Layer
     auto addLayerProperties(juce::PropertyPanel& panel) -> void override;
 };
 
-} // namespace mc
+} // namespace jml::designer

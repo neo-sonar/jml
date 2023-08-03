@@ -1,7 +1,7 @@
 #include "LayerEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
-LayerEffect::LayerEffect(juce::ValueTree vt, juce::UndoManager& um) : ValueTreeObject{std::move(vt), &um} {}
+LayerEffect::LayerEffect(juce::ValueTree vt, juce::UndoManager& um) : mc::ValueTreeObject{std::move(vt), &um} {}
 
-} // namespace mc
+} // namespace jml::designer

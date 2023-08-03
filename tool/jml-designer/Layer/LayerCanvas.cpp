@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 LayerCanvas::LayerCanvas(Layer& layer) : _layer{layer}
 {
@@ -39,4 +39,4 @@ auto LayerCanvas::layerPropertyChanged(Layer* l, juce::Identifier const& propert
 
     repaint();
 }
-} // namespace mc
+} // namespace jml::designer

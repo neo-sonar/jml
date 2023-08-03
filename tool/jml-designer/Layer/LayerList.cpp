@@ -4,10 +4,10 @@
 #include "Layers/ShapeLayer.hpp"
 #include "Layers/TextLayer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 LayerList::LayerList(juce::ValueTree v, juce::UndoManager& undoManager)
-    : ValueTreeObjectList<Layer>(v), _undoManager{undoManager}
+    : mc::ValueTreeObjectList<Layer>(v), _undoManager{undoManager}
 {
     if (not v.hasProperty(Layer::IDs::name)) { v.setProperty(Layer::IDs::name, v.getType().toString(), &undoManager); }
     rebuildObjects();
@@ -48,4 +48,4 @@ auto LayerList::objectOrderChanged() -> void
     if (onOrderChanged) { onOrderChanged(); }
 }
 
-} // namespace mc
+} // namespace jml::designer

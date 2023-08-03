@@ -2,7 +2,7 @@
 
 #include <lua_juce/lua_juce.hpp>
 
-namespace mc {
+namespace jml::viewer {
 namespace {
 auto const* defaultScriptPath = R"(C:\Developer\moderncircuits\tests\juce-lua\example\layout_grid.lua)";
 }
@@ -73,4 +73,4 @@ auto LuaScriptViewer::reloadLuaState() -> void
 
 auto LuaScriptViewer::handleLuaError(sol::error const& error) -> void { DBG(error.what()); }
 
-} // namespace mc
+} // namespace jml::viewer

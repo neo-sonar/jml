@@ -2,7 +2,7 @@
 
 #include <juce_graphics/juce_graphics.h>
 
-namespace mc {
+namespace jml::viewer {
 
 struct JmlViewerColors
 {
@@ -31,4 +31,4 @@ struct OneLightColors
     inline static juce::Colour const codePunctuation = juce::Colour(0xFF383A42);
 };
 
-} // namespace mc
+} // namespace jml::viewer

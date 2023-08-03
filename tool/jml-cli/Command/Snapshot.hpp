@@ -2,7 +2,7 @@
 
 #include "JmlCommandline.hpp"
 
-namespace mc {
+namespace jml::cli {
 
 inline auto runSnapshotScript(JmlCommandline const& cli) -> juce::Result
 {
@@ -43,4 +43,4 @@ inline auto runSnapshotScript(JmlCommandline const& cli) -> juce::Result
     return juce::Result::ok();
 }
 
-} // namespace mc
+} // namespace jml::cli

@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 namespace {
 
@@ -63,4 +63,4 @@ auto Application::anotherInstanceStarted(juce::String const& commandLine) -> voi
     juce::ignoreUnused(commandLine);
 }
 
-} // namespace mc
+} // namespace jml::designer

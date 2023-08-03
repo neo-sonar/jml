@@ -4,7 +4,7 @@
 #include "Layer/LayerTree.hpp"
 #include "Layer/LayerTreeItem.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 LayerPropertyPanel::LayerPropertyPanel(LayerSelection& selection) : _selection{selection}
 {
@@ -35,4 +35,4 @@ auto LayerPropertyPanel::layerSelectionChanged(LayerSelection* selection) -> voi
     selected->fillPropertyPanel(_panel);
 }
 
-} // namespace mc
+} // namespace jml::designer

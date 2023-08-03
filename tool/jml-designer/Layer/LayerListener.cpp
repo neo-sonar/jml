@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 auto LayerListener::layerPropertyChanged(Layer* layer, juce::Identifier const& property) -> void
 {
@@ -14,4 +14,4 @@ auto LayerListener::layerSelectionChanged(Layer* layer) -> void { juce::ignoreUn
 
 auto LayerListener::layerBeingDeleted(Layer* layer) -> void { juce::ignoreUnused(layer); }
 
-} // namespace mc
+} // namespace jml::designer

@@ -3,7 +3,7 @@
 #include "LookAndFeel/LookAndFeel.hpp"
 #include "Menu/CommandIDs.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 MainComponent::MainComponent()
 {
@@ -133,4 +133,4 @@ auto MainComponent::documentSaveAs() -> void
     _fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, load);
 }
 
-} // namespace mc
+} // namespace jml::designer

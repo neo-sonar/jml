@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 struct LayerSelection;
 
 struct LayerSelectionListener
@@ -35,4 +35,4 @@ private:
     std::vector<juce::WeakReference<Layer>> _layers{};
 };
 
-} // namespace mc
+} // namespace jml::designer

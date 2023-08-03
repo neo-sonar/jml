@@ -2,7 +2,7 @@
 
 #include "LookAndFeel/JmlViewerColors.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 static auto makeCodeEditorColorScheme() -> juce::CodeEditorComponent::ColourScheme
 {
@@ -35,4 +35,4 @@ auto CodeEditor::file(juce::File file) -> void
 auto CodeEditor::paint(juce::Graphics& g) -> void { g.fillAll(JmlViewerColors::whiteDirt); }
 auto CodeEditor::resized() -> void { _editor.setBounds(getLocalBounds().reduced(16)); }
 
-} // namespace mc
+} // namespace jml::viewer

@@ -4,7 +4,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc {
+namespace jml::viewer {
 
 struct ComponentTree final : juce::TreeView
 {
@@ -31,4 +31,4 @@ private:
     std::unique_ptr<Item> _rootItem{nullptr};
 };
 
-} // namespace mc
+} // namespace jml::viewer

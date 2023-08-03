@@ -2,9 +2,9 @@
 
 #include "Layer/Effect/LayerEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
-struct LayerEffectList final : ValueTreeObjectList<LayerEffect>
+struct LayerEffectList final : mc::ValueTreeObjectList<LayerEffect>
 {
     LayerEffectList(juce::ValueTree v, juce::UndoManager& undoManager);
     ~LayerEffectList() override;
@@ -24,4 +24,4 @@ private:
     juce::UndoManager& _undoManager;
 };
 
-} // namespace mc
+} // namespace jml::designer

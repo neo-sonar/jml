@@ -4,7 +4,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct LayerTreeItem;
 
@@ -23,4 +23,4 @@ private:
     std::unique_ptr<LayerTreeItem> _root;
 };
 
-} // namespace mc
+} // namespace jml::designer

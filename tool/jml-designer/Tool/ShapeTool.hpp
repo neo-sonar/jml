@@ -2,7 +2,7 @@
 
 #include "Tool/Tool.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 enum struct Shape
 {
@@ -27,4 +27,4 @@ private:
     std::optional<juce::Point<float>> _current;
 };
 
-} // namespace mc
+} // namespace jml::designer

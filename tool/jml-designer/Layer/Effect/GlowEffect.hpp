@@ -2,7 +2,7 @@
 
 #include "Layer/Effect/LayerEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct GlowEffectIDs
 {
@@ -26,4 +26,4 @@ private:
     juce::GlowEffect _effect;
 };
 
-} // namespace mc
+} // namespace jml::designer

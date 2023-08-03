@@ -1,6 +1,6 @@
 #include "LayerSelection.hpp"
 
-namespace mc {
+namespace jml::designer {
 auto LayerSelection::getLayers() const -> std::span<juce::WeakReference<Layer> const> { return _layers; }
 
 auto LayerSelection::clear() -> void
@@ -51,4 +51,4 @@ auto LayerSelection::addListener(Listener* listener) -> void { _listeners.add(li
 
 auto LayerSelection::removeListener(Listener* listener) -> void { _listeners.remove(listener); }
 
-} // namespace mc
+} // namespace jml::designer

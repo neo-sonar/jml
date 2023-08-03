@@ -8,7 +8,7 @@
 #include "Viewer/ComponentTree.hpp"
 #include "Viewer/FileChangeListener.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 struct LuaScriptViewer final
     : juce::Component
@@ -45,4 +45,4 @@ private:
     JUCE_LEAK_DETECTOR(LuaScriptViewer) // NOLINT
 };
 
-} // namespace mc
+} // namespace jml::viewer

@@ -2,7 +2,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct DocumentCanvas;
 
@@ -28,4 +28,4 @@ private:
     DocumentCanvas* _canvas;
 };
 
-} // namespace mc
+} // namespace jml::designer

@@ -4,7 +4,7 @@
 
 #include <mc_data_structures/mc_data_structures.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct GroupLayer final : Layer
 {
@@ -19,4 +19,4 @@ struct GroupLayer final : Layer
     auto mightHaveChildren() -> bool override;
 };
 
-} // namespace mc
+} // namespace jml::designer

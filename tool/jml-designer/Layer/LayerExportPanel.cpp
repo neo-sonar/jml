@@ -2,7 +2,7 @@
 
 #include "Component/PropertyPanel.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct ExportButtonPropertyComponent final : juce::ButtonPropertyComponent
 {
@@ -29,7 +29,7 @@ LayerExportPanel::LayerExportPanel(LayerSelection& selection) : _selection{selec
             _format,
             "Format",
             juce::StringArray{"PNG", "JPG"},
-            juce::Array{toVar(ImageExporter::Format::png), toVar(ImageExporter::Format::jpg)},
+            juce::Array{mc::toVar(ImageExporter::Format::png), mc::toVar(ImageExporter::Format::jpg)},
         },
         new juce::ChoicePropertyComponent{
             _scale,
@@ -52,7 +52,7 @@ auto LayerExportPanel::resized() -> void
 
 auto LayerExportPanel::launchExportFileChooser() -> void
 {
-    auto const format = fromVar<ImageExporter::Format>(_format);
+    auto const format = mc::fromVar<ImageExporter::Format>(_format);
 
     auto const* msg       = "Please select the image file you want to save to...";
     auto const dir        = juce::File::getCurrentWorkingDirectory();
@@ -82,4 +82,4 @@ auto LayerExportPanel::exportToImage(juce::File const& file, ImageExporter::Form
     if (result.failed()) { DBG(result.getErrorMessage()); }
 }
 
-} // namespace mc
+} // namespace jml::designer

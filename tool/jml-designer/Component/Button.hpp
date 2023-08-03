@@ -4,7 +4,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct DrawableButtonColors
 {
@@ -31,4 +31,4 @@ inline auto setImages(juce::DrawableButton& button, char const* svgFile, Drawabl
     button.setImages(off.get(), nullptr, on.get(), nullptr, on.get());
 }
 
-} // namespace mc
+} // namespace jml::designer

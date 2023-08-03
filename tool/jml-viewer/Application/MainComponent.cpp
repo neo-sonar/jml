@@ -2,7 +2,7 @@
 
 #include "Application/CommandIDs.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 MainComponent::MainComponent()
 {
@@ -113,4 +113,4 @@ auto MainComponent::loadScriptPath() -> void
         if (auto results = chooser.getResults(); results.size() == 1) { doReload(results[0]); }
     });
 }
-} // namespace mc
+} // namespace jml::viewer

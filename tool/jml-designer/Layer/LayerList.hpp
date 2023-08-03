@@ -2,11 +2,11 @@
 
 #include <mc_data_structures/mc_data_structures.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct Layer;
 
-struct LayerList final : ValueTreeObjectList<Layer>
+struct LayerList final : mc::ValueTreeObjectList<Layer>
 {
     LayerList(juce::ValueTree v, juce::UndoManager& undoManager);
     ~LayerList() override;
@@ -26,4 +26,4 @@ private:
     juce::UndoManager& _undoManager;
 };
 
-} // namespace mc
+} // namespace jml::designer

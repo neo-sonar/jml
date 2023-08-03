@@ -2,7 +2,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc {
+namespace jml::viewer {
 
 struct JmlViewerLookAndFeel final : juce::LookAndFeel_V4
 {
@@ -10,4 +10,4 @@ struct JmlViewerLookAndFeel final : juce::LookAndFeel_V4
     ~JmlViewerLookAndFeel() override = default;
 };
 
-} // namespace mc
+} // namespace jml::viewer

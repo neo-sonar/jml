@@ -3,7 +3,7 @@
 #include "Component/TreeView.hpp"
 #include "Layer/LayerTree.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 static auto getSelectedValueTrees(juce::TreeView& treeView) -> std::vector<juce::ValueTree>
 {
@@ -111,4 +111,4 @@ auto LayerTreeItem::refreshSubItems() -> void
     }
 }
 
-} // namespace mc
+} // namespace jml::designer

@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct ShapeLayerIDs : Layer::IDs
 {
@@ -20,4 +20,4 @@ struct ShapeLayer final : Layer
     auto addLayerProperties(juce::PropertyPanel& panel) -> void override;
 };
 
-} // namespace mc
+} // namespace jml::designer

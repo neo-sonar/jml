@@ -2,7 +2,7 @@
 
 #include "Layer/LayerTreeItem.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 LayerTree::LayerTree(Document& document)
     : _document{document}, _root{std::make_unique<LayerTreeItem>(*document.getRootLayer())}
@@ -15,4 +15,4 @@ LayerTree::LayerTree(Document& document)
 
 LayerTree::~LayerTree() { setRootItem(nullptr); }
 
-} // namespace mc
+} // namespace jml::designer

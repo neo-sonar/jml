@@ -1,3 +1,3 @@
 #include "Application/Application.hpp"
 
-START_JUCE_APPLICATION(mc::Application) // NOLINT
+START_JUCE_APPLICATION(jml::designer::Application) // NOLINT

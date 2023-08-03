@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc {
+namespace jml::designer {
 inline auto makeColorScheme()
 {
     return juce::LookAndFeel_V4::ColourScheme{
@@ -28,4 +28,4 @@ inline auto setComponentColors(juce::LookAndFeel& lnf)
     lnf.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
     lnf.setColour(juce::TreeView::dragAndDropIndicatorColourId, juce::Colours::black);
 }
-} // namespace mc
+} // namespace jml::designer

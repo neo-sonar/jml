@@ -2,7 +2,7 @@
 
 #include "Component/PropertyPanel.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 Layer::Layer(juce::ValueTree vt, juce::UndoManager& um) : ValueTreeObject{std::move(vt), &um}
 {
@@ -89,21 +89,21 @@ auto Layer::setName(juce::String const& name) -> void { valueTree().setProperty(
 
 auto Layer::getBackgroundFill() const -> juce::Colour
 {
-    return fromVar<juce::Colour>(valueTree().getProperty(IDs::backgroundFill));
+    return mc::fromVar<juce::Colour>(valueTree().getProperty(IDs::backgroundFill));
 }
 
 auto Layer::setBackgroundFill(juce::Colour newColor) -> void
 {
-    valueTree().setProperty(IDs::backgroundFill, toVar(newColor), undoManager());
+    valueTree().setProperty(IDs::backgroundFill, mc::toVar(newColor), undoManager());
 }
 auto Layer::getOverlayFill() const -> juce::Colour
 {
-    return fromVar<juce::Colour>(valueTree().getProperty(IDs::overlayFill));
+    return mc::fromVar<juce::Colour>(valueTree().getProperty(IDs::overlayFill));
 }
 
 auto Layer::setOverlayFill(juce::Colour newColor) -> void
 {
-    valueTree().setProperty(IDs::overlayFill, toVar(newColor), undoManager());
+    valueTree().setProperty(IDs::overlayFill, mc::toVar(newColor), undoManager());
 }
 
 auto Layer::getOpacity() const -> float { return static_cast<float>(valueTree().getProperty(IDs::opacity, 1.0F)); }
@@ -143,4 +143,4 @@ auto Layer::valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier con
     if (tree != valueTree()) { return; }
     _listeners.call(&Listener::layerPropertyChanged, this, property);
 }
-} // namespace mc
+} // namespace jml::designer

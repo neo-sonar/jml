@@ -2,7 +2,7 @@
 
 #include "JmlCommandline.hpp"
 
-namespace mc {
+namespace jml::cli {
 inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
 {
     auto state = sol::state{};
@@ -29,4 +29,4 @@ inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
     if (cli.verbose) { std::cout << "Done test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n'; }
     return juce::Result::ok();
 }
-} // namespace mc
+} // namespace jml::cli

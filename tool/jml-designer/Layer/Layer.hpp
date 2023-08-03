@@ -5,7 +5,7 @@
 #include "Layer/LayerList.hpp"
 #include "Layer/LayerListener.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct LayerIDs
 {
@@ -23,7 +23,7 @@ struct LayerIDs
 };
 
 struct Layer
-    : ValueTreeObject
+    : mc::ValueTreeObject
     , juce::ValueTree::Listener
 {
     using IDs      = LayerIDs;
@@ -91,4 +91,4 @@ private:
     friend class juce::WeakReference<Layer>;
 };
 
-} // namespace mc
+} // namespace jml::designer

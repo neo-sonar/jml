@@ -1,6 +1,6 @@
 #pragma once
 
-namespace mc {
+namespace jml::designer {
 
 struct CommandIDs
 {
@@ -15,4 +15,4 @@ struct CommandIDs
     };
 };
 
-} // namespace mc
+} // namespace jml::designer

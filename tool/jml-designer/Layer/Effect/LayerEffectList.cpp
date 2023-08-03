@@ -3,10 +3,10 @@
 #include "Layer/Effect/DropShadow.hpp"
 #include "Layer/Effect/GlowEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 LayerEffectList::LayerEffectList(juce::ValueTree v, juce::UndoManager& undoManager)
-    : ValueTreeObjectList<LayerEffect>(v), _undoManager{undoManager}
+    : mc::ValueTreeObjectList<LayerEffect>(v), _undoManager{undoManager}
 {
     rebuildObjects();
 }
@@ -46,4 +46,4 @@ auto LayerEffectList::objectOrderChanged() -> void
     if (onOrderChanged) { onOrderChanged(); }
 }
 
-} // namespace mc
+} // namespace jml::designer

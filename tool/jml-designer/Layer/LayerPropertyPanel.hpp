@@ -3,7 +3,7 @@
 #include "Layer/LayerExportPanel.hpp"
 #include "Layer/LayerSelection.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct LayerPropertyPanel final
     : juce::Component
@@ -21,4 +21,4 @@ private:
     LayerExportPanel _export{_selection};
 };
 
-} // namespace mc
+} // namespace jml::designer

@@ -2,7 +2,7 @@
 
 #include "Layer/Layer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct LayerTreeItem final
     : juce::TreeViewItem
@@ -43,4 +43,4 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LayerTreeItem) // NOLINT
 };
 
-} // namespace mc
+} // namespace jml::designer

@@ -1,6 +1,6 @@
 #include "JmlCommandline.hpp"
 
-namespace mc {
+namespace jml::cli {
 
 auto makeJmlCommandline() -> std::unique_ptr<JmlCommandline>
 {
@@ -16,4 +16,4 @@ auto makeJmlCommandline() -> std::unique_ptr<JmlCommandline>
     return cli;
 }
 
-} // namespace mc
+} // namespace jml::cli

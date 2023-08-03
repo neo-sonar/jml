@@ -2,7 +2,7 @@
 
 #include <mc_gui_extra/mc_gui_extra.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct Layer;
 
@@ -16,4 +16,4 @@ struct LayerListener
     virtual auto layerBeingDeleted(Layer* layer) -> void;
 };
 
-} // namespace mc
+} // namespace jml::designer

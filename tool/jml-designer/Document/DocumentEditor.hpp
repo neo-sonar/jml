@@ -7,7 +7,7 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc {
+namespace jml::designer {
 
 struct DocumentEditor final : juce::Component
 {
@@ -25,4 +25,4 @@ private:
     LayerPropertyPanel _propertyPanel{_document.getLayerSelection()};
 };
 
-} // namespace mc
+} // namespace jml::designer

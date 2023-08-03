@@ -1,6 +1,6 @@
 #include "ComponentTree.hpp"
 
-namespace mc {
+namespace jml::viewer {
 
 ComponentTree::~ComponentTree() { setRootComponent(nullptr); }
 
@@ -44,4 +44,4 @@ auto ComponentTree::Item::paintItem(juce::Graphics& g, int width, int height) ->
     g.drawText(getUniqueName(), bounds.toFloat(), juce::Justification::centred, false);
 }
 
-} // namespace mc
+} // namespace jml::viewer

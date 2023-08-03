@@ -5,7 +5,8 @@
 
 #include <juce_gui_extra/juce_gui_extra.h>
 
-namespace mc {
+namespace jml::designer {
+
 struct MainComponent final
     : juce::Component
     , juce::DragAndDropContainer
@@ -36,4 +37,4 @@ private:
     std::unique_ptr<DocumentEditor> _editor{std::make_unique<DocumentEditor>(*_document)};
 };
 
-} // namespace mc
+} // namespace jml::designer

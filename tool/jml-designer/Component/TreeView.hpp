@@ -2,7 +2,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 auto forEachSelectedItem(juce::TreeView& treeView, auto callback) -> void
 {
@@ -43,4 +43,4 @@ inline void moveItems(std::span<juce::ValueTree const> items, juce::ValueTree ne
     }
 }
 
-} // namespace mc
+} // namespace jml::designer

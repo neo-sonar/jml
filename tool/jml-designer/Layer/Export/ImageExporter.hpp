@@ -2,7 +2,7 @@
 
 #include "Layer/Export/Exporter.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct ImageExporter final : Exporter
 {
@@ -22,11 +22,11 @@ private:
     Format _format{Format::invalid};
 };
 
-} // namespace mc
+} // namespace jml::designer
 
 template<>
-struct juce::VariantConverter<mc::ImageExporter::Format>
+struct juce::VariantConverter<jml::designer::ImageExporter::Format>
 {
-    [[nodiscard]] static auto toVar(mc::ImageExporter::Format const& format) -> juce::var;
-    [[nodiscard]] static auto fromVar(juce::var const& v) -> mc::ImageExporter::Format;
+    [[nodiscard]] static auto toVar(jml::designer::ImageExporter::Format const& format) -> juce::var;
+    [[nodiscard]] static auto fromVar(juce::var const& v) -> jml::designer::ImageExporter::Format;
 };

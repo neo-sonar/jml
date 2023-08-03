@@ -1,6 +1,6 @@
 #include "DocumentEditor.hpp"
 
-namespace mc {
+namespace jml::designer {
 DocumentEditor::DocumentEditor(Document& document) : _document{document}
 {
     addAndMakeVisible(_toolBar);
@@ -18,4 +18,4 @@ auto DocumentEditor::resized() -> void
     _propertyPanel.setBounds(area.removeFromRight(panelWidth));
     _canvas.setBounds(area);
 }
-} // namespace mc
+} // namespace jml::designer

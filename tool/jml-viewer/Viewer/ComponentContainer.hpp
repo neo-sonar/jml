@@ -2,7 +2,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-namespace mc {
+namespace jml::viewer {
 
 struct ComponentContainer final : juce::Component
 {
@@ -18,4 +18,4 @@ private:
     juce::Component* _component{nullptr};
 };
 
-} // namespace mc
+} // namespace jml::viewer

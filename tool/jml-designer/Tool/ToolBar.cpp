@@ -2,7 +2,7 @@
 
 #include "Component/Button.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 ToolBar::ToolBar()
 {
@@ -55,4 +55,4 @@ auto ToolBar::updateTool() -> void
     if (onToolChange) { onToolChange(type); }
 }
 
-} // namespace mc
+} // namespace jml::designer

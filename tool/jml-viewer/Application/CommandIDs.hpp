@@ -1,6 +1,6 @@
 #pragma once
 
-namespace mc {
+namespace jml::viewer {
 struct CommandIDs
 {
     enum Values
@@ -14,4 +14,4 @@ struct CommandIDs
         redo,
     };
 };
-} // namespace mc
+} // namespace jml::viewer

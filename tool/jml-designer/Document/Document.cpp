@@ -4,7 +4,7 @@
 #include "Layers/ShapeLayer.hpp"
 #include "Layers/TextLayer.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 Document::Document(juce::ValueTree valueTree, juce::UndoManager* um)
     : _valueTree{std::move(valueTree)}, _undoManager{um}
@@ -72,15 +72,15 @@ auto Document::getUndoManager() const -> juce::UndoManager* { return _undoManage
 auto Document::save(juce::File const& file) -> void
 {
     if (file == juce::File{}) { return; }
-    saveValueTree(getValueTree(), file, true);
+    mc::saveValueTree(getValueTree(), file, true);
 }
 
 auto Document::load(juce::File const& file, juce::UndoManager* um) -> std::unique_ptr<Document>
 {
-    auto vt = loadValueTree(file, true);
+    auto vt = mc::loadValueTree(file, true);
     if (not vt.isValid()) { return {}; }
     if (not vt.hasType("JML")) { return {}; }
     return std::make_unique<Document>(std::move(vt), um);
 }
 
-} // namespace mc
+} // namespace jml::designer

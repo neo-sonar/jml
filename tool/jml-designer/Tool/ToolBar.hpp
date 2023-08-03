@@ -4,7 +4,7 @@
 
 #include <mc_gui_basics/mc_gui_basics.hpp>
 
-namespace mc {
+namespace jml::designer {
 struct AbstractShape;
 
 struct ToolBar final : juce::Component
@@ -24,4 +24,4 @@ private:
     juce::DrawableButton _ellipse{"Ellipse", juce::DrawableButton::ImageFitted};
 };
 
-} // namespace mc
+} // namespace jml::designer

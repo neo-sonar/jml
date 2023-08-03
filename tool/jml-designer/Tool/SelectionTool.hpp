@@ -3,7 +3,7 @@
 #include "Layer/LayerSelection.hpp"
 #include "Tool/Tool.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct Layer;
 
@@ -24,4 +24,4 @@ private:
     [[nodiscard]] auto getLayerSelection() const -> LayerSelection const&;
 };
 
-} // namespace mc
+} // namespace jml::designer

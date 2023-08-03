@@ -1,6 +1,6 @@
 #include "StackBlurEffect.hpp"
 
-namespace mc {
+namespace jml::designer {
 
 struct StackBlur
 {
@@ -198,4 +198,4 @@ auto StackBlurEffect::waitForAllThreadPoolJobsToFinish() const -> void
     while (threadPool.getNumJobs() > 0) {}
 }
 
-} // namespace mc
+} // namespace jml::designer

@@ -2,7 +2,7 @@
 
 #include <mc_core/mc_core.hpp>
 
-namespace mc {
+namespace jml::designer {
 
 struct Layer;
 
@@ -13,4 +13,4 @@ struct Exporter
     [[nodiscard]] virtual auto exportLayer(juce::OutputStream& out, Layer& layer, float scale) -> juce::Result = 0;
 };
 
-} // namespace mc
+} // namespace jml::designer
