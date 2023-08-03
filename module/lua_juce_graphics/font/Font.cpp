@@ -5,14 +5,10 @@ auto juce_Font(sol::table& state) -> void
     // clang-format off
 
     state.new_enum("FontStyleFlags",
-        "plain",
-            juce::Font::plain,
-        "bold",
-            juce::Font::bold,
-        "italic",
-            juce::Font::italic,
-        "underlined",
-            juce::Font::underlined
+        "plain",        juce::Font::plain,
+        "bold",         juce::Font::bold,
+        "italic",       juce::Font::italic,
+        "underlined",   juce::Font::underlined
     );
 
     auto font = state.new_usertype<juce::Font>("Font");

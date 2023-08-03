@@ -1,30 +1,28 @@
 namespace lua_juce {
 auto juce_Justification(sol::table& state) -> void
 {
-    using Type = juce::Justification;
-
     // clang-format off
     state.new_enum("JustificationFlags",
-        "left", Type::left,
-        "right", Type::right,
-        "horizontallyCentred", Type::horizontallyCentred,
-        "top", Type::top,
-        "bottom", Type::bottom,
-        "verticallyCentred", Type::verticallyCentred,
-        "horizontallyJustified", Type::horizontallyJustified,
-        "centred", Type::centred,
-        "centredLeft", Type::centredLeft,
-        "centredRight", Type::centredRight,
-        "centredTop", Type::centredTop,
-        "centredBottom", Type::centredBottom,
-        "topLeft", Type::topLeft,
-        "topRight", Type::topRight,
-        "bottomLeft", Type::bottomLeft,
-        "bottomRight", Type::bottomRight
+        "left",                     juce::Justification::left,
+        "right",                    juce::Justification::right,
+        "horizontallyCentred",      juce::Justification::horizontallyCentred,
+        "top",                      juce::Justification::top,
+        "bottom",                   juce::Justification::bottom,
+        "verticallyCentred",        juce::Justification::verticallyCentred,
+        "horizontallyJustified",    juce::Justification::horizontallyJustified,
+        "centred",                  juce::Justification::centred,
+        "centredLeft",              juce::Justification::centredLeft,
+        "centredRight",             juce::Justification::centredRight,
+        "centredTop",               juce::Justification::centredTop,
+        "centredBottom",            juce::Justification::centredBottom,
+        "topLeft",                  juce::Justification::topLeft,
+        "topRight",                 juce::Justification::topRight,
+        "bottomLeft",               juce::Justification::bottomLeft,
+        "bottomRight",              juce::Justification::bottomRight
     );
 
-    auto justification = state.new_usertype<Type>("Justification",
-        sol::constructors<Type(int)>()
+    auto justification = state.new_usertype<juce::Justification>("Justification",
+        sol::constructors<juce::Justification(int)>()
     );
     // clang-format on
 }

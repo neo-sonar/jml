@@ -1,56 +1,36 @@
 namespace lua_juce {
+
 auto juce_File(sol::table& state) -> void
 {
     // clang-format off
     state.new_enum("FileTypesOfFileToFind",
-        "findDirectories",
-        juce::File::TypesOfFileToFind::findDirectories,
-        "findFiles",
-        juce::File::TypesOfFileToFind::findFiles,
-        "findFilesAndDirectories",
-        juce::File::TypesOfFileToFind::findFilesAndDirectories,
-        "ignoreHiddenFiles",
-        juce::File::TypesOfFileToFind::ignoreHiddenFiles
+        "findDirectories",          juce::File::TypesOfFileToFind::findDirectories,
+        "findFiles",                juce::File::TypesOfFileToFind::findFiles,
+        "findFilesAndDirectories",  juce::File::TypesOfFileToFind::findFilesAndDirectories,
+        "ignoreHiddenFiles",        juce::File::TypesOfFileToFind::ignoreHiddenFiles
     );
 
     state.new_enum("FileSpecialLocationType",
-        "userHomeDirectory",
-        juce::File::userHomeDirectory,
-        "userDocumentsDirectory",
-        juce::File::userDocumentsDirectory,
-        "userDesktopDirectory",
-        juce::File::userDesktopDirectory,
-        "userMusicDirectory",
-        juce::File::userMusicDirectory,
-        "userMoviesDirectory",
-        juce::File::userMoviesDirectory,
-        "userPicturesDirectory",
-        juce::File::userPicturesDirectory,
-        "userApplicationDataDirectory",
-        juce::File::userApplicationDataDirectory,
-        "commonApplicationDataDirectory",
-        juce::File::commonApplicationDataDirectory,
-        "commonDocumentsDirectory",
-        juce::File::commonDocumentsDirectory,
-        "tempDirectory",
-        juce::File::tempDirectory,
-        "currentExecutableFile",
-        juce::File::currentExecutableFile,
-        "currentApplicationFile",
-        juce::File::currentApplicationFile,
-        "invokedExecutableFile",
-        juce::File::invokedExecutableFile,
-        "hostApplicationPath",
-        juce::File::hostApplicationPath,
+        "userHomeDirectory",                juce::File::userHomeDirectory,
+        "userDocumentsDirectory",           juce::File::userDocumentsDirectory,
+        "userDesktopDirectory",             juce::File::userDesktopDirectory,
+        "userMusicDirectory",               juce::File::userMusicDirectory,
+        "userMoviesDirectory",              juce::File::userMoviesDirectory,
+        "userPicturesDirectory",            juce::File::userPicturesDirectory,
+        "userApplicationDataDirectory",     juce::File::userApplicationDataDirectory,
+        "commonApplicationDataDirectory",   juce::File::commonApplicationDataDirectory,
+        "commonDocumentsDirectory",         juce::File::commonDocumentsDirectory,
+        "tempDirectory",                    juce::File::tempDirectory,
+        "currentExecutableFile",            juce::File::currentExecutableFile,
+        "currentApplicationFile",           juce::File::currentApplicationFile,
+        "invokedExecutableFile",            juce::File::invokedExecutableFile,
+        "hostApplicationPath",              juce::File::hostApplicationPath,
     #if JUCE_WINDOWS
-        "windowsSystemDirectory",
-        juce::File::windowsSystemDirectory,
+        "windowsSystemDirectory",           juce::File::windowsSystemDirectory,
     #endif
-        "globalApplicationsDirectory",
-        juce::File::globalApplicationsDirectory
+        "globalApplicationsDirectory",      juce::File::globalApplicationsDirectory
     #if JUCE_WINDOWS
-        ,"globalApplicationsDirectoryX86",
-        juce::File::globalApplicationsDirectoryX86
+        ,"globalApplicationsDirectoryX86",  juce::File::globalApplicationsDirectoryX86
     #endif
     );
 

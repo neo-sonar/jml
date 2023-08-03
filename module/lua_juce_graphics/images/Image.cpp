@@ -3,14 +3,10 @@ auto juce_Image(sol::table& state) -> void
 {
     // clang-format off
     state.new_enum("ImagePixelFormat",
-        "UnknownFormat",
-            juce::Image::PixelFormat::UnknownFormat,
-        "RGB",
-            juce::Image::PixelFormat::RGB,
-        "ARGB",
-            juce::Image::PixelFormat::ARGB,
-        "SingleChannel",
-            juce::Image::PixelFormat::SingleChannel
+        "UnknownFormat",    juce::Image::PixelFormat::UnknownFormat,
+        "RGB",              juce::Image::PixelFormat::RGB,
+        "ARGB",             juce::Image::PixelFormat::ARGB,
+        "SingleChannel",    juce::Image::PixelFormat::SingleChannel
     );
 
     auto img = state.new_usertype<juce::Image>("Image",

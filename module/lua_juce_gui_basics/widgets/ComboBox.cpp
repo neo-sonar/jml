@@ -3,18 +3,12 @@ auto juce_ComboBox(sol::table& state) -> void
 {
     // clang-format off
     state.new_enum("ComboBoxColourIds",
-        "arrowColourId",
-            juce::ComboBox::ColourIds::arrowColourId,
-        "backgroundColourId",
-            juce::ComboBox::ColourIds::backgroundColourId,
-        "buttonColourId",
-            juce::ComboBox::ColourIds::buttonColourId,
-        "focusedOutlineColourId",
-            juce::ComboBox::ColourIds::focusedOutlineColourId,
-        "outlineColourId",
-            juce::ComboBox::ColourIds::outlineColourId,
-        "textColourId",
-            juce::ComboBox::ColourIds::textColourId
+        "arrowColourId",            juce::ComboBox::ColourIds::arrowColourId,
+        "backgroundColourId",       juce::ComboBox::ColourIds::backgroundColourId,
+        "buttonColourId",           juce::ComboBox::ColourIds::buttonColourId,
+        "focusedOutlineColourId",   juce::ComboBox::ColourIds::focusedOutlineColourId,
+        "outlineColourId",          juce::ComboBox::ColourIds::outlineColourId,
+        "textColourId",             juce::ComboBox::ColourIds::textColourId
     );
 
     auto combo = state.new_usertype<juce::ComboBox>("ComboBox",
