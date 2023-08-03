@@ -2,7 +2,7 @@
 
 #include "Layer/LayerListener.hpp"
 
-#include <mc_gui_extra/mc_gui_extra.hpp>
+#include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {
 

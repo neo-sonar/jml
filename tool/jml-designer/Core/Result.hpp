@@ -1,10 +1,6 @@
 #pragma once
 
-#include <fmt/format.h>
-#include <fmt/os.h>
-#include <fmt/ostream.h>
-
-#include <juce_core/juce_core.h>
+#include "Core/String.hpp"
 
 namespace jml::designer {
 

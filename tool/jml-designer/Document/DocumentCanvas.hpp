@@ -4,7 +4,7 @@
 #include "Tool/Tool.hpp"
 #include "Tool/ToolBar.hpp"
 
-#include <mc_gui_basics/mc_gui_basics.hpp>
+#include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {
 struct DocumentCanvas final : juce::Component

@@ -20,8 +20,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/mc-juce/cmake)
-include(mcConan)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(ConanIntegration)
 
 enable_testing()
 include(CTest)
@@ -42,5 +42,4 @@ add_subdirectory(tool/jml-cli)
 add_subdirectory(tool/jml-viewer)
 add_subdirectory(test)
 
-add_subdirectory(3rd_party/mc-juce/modules EXCLUDE_FROM_ALL)
 add_subdirectory(tool/jml-designer)

@@ -2,6 +2,8 @@
 
 #include "Layer/Layer.hpp"
 
+#include <span>
+
 namespace jml::designer {
 struct LayerSelection;
 

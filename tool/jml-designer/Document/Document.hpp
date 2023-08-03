@@ -3,7 +3,7 @@
 #include "Layer/Layer.hpp"
 #include "Layer/LayerSelection.hpp"
 
-#include <mc_data_structures/mc_data_structures.hpp>
+#include <juce_data_structures/juce_data_structures.h>
 
 namespace jml::designer {
 

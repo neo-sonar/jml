@@ -35,7 +35,7 @@ auto LayerCanvas::layerPropertyChanged(Layer* l, juce::Identifier const& propert
     // Size
     auto const hasID   = [&](auto id) { return property == juce::StringRef{id}; };
     auto const sizeIDs = std::array<char const*, 4>{IDs::x, IDs::y, IDs::width, IDs::height};
-    if (ranges::any_of(sizeIDs, hasID)) { setBounds(layer().getBounds().toNearestInt()); }
+    if (std::any_of(sizeIDs.begin(), sizeIDs.end(), hasID)) { setBounds(layer().getBounds().toNearestInt()); }
 
     repaint();
 }

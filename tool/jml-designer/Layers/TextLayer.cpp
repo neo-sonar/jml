@@ -1,6 +1,7 @@
 #include "TextLayer.hpp"
 
 #include "Component/PropertyPanel.hpp"
+#include "Core/Color.hpp"
 #include "Core/Justification.hpp"
 #include "Core/ValueTree.hpp"
 

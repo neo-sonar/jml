@@ -23,16 +23,11 @@ class JML(ConanFile):
         self.version = ver.strip()
 
     def requirements(self):
-        self.requires("boost/1.82.0")
         self.requires("fmt/9.1.0")
         self.requires("cli11/2.2.0")
-        self.requires("concurrentqueue/1.0.4")
-        self.requires("range-v3/0.12.0")
-        self.requires("sml/1.1.6")
         self.requires("sol2/3.2.3")
 
     def config_options(self):
-        self.options["boost"].header_only = True
         self.options["lua"].compile_as_cpp = True
 
     def imports(self):

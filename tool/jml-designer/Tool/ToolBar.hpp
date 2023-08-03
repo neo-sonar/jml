@@ -2,7 +2,7 @@
 
 #include "Tool/Tool.hpp"
 
-#include <mc_gui_basics/mc_gui_basics.hpp>
+#include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {
 struct AbstractShape;

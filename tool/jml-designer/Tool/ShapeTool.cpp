@@ -1,5 +1,6 @@
 #include "ShapeTool.hpp"
 
+#include "Core/Color.hpp"
 #include "Core/ValueTree.hpp"
 #include "Document/DocumentCanvas.hpp"
 #include "Layers/ShapeLayer.hpp"

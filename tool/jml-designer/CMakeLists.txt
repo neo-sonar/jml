@@ -1,9 +1,6 @@
 project(jml-designer VERSION 0.1.0)
 
-find_package(Boost 1.78 REQUIRED COMPONENTS boost)
-find_package(concurrentqueue REQUIRED)
 find_package(fmt REQUIRED)
-find_package(range-v3 REQUIRED)
 
 juce_add_binary_data(JMLDesigner_BinaryData
     HEADER_NAME
@@ -51,9 +48,12 @@ set(sources
     "Component/ValuePropertyComponent.cpp"
     "Component/ValuePropertyComponent.hpp"
 
+    "Core/Color.cpp"
+    "Core/Color.hpp"
     "Core/Justification.cpp"
     "Core/Justification.hpp"
     "Core/Result.hpp"
+    "Core/String.hpp"
     "Core/ValueTree.cpp"
     "Core/ValueTree.hpp"
     "Core/ValueTreeObject.hpp"
@@ -141,14 +141,11 @@ target_include_directories(jml-designer
 
 target_link_libraries(jml-designer
     PRIVATE
-        mc::mc_gui_extra
+        juce::juce_gui_extra
     PUBLIC
         JMLDesigner_BinaryData
 
-        Boost::headers
-        concurrentqueue::concurrentqueue
         fmt::fmt
-        range-v3::range-v3
 
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

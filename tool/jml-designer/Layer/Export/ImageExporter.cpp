@@ -3,7 +3,7 @@
 #include "Core/Result.hpp"
 #include "Layer/Layer.hpp"
 
-#include <mc_graphics/mc_graphics.hpp>
+#include <juce_graphics/juce_graphics.h>
 
 namespace jml::designer {
 

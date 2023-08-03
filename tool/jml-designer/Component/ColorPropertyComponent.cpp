@@ -1,5 +1,6 @@
 #include "ColorPropertyComponent.hpp"
 
+#include "Core/Color.hpp"
 #include "Core/ValueTree.hpp"
 
 namespace jml::designer {

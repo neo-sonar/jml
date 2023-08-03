@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mc_gui_extra/mc_gui_extra.hpp>
+#include <juce_core/juce_core.h>
 
 namespace jml::designer {
 
