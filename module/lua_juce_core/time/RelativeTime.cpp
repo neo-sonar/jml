@@ -1,7 +1,3 @@
-#include "RelativeTime.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_RelativeTime(sol::table& state) -> void
 {

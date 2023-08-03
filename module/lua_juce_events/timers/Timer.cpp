@@ -1,7 +1,3 @@
-#include "Timer.hpp"
-
-#include <juce_events/juce_events.h>
-
 namespace lua_juce {
 auto juce_Timer(sol::table& state) -> void
 {

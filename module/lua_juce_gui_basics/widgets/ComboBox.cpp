@@ -1,7 +1,3 @@
-#include "ComboBox.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 SOL_BASE_CLASSES(juce::ComboBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient,
                  juce::Value::Listener);
 

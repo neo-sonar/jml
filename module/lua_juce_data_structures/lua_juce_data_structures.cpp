@@ -1,4 +1,4 @@
-#include <lua_juce_events/lua_juce_events.hpp>
+#include <lua_juce_data_structures/lua_juce_data_structures.hpp>
 
 #include "undomanager/UndoManager.cpp"    // NOLINT
 #include "undomanager/UndoableAction.cpp" // NOLINT

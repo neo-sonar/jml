@@ -1,4 +1,4 @@
-#include <lua_juce_events/lua_juce_events.hpp>
+#include <lua_juce_graphics/lua_juce_graphics.hpp>
 
 #include "colour/Colour.cpp"
 #include "colour/ColourGradient.cpp"

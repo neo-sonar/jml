@@ -1,4 +1,4 @@
-#include <lua_juce_events/lua_juce_events.hpp>
+#include <lua_juce_gui_basics/lua_juce_gui_basics.hpp>
 
 #include "buttons/ArrowButton.cpp"
 #include "buttons/Button.cpp"

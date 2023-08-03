@@ -1,7 +1,3 @@
-#include "LuaLookAndFeel_V4.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 struct LuaLookAndFeel_V4 final : juce::LookAndFeel_V4
 {

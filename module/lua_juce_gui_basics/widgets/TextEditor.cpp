@@ -1,7 +1,3 @@
-#include "TextEditor.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 
 auto juce_TextEditor(sol::table& state) -> void

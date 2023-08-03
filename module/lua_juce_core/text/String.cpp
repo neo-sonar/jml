@@ -1,7 +1,3 @@
-#include "String.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_String(sol::table& state) -> void
 {

@@ -1,6 +1,3 @@
-#include "Line.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 template<typename T>
 auto juce_LineImpl(sol::table& state, char const* name) -> void

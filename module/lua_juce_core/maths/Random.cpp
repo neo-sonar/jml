@@ -1,7 +1,3 @@
-#include "Random.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_Random(sol::table& state) -> void
 {

@@ -1,6 +1,3 @@
-#include "Font.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 auto juce_Font(sol::table& state) -> void
 {

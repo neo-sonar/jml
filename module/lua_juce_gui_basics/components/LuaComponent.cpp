@@ -1,7 +1,3 @@
-#include "LuaComponent.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 struct LuaComponent final : juce::Component
 {
     LuaComponent()           = default;

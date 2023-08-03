@@ -1,6 +1,3 @@
-#include "Image.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 auto juce_Image(sol::table& state) -> void
 {

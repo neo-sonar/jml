@@ -1,7 +1,3 @@
-#include "ImageCache.hpp"
-
-#include <juce_graphics/juce_graphics.h>
-
 namespace lua_juce {
 auto juce_ImageCache(sol::table& state) -> void
 {

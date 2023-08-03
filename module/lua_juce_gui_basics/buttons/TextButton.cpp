@@ -1,7 +1,3 @@
-#include "TextButton.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 SOL_BASE_CLASSES(juce::TextButton, juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 SOL_DERIVED_CLASSES(juce::Button, juce::TextButton);
 

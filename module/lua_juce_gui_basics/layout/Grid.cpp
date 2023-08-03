@@ -1,7 +1,3 @@
-#include "Grid.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace juce {
 [[maybe_unused]] static auto operator==(GridItem const&, GridItem const&) -> bool { return false; }
 [[maybe_unused]] static auto operator!=(GridItem const&, GridItem const&) -> bool { return true; }

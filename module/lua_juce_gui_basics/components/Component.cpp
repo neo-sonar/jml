@@ -1,6 +1,3 @@
-#include "Component.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
 namespace lua_juce {
 struct SolObjectSet final : juce::ReferenceCountedObject
 {

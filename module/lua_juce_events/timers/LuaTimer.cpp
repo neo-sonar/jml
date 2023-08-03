@@ -1,7 +1,3 @@
-#include "LuaTimer.hpp"
-
-#include <juce_events/juce_events.h>
-
 namespace lua_juce {
 struct LuaTimer final : juce::Timer
 {

@@ -1,7 +1,3 @@
-#include "MouseEvent.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 auto juce_MouseEvent(sol::table& state) -> void
 {

@@ -1,7 +1,3 @@
-#include "Range.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 template<typename T>
 auto juce_RangeImpl(sol::table& state, char const* name) -> void

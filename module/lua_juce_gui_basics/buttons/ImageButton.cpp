@@ -1,7 +1,3 @@
-#include "ImageButton.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 auto juce_ImageButton(sol::table& state) -> void
 {

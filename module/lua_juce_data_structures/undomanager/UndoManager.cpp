@@ -1,7 +1,3 @@
-#include "UndoManager.hpp"
-
-#include <juce_data_structures/juce_data_structures.h>
-
 namespace lua_juce {
 
 auto juce_UndoManager(sol::table& state) -> void

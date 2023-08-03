@@ -1,6 +1,3 @@
-#include "Rectangle.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 template<typename T>
 auto juce_RectangleImpl(sol::table& state, char const* name) -> void

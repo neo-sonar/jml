@@ -1,4 +1,4 @@
-#include <lua_juce_events/lua_juce_events.hpp>
+#include <lua_juce_gui_extra/lua_juce_gui_extra.hpp>
 
 #include "code_editor/CPlusPlusCodeTokeniser.cpp" // NOLINT
 #include "code_editor/CodeDocument.cpp"           // NOLINT

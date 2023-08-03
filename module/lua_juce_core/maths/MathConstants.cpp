@@ -1,7 +1,3 @@
-#include "MathConstants.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_MathConstants(sol::table& state) -> void
 {

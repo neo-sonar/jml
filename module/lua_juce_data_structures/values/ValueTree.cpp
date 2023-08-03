@@ -1,7 +1,3 @@
-#include "ValueTree.hpp"
-
-#include <juce_data_structures/juce_data_structures.h>
-
 namespace lua_juce {
 
 auto juce_ValueTree(sol::table& state) -> void

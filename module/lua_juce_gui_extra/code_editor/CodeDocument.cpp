@@ -1,7 +1,3 @@
-#include "CodeDocument.hpp"
-
-#include <juce_gui_extra/juce_gui_extra.h>
-
 namespace lua_juce {
 
 auto juce_CodeDocument(sol::table& state) -> void

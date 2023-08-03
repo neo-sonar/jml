@@ -1,7 +1,3 @@
-#include "ArrowButton.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 auto juce_ArrowButton(sol::table& state) -> void
 {

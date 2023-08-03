@@ -1,7 +1,3 @@
-#include "MouseWheelDetails.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 auto juce_MouseWheelDetails(sol::table& state) -> void
 {

@@ -1,7 +1,3 @@
-#include "TreeView.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 
 auto juce_TreeView(sol::table& state) -> void

@@ -1,7 +1,3 @@
-#include "ImageComponent.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 
 auto juce_ImageComponent(sol::table& state) -> void

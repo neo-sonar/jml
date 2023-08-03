@@ -1,7 +1,3 @@
-#include "MemoryBlock.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_MemoryBlock(sol::table& state) -> void
 {

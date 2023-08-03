@@ -1,7 +1,3 @@
-#include "LuaTokeniser.hpp"
-
-#include <juce_gui_extra/juce_gui_extra.h>
-
 namespace lua_juce {
 
 auto juce_LuaTokeniser(sol::table& state) -> void

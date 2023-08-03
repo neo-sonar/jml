@@ -1,7 +1,3 @@
-#include "ToggleButton.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 namespace lua_juce {
 auto juce_ToggleButton(sol::table& state) -> void
 {

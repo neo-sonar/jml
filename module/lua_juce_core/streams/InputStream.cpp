@@ -1,7 +1,3 @@
-#include "InputStream.hpp"
-
-#include <juce_core/juce_core.h>
-
 namespace lua_juce {
 auto juce_InputStream(sol::table& state) -> void
 {

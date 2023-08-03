@@ -1,6 +1,3 @@
-#include "Point.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 template<typename T>
 auto juce_PointImpl(sol::table& state, char const* name) -> void

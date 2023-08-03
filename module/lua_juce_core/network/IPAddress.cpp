@@ -1,6 +1,3 @@
-#include "IPAddress.hpp"
-
-#include <juce_core/juce_core.h>
 namespace lua_juce {
 auto juce_IPAddress(sol::table& state) -> void
 {

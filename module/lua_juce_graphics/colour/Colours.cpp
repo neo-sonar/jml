@@ -1,6 +1,3 @@
-#include "Colours.hpp"
-
-#include <juce_graphics/juce_graphics.h>
 namespace lua_juce {
 auto juce_Colours(sol::table& state) -> void
 {

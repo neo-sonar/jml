@@ -1,7 +1,3 @@
-#include "Button.hpp"
-
-#include <juce_gui_basics/juce_gui_basics.h>
-
 SOL_BASE_CLASSES(juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 
 namespace lua_juce {
