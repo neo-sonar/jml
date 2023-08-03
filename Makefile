@@ -13,7 +13,7 @@ tidy-fix:
 
 .PHONY: format-cpp
 format-cpp:
-	@find modules -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
+	@find module -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
 	@find tool -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
 
 .PHONY: format-lua

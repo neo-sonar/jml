@@ -36,7 +36,7 @@ juce_disable_default_flags()
 set_directory_properties(PROPERTIES JUCE_COMPANY_COPYRIGHT "Copyright 2023 neo-sonar. All rights reserved.")
 set_directory_properties(PROPERTIES JUCE_COMPANY_NAME "neo-sonar")
 
-add_subdirectory(modules)
+add_subdirectory(module)
 
 add_subdirectory(tool/jml-cli)
 add_subdirectory(tool/jml-viewer)

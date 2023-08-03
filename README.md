@@ -10,7 +10,7 @@ In your `CMakeLists.txt`:
 
 ```cmake
 find_package(sol2 REQUIRED)
-add_subdirectory(path/to/jml/modules)
+add_subdirectory(path/to/jml/module)
 
 target_link_libraries(YourApplication
     PRIVATE
