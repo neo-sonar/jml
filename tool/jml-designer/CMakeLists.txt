@@ -1,7 +1,5 @@
 project(jml-designer VERSION 0.1.0)
 
-find_package(fmt REQUIRED)
-
 juce_add_binary_data(JMLDesigner_BinaryData
     HEADER_NAME
         "BinaryData.hpp"
@@ -52,8 +50,6 @@ set(sources
     "Core/Color.hpp"
     "Core/Justification.cpp"
     "Core/Justification.hpp"
-    "Core/Result.hpp"
-    "Core/String.hpp"
     "Core/ValueTree.cpp"
     "Core/ValueTree.hpp"
     "Core/ValueTreeObject.hpp"
@@ -144,8 +140,6 @@ target_link_libraries(jml-designer
         juce::juce_gui_extra
     PUBLIC
         JMLDesigner_BinaryData
-
-        fmt::fmt
 
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
