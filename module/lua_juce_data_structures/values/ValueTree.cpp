@@ -3,71 +3,71 @@ namespace lua_juce {
 auto juce_ValueTree(sol::table& state) -> void
 {
     // clang-format off
-    auto um = state.new_usertype<juce::ValueTree>("ValueTree",
+    auto vt = state.new_usertype<juce::ValueTree>("ValueTree",
         sol::constructors<
             juce::ValueTree(),
             juce::ValueTree(juce::Identifier const&)
         >()
     );
 
-    um["getProperty"] = sol::overload(
+    vt["getProperty"] = sol::overload(
         [](juce::ValueTree* self, juce::Identifier const& name) { return self->getProperty(name); },
         [](juce::ValueTree* self, juce::Identifier const& name, juce::var const& val) { return self->getProperty(name, val); }
     );
 
-    um["removeChild"] = sol::overload(
+    vt["removeChild"] = sol::overload(
         [](juce::ValueTree* self, juce::ValueTree const& child, juce::UndoManager* um) { self->removeChild(child, um); },
         [](juce::ValueTree* self, int index, juce::UndoManager* um) { self->removeChild(index, um); }
     );
 
-    um["fromXml"] = sol::overload(
+    vt["fromXml"] = sol::overload(
         [](juce::String const& xml) { return juce::ValueTree::fromXml(xml); },
         [](juce::XmlElement const& xml) { return juce::ValueTree::fromXml(xml); }
     );
 
     // clang-format on
 
-    um["isEquivalentTo"]                = &juce::ValueTree::isEquivalentTo;
-    um["isValid"]                       = &juce::ValueTree::isValid;
-    um["createCopy"]                    = &juce::ValueTree::createCopy;
-    um["copyPropertiesFrom"]            = &juce::ValueTree::copyPropertiesFrom;
-    um["copyPropertiesAndChildrenFrom"] = &juce::ValueTree::copyPropertiesAndChildrenFrom;
-    um["getType"]                       = &juce::ValueTree::getType;
-    um["hasType"]                       = &juce::ValueTree::hasType;
-    um["getPropertyPointer"]            = &juce::ValueTree::getPropertyPointer;
-    um["setProperty"]                   = &juce::ValueTree::setProperty;
-    um["hasProperty"]                   = &juce::ValueTree::hasProperty;
-    um["removeProperty"]                = &juce::ValueTree::removeProperty;
-    um["removeAllProperties"]           = &juce::ValueTree::removeAllProperties;
-    um["getNumProperties"]              = &juce::ValueTree::getNumProperties;
-    um["getPropertyName"]               = &juce::ValueTree::getPropertyName;
-    um["getPropertyAsValue"]            = &juce::ValueTree::getPropertyAsValue;
-    um["getNumChildren"]                = &juce::ValueTree::getNumChildren;
-    um["getChild"]                      = &juce::ValueTree::getChild;
-    um["getChildWithName"]              = &juce::ValueTree::getChildWithName;
-    um["getOrCreateChildWithName"]      = &juce::ValueTree::getOrCreateChildWithName;
-    um["getChildWithProperty"]          = &juce::ValueTree::getChildWithProperty;
-    um["addChild"]                      = &juce::ValueTree::addChild;
-    um["appendChild"]                   = &juce::ValueTree::appendChild;
-    um["removeAllChildren"]             = &juce::ValueTree::removeAllChildren;
-    um["moveChild"]                     = &juce::ValueTree::moveChild;
-    um["isAChildOf"]                    = &juce::ValueTree::isAChildOf;
-    um["indexOf"]                       = &juce::ValueTree::indexOf;
-    um["getParent"]                     = &juce::ValueTree::getParent;
-    um["getRoot"]                       = &juce::ValueTree::getRoot;
-    um["getSibling"]                    = &juce::ValueTree::getSibling;
-    um["createXml"]                     = &juce::ValueTree::createXml;
-    um["toXmlString"]                   = &juce::ValueTree::toXmlString;
-    um["writeToStream"]                 = &juce::ValueTree::writeToStream;
-    um["addListener"]                   = &juce::ValueTree::addListener;
-    um["removeListener"]                = &juce::ValueTree::removeListener;
-    um["setPropertyExcludingListener"]  = &juce::ValueTree::setPropertyExcludingListener;
-    um["sendPropertyChangeMessage"]     = &juce::ValueTree::sendPropertyChangeMessage;
-    um["getReferenceCount"]             = &juce::ValueTree::getReferenceCount;
+    vt["isEquivalentTo"]                = &juce::ValueTree::isEquivalentTo;
+    vt["isValid"]                       = &juce::ValueTree::isValid;
+    vt["createCopy"]                    = &juce::ValueTree::createCopy;
+    vt["copyPropertiesFrom"]            = &juce::ValueTree::copyPropertiesFrom;
+    vt["copyPropertiesAndChildrenFrom"] = &juce::ValueTree::copyPropertiesAndChildrenFrom;
+    vt["getType"]                       = &juce::ValueTree::getType;
+    vt["hasType"]                       = &juce::ValueTree::hasType;
+    vt["getPropertyPointer"]            = &juce::ValueTree::getPropertyPointer;
+    vt["setProperty"]                   = &juce::ValueTree::setProperty;
+    vt["hasProperty"]                   = &juce::ValueTree::hasProperty;
+    vt["removeProperty"]                = &juce::ValueTree::removeProperty;
+    vt["removeAllProperties"]           = &juce::ValueTree::removeAllProperties;
+    vt["getNumProperties"]              = &juce::ValueTree::getNumProperties;
+    vt["getPropertyName"]               = &juce::ValueTree::getPropertyName;
+    vt["getPropertyAsValue"]            = &juce::ValueTree::getPropertyAsValue;
+    vt["getNumChildren"]                = &juce::ValueTree::getNumChildren;
+    vt["getChild"]                      = &juce::ValueTree::getChild;
+    vt["getChildWithName"]              = &juce::ValueTree::getChildWithName;
+    vt["getOrCreateChildWithName"]      = &juce::ValueTree::getOrCreateChildWithName;
+    vt["getChildWithProperty"]          = &juce::ValueTree::getChildWithProperty;
+    vt["addChild"]                      = &juce::ValueTree::addChild;
+    vt["appendChild"]                   = &juce::ValueTree::appendChild;
+    vt["removeAllChildren"]             = &juce::ValueTree::removeAllChildren;
+    vt["moveChild"]                     = &juce::ValueTree::moveChild;
+    vt["isAChildOf"]                    = &juce::ValueTree::isAChildOf;
+    vt["indexOf"]                       = &juce::ValueTree::indexOf;
+    vt["getParent"]                     = &juce::ValueTree::getParent;
+    vt["getRoot"]                       = &juce::ValueTree::getRoot;
+    vt["getSibling"]                    = &juce::ValueTree::getSibling;
+    vt["createXml"]                     = &juce::ValueTree::createXml;
+    vt["toXmlString"]                   = &juce::ValueTree::toXmlString;
+    vt["writeToStream"]                 = &juce::ValueTree::writeToStream;
+    vt["addListener"]                   = &juce::ValueTree::addListener;
+    vt["removeListener"]                = &juce::ValueTree::removeListener;
+    vt["setPropertyExcludingListener"]  = &juce::ValueTree::setPropertyExcludingListener;
+    vt["sendPropertyChangeMessage"]     = &juce::ValueTree::sendPropertyChangeMessage;
+    vt["getReferenceCount"]             = &juce::ValueTree::getReferenceCount;
 
-    um["readFromStream"]   = &juce::ValueTree::readFromStream;
-    um["readFromData"]     = &juce::ValueTree::readFromData;
-    um["readFromGZIPData"] = &juce::ValueTree::readFromGZIPData;
+    vt["readFromStream"]   = &juce::ValueTree::readFromStream;
+    vt["readFromData"]     = &juce::ValueTree::readFromData;
+    vt["readFromGZIPData"] = &juce::ValueTree::readFromGZIPData;
 }
 
 } // namespace lua_juce

@@ -4,7 +4,7 @@
 #include "Core/Justification.hpp"
 namespace jml::designer {
 
-auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
+static auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
                         juce::UndoManager* um)
 {
     if (not tree.hasProperty(property)) { tree.setProperty(property, value, um); }

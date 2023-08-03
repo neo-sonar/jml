@@ -67,7 +67,7 @@ auto juce_Slider(sol::table& state) -> void
     slider.set_function("setRange", sol::overload(
             static_cast<void (juce::Slider::*)(juce::Range<double>, double)>(&juce::Slider::setRange),
             static_cast<void (juce::Slider::*)(double, double, double)>(&juce::Slider::setRange),
-            [] (juce::Slider* slider, double minValue, double maxValue) { slider->setRange(minValue, maxValue); }
+            [] (juce::Slider* self, double minValue, double maxValue) { self->setRange(minValue, maxValue); }
         )
     );
     slider.set_function("setRotaryParameters", sol::overload(
