@@ -1,4 +1,4 @@
-#include "LayerExportPanel.hpp"
+#include "ExportPanel.hpp"
 
 #include "Component/PropertyPanel.hpp"
 
@@ -21,7 +21,7 @@ private:
     std::function<void()> _callback;
 };
 
-LayerExportPanel::LayerExportPanel(LayerSelection& selection) : _selection{selection}
+ExportPanel::ExportPanel(LayerSelection& selection) : _selection{selection}
 {
     auto const exportProperties = juce::Array<juce::PropertyComponent*>{
         new ExportButtonPropertyComponent{[this] { launchExportFileChooser(); }},
@@ -44,13 +44,13 @@ LayerExportPanel::LayerExportPanel(LayerSelection& selection) : _selection{selec
     addAndMakeVisible(_panel);
 }
 
-auto LayerExportPanel::resized() -> void
+auto ExportPanel::resized() -> void
 {
     auto area = getLocalBounds();
     _panel.setBounds(area.reduced(2));
 }
 
-auto LayerExportPanel::launchExportFileChooser() -> void
+auto ExportPanel::launchExportFileChooser() -> void
 {
     auto const format = mc::fromVar<ImageExporter::Format>(_format);
 
@@ -64,7 +64,7 @@ auto LayerExportPanel::launchExportFileChooser() -> void
     _fileChooser->launchAsync(chooserFlags, load);
 }
 
-auto LayerExportPanel::exportToImage(juce::File const& file, ImageExporter::Format format) -> void
+auto ExportPanel::exportToImage(juce::File const& file, ImageExporter::Format format) -> void
 {
     auto const layers = _selection.getLayers();
     if (layers.size() != 1) { return; }

@@ -7,10 +7,10 @@
 
 namespace jml::designer {
 
-struct LayerExportPanel final : juce::Component
+struct ExportPanel final : juce::Component
 {
-    explicit LayerExportPanel(LayerSelection& selection);
-    ~LayerExportPanel() override = default;
+    explicit ExportPanel(LayerSelection& selection);
+    ~ExportPanel() override = default;
 
     auto resized() -> void override;
 

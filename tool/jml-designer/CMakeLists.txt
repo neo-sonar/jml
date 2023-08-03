@@ -61,8 +61,6 @@ set(sources
     "Layer/Layer.hpp"
     "Layer/LayerCanvas.cpp"
     "Layer/LayerCanvas.hpp"
-    "Layer/LayerExportPanel.cpp"
-    "Layer/LayerExportPanel.hpp"
     "Layer/LayerList.cpp"
     "Layer/LayerList.hpp"
     "Layer/LayerListener.cpp"
@@ -88,6 +86,8 @@ set(sources
     "Layer/Effect/StackBlurEffect.hpp"
 
     "Layer/Export/Exporter.hpp"
+    "Layer/Export/ExportPanel.cpp"
+    "Layer/Export/ExportPanel.hpp"
     "Layer/Export/ImageExporter.cpp"
     "Layer/Export/ImageExporter.hpp"
 

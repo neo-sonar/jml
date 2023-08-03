@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Layer/LayerExportPanel.hpp"
+#include "Layer/Export/ExportPanel.hpp"
 #include "Layer/LayerSelection.hpp"
 
 namespace jml::designer {
@@ -18,7 +18,7 @@ struct LayerPropertyPanel final
 private:
     LayerSelection& _selection;
     juce::PropertyPanel _panel;
-    LayerExportPanel _export{_selection};
+    ExportPanel _export{_selection};
 };
 
 } // namespace jml::designer
