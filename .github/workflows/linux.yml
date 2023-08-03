@@ -55,7 +55,7 @@ jobs:
           -D CMAKE_BUILD_TYPE=${{ matrix.build_mode }}
 
       - name: CMake build
-        run: cmake --build build
+        run: cmake --build build --parallel 1
 
       - name: CTest
         run: ctest --test-dir build -C ${{ matrix.build_mode }} --output-on-failure
