@@ -1,12 +1,19 @@
 # JUCE Meets LUA
 
-> **WORK IN PROGRESS**: For license information please refer to [juce.com/get-juce](https://juce.com/get-juce)
-
 [![Linux](https://github.com/neo-sonar/jml/actions/workflows/linux.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/linux.yml)
 [![macOS](https://github.com/neo-sonar/jml/actions/workflows/macos.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/macos.yml)
 [![Windows](https://github.com/neo-sonar/jml/actions/workflows/windows.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/windows.yml)
 
-## Projects
+- [Usage](#usage)
+  - [Bindings](#bindings)
+- [Tools](#tools)
+  - [jml-cli](#jml-cli)
+  - [jml-viewer](#jml-viewer)
+  - [jml-designer](#jml-designer)
+
+> **WORK IN PROGRESS**: For license information please refer to [juce.com/get-juce](https://juce.com/get-juce)
+
+## Usage
 
 ### Bindings
 
@@ -41,17 +48,17 @@ state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
 lua_juce::allModules(state);
 ```
 
-### Tools
+## Tools
 
-#### jml-cli
+### jml-cli
 
 - Run unit tests. See [Test.hpp](./tool/jml-cli/Command/Test.hpp)
 - Create component snapshot images. See [Snapshot.hpp](./tool/jml-cli/Command/Snapshot.hpp)
 
-#### jml-viewer
+### jml-viewer
 
 - ToDo
 
-#### jml-designer
+### jml-designer
 
 - ToDo
