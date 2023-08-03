@@ -1,16 +1,15 @@
-name: Windows
+name: macOS
 
 on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: macos-12
     strategy:
       matrix:
-        cxx: [20, 23]
-        build_mode: ["Release"]
+        build_mode: ["Debug", "Release"]
       fail-fast: false
-    name: ${{ matrix.cxx }} - ${{ matrix.build_mode }}
+    name: AppleClang - ${{ matrix.build_mode }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -20,26 +19,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install conan
+          brew install ninja
+          pip3 install -r requirements.txt
           conan config set general.revisions_enabled=1
-
-      - name: Set up Visual Studio shell
-        uses: egor-tensin/vs-shell@v2
-        with:
-          arch: x64
 
       - name: CMake configure
         run: >
           cmake
           -S .
-          -G "Ninja"
+          -G Ninja
           -B build
           -D CMAKE_BUILD_TYPE=${{ matrix.build_mode }}
-          -D CMAKE_CXX_STANDARD="${{ matrix.cxx }}"
-          -D CMAKE_UNITY_BUILD=ON
 
       - name: CMake build
-        run: cmake --build build --config ${{ matrix.build_mode }}
+        run: cmake --build build
 
       - name: CTest
         run: ctest --test-dir build -C ${{ matrix.build_mode }} --output-on-failure
