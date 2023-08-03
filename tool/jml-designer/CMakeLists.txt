@@ -6,7 +6,7 @@ juce_add_binary_data(JMLDesigner_BinaryData
     HEADER_NAME
         "BinaryData.hpp"
     NAMESPACE
-        mcbd
+        BinaryData
     SOURCES
         "Resources/svg/tool_circle.svg"
         "Resources/svg/tool_rectangle.svg"
