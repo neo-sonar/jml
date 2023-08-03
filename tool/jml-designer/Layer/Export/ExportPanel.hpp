@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/ValueTree.hpp"
 #include "Layer/Export/ImageExporter.hpp"
 #include "Layer/LayerSelection.hpp"
 
@@ -18,7 +19,7 @@ private:
     auto launchExportFileChooser() -> void;
     auto exportToImage(juce::File const& file, ImageExporter::Format format) -> void;
 
-    juce::Value _format{mc::toVar(ImageExporter::Format::png)};
+    juce::Value _format{toVar(ImageExporter::Format::png)};
     juce::Value _scale{juce::var{1.0F}};
     LayerSelection& _selection;
     juce::PropertyPanel _panel;

@@ -1,6 +1,7 @@
 #include "ExportPanel.hpp"
 
 #include "Component/PropertyPanel.hpp"
+#include "Core/ValueTree.hpp"
 
 namespace jml::designer {
 
@@ -29,7 +30,7 @@ ExportPanel::ExportPanel(LayerSelection& selection) : _selection{selection}
             _format,
             "Format",
             juce::StringArray{"PNG", "JPG"},
-            juce::Array{mc::toVar(ImageExporter::Format::png), mc::toVar(ImageExporter::Format::jpg)},
+            juce::Array{toVar(ImageExporter::Format::png), toVar(ImageExporter::Format::jpg)},
         },
         new juce::ChoicePropertyComponent{
             _scale,
@@ -52,7 +53,7 @@ auto ExportPanel::resized() -> void
 
 auto ExportPanel::launchExportFileChooser() -> void
 {
-    auto const format = mc::fromVar<ImageExporter::Format>(_format);
+    auto const format = fromVar<ImageExporter::Format>(_format);
 
     auto const* msg       = "Please select the image file you want to save to...";
     auto const dir        = juce::File::getCurrentWorkingDirectory();

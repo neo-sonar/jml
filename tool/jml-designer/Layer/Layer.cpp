@@ -1,6 +1,7 @@
 #include "Layer.hpp"
 
 #include "Component/PropertyPanel.hpp"
+#include "Core/ValueTree.hpp"
 
 namespace jml::designer {
 
@@ -89,21 +90,21 @@ auto Layer::setName(juce::String const& name) -> void { valueTree().setProperty(
 
 auto Layer::getBackgroundFill() const -> juce::Colour
 {
-    return mc::fromVar<juce::Colour>(valueTree().getProperty(IDs::backgroundFill));
+    return fromVar<juce::Colour>(valueTree().getProperty(IDs::backgroundFill));
 }
 
 auto Layer::setBackgroundFill(juce::Colour newColor) -> void
 {
-    valueTree().setProperty(IDs::backgroundFill, mc::toVar(newColor), undoManager());
+    valueTree().setProperty(IDs::backgroundFill, toVar(newColor), undoManager());
 }
 auto Layer::getOverlayFill() const -> juce::Colour
 {
-    return mc::fromVar<juce::Colour>(valueTree().getProperty(IDs::overlayFill));
+    return fromVar<juce::Colour>(valueTree().getProperty(IDs::overlayFill));
 }
 
 auto Layer::setOverlayFill(juce::Colour newColor) -> void
 {
-    valueTree().setProperty(IDs::overlayFill, mc::toVar(newColor), undoManager());
+    valueTree().setProperty(IDs::overlayFill, toVar(newColor), undoManager());
 }
 
 auto Layer::getOpacity() const -> float { return static_cast<float>(valueTree().getProperty(IDs::opacity, 1.0F)); }

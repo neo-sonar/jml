@@ -2,6 +2,8 @@
 
 #include "Component/PropertyPanel.hpp"
 #include "Core/Justification.hpp"
+#include "Core/ValueTree.hpp"
+
 namespace jml::designer {
 
 static auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
@@ -13,9 +15,9 @@ static auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& pr
 TextLayer::TextLayer(juce::ValueTree vt, juce::UndoManager& um) : Layer{std::move(vt), um}
 {
     setPropertyIfEmpty(valueTree(), IDs::text, "Text", undoManager());
-    setPropertyIfEmpty(valueTree(), IDs::justification, mc::toVar(juce::Justification::centred), undoManager());
+    setPropertyIfEmpty(valueTree(), IDs::justification, toVar(juce::Justification::centred), undoManager());
     setPropertyIfEmpty(valueTree(), IDs::fontSize, 16.0F, undoManager());
-    setPropertyIfEmpty(valueTree(), IDs::fontColor, mc::toVar(juce::Colours::black), undoManager());
+    setPropertyIfEmpty(valueTree(), IDs::fontColor, toVar(juce::Colours::black), undoManager());
 }
 
 auto TextLayer::setText(juce::String const& text) -> void { valueTree().setProperty(IDs::text, text, undoManager()); }
@@ -23,11 +25,11 @@ auto TextLayer::getText() const -> juce::String { return valueTree().getProperty
 
 auto TextLayer::setTextJustification(juce::Justification const& justification) -> void
 {
-    valueTree().setProperty(IDs::justification, mc::toVar(justification), undoManager());
+    valueTree().setProperty(IDs::justification, toVar(justification), undoManager());
 }
 auto TextLayer::getTextJustification() const -> juce::Justification
 {
-    return mc::fromVar<juce::Justification>(valueTree().getProperty(IDs::justification));
+    return fromVar<juce::Justification>(valueTree().getProperty(IDs::justification));
 }
 
 auto TextLayer::setFontSize(float fontSize) -> void { valueTree().setProperty(IDs::fontSize, fontSize, undoManager()); }
@@ -35,11 +37,11 @@ auto TextLayer::getFontSize() const -> float { return valueTree().getProperty(ID
 
 auto TextLayer::setFontColor(juce::Colour fontColor) -> void
 {
-    valueTree().setProperty(IDs::fontColor, mc::toVar(fontColor), undoManager());
+    valueTree().setProperty(IDs::fontColor, toVar(fontColor), undoManager());
 }
 auto TextLayer::getFontColor() const -> juce::Colour
 {
-    return mc::fromVar<juce::Colour>(valueTree().getProperty(IDs::fontColor));
+    return fromVar<juce::Colour>(valueTree().getProperty(IDs::fontColor));
 }
 
 auto TextLayer::paintLayer(juce::Graphics& g) -> void

@@ -1,5 +1,6 @@
 #include "LayerList.hpp"
 
+#include "Core/ValueTreeObject.hpp"
 #include "Layers/GroupLayer.hpp"
 #include "Layers/ShapeLayer.hpp"
 #include "Layers/TextLayer.hpp"
@@ -7,7 +8,7 @@
 namespace jml::designer {
 
 LayerList::LayerList(juce::ValueTree v, juce::UndoManager& undoManager)
-    : mc::ValueTreeObjectList<Layer>(v), _undoManager{undoManager}
+    : ValueTreeObjectList<Layer>(v), _undoManager{undoManager}
 {
     if (not v.hasProperty(Layer::IDs::name)) { v.setProperty(Layer::IDs::name, v.getType().toString(), &undoManager); }
     rebuildObjects();

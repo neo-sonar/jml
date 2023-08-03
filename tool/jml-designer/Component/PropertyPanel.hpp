@@ -1,6 +1,9 @@
 #pragma once
 
-#include <mc_gui_extra/mc_gui_extra.hpp>
+#include "Component/ColorPropertyComponent.hpp"
+
+#include <juce_gui_extra/juce_gui_extra.h>
+
 namespace jml::designer {
 auto makeTextProperty(auto& vt, auto const& id, auto const& name, bool editable)
 {
@@ -14,7 +17,7 @@ auto makeSliderProperty(auto& vt, auto const& id, auto const& name, double minVa
 
 auto makeColorProperty(auto& vt, auto const& id, auto const& name, bool showAlpha)
 {
-    return new mc::ColorPropertyComponent{vt.getPropertyAsValue(id, nullptr), name, showAlpha};
+    return new ColorPropertyComponent{vt.getPropertyAsValue(id, nullptr), name, showAlpha};
 }
 
 } // namespace jml::designer

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <mc_data_structures/mc_data_structures.hpp>
+#include "Core/ValueTreeObjectList.hpp"
 
 namespace jml::designer {
 
 struct Layer;
 
-struct LayerList final : mc::ValueTreeObjectList<Layer>
+struct LayerList final : ValueTreeObjectList<Layer>
 {
     LayerList(juce::ValueTree v, juce::UndoManager& undoManager);
     ~LayerList() override;

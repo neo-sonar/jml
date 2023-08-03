@@ -1,5 +1,6 @@
 #include "ShapeTool.hpp"
 
+#include "Core/ValueTree.hpp"
 #include "Document/DocumentCanvas.hpp"
 #include "Layers/ShapeLayer.hpp"
 
@@ -45,7 +46,7 @@ auto ShapeTool::mouseUp(juce::MouseEvent const& /*event*/) -> void
     shape.setProperty(Layer::IDs::y, bounds.getY(), nullptr);
     shape.setProperty(Layer::IDs::width, bounds.getWidth(), nullptr);
     shape.setProperty(Layer::IDs::height, bounds.getHeight(), nullptr);
-    shape.setProperty(Layer::IDs::backgroundFill, mc::toVar(juce::Colours::white), nullptr);
+    shape.setProperty(Layer::IDs::backgroundFill, toVar(juce::Colours::white), nullptr);
     shape.setProperty(Layer::IDs::opacity, 1.0F, nullptr);
 
     auto& doc = getDocumentCanvas().document();

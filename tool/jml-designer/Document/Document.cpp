@@ -1,5 +1,6 @@
 #include "Document.hpp"
 
+#include "Core/ValueTree.hpp"
 #include "Layers/GroupLayer.hpp"
 #include "Layers/ShapeLayer.hpp"
 #include "Layers/TextLayer.hpp"
@@ -72,12 +73,12 @@ auto Document::getUndoManager() const -> juce::UndoManager* { return _undoManage
 auto Document::save(juce::File const& file) -> void
 {
     if (file == juce::File{}) { return; }
-    mc::saveValueTree(getValueTree(), file, true);
+    saveValueTree(getValueTree(), file, true);
 }
 
 auto Document::load(juce::File const& file, juce::UndoManager* um) -> std::unique_ptr<Document>
 {
-    auto vt = mc::loadValueTree(file, true);
+    auto vt = loadValueTree(file, true);
     if (not vt.isValid()) { return {}; }
     if (not vt.hasType("JML")) { return {}; }
     return std::make_unique<Document>(std::move(vt), um);

@@ -1,10 +1,11 @@
 #pragma once
 
+#include "Core/ValueTreeObjectList.hpp"
 #include "Layer/Effect/LayerEffect.hpp"
 
 namespace jml::designer {
 
-struct LayerEffectList final : mc::ValueTreeObjectList<LayerEffect>
+struct LayerEffectList final : ValueTreeObjectList<LayerEffect>
 {
     LayerEffectList(juce::ValueTree v, juce::UndoManager& undoManager);
     ~LayerEffectList() override;

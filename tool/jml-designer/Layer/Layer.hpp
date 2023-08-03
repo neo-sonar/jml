@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/ValueTreeObject.hpp"
 #include "Layer/Effect/LayerEffectList.hpp"
 #include "Layer/LayerCanvas.hpp"
 #include "Layer/LayerList.hpp"
@@ -23,7 +24,7 @@ struct LayerIDs
 };
 
 struct Layer
-    : mc::ValueTreeObject
+    : ValueTreeObject
     , juce::ValueTree::Listener
 {
     using IDs      = LayerIDs;

@@ -44,11 +44,20 @@ set(sources
     "Application/MainComponent.hpp"
 
     "Component/Button.hpp"
+    "Component/ColorPropertyComponent.cpp"
+    "Component/ColorPropertyComponent.hpp"
     "Component/PropertyPanel.hpp"
     "Component/TreeView.hpp"
+    "Component/ValuePropertyComponent.cpp"
+    "Component/ValuePropertyComponent.hpp"
 
     "Core/Justification.cpp"
     "Core/Justification.hpp"
+    "Core/Result.hpp"
+    "Core/ValueTree.cpp"
+    "Core/ValueTree.hpp"
+    "Core/ValueTreeObject.hpp"
+    "Core/ValueTreeObjectList.hpp"
 
     "Document/Document.cpp"
     "Document/Document.hpp"

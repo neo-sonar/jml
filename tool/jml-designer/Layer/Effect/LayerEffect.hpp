@@ -1,10 +1,12 @@
 #pragma once
 
-#include <mc_gui_basics/mc_gui_basics.hpp>
+#include "Core/ValueTreeObject.hpp"
+
+#include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {
 
-struct LayerEffect : mc::ValueTreeObject
+struct LayerEffect : ValueTreeObject
 {
     LayerEffect(juce::ValueTree vt, juce::UndoManager& um);
     virtual ~LayerEffect() = default;

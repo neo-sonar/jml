@@ -1,5 +1,6 @@
 #include "ImageExporter.hpp"
 
+#include "Core/Result.hpp"
 #include "Layer/Layer.hpp"
 
 #include <mc_graphics/mc_graphics.hpp>
@@ -20,13 +21,11 @@ auto ImageExporter::exportLayer(juce::OutputStream& out, Layer& layer, float sca
 {
     auto& canvas = layer.getCanvas();
     auto image   = canvas.createComponentSnapshot(canvas.getLocalBounds(), true, scale);
-    if (not image.isValid()) { return mc::fail("invalid image returned for layer: {}", layer.getName()); }
+    if (not image.isValid()) { return fail("invalid image returned for layer: {}", layer.getName()); }
 
     auto format = makeImageFileFormatForExporter(_format);
-    if (format == nullptr) { return mc::fail("failed to create image format writer"); }
-    if (not format->writeImageToStream(image, out)) {
-        return mc::fail("couldn't write image for: {}", layer.getName());
-    }
+    if (format == nullptr) { return fail("failed to create image format writer"); }
+    if (not format->writeImageToStream(image, out)) { return fail("couldn't write image for: {}", layer.getName()); }
 
     return juce::Result::ok();
 }
