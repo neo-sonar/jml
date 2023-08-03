@@ -1,3 +1,0 @@
-[submodule "3rd_party/mc-juce"]
-	path = 3rd_party/mc-juce
-	url = https://github.com/ModernCircuits/mc-juce
