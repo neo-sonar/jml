@@ -24,6 +24,8 @@ END_JUCE_MODULE_DECLARATION
 #include <lua_juce_data_structures/lua_juce_data_structures.hpp>
 #include <lua_juce_graphics/lua_juce_graphics.hpp>
 
+// clang-format off
+
 #include "buttons/ArrowButton.hpp"
 #include "buttons/Button.hpp"
 #include "buttons/HyperlinkButton.hpp"
@@ -43,8 +45,10 @@ END_JUCE_MODULE_DECLARATION
 #include "widgets/ComboBox.hpp"
 #include "widgets/ImageComponent.hpp"
 #include "widgets/Label.hpp"
-#include "widgets/ListBox.hpp"
 #include "widgets/ListBoxModel.hpp"
+#include "widgets/ListBox.hpp"
 #include "widgets/Slider.hpp"
 #include "widgets/TextEditor.hpp"
 #include "widgets/TreeView.hpp"
+
+// clang-format on
