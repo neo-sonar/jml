@@ -47,6 +47,7 @@ jobs:
           -G "Ninja"
           -B build
           -D CMAKE_BUILD_TYPE=${{ matrix.build_mode }}
+          -D CMAKE_UNITY_BUILD=OFF
           -D CMAKE_PROJECT_TOP_LEVEL_INCLUDES=external/cmake-conan/conan_provider.cmake
 
       - name: CMake build
