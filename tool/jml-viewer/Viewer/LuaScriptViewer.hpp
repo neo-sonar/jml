@@ -4,7 +4,7 @@
 #include <lua_juce_core/lua_juce_core.hpp>
 
 #include "Application/MenuBar.hpp"
-#include "Viewer/ComponentContainer.hpp"
+#include "Viewer/ScriptViewport.hpp"
 #include "Viewer/ComponentTree.hpp"
 #include "Viewer/FileChangeListener.hpp"
 
@@ -36,7 +36,7 @@ private:
     static auto handleLuaError(sol::error const& error) -> void;
 
     std::unique_ptr<LuaState> _lua;
-    ComponentContainer _viewport;
+    ScriptViewport _viewport;
     ComponentTree _componentTree;
 
     juce::File _scriptFile;

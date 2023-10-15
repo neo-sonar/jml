@@ -6,7 +6,6 @@
 #include "CodeEditor/CodeEditor.hpp"
 #include "LookAndFeel/Colours.hpp"
 #include "LookAndFeel/LookAndFeel.hpp"
-#include "Viewer/ComponentContainer.hpp"
 #include "Viewer/ComponentTree.hpp"
 #include "Viewer/FileChangeListener.hpp"
 #include "Viewer/LuaScriptViewer.hpp"

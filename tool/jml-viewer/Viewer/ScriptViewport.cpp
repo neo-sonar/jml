@@ -1,8 +1,8 @@
-#include "ComponentContainer.hpp"
+#include "ScriptViewport.hpp"
 
 namespace jml::viewer {
 
-auto ComponentContainer::setContentComponent(juce::Component* component) -> void
+auto ScriptViewport::setViewedComponent(juce::Component* component) -> void
 {
     if (_component != nullptr) { removeChildComponent(_component); }
     if (_component = component; _component != nullptr) {
@@ -11,9 +11,9 @@ auto ComponentContainer::setContentComponent(juce::Component* component) -> void
     }
 }
 
-auto ComponentContainer::paint(juce::Graphics& g) -> void { g.fillAll(juce::Colour::fromRGB(240, 240, 240)); }
+auto ScriptViewport::paint(juce::Graphics& g) -> void { g.fillAll(juce::Colour::fromRGB(240, 240, 240)); }
 
-auto ComponentContainer::resized() -> void
+auto ScriptViewport::resized() -> void
 {
     if (_component == nullptr) { return; }
 

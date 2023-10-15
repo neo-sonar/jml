@@ -4,7 +4,7 @@
 
 namespace jml::viewer {
 namespace {
-constexpr auto const* DefaultScriptPath = R"(C:\Developer\moderncircuits\tests\juce-lua\example\layout_grid.lua)";
+constexpr auto const* DefaultScriptPath = R"(~/Developer/neo-sonar/jml/example/layout_grid.lua)";
 }
 
 LuaScriptViewer::LuaScriptViewer() : _scriptFile(DefaultScriptPath)
@@ -19,7 +19,7 @@ auto LuaScriptViewer::setScriptFile(juce::File const& file) -> void
     auto componentTreeState = _componentTree.getOpennessState(true);
 
     _fileListener.reset(nullptr);
-    _viewport.setContentComponent(nullptr);
+    _viewport.setViewedComponent(nullptr);
 
     if (not file.existsAsFile()) { return; }
     file.getParentDirectory().setAsCurrentWorkingDirectory();
@@ -36,7 +36,7 @@ auto LuaScriptViewer::setScriptFile(juce::File const& file) -> void
     _lua->component = _lua->obj.as<juce::Component*>();
     _lua->component->resized();
 
-    _viewport.setContentComponent(_lua->component);
+    _viewport.setViewedComponent(_lua->component);
     _componentTree.setRootComponent(_lua->component);
 
     _scriptFile             = file;

@@ -4,12 +4,12 @@
 
 namespace jml::viewer {
 
-struct ComponentContainer final : juce::Component
+struct ScriptViewport final : juce::Component
 {
-    ComponentContainer()           = default;
-    ~ComponentContainer() override = default;
+    ScriptViewport()           = default;
+    ~ScriptViewport() override = default;
 
-    auto setContentComponent(juce::Component* component) -> void;
+    auto setViewedComponent(juce::Component* component) -> void;
 
     auto paint(juce::Graphics& g) -> void override;
     auto resized() -> void override;

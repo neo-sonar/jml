@@ -24,14 +24,14 @@ set(sources
     "LookAndFeel/LookAndFeel.cpp"
     "LookAndFeel/LookAndFeel.hpp"
 
-    "Viewer/ComponentContainer.cpp"
-    "Viewer/ComponentContainer.hpp"
     "Viewer/ComponentTree.cpp"
     "Viewer/ComponentTree.hpp"
     "Viewer/FileChangeListener.cpp"
     "Viewer/FileChangeListener.hpp"
     "Viewer/LuaScriptViewer.cpp"
     "Viewer/LuaScriptViewer.hpp"
+    "Viewer/ScriptViewport.cpp"
+    "Viewer/ScriptViewport.hpp"
 )
 
 target_sources(jml-viewer PRIVATE ${sources})
