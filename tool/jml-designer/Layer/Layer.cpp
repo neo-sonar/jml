@@ -1,6 +1,7 @@
 #include "Layer.hpp"
 
 #include "Component/PropertyPanel.hpp"
+#include "Core/Color.hpp"
 #include "Core/ValueTree.hpp"
 
 namespace jml::designer {

@@ -2,6 +2,8 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
+#include <span>
+
 namespace jml::designer {
 
 auto forEachSelectedItem(juce::TreeView& treeView, auto callback) -> void
