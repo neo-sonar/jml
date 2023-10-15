@@ -3,18 +3,31 @@
 #include "LookAndFeel/Colours.hpp"
 
 namespace jml::viewer {
-LookAndFeel::LookAndFeel()
-    : juce::LookAndFeel_V4{{
-        Colours::whiteDirt,              // windowBackground
-        Colours::white,                  // widgetBackground
-        Colours::white,                  // menuBackground
-        juce::Colours::transparentBlack, // outline
-        Colours::black,                  // defaultText
-        Colours::white.darker(),         // defaultFill
-        Colours::black,                  // highlightedText
-        Colours::whiteDirt,              // highlightedFill
-        Colours::black,                  // menuText
-    }}
+
+namespace {
+
+auto makeColourScheme(bool custom) -> juce::LookAndFeel_V4::ColourScheme
+{
+    if (custom) {
+        return {
+            Colours::whiteDirt,              // windowBackground
+            Colours::white,                  // widgetBackground
+            Colours::white,                  // menuBackground
+            juce::Colours::transparentBlack, // outline
+            Colours::black,                  // defaultText
+            Colours::white.darker(),         // defaultFill
+            Colours::black,                  // highlightedText
+            Colours::whiteDirt,              // highlightedFill
+            Colours::black,                  // menuText
+        };
+    }
+
+    return juce::LookAndFeel_V4::getDarkColourScheme();
+}
+
+} // namespace
+
+LookAndFeel::LookAndFeel() : juce::LookAndFeel_V4{makeColourScheme(true)}
 {
     setColour(juce::CodeEditorComponent::backgroundColourId, OneLightColours::editorBackground);
     setColour(juce::CodeEditorComponent::highlightColourId, OneLightColours::editorHighlight);
