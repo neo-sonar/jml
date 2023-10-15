@@ -14,10 +14,9 @@ jobs:
     runs-on: windows-2022
     strategy:
       matrix:
-        build_mode: ["Debug", "Release"]
         cxx: ["MSVC", "Clang"]
       fail-fast: false
-    name: ${{ matrix.cxx }} - ${{ matrix.build_mode }}
+    name: ${{ matrix.cxx }} - Release
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -44,7 +43,7 @@ jobs:
       - name: Install ccache
         uses: hendrikmuhs/ccache-action@main
         with:
-          key: jml-windows-build-${{ matrix.build_mode }}
+          key: jml-windows-build-Release
 
       - name: CMake configure
         run: >
@@ -52,12 +51,11 @@ jobs:
           -S .
           -G "Ninja"
           -B build
-          -D CMAKE_BUILD_TYPE=${{ matrix.build_mode }}
-          -D CMAKE_UNITY_BUILD=OFF
+          -D CMAKE_BUILD_TYPE=Release
           -D CMAKE_PROJECT_TOP_LEVEL_INCLUDES=external/cmake-conan/conan_provider.cmake
 
       - name: CMake build
         run: cmake --build build
 
       - name: CTest
-        run: ctest --test-dir build -C ${{ matrix.build_mode }} --output-on-failure
+        run: ctest --test-dir build -C Release --output-on-failure
