@@ -15,8 +15,9 @@ jobs:
     strategy:
       matrix:
         build_mode: ["Debug", "Release"]
+        cxx: ["MSVC", "Clang"]
       fail-fast: false
-    name: MSVC - ${{ matrix.build_mode }}
+    name: ${{ matrix.cxx }} - ${{ matrix.build_mode }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -25,9 +26,14 @@ jobs:
           lfs: true
 
       - name: Set up Visual Studio shell
+        if: matrix.cxx == 'MSVC'
         uses: egor-tensin/vs-shell@v2
         with:
           arch: x64
+
+      - name: Install clang
+        if: matrix.cxx == 'Clang'
+        uses: egor-tensin/setup-clang@v1
 
       - name: Install dependencies
         run: |
