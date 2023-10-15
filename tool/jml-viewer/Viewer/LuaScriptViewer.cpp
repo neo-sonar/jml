@@ -71,6 +71,10 @@ auto LuaScriptViewer::reloadLuaState() -> void
     lua_juce::allModules(_lua->state);
 }
 
-auto LuaScriptViewer::handleLuaError(sol::error const& error) -> void { DBG(error.what()); }
+auto LuaScriptViewer::handleLuaError(sol::error const& error) -> void
+{
+    DBG(error.what());
+    juce::ignoreUnused(error);
+}
 
 } // namespace jml::viewer

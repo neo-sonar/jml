@@ -79,13 +79,13 @@ auto LayerTreeItem::itemDropped(juce::DragAndDropTarget::SourceDetails const& /*
 
 auto LayerTreeItem::layerPropertyChanged(Layer* layer, juce::Identifier const& /*property*/) -> void
 {
-    jassert(&_layer == layer);
+    jassertquiet(&_layer == layer);
     repaintItem();
 }
 
 auto LayerTreeItem::layerChildrenChanged(Layer* layer) -> void
 {
-    jassert(&_layer == layer);
+    jassertquiet(&_layer == layer);
     refreshSubItems();
     treeHasChanged();
     setOpen(true);
