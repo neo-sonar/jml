@@ -2,6 +2,13 @@ name: Linux
 
 on: [push, pull_request]
 
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  CMAKE_GENERATOR: Ninja
+
 jobs:
   build:
     runs-on: ubuntu-22.04
