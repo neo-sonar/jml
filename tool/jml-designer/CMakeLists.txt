@@ -142,6 +142,6 @@ target_link_libraries(jml-designer
         JMLDesigner_BinaryData
 
         juce::juce_recommended_config_flags
-        juce::juce_recommended_lto_flags
+        # juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags
 )

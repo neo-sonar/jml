@@ -24,7 +24,7 @@ class JML(ConanFile):
 
     def requirements(self):
         self.requires("cli11/2.3.2")
-        self.requires("sol2/3.3.0")
+        self.requires("sol2/3.3.1")
 
     def config_options(self):
         self.options["lua"].compile_as_cpp = True
