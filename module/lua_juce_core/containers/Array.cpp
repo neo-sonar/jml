@@ -1,5 +1,3 @@
-#include "Array.hpp"
-
 namespace lua_juce {
 auto juce_Array(sol::table& state) -> void
 {

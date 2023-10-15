@@ -23,6 +23,8 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_data_structures/juce_data_structures.h>
 #include <lua_juce_events/lua_juce_events.hpp>
 
-#include "undomanager/UndoManager.hpp"
-#include "undomanager/UndoableAction.hpp"
-#include "values/ValueTree.hpp"
+namespace lua_juce {
+auto juce_UndoableAction(sol::table& state) -> void;
+auto juce_UndoManager(sol::table& state) -> void;
+auto juce_ValueTree(sol::table& state) -> void;
+} // namespace lua_juce

@@ -23,16 +23,18 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_graphics/juce_graphics.h>
 #include <lua_juce_events/lua_juce_events.hpp>
 
-#include "colour/Colour.hpp"
-#include "colour/ColourGradient.hpp"
-#include "colour/Colours.hpp"
-#include "contexts/Graphics.hpp"
-#include "font/Font.hpp"
-#include "geometry/AffineTransform.hpp"
-#include "geometry/Line.hpp"
-#include "geometry/Path.hpp"
-#include "geometry/Point.hpp"
-#include "geometry/Rectangle.hpp"
-#include "images/Image.hpp"
-#include "images/ImageCache.hpp"
-#include "placement/Justification.hpp"
+namespace lua_juce {
+auto juce_Colour(sol::table& state) -> void;
+auto juce_ColourGradient(sol::table& state) -> void;
+auto juce_Colours(sol::table& state) -> void;
+auto juce_Graphics(sol::table& state) -> void;
+auto juce_Font(sol::table& state) -> void;
+auto juce_AffineTransform(sol::table& state) -> void;
+auto juce_Line(sol::table& state) -> void;
+auto juce_Path(sol::table& state) -> void;
+auto juce_Point(sol::table& state) -> void;
+auto juce_Rectangle(sol::table& state) -> void;
+auto juce_Image(sol::table& state) -> void;
+auto juce_ImageCache(sol::table& state) -> void;
+auto juce_Justification(sol::table& state) -> void;
+} // namespace lua_juce

@@ -1,4 +1,3 @@
-#include "ListBoxModel.hpp"
 namespace lua_juce {
 
 static auto juce_LuaListBoxModel(sol::table& state) -> void

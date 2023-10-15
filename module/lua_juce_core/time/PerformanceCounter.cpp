@@ -1,4 +1,3 @@
-#include "PerformanceCounter.hpp"
 
 namespace lua_juce {
 auto juce_PerformanceCounter(sol::table& state) -> void

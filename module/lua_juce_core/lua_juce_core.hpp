@@ -78,25 +78,88 @@ template<typename T>
 struct sol::is_container<juce::Array<T>> : std::false_type
 {};
 
-#include "containers/Array.hpp"
-#include "files/File.hpp"
-#include "maths/BigInteger.hpp"
-#include "maths/Int.hpp"
-#include "maths/MathConstants.hpp"
-#include "maths/NormalisableRange.hpp"
-#include "maths/Random.hpp"
-#include "maths/Range.hpp"
-#include "maths/StatisticsAccumulator.hpp"
-#include "memory/MemoryBlock.hpp"
-#include "misc/Result.hpp"
-#include "misc/Uuid.hpp"
-#include "network/IPAddress.hpp"
-#include "streams/InputStream.hpp"
-#include "streams/MemoryInputStream.hpp"
-#include "streams/MemoryOutputStream.hpp"
-#include "streams/OutputStream.hpp"
-#include "text/String.hpp"
-#include "text/StringArray.hpp"
-#include "time/PerformanceCounter.hpp"
-#include "time/RelativeTime.hpp"
-#include "time/Time.hpp"
+namespace lua_juce {
+auto juce_Array(sol::table& state) -> void;
+auto juce_File(sol::table& state) -> void;
+auto juce_BigInteger(sol::table& state) -> void;
+auto juce_Int(sol::table& state) -> void;
+auto juce_MathConstants(sol::table& state) -> void;
+auto juce_NormalisableRange(sol::table& state) -> void;
+auto juce_Random(sol::table& state) -> void;
+auto juce_Range(sol::table& state) -> void;
+auto juce_StatisticsAccumulator(sol::table& state) -> void;
+auto juce_MemoryBlock(sol::table& state) -> void;
+auto juce_Result(sol::table& state) -> void;
+auto juce_Uuid(sol::table& state) -> void;
+auto juce_IPAddress(sol::table& state) -> void;
+auto juce_InputStream(sol::table& state) -> void;
+auto juce_MemoryInputStream(sol::table& state) -> void;
+auto juce_MemoryOutputStream(sol::table& state) -> void;
+auto juce_OutputStream(sol::table& state) -> void;
+auto juce_String(sol::table& state) -> void;
+auto juce_StringArray(sol::table& state) -> void;
+auto juce_PerformanceCounter(sol::table& state) -> void;
+auto juce_RelativeTime(sol::table& state) -> void;
+auto juce_Time(sol::table& state) -> void;
+
+template<typename T>
+auto juce_ArrayImpl(sol::table& state, char const* name) -> void
+{
+    auto noOperators                           = sol::automagic_enrollments{};
+    noOperators.less_than_operator             = false;
+    noOperators.less_than_or_equal_to_operator = false;
+    noOperators.equal_to_operator              = false;
+
+    auto array = state.new_usertype<juce::Array<T>>(name, noOperators);
+
+    array["clear"]                    = &juce::Array<T>::clear;
+    array["clearQuick"]               = &juce::Array<T>::clearQuick;
+    array["fill"]                     = &juce::Array<T>::fill;
+    array["size"]                     = &juce::Array<T>::size;
+    array["isEmpty"]                  = &juce::Array<T>::isEmpty;
+    array["getUnchecked"]             = &juce::Array<T>::getUnchecked;
+    array["getFirst"]                 = &juce::Array<T>::getFirst;
+    array["getLast"]                  = &juce::Array<T>::getLast;
+    array["insert"]                   = &juce::Array<T>::insert;
+    array["insertMultiple"]           = &juce::Array<T>::insertMultiple;
+    array["set"]                      = &juce::Array<T>::set;
+    array["setUnchecked"]             = &juce::Array<T>::setUnchecked;
+    array["resize"]                   = &juce::Array<T>::resize;
+    array["removeAndReturn"]          = &juce::Array<T>::removeAndReturn;
+    array["removeRange"]              = &juce::Array<T>::removeRange;
+    array["removeLast"]               = &juce::Array<T>::removeLast;
+    array["swap"]                     = &juce::Array<T>::swap;
+    array["move"]                     = &juce::Array<T>::move;
+    array["minimiseStorageOverheads"] = &juce::Array<T>::minimiseStorageOverheads;
+    array["ensureStorageAllocated"]   = &juce::Array<T>::ensureStorageAllocated;
+    array["add"]                      = [](juce::Array<T>* a, T const& t) { a->add(t); };
+
+    // array["indexOf"]                  = &juce::Array<T>::indexOf;
+    // array["contains"]                 = &juce::Array<T>::contains;
+    // array["addIfNotAlreadyThere"]     = &juce::Array<T>::addIfNotAlreadyThere;
+    // array["swapWith"]                 = &juce::Array<T>::swapWith;
+    // array["addSorted"]                = &juce::Array<T>::addSorted;
+    // array["addUsingDefaultSort"]      = &juce::Array<T>::addUsingDefaultSort;
+    // array["indexOfSorted"]            = &juce::Array<T>::indexOfSorted;
+    // array["removeFirstMatchingValue"] = &juce::Array<T>::removeFirstMatchingValue;
+    // array["removeAllInstancesOf"]     = &juce::Array<T>::removeAllInstancesOf;
+    // array["removeIf"]                 = &juce::Array<T>::removeIf;
+    // array["removeValuesIn"]           = &juce::Array<T>::removeValuesIn;
+    // array["removeValuesNotIn"]        = &juce::Array<T>::removeValuesNotIn;
+
+    // TODO(tobi)
+    // getReference
+    // getRawDataPointer
+    // begin
+    // end
+    // data
+    // add
+    // insertArray
+    // addArray
+    // addNullTerminatedArray
+    // remove
+    // sort
+    // getLock
+}
+
+} // namespace lua_juce

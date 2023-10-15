@@ -23,5 +23,7 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_events/juce_events.h>
 #include <lua_juce_core/lua_juce_core.hpp>
 
-#include "timers/LuaTimer.hpp"
-#include "timers/Timer.hpp"
+namespace lua_juce {
+auto juce_Timer(sol::table& state) -> void;
+auto juce_LuaTimer(sol::table& state) -> void;
+} // namespace lua_juce

@@ -1,5 +1,3 @@
-#include "ComponentListener.hpp"
-
 namespace lua_juce {
 namespace {
 struct LuaComponentListener final : juce::ComponentListener

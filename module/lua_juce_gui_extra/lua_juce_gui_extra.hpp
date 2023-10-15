@@ -23,8 +23,10 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_gui_extra/juce_gui_extra.h>
 #include <lua_juce_gui_basics/lua_juce_gui_basics.hpp>
 
-#include "code_editor/CPlusPlusCodeTokeniser.hpp"
-#include "code_editor/CodeDocument.hpp"
-#include "code_editor/CodeTokeniser.hpp"
-#include "code_editor/LuaTokeniser.hpp"
-#include "code_editor/XmlTokeniser.hpp"
+namespace lua_juce {
+auto juce_CodeDocument(sol::table& state) -> void;
+auto juce_CodeTokeniser(sol::table& state) -> void;
+auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void;
+auto juce_LuaTokeniser(sol::table& state) -> void;
+auto juce_XmlTokeniser(sol::table& state) -> void;
+} // namespace lua_juce
