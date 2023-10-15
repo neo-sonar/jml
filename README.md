@@ -1,8 +1,6 @@
 # JUCE Meets LUA
 
-[![Linux](https://github.com/neo-sonar/jml/actions/workflows/linux.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/linux.yml)
-[![macOS](https://github.com/neo-sonar/jml/actions/workflows/macos.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/macos.yml)
-[![Windows](https://github.com/neo-sonar/jml/actions/workflows/windows.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/windows.yml)
+[![Build](https://github.com/neo-sonar/jml/actions/workflows/build.yml/badge.svg)](https://github.com/neo-sonar/jml/actions/workflows/build.yml)
 
 - [Usage](#usage)
   - [Bindings](#bindings)
