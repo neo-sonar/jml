@@ -18,7 +18,7 @@ struct LayerList final : ValueTreeObjectList<Layer>
 private:
     [[nodiscard]] auto isSuitableType(juce::ValueTree const& v) const -> bool override;
     auto createNewObject(juce::ValueTree const& v) -> Layer* override;
-    auto deleteObject(Layer* c) -> void override;
+    auto deleteObject(Layer* layer) -> void override;
     auto newObjectAdded(Layer* layer) -> void override;
     auto objectRemoved(Layer* layer) -> void override;
     auto objectOrderChanged() -> void override;

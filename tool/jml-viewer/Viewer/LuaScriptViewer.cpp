@@ -4,10 +4,10 @@
 
 namespace jml::viewer {
 namespace {
-constexpr auto const* defaultScriptPath = R"(C:\Developer\moderncircuits\tests\juce-lua\example\layout_grid.lua)";
+constexpr auto const* DefaultScriptPath = R"(C:\Developer\moderncircuits\tests\juce-lua\example\layout_grid.lua)";
 }
 
-LuaScriptViewer::LuaScriptViewer() : _scriptFile(defaultScriptPath)
+LuaScriptViewer::LuaScriptViewer() : _scriptFile(DefaultScriptPath)
 {
     addAndMakeVisible(_viewport);
     addAndMakeVisible(_componentTree);

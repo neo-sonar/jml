@@ -13,12 +13,11 @@ auto ComponentTree::setRootComponent(juce::Component* root) -> void
     setRootItem(_rootItem.get());
 }
 
-ComponentTree::Item::Item(juce::Component* root) : _root{root}
+ComponentTree::Item::Item(juce::Component* root) // NOLINT(misc-no-recursion)
+    : _root{root}
 {
     auto const& children = root->getChildren();
-    for (auto* child : children) {
-        addSubItem(new ComponentTree::Item{child}); // NOLINT(misc-no-recursion)
-    }
+    for (auto* child : children) { addSubItem(std::make_unique<ComponentTree::Item>(child).release()); }
 }
 
 auto ComponentTree::Item::mightContainSubItems() -> bool

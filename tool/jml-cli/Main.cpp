@@ -16,7 +16,7 @@ namespace {
 }
 } // namespace
 
-auto main(int argc, char* argv[]) -> int
+auto main(int argc, char* argv[]) -> int // NOLINT(bugprone-exception-escape)
 {
     auto init = juce::ScopedJuceInitialiser_GUI{};
 

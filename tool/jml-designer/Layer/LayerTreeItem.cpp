@@ -108,8 +108,8 @@ auto LayerTreeItem::refreshSubItems() -> void
 {
     clearSubItems();
     for (auto* child : _layer.getChildren()) {
-        auto* item = new LayerTreeItem(*child);
-        if (item != nullptr) { addSubItem(item); }
+        auto item = std::make_unique<LayerTreeItem>(*child);
+        if (item != nullptr) { addSubItem(item.release()); }
     }
 }
 
