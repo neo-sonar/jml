@@ -16,7 +16,9 @@ auto ComponentTree::setRootComponent(juce::Component* root) -> void
 ComponentTree::Item::Item(juce::Component* root) : _root{root}
 {
     auto const& children = root->getChildren();
-    for (auto* child : children) { addSubItem(new ComponentTree::Item{child}); }
+    for (auto* child : children) {
+        addSubItem(new ComponentTree::Item{child}); // NOLINT(misc-no-recursion)
+    }
 }
 
 auto ComponentTree::Item::mightContainSubItems() -> bool

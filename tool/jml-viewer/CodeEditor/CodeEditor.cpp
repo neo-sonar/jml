@@ -4,21 +4,23 @@
 
 namespace jml::viewer {
 
-static auto makeCodeEditorColorScheme() -> juce::CodeEditorComponent::ColourScheme
+namespace {
+auto makeCodeEditorColorScheme() -> juce::CodeEditorComponent::ColourScheme
 {
-    static juce::CodeEditorComponent::ColourScheme::TokenType const types[] = {
-        {"Error", juce::Colour(0xffcc0000)},      {"Comment", OneLightColors::codeComment},
-        {"Keyword", OneLightColors::codeKeyword}, {"Operator", OneLightColors::codeOperator},
-        {"Identifier", juce::Colour(0xff000000)}, {"Integer", OneLightColors::codeInteger},
-        {"Float", OneLightColors::codeFloat},     {"String", OneLightColors::codeString},
-        {"Bracket", OneLightColors::codeBracket}, {"Punctuation", juce::Colour(0xff004400)},
+    using TokenType         = juce::CodeEditorComponent::ColourScheme::TokenType;
+    static auto const types = std::array{
+        TokenType{"Error", juce::Colour(0xffcc0000)},      TokenType{"Comment", OneLightColors::codeComment},
+        TokenType{"Keyword", OneLightColors::codeKeyword}, TokenType{"Operator", OneLightColors::codeOperator},
+        TokenType{"Identifier", juce::Colour(0xff000000)}, TokenType{"Integer", OneLightColors::codeInteger},
+        TokenType{"Float", OneLightColors::codeFloat},     TokenType{"String", OneLightColors::codeString},
+        TokenType{"Bracket", OneLightColors::codeBracket}, TokenType{"Punctuation", juce::Colour(0xff004400)},
     };
 
     auto cs = juce::CodeEditorComponent::ColourScheme{};
     for (auto const& t : types) { cs.set(t.name, t.colour); }
     return cs;
 }
-
+} // namespace
 CodeEditor::CodeEditor()
 {
     _editor.setLineNumbersShown(true);

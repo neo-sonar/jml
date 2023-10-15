@@ -33,7 +33,7 @@ struct GuiAppApplication final : juce::JUCEApplication
                 DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar(true);
-            setContentOwned(new jml::viewer::MainComponent(), true);
+            setContentOwned(std::make_unique<jml::viewer::MainComponent>().release(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen(true);

@@ -29,7 +29,10 @@ auto LayerEffectList::createNewObject(juce::ValueTree const& v) -> LayerEffect*
     return nullptr;
 }
 
-auto LayerEffectList::deleteObject(LayerEffect* c) -> void { delete c; }
+auto LayerEffectList::deleteObject(LayerEffect* layer) -> void
+{
+    delete layer; // NOLINT
+}
 
 auto LayerEffectList::newObjectAdded(LayerEffect* layer) -> void
 {

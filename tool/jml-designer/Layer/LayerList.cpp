@@ -32,7 +32,10 @@ auto LayerList::createNewObject(juce::ValueTree const& v) -> Layer*
     return nullptr;
 }
 
-auto LayerList::deleteObject(Layer* c) -> void { delete c; }
+auto LayerList::deleteObject(Layer* layer) -> void
+{
+    delete layer; // NOLINT
+}
 
 auto LayerList::newObjectAdded(Layer* layer) -> void
 {

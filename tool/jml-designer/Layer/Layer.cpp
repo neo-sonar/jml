@@ -54,21 +54,21 @@ auto Layer::mightHaveChildren() -> bool { return false; }
 auto Layer::fillPropertyPanel(juce::PropertyPanel& panel) -> void
 {
     auto const general = juce::Array<juce::PropertyComponent*>{
-        makeTextProperty(valueTree(), Layer::IDs::uuid, "UUID", false),
-        makeTextProperty(valueTree(), Layer::IDs::name, "Name", true),
+        makeTextProperty(valueTree(), Layer::IDs::uuid, "UUID", false).release(),
+        makeTextProperty(valueTree(), Layer::IDs::name, "Name", true).release(),
     };
 
     auto const position = juce::Array<juce::PropertyComponent*>{
-        makeSliderProperty(valueTree(), Layer::IDs::x, "X", 0.0, 1000.0, 1.0),
-        makeSliderProperty(valueTree(), Layer::IDs::y, "Y", 0.0, 1000.0, 1.0),
-        makeSliderProperty(valueTree(), Layer::IDs::width, "Width", 0.0, 1000.0, 1.0),
-        makeSliderProperty(valueTree(), Layer::IDs::height, "Height", 0.0, 1000.0, 1.0),
+        makeSliderProperty(valueTree(), Layer::IDs::x, "X", 0.0, 1000.0, 1.0).release(),
+        makeSliderProperty(valueTree(), Layer::IDs::y, "Y", 0.0, 1000.0, 1.0).release(),
+        makeSliderProperty(valueTree(), Layer::IDs::width, "Width", 0.0, 1000.0, 1.0).release(),
+        makeSliderProperty(valueTree(), Layer::IDs::height, "Height", 0.0, 1000.0, 1.0).release(),
     };
 
     auto const fill = juce::Array<juce::PropertyComponent*>{
-        makeSliderProperty(valueTree(), IDs::opacity, "Opacity", 0.0, 1.0, 0.01),
-        makeColorProperty(valueTree(), IDs::backgroundFill, "Background", true),
-        makeColorProperty(valueTree(), IDs::overlayFill, "Overlay", true),
+        makeSliderProperty(valueTree(), IDs::opacity, "Opacity", 0.0, 1.0, 0.01).release(),
+        makeColorProperty(valueTree(), IDs::backgroundFill, "Background", true).release(),
+        makeColorProperty(valueTree(), IDs::overlayFill, "Overlay", true).release(),
     };
 
     panel.clear();

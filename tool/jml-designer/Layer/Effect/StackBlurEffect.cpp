@@ -1,5 +1,7 @@
 #include "StackBlurEffect.hpp"
 
+#include <span>
+
 namespace jml::designer {
 
 struct StackBlur
@@ -58,23 +60,25 @@ private:
     private:
         struct RingBuffer
         {
-            RingBuffer(juce::uint8* sourceData, int bufferSize) : _data{sourceData}, _size{bufferSize} {}
+            RingBuffer(juce::uint8* sourceData, int bufferSize)
+                : _data{sourceData, static_cast<std::size_t>(bufferSize)}
+            {
+            }
 
             void write(juce::uint8 value)
             {
                 _data[_writeIndex] = value;
 
-                if (++_writeIndex >= _size) { _writeIndex = 0; }
+                if (++_writeIndex >= _data.size()) { _writeIndex = 0; }
             }
 
             [[nodiscard]] auto front() const -> juce::uint8 { return _data[_writeIndex]; }
 
-            [[nodiscard]] auto sum() const -> double { return std::accumulate(_data, _data + _size, 0.0); }
+            [[nodiscard]] auto sum() const -> double { return std::accumulate(_data.begin(), _data.end(), 0.0); }
 
         private:
-            int _writeIndex{0};
-            juce::uint8* _data;
-            int const _size;
+            std::span<juce::uint8> _data;
+            std::size_t _writeIndex{0};
         };
 
         std::vector<juce::uint8> _buffer;
@@ -112,7 +116,8 @@ auto StackBlurEffect::setUseThreadPool(bool shouldUseThreadPool, int jobsPerThre
 
 auto StackBlurEffect::isUsingThreadPool() const -> bool { return _threadPoolEnabled; }
 
-static auto getNumColourChannels(juce::Image const& image) -> int
+namespace {
+auto getNumColourChannels(juce::Image const& image) -> int
 {
     switch (image.getFormat()) {
         case juce::Image::PixelFormat::RGB: return 3;
@@ -122,6 +127,7 @@ static auto getNumColourChannels(juce::Image const& image) -> int
         default: return 0;
     }
 }
+} // namespace
 
 auto StackBlurEffect::applyEffect(juce::Image& source, juce::Graphics& g, float scale, float alpha) -> void
 {
@@ -152,7 +158,7 @@ auto StackBlurEffect::blurHorizontally(juce::Image& image, int channel, float sc
     for (auto i = 0; i < numRows; i += _numJobsPerThread) {
         auto blurRow = [this, &bitmapData, i, channel, numRows, &blur]() {
             for (auto row = i; row < i + _numJobsPerThread && row < numRows; row++) {
-                auto* const pixels = bitmapData.getPixelPointer(0, row) + channel;
+                auto* const pixels = std::next(bitmapData.getPixelPointer(0, row), channel);
                 blur.blur(pixels);
             }
         };
@@ -180,7 +186,7 @@ auto StackBlurEffect::blurVertically(juce::Image& image, int channel, float scal
     for (auto i = 0; i < numColumns; i += _numJobsPerThread) {
         auto blurColumn = [this, &bitmapData, i, channel, numColumns, &blur]() {
             for (auto column = i; column < i + _numJobsPerThread && column < numColumns; column++) {
-                auto* const pixels = bitmapData.getPixelPointer(column, 0) + channel;
+                auto* const pixels = std::next(bitmapData.getPixelPointer(column, 0), channel);
                 blur.blur(pixels);
             }
         };

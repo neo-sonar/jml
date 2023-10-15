@@ -10,7 +10,7 @@ struct MainWindow final : juce::DocumentWindow
         : DocumentWindow(name, juce::Colours::black, DocumentWindow::allButtons)
     {
         setUsingNativeTitleBar(true);
-        setContentOwned(new MainComponent(), true);
+        setContentOwned(std::make_unique<MainComponent>().release(), true);
         setResizable(true, true);
         centreWithSize(getWidth(), getHeight());
         setVisible(true);

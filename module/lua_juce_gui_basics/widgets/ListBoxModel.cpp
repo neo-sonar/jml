@@ -1,6 +1,7 @@
 namespace lua_juce {
 
-static auto juce_LuaListBoxModel(sol::table& state) -> void
+namespace {
+auto juce_LuaListBoxModel(sol::table& state) -> void
 {
     // clang-format off
     auto model = state.new_usertype<LuaListBoxModel>("ListBoxModel",
@@ -24,6 +25,7 @@ static auto juce_LuaListBoxModel(sol::table& state) -> void
     model["getTooltipForRow"]         = &LuaListBoxModel::lua_getTooltipForRow;
     model["getMouseCursorForRow"]     = &LuaListBoxModel::lua_getMouseCursorForRow;
 }
+} // namespace
 
 auto juce_ListBoxModel(sol::table& state) -> void
 {

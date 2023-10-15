@@ -5,13 +5,15 @@
 
 namespace jml::designer {
 
-static auto getSelectedValueTrees(juce::TreeView& treeView) -> std::vector<juce::ValueTree>
+namespace {
+[[nodiscard]] auto getSelectedValueTrees(juce::TreeView& treeView) -> std::vector<juce::ValueTree>
 {
     auto items        = std::vector<juce::ValueTree>{};
     auto addValueTree = [&items](auto const& i) { items.push_back(i.getState()); };
     forEachSelectedItemWithType<LayerTreeItem>(treeView, addValueTree);
     return items;
 }
+} // namespace
 
 LayerTreeItem::LayerTreeItem(Layer& layer) : _layer{layer} { _layer.addListener(this); }
 LayerTreeItem::~LayerTreeItem() { _layer.removeListener(this); }

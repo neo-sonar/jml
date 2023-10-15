@@ -6,13 +6,15 @@
 
 namespace jml::designer {
 
-[[nodiscard]] static auto makeImageFileFormatForExporter(ImageExporter::Format format)
+namespace {
+[[nodiscard]] auto makeImageFileFormatForExporter(ImageExporter::Format format)
     -> std::unique_ptr<juce::ImageFileFormat>
 {
     if (format == ImageExporter::Format::jpg) { return std::make_unique<juce::JPEGImageFormat>(); }
     if (format == ImageExporter::Format::png) { return std::make_unique<juce::PNGImageFormat>(); }
     return nullptr;
 }
+} // namespace
 
 ImageExporter::ImageExporter(Format format) : _format{format} {}
 

@@ -34,6 +34,8 @@ auto ShapeTool::mouseDrag(juce::MouseEvent const& event) -> void
 
 auto ShapeTool::mouseUp(juce::MouseEvent const& /*event*/) -> void
 {
+    if (not _start or not _current) { return; }
+
     auto const id     = juce::Uuid{};
     auto const bounds = juce::Rectangle{
         juce::Point{_start->getX(), _start->getY()},

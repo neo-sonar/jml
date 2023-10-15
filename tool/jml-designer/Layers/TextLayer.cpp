@@ -7,11 +7,13 @@
 
 namespace jml::designer {
 
-static auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
-                               juce::UndoManager* um)
+namespace {
+auto setPropertyIfEmpty(juce::ValueTree& tree, juce::Identifier const& property, juce::var const& value,
+                        juce::UndoManager* um)
 {
     if (not tree.hasProperty(property)) { tree.setProperty(property, value, um); }
 }
+} // namespace
 
 TextLayer::TextLayer(juce::ValueTree vt, juce::UndoManager& um) : Layer{std::move(vt), um}
 {
@@ -55,9 +57,9 @@ auto TextLayer::paintLayer(juce::Graphics& g) -> void
 auto TextLayer::addLayerProperties(juce::PropertyPanel& panel) -> void
 {
     auto const properties = juce::Array<juce::PropertyComponent*>{
-        makeTextProperty(valueTree(), IDs::text, "Text", true),
-        makeSliderProperty(valueTree(), IDs::fontSize, "Size", 6.0, 128.0, 1.0),
-        makeColorProperty(valueTree(), IDs::fontColor, "Color", true),
+        makeTextProperty(valueTree(), IDs::text, "Text", true).release(),
+        makeSliderProperty(valueTree(), IDs::fontSize, "Size", 6.0, 128.0, 1.0).release(),
+        makeColorProperty(valueTree(), IDs::fontColor, "Color", true).release(),
         makeJustificationProperty(valueTree().getPropertyAsValue(IDs::justification, undoManager()), "Justification")
             .release(),
     };
