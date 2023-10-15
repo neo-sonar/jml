@@ -14,7 +14,7 @@ MainComponent::MainComponent()
     addAndMakeVisible(_menuBar);
     addAndMakeVisible(*_editor);
 
-    setComponentColors(getLookAndFeel(), defaultColorScheme);
+    setComponentColors(getLookAndFeel(), DefaultColorScheme);
     setSize(1280, 720);
 }
 

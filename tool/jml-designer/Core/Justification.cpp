@@ -4,7 +4,8 @@
 
 namespace jml::designer {
 
-auto makeJustificationProperty(juce::Value value, juce::String const& name) -> std::unique_ptr<juce::PropertyComponent>
+auto makeJustificationProperty(juce::Value const& value, juce::String const& name)
+    -> std::unique_ptr<juce::PropertyComponent>
 {
     auto const optionNames = juce::StringArray{
         "Left",

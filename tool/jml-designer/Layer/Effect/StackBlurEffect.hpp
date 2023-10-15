@@ -42,11 +42,11 @@ private:
     auto blurVertically(juce::Image& image, int channel, float scale) -> void;
     auto waitForAllThreadPoolJobsToFinish() const -> void;
 
-    int blurRadiusX{0};
-    int blurRadiusY{0};
-    bool threadPoolEnabled{true};
-    int numJobsPerThread{5};
-    juce::ThreadPool threadPool;
+    int _blurRadiusX{0};
+    int _blurRadiusY{0};
+    bool _threadPoolEnabled{true};
+    int _numJobsPerThread{5};
+    juce::ThreadPool _threadPool;
 
     JUCE_LEAK_DETECTOR(StackBlurEffect)
 };

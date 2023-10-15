@@ -21,7 +21,7 @@ struct Application final : juce::JUCEApplication
     auto anotherInstanceStarted(juce::String const& commandLine) -> void override;
 
 private:
-    juce::LookAndFeel_V4 _lnf{makeColorScheme(defaultColorScheme)};
+    juce::LookAndFeel_V4 _lnf{makeColorScheme(DefaultColorScheme)};
     std::unique_ptr<juce::DocumentWindow> _mainWindow{nullptr};
 };
 

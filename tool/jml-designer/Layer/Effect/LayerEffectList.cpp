@@ -6,7 +6,7 @@
 namespace jml::designer {
 
 LayerEffectList::LayerEffectList(juce::ValueTree v, juce::UndoManager& undoManager)
-    : ValueTreeObjectList<LayerEffect>(v), _undoManager{undoManager}
+    : ValueTreeObjectList<LayerEffect>(std::move(v)), _undoManager{undoManager}
 {
     rebuildObjects();
 }

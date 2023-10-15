@@ -17,9 +17,9 @@ struct LayerEffectList final : ValueTreeObjectList<LayerEffect>
 private:
     [[nodiscard]] auto isSuitableType(juce::ValueTree const& v) const -> bool override;
     auto createNewObject(juce::ValueTree const& v) -> LayerEffect* override;
-    auto deleteObject(LayerEffect* effect) -> void override;
-    auto newObjectAdded(LayerEffect* effect) -> void override;
-    auto objectRemoved(LayerEffect* effect) -> void override;
+    auto deleteObject(LayerEffect* c) -> void override;
+    auto newObjectAdded(LayerEffect* layer) -> void override;
+    auto objectRemoved(LayerEffect* layer) -> void override;
     auto objectOrderChanged() -> void override;
 
     juce::UndoManager& _undoManager;

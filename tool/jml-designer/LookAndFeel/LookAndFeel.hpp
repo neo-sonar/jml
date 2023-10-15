@@ -10,7 +10,7 @@ enum struct ColorScheme
     juce,
 };
 
-inline static constexpr auto defaultColorScheme = ColorScheme::light;
+inline static constexpr auto DefaultColorScheme = ColorScheme::light;
 
 inline auto makeColorScheme(ColorScheme scheme)
 {

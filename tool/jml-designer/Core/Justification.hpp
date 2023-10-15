@@ -3,7 +3,7 @@
 #include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {
-[[nodiscard]] auto makeJustificationProperty(juce::Value value, juce::String const& name)
+[[nodiscard]] auto makeJustificationProperty(juce::Value const& value, juce::String const& name)
     -> std::unique_ptr<juce::PropertyComponent>;
 }
 

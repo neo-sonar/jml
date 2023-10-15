@@ -5,7 +5,8 @@
 
 #include <lua_juce/lua_juce.hpp>
 
-static auto run(auto const func, auto const& app) -> int
+namespace {
+[[nodiscard]] auto run(auto const func, auto const& app) -> int
 {
     if (auto const result = func(app); result.failed()) {
         std::cerr << result.getErrorMessage() << '\n';
@@ -13,6 +14,7 @@ static auto run(auto const func, auto const& app) -> int
     }
     return EXIT_SUCCESS;
 }
+} // namespace
 
 auto main(int argc, char* argv[]) -> int
 {
