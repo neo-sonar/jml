@@ -53,7 +53,7 @@ private:
 
         double calculateStackDifference() const { return inBuffer.sum() - outBuffer.sum(); }
 
-        const juce::uint64 size;
+        juce::uint64 const size;
 
     private:
         struct RingBuffer

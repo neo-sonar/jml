@@ -7,8 +7,8 @@ struct GuiAppApplication final : juce::JUCEApplication
 
     GuiAppApplication() = default;
 
-    auto getApplicationName() -> const juce::String override { return JUCE_APPLICATION_NAME_STRING; }
-    auto getApplicationVersion() -> const juce::String override { return JUCE_APPLICATION_VERSION_STRING; }
+    auto getApplicationName() -> juce::String const override { return JUCE_APPLICATION_NAME_STRING; }
+    auto getApplicationVersion() -> juce::String const override { return JUCE_APPLICATION_VERSION_STRING; }
     auto moreThanOneInstanceAllowed() -> bool override { return true; }
 
     auto initialise(juce::String const& commandLine) -> void override

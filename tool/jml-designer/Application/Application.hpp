@@ -11,8 +11,8 @@ struct Application final : juce::JUCEApplication
     Application()           = default;
     ~Application() override = default;
 
-    [[nodiscard]] auto getApplicationName() -> const juce::String override;
-    [[nodiscard]] auto getApplicationVersion() -> const juce::String override;
+    [[nodiscard]] auto getApplicationName() -> juce::String const override;
+    [[nodiscard]] auto getApplicationVersion() -> juce::String const override;
     [[nodiscard]] auto moreThanOneInstanceAllowed() -> bool override;
 
     auto initialise(juce::String const& commandLine) -> void override;
