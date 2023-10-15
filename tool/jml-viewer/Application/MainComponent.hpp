@@ -4,8 +4,8 @@
 
 #include "Application/MenuBar.hpp"
 #include "CodeEditor/CodeEditor.hpp"
-#include "LookAndFeel/JmlViewerColors.hpp"
-#include "LookAndFeel/JmlViewerLookAndFeel.hpp"
+#include "LookAndFeel/Colours.hpp"
+#include "LookAndFeel/LookAndFeel.hpp"
 #include "Viewer/ComponentContainer.hpp"
 #include "Viewer/ComponentTree.hpp"
 #include "Viewer/FileChangeListener.hpp"
@@ -29,13 +29,13 @@ struct MainComponent
     auto perform(juce::ApplicationCommandTarget::InvocationInfo const& info) -> bool override;
 
 private:
+    auto showAboutWindow() -> void;
     auto doReload(juce::File const& file) -> void;
-
     auto loadScriptPath() -> void;
 
     juce::ApplicationCommandManager _commandManager{};
     juce::UndoManager _undoManager;
-    JmlViewerLookAndFeel _lnf;
+    LookAndFeel _lnf;
 
     MenuBar _menuBar{_commandManager};
     juce::TabbedComponent _tabs{juce::TabbedButtonBar::TabsAtLeft};

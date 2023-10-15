@@ -38,10 +38,10 @@ auto ComponentTree::Item::itemSelectionChanged(bool isNowSelected) -> void { juc
 auto ComponentTree::Item::paintItem(juce::Graphics& g, int width, int height) -> void
 {
     auto const bounds = juce::Rectangle{0, 0, width, height}.reduced(1);
-    g.setColour(JmlViewerColors::whiteDirt);
+    g.setColour(Colours::whiteDirt);
     g.fillRect(bounds);
 
-    g.setColour(JmlViewerColors::black);
+    g.setColour(Colours::black);
     g.drawText(getUniqueName(), bounds.toFloat(), juce::Justification::centred, false);
 }
 

@@ -17,13 +17,15 @@ auto MenuBar::getMenuBarNames() -> juce::StringArray
     return {
         "File",
         "Edit",
+        "Help",
     };
 }
 
 auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -> juce::PopupMenu
 {
+    auto const index = static_cast<MenuIndex>(menuIndex);
 
-    if (menuIndex == 0) {
+    if (index == MenuIndex::File) {
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(&_commandManager, CommandIDs::open, "Open", {} /*openIcon->createCopy()*/);
         menu.addCommandItem(&_commandManager, CommandIDs::reload, "Reload", {} /*openIcon->createCopy()*/);
@@ -33,10 +35,16 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
         return menu;
     }
 
-    if (menuIndex == 1) {
+    if (index == MenuIndex::Edit) {
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(&_commandManager, CommandIDs::undo, "Undo", {} /*undoIcon->createCopy()*/);
         menu.addCommandItem(&_commandManager, CommandIDs::redo, "Redo", {} /*redoIcon->createCopy()*/);
+        return menu;
+    }
+
+    if (index == MenuIndex::Help) {
+        auto menu = juce::PopupMenu{};
+        menu.addCommandItem(&_commandManager, CommandIDs::about, "About", {});
         return menu;
     }
 

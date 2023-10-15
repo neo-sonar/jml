@@ -18,6 +18,13 @@ struct MenuBar final
     auto menuItemSelected(int /*menuItemID*/, int /*topLevelMenuIndex*/) -> void override;
 
 private:
+    enum struct MenuIndex
+    {
+        File = 0,
+        Edit,
+        Help,
+    };
+
     juce::ApplicationCommandManager& _commandManager;
     juce::MenuBarComponent _menu{this};
 };

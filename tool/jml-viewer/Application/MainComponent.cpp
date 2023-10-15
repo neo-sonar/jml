@@ -11,8 +11,8 @@ MainComponent::MainComponent()
     setWantsKeyboardFocus(true);
 
     _tabs.setTabBarDepth(50);
-    _tabs.addTab("Viewer", JmlViewerColors::black, &_preview, false);
-    _tabs.addTab("Code", JmlViewerColors::black, &_editor, false);
+    _tabs.addTab("Viewer", Colours::black, &_preview, false);
+    _tabs.addTab("Code", Colours::black, &_editor, false);
 
     addAndMakeVisible(_menuBar);
     addAndMakeVisible(_tabs);
@@ -46,6 +46,7 @@ auto MainComponent::getAllCommands(juce::Array<juce::CommandID>& c) -> void
         CommandIDs::saveAs,
         CommandIDs::redo,
         CommandIDs::undo,
+        CommandIDs::about,
     });
 }
 
@@ -55,30 +56,40 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
     using juce::ModifierKeys;
 
     switch (commandID) {
-        case CommandIDs::open:
+        case CommandIDs::open: {
             result.setInfo("Open", "Opens a script file", "File", 0);
             result.addDefaultKeypress('o', ModifierKeys::commandModifier);
             break;
-        case CommandIDs::reload:
+        }
+        case CommandIDs::reload: {
             result.setInfo("Reload", "Reload script file", "File", 0);
             result.addDefaultKeypress('r', ModifierKeys::commandModifier);
             break;
-        case CommandIDs::save:
+        }
+        case CommandIDs::save: {
             result.setInfo("Save", "Saves a script file", "File", 0);
             result.addDefaultKeypress('s', ModifierKeys::commandModifier);
             break;
-        case CommandIDs::saveAs:
+        }
+        case CommandIDs::saveAs: {
             result.setInfo("Save As", "Saves a script file to a new location", "File", 0);
             result.addDefaultKeypress('s', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
             break;
-        case CommandIDs::undo:
+        }
+        case CommandIDs::undo: {
             result.setInfo("Undo", "Undo one step", "Edit", 0);
             result.addDefaultKeypress('z', ModifierKeys::commandModifier);
             break;
-        case CommandIDs::redo:
+        }
+        case CommandIDs::redo: {
             result.setInfo("Redo", "Redo one step", "Edit", 0);
             result.addDefaultKeypress('z', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
             break;
+        }
+        case CommandIDs::about: {
+            result.setInfo("About", "Show debug info", "Help", 0);
+            break;
+        }
         default: break;
     }
 }
@@ -92,10 +103,23 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
         case CommandIDs::saveAs: /*saveProject();*/ break;
         case CommandIDs::undo: _undoManager.undo(); break;
         case CommandIDs::redo: _undoManager.redo(); break;
+        case CommandIDs::about: showAboutWindow(); break;
         default: return false;
     }
 
     return true;
+}
+
+auto MainComponent::showAboutWindow() -> void
+{
+    auto const options = juce::MessageBoxOptions()
+                             .withTitle("About")
+                             .withMessage("JML Viewer - 0.1.0")
+                             .withIconType(juce::MessageBoxIconType::InfoIcon)
+                             .withButton("Ok")
+                             .withParentComponent(this);
+
+    juce::AlertWindow::showAsync(options, [](int /*button*/) {});
 }
 
 auto MainComponent::doReload(juce::File const& file) -> void

@@ -12,6 +12,7 @@ struct CommandIDs
         saveAs,
         undo,
         redo,
+        about,
     };
 };
 } // namespace jml::viewer

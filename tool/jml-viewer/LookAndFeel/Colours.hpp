@@ -4,7 +4,7 @@
 
 namespace jml::viewer {
 
-struct JmlViewerColors
+struct Colours
 {
     inline static juce::Colour const black       = juce::Colours::black;
     inline static juce::Colour const transparent = juce::Colours::transparentBlack;
@@ -12,7 +12,7 @@ struct JmlViewerColors
     inline static juce::Colour const whiteDirt   = juce::Colour::fromRGB(240, 240, 240);
 };
 
-struct OneLightColors
+struct OneLightColours
 {
     inline static juce::Colour const editorBackground = juce::Colour(0xFFFAFAFA);
     inline static juce::Colour const editorForeground = juce::Colour(0xFF383A42);

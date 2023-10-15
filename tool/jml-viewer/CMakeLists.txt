@@ -20,9 +20,9 @@ set(sources
     "CodeEditor/CodeEditor.cpp"
     "CodeEditor/CodeEditor.hpp"
 
-    "LookAndFeel/JmlViewerColors.hpp"
-    "LookAndFeel/JmlViewerLookAndFeel.cpp"
-    "LookAndFeel/JmlViewerLookAndFeel.hpp"
+    "LookAndFeel/Colours.hpp"
+    "LookAndFeel/LookAndFeel.cpp"
+    "LookAndFeel/LookAndFeel.hpp"
 
     "Viewer/ComponentContainer.cpp"
     "Viewer/ComponentContainer.hpp"

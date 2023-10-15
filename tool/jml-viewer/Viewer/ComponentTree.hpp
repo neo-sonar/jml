@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LookAndFeel/JmlViewerColors.hpp"
+#include "LookAndFeel/Colours.hpp"
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
