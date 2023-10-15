@@ -4,7 +4,10 @@ auto juce_TextEditor(sol::table& state) -> void
 {
     // clang-format off
     auto editor = state.new_usertype<juce::TextEditor>("TextEditor",
-        sol::constructors<juce::TextEditor(juce::String const&, juce::juce_wchar)>(),
+        sol::factories(
+            [](juce::String const& name) { return std::make_unique<juce::TextEditor>(name); },
+            [](juce::String const& name, int flags) { return std::make_unique<juce::TextEditor>(name, static_cast<juce::juce_wchar>(flags)); }
+        ),
         sol::base_classes,
         sol::bases<
             juce::TextInputTarget,
