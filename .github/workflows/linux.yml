@@ -24,6 +24,7 @@ jobs:
         run: >
           sudo apt install -y
           ninja-build
+          ccache
           libasound2-dev
           libjack-jackd2-dev
           ladspa-sdk
@@ -41,10 +42,15 @@ jobs:
           libglu1-mesa-dev
           mesa-common-dev
 
+      - name: Install ccache
+        uses: hendrikmuhs/ccache-action@main
+        with:
+          key: jml-linux-build-${{ matrix.build_mode }}
+
       - name: Install conan
         run: |
           pip install -r requirements.txt
-          conan config set general.revisions_enabled=1
+          conan profile detect --force
 
       - name: CMake configure
         run: >
@@ -53,6 +59,7 @@ jobs:
           -G Ninja
           -B build
           -D CMAKE_BUILD_TYPE=${{ matrix.build_mode }}
+          -D CMAKE_PROJECT_TOP_LEVEL_INCLUDES=external/cmake-conan/conan_provider.cmake
 
       - name: CMake build
         run: cmake --build build --parallel 1
