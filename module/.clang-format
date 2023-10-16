@@ -22,7 +22,7 @@ BreakBeforeInheritanceComma: true
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeComma
 BreakStringLiterals: true
-ColumnLimit: 140
+ColumnLimit: 180
 CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 Cpp11BracedListStyle: true

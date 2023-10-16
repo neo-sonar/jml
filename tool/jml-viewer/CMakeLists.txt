@@ -72,6 +72,6 @@ target_link_libraries(jml-viewer
         CLI11::CLI11
 
         juce::juce_recommended_config_flags
-        # juce::juce_recommended_lto_flags
+        juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags
 )

@@ -64,16 +64,14 @@ auto juce_Slider(sol::table& state) -> void
             juce::SettableTooltipClient
         >()
     );
-    slider.set_function("setRange", sol::overload(
+    slider["setRange"] =  sol::overload(
             static_cast<void (juce::Slider::*)(juce::Range<double>, double)>(&juce::Slider::setRange),
             static_cast<void (juce::Slider::*)(double, double, double)>(&juce::Slider::setRange),
             [] (juce::Slider* self, double minValue, double maxValue) { self->setRange(minValue, maxValue); }
-        )
     );
-    slider.set_function("setRotaryParameters", sol::overload(
+    slider["setRotaryParameters"] =  sol::overload(
             static_cast<void (juce::Slider::*)(juce::Slider::RotaryParameters)>(&juce::Slider::setRotaryParameters),
             static_cast<void (juce::Slider::*)(float, float, bool)>(&juce::Slider::setRotaryParameters)
-        )
     );
     // clang-format on
 

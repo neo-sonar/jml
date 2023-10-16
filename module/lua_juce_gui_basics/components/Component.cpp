@@ -52,26 +52,18 @@ auto LuaComponent::mouseMagnify(juce::MouseEvent const& event, float scaleFactor
 
 auto juce_Component(sol::table& state) -> void
 {
-    // clang-format off
     auto comp = state.new_usertype<juce::Component>("InternalComponent", sol::base_classes, sol::bases<juce::MouseListener>());
-    // comp.set_function("addAndMakeVisible", sol::overload(
-    //         static_cast<void (juce::Component::*)(juce::Component*, int)>(&juce::Component::addAndMakeVisible),
-    //         static_cast<void (juce::Component::*)(juce::Component&, int)>(&juce::Component::addAndMakeVisible),
-    //         [](juce::Component* self, juce::Component* child) -> void { self->addAndMakeVisible(child, -1); }
-    //     )
-    // );
-    comp.set_function("setBounds", sol::overload(
-            static_cast<void (juce::Component::*)(int,int,int,int)>(&juce::Component::setBounds),
-            static_cast<void (juce::Component::*)(juce::Rectangle<int>)>(&juce::Component::setBounds)
-        )
-    );
-    comp.set_function("repaint", sol::overload(
-            static_cast<void (juce::Component::*)()>(&juce::Component::repaint),
-            static_cast<void (juce::Component::*)(juce::Rectangle<int>)>(&juce::Component::repaint),
-            static_cast<void (juce::Component::*)(int, int, int, int)>(&juce::Component::repaint)
-        )
-    );
-    // clang-format on
+
+    comp["setBounds"] = sol::c_call<                                                                              //
+        LUA_JUCE_WRAP(static_cast<void (juce::Component::*)(juce::Rectangle<int>)>(&juce::Component::setBounds)), //
+        LUA_JUCE_WRAP(static_cast<void (juce::Component::*)(int, int, int, int)>(&juce::Component::setBounds))    //
+        >;
+
+    comp["repaint"] = sol::c_call<                                                                              //
+        LUA_JUCE_WRAP(static_cast<void (juce::Component::*)()>(&juce::Component::repaint)),                     //
+        LUA_JUCE_WRAP(static_cast<void (juce::Component::*)(juce::Rectangle<int>)>(&juce::Component::repaint)), //
+        LUA_JUCE_WRAP(static_cast<void (juce::Component::*)(int, int, int, int)>(&juce::Component::repaint))    //
+        >;
 
     comp["setColour"]         = LUA_JUCE_C_CALL(&juce::Component::setColour);
     comp["paint"]             = LUA_JUCE_C_CALL(&juce::Component::paint);

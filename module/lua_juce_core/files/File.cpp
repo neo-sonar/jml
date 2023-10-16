@@ -43,7 +43,7 @@ auto juce_File(sol::table& state) -> void
     auto file = state.new_usertype<juce::File>("File",
         sol::constructors<juce::File(), juce::File(juce::String const&)>()
     );
-    file.set_function("findChildFiles", sol::overload(
+    file["findChildFiles"] =  sol::overload(
             // Array<File> findChildFiles(int whatToLookFor, bool searchRecursively, const String &wildCardPattern="*") const
             [](juce::File const* self, int what, bool recursive) { return self->findChildFiles(what, recursive); },
             static_cast<juce::Array<juce::File> (juce::File::*)(int, bool, juce::String const&, juce::File::FollowSymlinks) const>(&juce::File::findChildFiles),
@@ -51,7 +51,6 @@ auto juce_File(sol::table& state) -> void
             // int findChildFiles(Array<File> &results, int whatToLookFor, bool searchRecursively, const String &wildCardPattern="*") const
             [](juce::File const* self, juce::Array<juce::File>& results, int what, bool recursive) { return self->findChildFiles(results, what, recursive); },
             static_cast<int (juce::File::*)(juce::Array<juce::File>&, int, bool, juce::String const&, juce::File::FollowSymlinks) const>(&juce::File::findChildFiles)
-        )
     );
     // clang-format on
     file["exists"]                        = LUA_JUCE_C_CALL(&juce::File::exists);

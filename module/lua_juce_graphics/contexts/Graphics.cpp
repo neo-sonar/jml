@@ -1,126 +1,124 @@
 namespace lua_juce {
 auto juce_Graphics(sol::table& state) -> void
 {
+    using juce::Graphics;
+    using juce::Justification;
+    using juce::Rectangle;
+    using juce::String;
+
+    auto g = state.new_usertype<Graphics>("Graphics");
+
+    g["setColour"]                 = LUA_JUCE_C_CALL(&Graphics::setColour);
+    g["setOpacity"]                = LUA_JUCE_C_CALL(&Graphics::setOpacity);
+    g["setTiledImageFill"]         = LUA_JUCE_C_CALL(&Graphics::setTiledImageFill);
+    g["setFillType"]               = LUA_JUCE_C_CALL(&Graphics::setFillType);
+    g["getCurrentFont"]            = LUA_JUCE_C_CALL(&Graphics::getCurrentFont);
+    g["drawSingleLineText"]        = LUA_JUCE_C_CALL(&Graphics::drawSingleLineText);
+    g["drawMultiLineText"]         = LUA_JUCE_C_CALL(&Graphics::drawMultiLineText);
+    g["getCurrentFont"]            = LUA_JUCE_C_CALL(&Graphics::getCurrentFont);
+    g["fillCheckerBoard"]          = LUA_JUCE_C_CALL(&Graphics::fillCheckerBoard);
+    g["drawDashedLine"]            = LUA_JUCE_C_CALL(&Graphics::drawDashedLine);
+    g["drawVerticalLine"]          = LUA_JUCE_C_CALL(&Graphics::drawVerticalLine);
+    g["drawHorizontalLine"]        = LUA_JUCE_C_CALL(&Graphics::drawHorizontalLine);
+    g["strokePath"]                = LUA_JUCE_C_CALL(&Graphics::strokePath);
+    g["drawArrow"]                 = LUA_JUCE_C_CALL(&Graphics::drawArrow);
+    g["setImageResamplingQuality"] = LUA_JUCE_C_CALL(&Graphics::setImageResamplingQuality);
+    g["drawImageAt"]               = LUA_JUCE_C_CALL(&Graphics::drawImageAt);
+    g["drawImageTransformed"]      = LUA_JUCE_C_CALL(&Graphics::drawImageTransformed);
+    g["drawImageWithin"]           = LUA_JUCE_C_CALL(&Graphics::drawImageWithin);
+    g["getClipBounds"]             = LUA_JUCE_C_CALL(&Graphics::getClipBounds);
+    g["clipRegionIntersects"]      = LUA_JUCE_C_CALL(&Graphics::clipRegionIntersects);
+    g["excludeClipRegion"]         = LUA_JUCE_C_CALL(&Graphics::excludeClipRegion);
+    g["isClipEmpty"]               = LUA_JUCE_C_CALL(&Graphics::isClipEmpty);
+    g["saveState"]                 = LUA_JUCE_C_CALL(&Graphics::saveState);
+    g["restoreState"]              = LUA_JUCE_C_CALL(&Graphics::restoreState);
+    g["beginTransparencyLayer"]    = LUA_JUCE_C_CALL(&Graphics::beginTransparencyLayer);
+    g["endTransparencyLayer"]      = LUA_JUCE_C_CALL(&Graphics::endTransparencyLayer);
+    g["addTransform"]              = LUA_JUCE_C_CALL(&Graphics::addTransform);
+    g["resetToDefaultState"]       = LUA_JUCE_C_CALL(&Graphics::resetToDefaultState);
+    g["isVectorDevice"]            = LUA_JUCE_C_CALL(&Graphics::isVectorDevice);
+    g["getInternalContext"]        = LUA_JUCE_C_CALL(&Graphics::getInternalContext);
+    g["setGradientFill"]           = LUA_JUCE_C_CALL(static_cast<void (Graphics::*)(juce::ColourGradient const&)>(&Graphics::setGradientFill));
+
+    g["setFont"] = sol::c_call<                                                               //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float)>(&Graphics::setFont)),            //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::Font const&)>(&Graphics::setFont)) //
+        >;
+
+    g["drawFittedText"] = sol::c_call<                                                                                                                              //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, int, float) const>(&Graphics::drawFittedText)),              //
+        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, int x, int y, int w, int h, Justification j, int m) { ctx->drawFittedText(s, x, y, w, h, j, m); }), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, int, float) const>(&Graphics::drawFittedText)),                  //
+        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<int> area, Justification j, int m) { ctx->drawFittedText(s, area, j, m); })               //
+        >;
+
+    g["drawText"] = sol::c_call<                                                                                                                    //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, bool) const>(&Graphics::drawText)),          //
+        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, int x, int y, int w, int h, Justification j) { ctx->drawText(s, x, y, w, h, j); }), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, bool) const>(&Graphics::drawText)),              //
+        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<int> area, Justification j) { ctx->drawText(s, area, j); }),              //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<float>, Justification, bool) const>(&Graphics::drawText)),            //
+        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<float> area, Justification j) { ctx->drawText(s, area, j); })             //
+        >;
+
+    g["fillAll"] = sol::c_call<                                                                //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)() const>(&Graphics::fillAll)),            //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::Colour) const>(&Graphics::fillAll)) //
+        >;
+
+    g["fillEllipse"] = sol::c_call<                                                                               //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float) const>(&Graphics::fillEllipse)), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<float>) const>(&Graphics::fillEllipse))            //
+        >;
+
+    g["fillRect"] = sol::c_call<                                                                              //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<int>) const>(&Graphics::fillRect)),            //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<float>) const>(&Graphics::fillRect)),          //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(int, int, int, int) const>(&Graphics::fillRect)),        //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float) const>(&Graphics::fillRect)) //
+        >;
+
+    g["fillRoundedRectangle"] = sol::c_call<                                                                                      //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float) const>(&Graphics::fillRoundedRectangle)), //
+        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<int> r, double ra) { ctx->fillRoundedRectangle(r.toFloat(), float(ra)); }),    //
+        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<float> r, double ra) { ctx->fillRoundedRectangle(r, float(ra)); }),            //
+        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<double> r, double ra) { ctx->fillRoundedRectangle(r.toFloat(), float(ra)); })  //
+        >;
+
+    g["fillRectList"] = sol::c_call<                                                                                      //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::RectangleList<float> const&) const>(&Graphics::fillRectList)), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::RectangleList<int> const&) const>(&Graphics::fillRectList))    //
+        >;
+
+    g["drawRect"] = sol::c_call<                                                                                     //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<int>, int) const>(&Graphics::drawRect)),              //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<float>, float) const>(&Graphics::drawRect)),          //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(int, int, int, int, int) const>(&Graphics::drawRect)),          //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float) const>(&Graphics::drawRect)) //
+        >;
+
+    g["drawLine"] = sol::c_call<                                                                                      //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float) const>(&Graphics::drawLine)),        //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float) const>(&Graphics::drawLine)), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::Line<float>) const>(&Graphics::drawLine)),                 //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::Line<float>, float) const>(&Graphics::drawLine))           //
+        >;
+
+    g["drawRoundedRectangle"] = sol::c_call<                                                                                             //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float, float) const>(&Graphics::drawRoundedRectangle)), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<float>, float, float) const>(&Graphics::drawRoundedRectangle))            //
+        >;
+
+    g["drawEllipse"] = sol::c_call<                                                                                      //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float) const>(&Graphics::drawEllipse)), //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(Rectangle<float>, float) const>(&Graphics::drawEllipse))            //
+        >;
+
     // TODO(tobi):
     // fillPath
     // drawImage
     // reduceClipRegion
     // setOrigin
-
-    auto g = state.new_usertype<juce::Graphics>("Graphics");
-
-    g["setColour"]                 = LUA_JUCE_C_CALL(&juce::Graphics::setColour);
-    g["setOpacity"]                = LUA_JUCE_C_CALL(&juce::Graphics::setOpacity);
-    g["setTiledImageFill"]         = LUA_JUCE_C_CALL(&juce::Graphics::setTiledImageFill);
-    g["setFillType"]               = LUA_JUCE_C_CALL(&juce::Graphics::setFillType);
-    g["getCurrentFont"]            = LUA_JUCE_C_CALL(&juce::Graphics::getCurrentFont);
-    g["drawSingleLineText"]        = LUA_JUCE_C_CALL(&juce::Graphics::drawSingleLineText);
-    g["drawMultiLineText"]         = LUA_JUCE_C_CALL(&juce::Graphics::drawMultiLineText);
-    g["getCurrentFont"]            = LUA_JUCE_C_CALL(&juce::Graphics::getCurrentFont);
-    g["fillCheckerBoard"]          = LUA_JUCE_C_CALL(&juce::Graphics::fillCheckerBoard);
-    g["drawDashedLine"]            = LUA_JUCE_C_CALL(&juce::Graphics::drawDashedLine);
-    g["drawVerticalLine"]          = LUA_JUCE_C_CALL(&juce::Graphics::drawVerticalLine);
-    g["drawHorizontalLine"]        = LUA_JUCE_C_CALL(&juce::Graphics::drawHorizontalLine);
-    g["strokePath"]                = LUA_JUCE_C_CALL(&juce::Graphics::strokePath);
-    g["drawArrow"]                 = LUA_JUCE_C_CALL(&juce::Graphics::drawArrow);
-    g["setImageResamplingQuality"] = LUA_JUCE_C_CALL(&juce::Graphics::setImageResamplingQuality);
-    g["drawImageAt"]               = LUA_JUCE_C_CALL(&juce::Graphics::drawImageAt);
-    g["drawImageTransformed"]      = LUA_JUCE_C_CALL(&juce::Graphics::drawImageTransformed);
-    g["drawImageWithin"]           = LUA_JUCE_C_CALL(&juce::Graphics::drawImageWithin);
-    g["getClipBounds"]             = LUA_JUCE_C_CALL(&juce::Graphics::getClipBounds);
-    g["clipRegionIntersects"]      = LUA_JUCE_C_CALL(&juce::Graphics::clipRegionIntersects);
-    g["excludeClipRegion"]         = LUA_JUCE_C_CALL(&juce::Graphics::excludeClipRegion);
-    g["isClipEmpty"]               = LUA_JUCE_C_CALL(&juce::Graphics::isClipEmpty);
-    g["saveState"]                 = LUA_JUCE_C_CALL(&juce::Graphics::saveState);
-    g["restoreState"]              = LUA_JUCE_C_CALL(&juce::Graphics::restoreState);
-    g["beginTransparencyLayer"]    = LUA_JUCE_C_CALL(&juce::Graphics::beginTransparencyLayer);
-    g["endTransparencyLayer"]      = LUA_JUCE_C_CALL(&juce::Graphics::endTransparencyLayer);
-    g["addTransform"]              = LUA_JUCE_C_CALL(&juce::Graphics::addTransform);
-    g["resetToDefaultState"]       = LUA_JUCE_C_CALL(&juce::Graphics::resetToDefaultState);
-    g["isVectorDevice"]            = LUA_JUCE_C_CALL(&juce::Graphics::isVectorDevice);
-    g["getInternalContext"]        = LUA_JUCE_C_CALL(&juce::Graphics::getInternalContext);
-    g["setFont"]                   = sol::overload(                                                          //
-        static_cast<void (juce::Graphics::*)(float)>(&juce::Graphics::setFont),            //
-        static_cast<void (juce::Graphics::*)(juce::Font const&)>(&juce::Graphics::setFont) //
-    );
-
-    // clang-format off
-    g.set_function("drawText", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::String const&, int, int, int, int, juce::Justification, bool) const>(&juce::Graphics::drawText),
-            [](juce::Graphics const* ctx, juce::String const& s, int x, int y, int w, int h, juce::Justification j) { ctx->drawText(s, x, y, w, h, j); },
-
-            static_cast<void (juce::Graphics::*)(juce::String const&, juce::Rectangle<int>, juce::Justification, bool) const>(&juce::Graphics::drawText),
-            [](juce::Graphics const* ctx, juce::String const& s, juce::Rectangle<int> area, juce::Justification j) { ctx->drawText(s, area, j); },
-
-            static_cast<void (juce::Graphics::*)(juce::String const&, juce::Rectangle<float>, juce::Justification, bool) const>(&juce::Graphics::drawText),
-            [](juce::Graphics const* ctx, juce::String const& s, juce::Rectangle<float> area, juce::Justification j) { ctx->drawText(s, area, j); }
-        )
-    );
-    g.set_function("drawFittedText", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::String const&, int, int, int, int, juce::Justification, int, float) const>(&juce::Graphics::drawFittedText),
-            [](juce::Graphics const* ctx, juce::String const& s, int x, int y, int w, int h, juce::Justification j, int m) { ctx->drawFittedText(s, x, y, w, h, j, m); },
-
-            static_cast<void (juce::Graphics::*)(juce::String const&, juce::Rectangle<int>, juce::Justification, int, float) const>(&juce::Graphics::drawFittedText),
-            [](juce::Graphics const* ctx, juce::String const& s, juce::Rectangle<int> area, juce::Justification j, int m) { ctx->drawFittedText(s, area, j, m); }
-        )
-    );
-    g.set_function("setGradientFill", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::ColourGradient const&)>(&juce::Graphics::setGradientFill)
-        )
-    );
-    g.set_function("fillAll", sol::overload(
-            static_cast<void (juce::Graphics::*)() const>(&juce::Graphics::fillAll),
-            static_cast<void (juce::Graphics::*)(juce::Colour) const>(&juce::Graphics::fillAll)
-        )
-    );
-    g.set_function("fillEllipse", sol::overload(
-            static_cast<void (juce::Graphics::*)(float, float, float, float) const>(&juce::Graphics::fillEllipse),
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<float>) const>(&juce::Graphics::fillEllipse)
-        )
-    );
-    g.set_function("fillRect", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<int>) const>(&juce::Graphics::fillRect),
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<float>) const>(&juce::Graphics::fillRect),
-            static_cast<void (juce::Graphics::*)(int, int, int, int) const>(&juce::Graphics::fillRect),
-            static_cast<void (juce::Graphics::*)(float, float, float, float) const>(&juce::Graphics::fillRect)
-        )
-    );
-    g.set_function("fillRectList", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::RectangleList<float> const&) const>(&juce::Graphics::fillRectList),
-            static_cast<void (juce::Graphics::*)(juce::RectangleList<int> const&) const>(&juce::Graphics::fillRectList)
-        )
-    );
-    g.set_function("fillRoundedRectangle", sol::overload(
-            static_cast<void (juce::Graphics::*)(float, float, float, float, float) const>(&juce::Graphics::fillRoundedRectangle),
-            [](juce::Graphics* ctx, juce::Rectangle<int> rect, double radius){ ctx->fillRoundedRectangle(rect.toFloat(), static_cast<float>(radius)); },
-            [](juce::Graphics* ctx, juce::Rectangle<float> rect, double radius){ ctx->fillRoundedRectangle(rect, static_cast<float>(radius)); },
-            [](juce::Graphics* ctx, juce::Rectangle<double> rect, double radius){ ctx->fillRoundedRectangle(rect.toFloat(), static_cast<float>(radius)); }
-        )
-    );
-    g.set_function("drawRect", sol::overload(
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<int>, int) const>(&juce::Graphics::drawRect),
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<float>, float) const>(&juce::Graphics::drawRect),
-            static_cast<void (juce::Graphics::*)(int, int, int, int, int) const>(&juce::Graphics::drawRect),
-            static_cast<void (juce::Graphics::*)(float, float, float, float, float) const>(&juce::Graphics::drawRect)
-        )
-    );
-    g.set_function("drawLine", sol::overload(
-            static_cast<void (juce::Graphics::*)(float, float, float, float) const>(&juce::Graphics::drawLine),
-            static_cast<void (juce::Graphics::*)(float, float, float, float, float) const>(&juce::Graphics::drawLine),
-            static_cast<void (juce::Graphics::*)(juce::Line<float>) const>(&juce::Graphics::drawLine),
-            static_cast<void (juce::Graphics::*)(juce::Line<float>, float) const>(&juce::Graphics::drawLine)
-        )
-    );
-    g.set_function("drawRoundedRectangle", sol::overload(
-            static_cast<void (juce::Graphics::*)(float, float, float, float, float, float) const>(&juce::Graphics::drawRoundedRectangle),
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<float>, float, float) const>(&juce::Graphics::drawRoundedRectangle)
-        )
-    );
-    g.set_function("drawEllipse", sol::overload(
-            static_cast<void (juce::Graphics::*)(float, float, float, float, float) const>(&juce::Graphics::drawEllipse),
-            static_cast<void (juce::Graphics::*)(juce::Rectangle<float>, float) const>(&juce::Graphics::drawEllipse)
-        )
-    );
-    // clang-format on
 }
+
 } // namespace lua_juce

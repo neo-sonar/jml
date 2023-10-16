@@ -10,12 +10,12 @@ auto juce_BigInteger(sol::table& state) -> void
             juce::BigInteger(juce::int64)
         >()
     );
-    bigInt.set_function("setBit", sol::overload(
+    bigInt["setBit"] =  sol::overload(
             static_cast<juce::BigInteger& (juce::BigInteger::*)(int)>(&juce::BigInteger::setBit),
             static_cast<juce::BigInteger& (juce::BigInteger::*)(int, bool)>(&juce::BigInteger::setBit)
-        )
     );
     // clang-format on
+
     bigInt["swapWith"]                  = LUA_JUCE_C_CALL(&juce::BigInteger::swapWith);
     bigInt["isZero"]                    = LUA_JUCE_C_CALL(&juce::BigInteger::isZero);
     bigInt["isOne"]                     = LUA_JUCE_C_CALL(&juce::BigInteger::isOne);
