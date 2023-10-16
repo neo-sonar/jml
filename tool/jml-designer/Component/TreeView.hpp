@@ -20,25 +20,41 @@ auto forEachSelectedItemWithType(juce::TreeView& treeView, auto callback) -> voi
 {
     forEachSelectedItem(treeView, [&callback](auto& item) {
         auto* typed = dynamic_cast<Type*>(&item);
-        if (typed == nullptr) { return; }
+        if (typed == nullptr) {
+            return;
+        }
         callback(*typed);
     });
 }
 
-inline void moveItems(std::span<juce::ValueTree const> items, juce::ValueTree newParent, int insertIndex,
-                      juce::UndoManager& undoManager)
+inline void moveItems(
+    std::span<juce::ValueTree const> items,
+    juce::ValueTree newParent,
+    int insertIndex,
+    juce::UndoManager& undoManager
+)
 {
-    if (items.empty()) { return; }
+    if (items.empty()) {
+        return;
+    }
 
     for (auto i{std::ssize(items) - 1}; i >= 0; --i) {
         auto const& v  = items[static_cast<size_t>(i)];
         auto oldParent = v.getParent();
 
-        if (not oldParent.isValid()) { continue; }
-        if (newParent == v) { continue; }
-        if (newParent.isAChildOf(v)) { continue; }
+        if (not oldParent.isValid()) {
+            continue;
+        }
+        if (newParent == v) {
+            continue;
+        }
+        if (newParent.isAChildOf(v)) {
+            continue;
+        }
 
-        if (oldParent == newParent && newParent.indexOf(v) < insertIndex) { --insertIndex; }
+        if (oldParent == newParent && newParent.indexOf(v) < insertIndex) {
+            --insertIndex;
+        }
 
         oldParent.removeChild(v, &undoManager);
         newParent.addChild(v, insertIndex, &undoManager);

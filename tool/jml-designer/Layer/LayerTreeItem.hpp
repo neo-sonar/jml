@@ -25,8 +25,10 @@ struct LayerTreeItem final
     auto itemSelectionChanged(bool isNowSelected) -> void override;
 
     auto getDragSourceDescription() -> juce::var override;
-    auto isInterestedInDragSource(juce::DragAndDropTarget::SourceDetails const& sourceDetails) -> bool override;
-    auto itemDropped(juce::DragAndDropTarget::SourceDetails const& sourceDetails, int index) -> void override;
+    auto isInterestedInDragSource(juce::DragAndDropTarget::SourceDetails const& sourceDetails)
+        -> bool override;
+    auto itemDropped(juce::DragAndDropTarget::SourceDetails const& sourceDetails, int index)
+        -> void override;
 
     // Layer::Listener
     auto layerPropertyChanged(Layer* layer, juce::Identifier const& property) -> void override;

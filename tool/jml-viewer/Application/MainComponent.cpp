@@ -46,7 +46,8 @@ auto MainComponent::getAllCommands(juce::Array<juce::CommandID>& c) -> void
     });
 }
 
-auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result) -> void
+auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result)
+    -> void
 {
     using juce::KeyPress;
     using juce::ModifierKeys;
@@ -69,7 +70,10 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
         }
         case CommandIDs::saveAs: {
             result.setInfo("Save As", "Saves a script file to a new location", "File", 0);
-            result.addDefaultKeypress('s', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+            result.addDefaultKeypress(
+                's',
+                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
+            );
             break;
         }
         case CommandIDs::undo: {
@@ -79,7 +83,10 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
         }
         case CommandIDs::redo: {
             result.setInfo("Redo", "Redo one step", "Edit", 0);
-            result.addDefaultKeypress('z', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+            result.addDefaultKeypress(
+                'z',
+                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
+            );
             break;
         }
         case CommandIDs::about: {
@@ -124,7 +131,9 @@ auto MainComponent::loadScriptPath() -> void
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
     _fileChooser    = std::make_unique<juce::FileChooser>(msg, dir, "*.lua");
     _fileChooser->launchAsync(juce::FileBrowserComponent::openMode, [this](auto const& chooser) {
-        if (auto const result = chooser.getResult(); result.existsAsFile()) { _documents.openScript(result); }
+        if (auto const result = chooser.getResult(); result.existsAsFile()) {
+            _documents.openScript(result);
+        }
     });
 }
 } // namespace jml::viewer

@@ -13,6 +13,7 @@ LayerCanvas::LayerCanvas(Layer& layer) : _layer{layer}
 LayerCanvas::~LayerCanvas() { _layer.removeListener(this); }
 
 auto LayerCanvas::layer() -> Layer& { return _layer; }
+
 auto LayerCanvas::layer() const -> Layer const& { return _layer; }
 
 auto LayerCanvas::paint(juce::Graphics& g) -> void
@@ -25,17 +26,25 @@ auto LayerCanvas::paintOverChildren(juce::Graphics& g) -> void { g.fillAll(_laye
 
 auto LayerCanvas::layerPropertyChanged(Layer* l, juce::Identifier const& property) -> void
 {
-    if (l->valueTree() != layer().valueTree()) { return repaint(); }
+    if (l->valueTree() != layer().valueTree()) {
+        return repaint();
+    }
 
     // ID & Name
     using IDs = Layer::IDs;
-    if (property == juce::StringRef{IDs::uuid}) { setComponentID(layer().getUUID()); }
-    if (property == juce::StringRef{IDs::name}) { setName(layer().getName()); }
+    if (property == juce::StringRef{IDs::uuid}) {
+        setComponentID(layer().getUUID());
+    }
+    if (property == juce::StringRef{IDs::name}) {
+        setName(layer().getName());
+    }
 
     // Size
     auto const hasID   = [&](auto id) { return property == juce::StringRef{id}; };
     auto const sizeIDs = std::array<char const*, 4>{IDs::x, IDs::y, IDs::width, IDs::height};
-    if (std::any_of(sizeIDs.begin(), sizeIDs.end(), hasID)) { setBounds(layer().getBounds().toNearestInt()); }
+    if (std::any_of(sizeIDs.begin(), sizeIDs.end(), hasID)) {
+        setBounds(layer().getBounds().toNearestInt());
+    }
 
     repaint();
 }

@@ -39,10 +39,15 @@ auto MultiScriptPanel::openScript(juce::File const& script) -> void
 
 auto MultiScriptPanel::reloadActiveScript() -> void
 {
-    if (auto* panel = dynamic_cast<ScriptPanel*>(getActiveDocument()); panel != nullptr) { panel->reloadScriptFile(); }
+    if (auto* panel = dynamic_cast<ScriptPanel*>(getActiveDocument()); panel != nullptr) {
+        panel->reloadScriptFile();
+    }
 }
 
-auto MultiScriptPanel::tryToCloseDocumentAsync(juce::Component* component, std::function<void(bool)> callback) -> void
+auto MultiScriptPanel::tryToCloseDocumentAsync(
+    juce::Component* component,
+    std::function<void(bool)> callback
+) -> void
 {
     callback(component != nullptr);
 }

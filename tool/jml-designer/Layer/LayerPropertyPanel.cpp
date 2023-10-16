@@ -28,10 +28,14 @@ auto LayerPropertyPanel::layerSelectionChanged(LayerSelection* selection) -> voi
     _panel.clear();
 
     auto layers = selection->getLayers();
-    if (layers.size() != 1) { return; }
+    if (layers.size() != 1) {
+        return;
+    }
 
     auto const& selected = layers[0];
-    if (selected == nullptr) { return; }
+    if (selected == nullptr) {
+        return;
+    }
     selected->fillPropertyPanel(_panel);
 }
 

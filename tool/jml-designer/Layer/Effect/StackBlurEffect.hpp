@@ -35,7 +35,8 @@ struct StackBlurEffect final : juce::ImageEffectFilter
         The original image will be left un-blurred, so you probably want to make
         sure the destination context isn't going to draw to that image.
     */
-    auto applyEffect(juce::Image& source, juce::Graphics& g, float scaleFactor, float alpha) -> void override;
+    auto applyEffect(juce::Image& source, juce::Graphics& g, float scaleFactor, float alpha)
+        -> void override;
 
 private:
     auto blurHorizontally(juce::Image& image, int channel, float scale) -> void;

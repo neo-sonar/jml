@@ -17,7 +17,8 @@ struct MainComponent final
 
     auto getNextCommandTarget() -> juce::ApplicationCommandTarget* override;
     auto getAllCommands(juce::Array<juce::CommandID>& commands) -> void override;
-    auto getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result) -> void override;
+    auto getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result)
+        -> void override;
     auto perform(juce::ApplicationCommandTarget::InvocationInfo const& info) -> bool override;
 
     auto paint(juce::Graphics& /*g*/) -> void override;
@@ -33,7 +34,9 @@ private:
     MenuBar _menuBar{_commandManager};
 
     juce::File _documentFile;
-    std::unique_ptr<Document> _document{std::make_unique<Document>(juce::ValueTree{"JML"}, &_undoManager)};
+    std::unique_ptr<Document> _document{
+        std::make_unique<Document>(juce::ValueTree{"JML"}, &_undoManager)
+    };
     std::unique_ptr<DocumentEditor> _editor{std::make_unique<DocumentEditor>(*_document)};
 };
 

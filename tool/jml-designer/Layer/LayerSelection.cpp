@@ -1,12 +1,17 @@
 #include "LayerSelection.hpp"
 
 namespace jml::designer {
-auto LayerSelection::getLayers() const -> std::span<juce::WeakReference<Layer> const> { return _layers; }
+auto LayerSelection::getLayers() const -> std::span<juce::WeakReference<Layer> const>
+{
+    return _layers;
+}
 
 auto LayerSelection::clear() -> void
 {
     for (auto const& layer : _layers) {
-        if (layer != nullptr) { remove(layer.get()); }
+        if (layer != nullptr) {
+            remove(layer.get());
+        }
     }
     _layers.clear();
     _listeners.call(&Listener::layerSelectionChanged, this);
@@ -44,7 +49,9 @@ auto LayerSelection::addOrRemove(Layer* layer) -> void
 
 auto LayerSelection::isSelected(Layer* layer) const -> bool
 {
-    return not std::none_of(_layers.begin(), _layers.end(), [layer](auto const& l) { return l.get() == layer; });
+    return not std::none_of(_layers.begin(), _layers.end(), [layer](auto const& l) {
+        return l.get() == layer;
+    });
 }
 
 auto LayerSelection::addListener(Listener* listener) -> void { _listeners.add(listener); }

@@ -21,16 +21,22 @@ auto LuaScriptViewer::setScriptFile(juce::File const& file) -> void
     _fileListener.reset(nullptr);
     _viewport.setViewedComponent(nullptr);
 
-    if (not file.existsAsFile()) { return; }
+    if (not file.existsAsFile()) {
+        return;
+    }
     file.getParentDirectory().setAsCurrentWorkingDirectory();
 
     reloadLuaState();
     auto script = _lua->state.load_file(file.getFullPathName().toStdString());
-    if (not script.valid()) { return handleLuaError(script); }
+    if (not script.valid()) {
+        return handleLuaError(script);
+    }
 
     auto factory = script.get<sol::protected_function>();
     auto result  = factory();
-    if (not result.valid()) { return handleLuaError(result); }
+    if (not result.valid()) {
+        return handleLuaError(result);
+    }
 
     _lua->obj       = result;
     _lua->component = _lua->obj.as<juce::Component*>();
@@ -45,7 +51,9 @@ auto LuaScriptViewer::setScriptFile(juce::File const& file) -> void
 
     resized();
 
-    if (componentTreeState == nullptr) { return; }
+    if (componentTreeState == nullptr) {
+        return;
+    }
     _componentTree.restoreOpennessState(*componentTreeState, false);
 }
 
@@ -60,7 +68,9 @@ auto LuaScriptViewer::resized() -> void
 
 auto LuaScriptViewer::timerCallback() -> void
 {
-    if (_lua == nullptr) { return; }
+    if (_lua == nullptr) {
+        return;
+    }
     _lua->state.collect_garbage();
 }
 

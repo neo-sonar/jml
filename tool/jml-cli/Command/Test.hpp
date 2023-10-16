@@ -10,7 +10,9 @@ inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
     lua_juce::allModules(state);
 
     auto const scriptFile = juce::File{cli.scriptPath};
-    if (cli.verbose) { std::cout << "Run test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n'; }
+    if (cli.verbose) {
+        std::cout << "Run test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n';
+    }
     scriptFile.getParentDirectory().setAsCurrentWorkingDirectory();
 
     auto script = state.load_file(scriptFile.getFullPathName().toStdString());
@@ -26,7 +28,9 @@ inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
         return juce::Result::fail(error.what());
     }
 
-    if (cli.verbose) { std::cout << "Done test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n'; }
+    if (cli.verbose) {
+        std::cout << "Done test: " << scriptFile.getFileNameWithoutExtension().toStdString() << '\n';
+    }
     return juce::Result::ok();
 }
 } // namespace jml::cli

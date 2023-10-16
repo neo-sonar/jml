@@ -31,7 +31,8 @@ struct MultiScriptPanel final : juce::MultiDocumentPanel
     auto openScript(juce::File const& script) -> void;
     auto reloadActiveScript() -> void;
 
-    auto tryToCloseDocumentAsync(juce::Component* component, std::function<void(bool)> callback) -> void override;
+    auto tryToCloseDocumentAsync(juce::Component* component, std::function<void(bool)> callback)
+        -> void override;
 
 private:
 };

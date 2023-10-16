@@ -14,7 +14,8 @@ struct DrawableButtonColors
     juce::Colour onText;
 };
 
-inline auto setImages(juce::DrawableButton& button, char const* svgFile, DrawableButtonColors colors) -> void
+inline auto setImages(juce::DrawableButton& button, char const* svgFile, DrawableButtonColors colors)
+    -> void
 {
     auto svgSize        = 0;
     auto const* svgData = BinaryData::getNamedResource(svgFile, svgSize);

@@ -3,7 +3,8 @@
 namespace jml::viewer {
 
 FileChangeListener::FileChangeListener(juce::File file)
-    : _file{std::move(file)}, _writeTime{_file.getLastModificationTime()}
+    : _file{std::move(file)}
+    , _writeTime{_file.getLastModificationTime()}
 {
     startTimer(500);
 }
@@ -11,10 +12,14 @@ FileChangeListener::FileChangeListener(juce::File file)
 auto FileChangeListener::timerCallback() -> void
 {
     auto const writeTime = _file.getLastModificationTime();
-    if (writeTime == _writeTime) { return; }
+    if (writeTime == _writeTime) {
+        return;
+    }
     _writeTime = writeTime;
 
-    if (onChange) { onChange(); }
+    if (onChange) {
+        onChange();
+    }
 }
 
 } // namespace jml::viewer

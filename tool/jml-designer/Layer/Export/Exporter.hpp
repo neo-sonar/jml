@@ -10,7 +10,9 @@ struct Exporter
 {
     virtual ~Exporter() = default;
 
-    [[nodiscard]] virtual auto exportLayer(juce::OutputStream& out, Layer& layer, float scale) -> juce::Result = 0;
+    [[nodiscard]] virtual auto exportLayer(juce::OutputStream& out, Layer& layer, float scale)
+        -> juce::Result
+        = 0;
 };
 
 } // namespace jml::designer

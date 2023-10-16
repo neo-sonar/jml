@@ -11,7 +11,14 @@ auto makeTextProperty(auto& vt, auto const& id, auto const& name, bool editable)
     return std::make_unique<juce::TextPropertyComponent>(value, name, 64, false, editable);
 }
 
-auto makeSliderProperty(auto& vt, auto const& id, auto const& name, double minVal, double maxVal, double interval)
+auto makeSliderProperty(
+    auto& vt,
+    auto const& id,
+    auto const& name,
+    double minVal,
+    double maxVal,
+    double interval
+)
 {
     auto value = vt.getPropertyAsValue(id, nullptr);
     return std::make_unique<juce::SliderPropertyComponent>(value, name, minVal, maxVal, interval);

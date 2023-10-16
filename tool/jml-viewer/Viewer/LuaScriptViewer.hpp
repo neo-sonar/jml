@@ -4,9 +4,9 @@
 #include <lua_juce_core/lua_juce_core.hpp>
 
 #include "Application/MenuBar.hpp"
-#include "Viewer/ScriptViewport.hpp"
 #include "Viewer/ComponentTree.hpp"
 #include "Viewer/FileChangeListener.hpp"
+#include "Viewer/ScriptViewport.hpp"
 
 namespace jml::viewer {
 
@@ -18,6 +18,7 @@ struct LuaScriptViewer final
     ~LuaScriptViewer() override = default;
 
     [[nodiscard]] auto getScriptFile() const -> juce::File { return _scriptFile; }
+
     auto setScriptFile(juce::File const& file) -> void;
 
     auto paint(juce::Graphics& g) -> void override;

@@ -21,7 +21,8 @@ struct MainComponent
 
     auto getNextCommandTarget() -> juce::ApplicationCommandTarget* override;
     auto getAllCommands(juce::Array<juce::CommandID>& commands) -> void override;
-    auto getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result) -> void override;
+    auto getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result)
+        -> void override;
     auto perform(juce::ApplicationCommandTarget::InvocationInfo const& info) -> bool override;
 
 private:

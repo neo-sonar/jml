@@ -48,7 +48,8 @@ auto MainComponent::getAllCommands(juce::Array<juce::CommandID>& c) -> void
     });
 }
 
-auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result) -> void
+auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationCommandInfo& result)
+    -> void
 {
     using juce::KeyPress;
     using juce::ModifierKeys;
@@ -64,7 +65,10 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
             break;
         case CommandIDs::saveAs:
             result.setInfo("Save As", "Saves a project file to a new location", "File", 0);
-            result.addDefaultKeypress('s', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+            result.addDefaultKeypress(
+                's',
+                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
+            );
             break;
         case CommandIDs::undo:
             result.setInfo("Undo", "Undo one step", "Edit", 0);
@@ -72,7 +76,10 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
             break;
         case CommandIDs::redo:
             result.setInfo("Redo", "Redo one step", "Edit", 0);
-            result.addDefaultKeypress('z', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
+            result.addDefaultKeypress(
+                'z',
+                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
+            );
             break;
         default: break;
     }
@@ -98,11 +105,15 @@ auto MainComponent::documentLoad() -> void
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
     auto const load = [this](auto const& chooser) {
         auto results = chooser.getResults();
-        if (results.size() != 1) { return; }
+        if (results.size() != 1) {
+            return;
+        }
 
         auto const file = juce::File{results[0]};
         auto newDoc     = Document::load(file, &_undoManager);
-        if (newDoc == nullptr) { return; }
+        if (newDoc == nullptr) {
+            return;
+        }
 
         _editor.reset(nullptr);
         _document.reset(nullptr);
@@ -125,7 +136,9 @@ auto MainComponent::documentSaveAs() -> void
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
     auto const load = [this](auto const& chooser) {
         auto results = chooser.getResults();
-        if (results.size() != 1) { return; }
+        if (results.size() != 1) {
+            return;
+        }
         _document->save(juce::File{results[0]});
     };
 

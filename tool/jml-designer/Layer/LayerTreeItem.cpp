@@ -16,9 +16,11 @@ namespace {
 } // namespace
 
 LayerTreeItem::LayerTreeItem(Layer& layer) : _layer{layer} { _layer.addListener(this); }
+
 LayerTreeItem::~LayerTreeItem() { _layer.removeListener(this); }
 
 auto LayerTreeItem::getLayer() -> Layer& { return _layer; }
+
 auto LayerTreeItem::getState() const -> juce::ValueTree { return _layer.valueTree(); }
 
 auto LayerTreeItem::getUndoManager() const -> juce::UndoManager* { return _layer.undoManager(); }
@@ -39,21 +41,29 @@ auto LayerTreeItem::paintItem(juce::Graphics& g, int width, int height) -> void
 
 auto LayerTreeItem::itemOpennessChanged(bool isNowOpen) -> void
 {
-    if (isNowOpen && getNumSubItems() == 0) { return refreshSubItems(); }
+    if (isNowOpen && getNumSubItems() == 0) {
+        return refreshSubItems();
+    }
     clearSubItems();
 }
 
 auto LayerTreeItem::itemSelectionChanged(bool isNowSelected) -> void
 {
-    if (_ignoreItemSelectionCallbacks) { return; }
+    if (_ignoreItemSelectionCallbacks) {
+        return;
+    }
     auto const ignoreCallbacks = juce::ScopedValueSetter<bool>{_ignoreLayerSelectionCallbacks, true};
 
     auto* const ov = getOwnerView();
-    if (ov == nullptr) { return; }
+    if (ov == nullptr) {
+        return;
+    }
 
     auto* const layerTree = dynamic_cast<LayerTree*>(ov);
     jassert(layerTree != nullptr);
-    if (layerTree == nullptr) { return; }
+    if (layerTree == nullptr) {
+        return;
+    }
 
     auto& selection = layerTree->getDocument().getLayerSelection();
     if (isNowSelected) {
@@ -63,20 +73,29 @@ auto LayerTreeItem::itemSelectionChanged(bool isNowSelected) -> void
     }
 }
 
-auto LayerTreeItem::getDragSourceDescription() -> juce::var { return getState().getType().toString(); }
+auto LayerTreeItem::getDragSourceDescription() -> juce::var
+{
+    return getState().getType().toString();
+}
 
-auto LayerTreeItem::isInterestedInDragSource(juce::DragAndDropTarget::SourceDetails const& /*sourceDetails*/) -> bool
+auto LayerTreeItem::
+    isInterestedInDragSource(juce::DragAndDropTarget::SourceDetails const& /*sourceDetails*/) -> bool
 {
     return _layer.mightHaveChildren();
 }
 
-auto LayerTreeItem::itemDropped(juce::DragAndDropTarget::SourceDetails const& /*sourceDetails*/, int index) -> void
+auto LayerTreeItem::itemDropped(
+    juce::DragAndDropTarget::SourceDetails const& /*sourceDetails*/,
+    int index
+) -> void
 {
     auto& treeView      = *getOwnerView();
     auto selectedLayers = getSelectedValueTrees(treeView);
     auto oldOpenness    = treeView.getOpennessState(false);
     moveItems(selectedLayers, getState(), index, *getUndoManager());
-    if (oldOpenness != nullptr) { treeView.restoreOpennessState(*oldOpenness, false); }
+    if (oldOpenness != nullptr) {
+        treeView.restoreOpennessState(*oldOpenness, false);
+    }
 }
 
 auto LayerTreeItem::layerPropertyChanged(Layer* layer, juce::Identifier const& /*property*/) -> void
@@ -97,11 +116,15 @@ auto LayerTreeItem::layerSelectionChanged(Layer* layer) -> void
 {
     jassert(&_layer == layer);
 
-    if (_ignoreLayerSelectionCallbacks) { return; }
+    if (_ignoreLayerSelectionCallbacks) {
+        return;
+    }
 
     auto const ignoreCallbacks = juce::ScopedValueSetter<bool>{_ignoreItemSelectionCallbacks, true};
 
-    if (isSelected() != layer->isSelected()) { setSelected(layer->isSelected(), false); }
+    if (isSelected() != layer->isSelected()) {
+        setSelected(layer->isSelected(), false);
+    }
 }
 
 auto LayerTreeItem::refreshSubItems() -> void
@@ -109,7 +132,9 @@ auto LayerTreeItem::refreshSubItems() -> void
     clearSubItems();
     for (auto* child : _layer.getChildren()) {
         auto item = std::make_unique<LayerTreeItem>(*child);
-        if (item != nullptr) { addSubItem(item.release()); }
+        if (item != nullptr) {
+            addSubItem(item.release());
+        }
     }
 }
 

@@ -13,7 +13,9 @@ Layer::Layer(juce::ValueTree vt, juce::UndoManager& um) : ValueTreeObject{std::m
 
         auto& childCanvas = layer->getCanvas();
         getCanvas().addAndMakeVisible(childCanvas);
-        for (auto* l : _children) { l->getCanvas().toBack(); }
+        for (auto* l : _children) {
+            l->getCanvas().toBack();
+        }
         childCanvas.setBounds(layer->getBounds().toNearestInt());
         childCanvas.repaint();
 
@@ -21,11 +23,15 @@ Layer::Layer(juce::ValueTree vt, juce::UndoManager& um) : ValueTreeObject{std::m
     };
     _children.onRemoved = [this](Layer* layer) {
         getCanvas().removeChildComponent(&layer->getCanvas());
-        for (auto* l : _children) { l->getCanvas().toBack(); }
+        for (auto* l : _children) {
+            l->getCanvas().toBack();
+        }
         _listeners.call(&Listener::layerChildrenChanged, this);
     };
     _children.onOrderChanged = [this]() {
-        for (auto* l : _children) { l->getCanvas().toBack(); }
+        for (auto* l : _children) {
+            l->getCanvas().toBack();
+        }
         _listeners.call(&Listener::layerChildrenChanged, this);
     };
     _children.rebuildObjects();
@@ -77,6 +83,7 @@ auto Layer::fillPropertyPanel(juce::PropertyPanel& panel) -> void
     panel.addSection("Fill", fill);
     addLayerProperties(panel);
 }
+
 auto Layer::addLayerProperties(juce::PropertyPanel& panel) -> void { juce::ignoreUnused(panel); }
 
 auto Layer::getCanvas() -> Canvas& { return _canvas; }
@@ -87,7 +94,10 @@ auto Layer::getUUID() const -> juce::String { return valueTree().getProperty(IDs
 
 auto Layer::getName() const -> juce::String { return valueTree().getProperty(IDs::name).toString(); }
 
-auto Layer::setName(juce::String const& name) -> void { valueTree().setProperty(IDs::name, name, undoManager()); }
+auto Layer::setName(juce::String const& name) -> void
+{
+    valueTree().setProperty(IDs::name, name, undoManager());
+}
 
 auto Layer::getBackgroundFill() const -> juce::Colour
 {
@@ -98,6 +108,7 @@ auto Layer::setBackgroundFill(juce::Colour newColor) -> void
 {
     valueTree().setProperty(IDs::backgroundFill, toVar(newColor), undoManager());
 }
+
 auto Layer::getOverlayFill() const -> juce::Colour
 {
     return fromVar<juce::Colour>(valueTree().getProperty(IDs::overlayFill));
@@ -108,41 +119,79 @@ auto Layer::setOverlayFill(juce::Colour newColor) -> void
     valueTree().setProperty(IDs::overlayFill, toVar(newColor), undoManager());
 }
 
-auto Layer::getOpacity() const -> float { return static_cast<float>(valueTree().getProperty(IDs::opacity, 1.0F)); }
-auto Layer::setOpacity(float opacity) -> void { valueTree().setProperty(IDs::opacity, opacity, undoManager()); }
+auto Layer::getOpacity() const -> float
+{
+    return static_cast<float>(valueTree().getProperty(IDs::opacity, 1.0F));
+}
 
-auto Layer::getX() const -> float { return static_cast<float>(valueTree().getProperty(IDs::x, 0.0F)); }
+auto Layer::setOpacity(float opacity) -> void
+{
+    valueTree().setProperty(IDs::opacity, opacity, undoManager());
+}
+
+auto Layer::getX() const -> float
+{
+    return static_cast<float>(valueTree().getProperty(IDs::x, 0.0F));
+}
+
 auto Layer::setX(float x) -> void { valueTree().setProperty(IDs::x, x, undoManager()); }
 
-auto Layer::getY() const -> float { return static_cast<float>(valueTree().getProperty(IDs::y, 0.0F)); }
+auto Layer::getY() const -> float
+{
+    return static_cast<float>(valueTree().getProperty(IDs::y, 0.0F));
+}
+
 auto Layer::setY(float y) -> void { valueTree().setProperty(IDs::y, y, undoManager()); }
 
-auto Layer::getWidth() const -> float { return static_cast<float>(valueTree().getProperty(IDs::width, 0.0F)); }
-auto Layer::setWidth(float width) -> void { valueTree().setProperty(IDs::width, width, undoManager()); }
+auto Layer::getWidth() const -> float
+{
+    return static_cast<float>(valueTree().getProperty(IDs::width, 0.0F));
+}
 
-auto Layer::getHeight() const -> float { return static_cast<float>(valueTree().getProperty(IDs::height, 0.0F)); }
-auto Layer::setHeight(float height) -> void { valueTree().setProperty(IDs::height, height, undoManager()); }
+auto Layer::setWidth(float width) -> void
+{
+    valueTree().setProperty(IDs::width, width, undoManager());
+}
+
+auto Layer::getHeight() const -> float
+{
+    return static_cast<float>(valueTree().getProperty(IDs::height, 0.0F));
+}
+
+auto Layer::setHeight(float height) -> void
+{
+    valueTree().setProperty(IDs::height, height, undoManager());
+}
 
 auto Layer::setSelected(bool isSelected) -> void
 {
-    if (_selected == isSelected) { return; }
+    if (_selected == isSelected) {
+        return;
+    }
     _selected = isSelected;
     _listeners.call(&Listener::layerSelectionChanged, this);
 }
+
 auto Layer::isSelected() const -> bool { return _selected; }
 
-auto Layer::getBounds() const -> juce::Rectangle<float> { return {getX(), getY(), getWidth(), getHeight()}; }
+auto Layer::getBounds() const -> juce::Rectangle<float>
+{
+    return {getX(), getY(), getWidth(), getHeight()};
+}
 
 auto Layer::getNumChildren() const -> int { return _children.size(); }
 
 auto Layer::getChildren() const -> juce::Array<Layer*> const& { return _children.objects; }
 
 auto Layer::addListener(Listener* listener) -> void { _listeners.add(listener); }
+
 auto Layer::removeListener(Listener* listener) -> void { _listeners.remove(listener); }
 
 auto Layer::valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier const& property) -> void
 {
-    if (tree != valueTree()) { return; }
+    if (tree != valueTree()) {
+        return;
+    }
     _listeners.call(&Listener::layerPropertyChanged, this, property);
 }
 } // namespace jml::designer

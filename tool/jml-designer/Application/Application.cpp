@@ -29,7 +29,10 @@ struct MainWindow final : juce::DocumentWindow
 
 auto Application::getApplicationName() -> juce::String const { return JUCE_APPLICATION_NAME_STRING; }
 
-auto Application::getApplicationVersion() -> juce::String const { return JUCE_APPLICATION_VERSION_STRING; }
+auto Application::getApplicationVersion() -> juce::String const
+{
+    return JUCE_APPLICATION_VERSION_STRING;
+}
 
 auto Application::moreThanOneInstanceAllowed() -> bool { return true; }
 

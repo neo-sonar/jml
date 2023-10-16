@@ -20,8 +20,8 @@ private:
 };
 
 inline ValueTreeObject::ValueTreeObject(juce::ValueTree valueTree, juce::UndoManager* um)
-    : _valueTree{std::move(valueTree)}, _undoManager{um}
-{
-}
+    : _valueTree{std::move(valueTree)}
+    , _undoManager{um}
+{}
 
 } // namespace jml::designer

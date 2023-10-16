@@ -39,17 +39,26 @@ struct ValueTreeObjectList : juce::ValueTree::Listener
 
     [[nodiscard]] auto cend() const noexcept { return objects.cend(); }
 
-    [[nodiscard]] auto operator[](size_t index) noexcept -> T& { return *objects[static_cast<int>(index)]; }
+    [[nodiscard]] auto operator[](size_t index) noexcept -> T&
+    {
+        return *objects[static_cast<int>(index)];
+    }
 
-    [[nodiscard]] auto operator[](size_t index) const noexcept -> T const& { return *objects[static_cast<int>(index)]; }
+    [[nodiscard]] auto operator[](size_t index) const noexcept -> T const&
+    {
+        return *objects[static_cast<int>(index)];
+    }
 
     auto rebuildObjects() -> void;
     auto freeObjects() -> void;
 
     auto valueTreeChildAdded(juce::ValueTree& parentTree, juce::ValueTree& tree) -> void override;
-    auto valueTreeChildRemoved(juce::ValueTree& exParent, juce::ValueTree& tree, int index) -> void override;
-    auto valueTreeChildOrderChanged(juce::ValueTree& tree, int oldIndex, int newIndex) -> void override;
-    auto valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier const& property) -> void override;
+    auto valueTreeChildRemoved(juce::ValueTree& exParent, juce::ValueTree& tree, int index)
+        -> void override;
+    auto valueTreeChildOrderChanged(juce::ValueTree& tree, int oldIndex, int newIndex)
+        -> void override;
+    auto valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier const& property)
+        -> void override;
     auto valueTreeParentChanged(juce::ValueTree& tree) -> void override;
     auto valueTreeRedirected(juce::ValueTree& tree) -> void override;
 
@@ -67,7 +76,8 @@ protected:
 };
 
 template<typename T>
-ValueTreeObjectList<T>::ValueTreeObjectList(juce::ValueTree parentTree) : parent(std::move(parentTree))
+ValueTreeObjectList<T>::ValueTreeObjectList(juce::ValueTree parentTree)
+    : parent(std::move(parentTree))
 {
     parent.addListener(this);
 }
@@ -105,9 +115,14 @@ void ValueTreeObjectList<T>::freeObjects()
 }
 
 template<typename T>
-void ValueTreeObjectList<T>::valueTreeChildAdded(juce::ValueTree& /*parentTree*/, juce::ValueTree& tree)
+void ValueTreeObjectList<T>::valueTreeChildAdded(
+    juce::ValueTree& /*parentTree*/,
+    juce::ValueTree& tree
+)
 {
-    if (!isChildTree(tree)) { return; }
+    if (!isChildTree(tree)) {
+        return;
+    }
 
     int const index = parent.indexOf(tree);
     jassert(index >= 0);
@@ -126,7 +141,8 @@ void ValueTreeObjectList<T>::valueTreeChildAdded(juce::ValueTree& /*parentTree*/
 }
 
 template<typename T>
-void ValueTreeObjectList<T>::valueTreeChildRemoved(juce::ValueTree& exParent, juce::ValueTree& tree, int /*index*/)
+void ValueTreeObjectList<
+    T>::valueTreeChildRemoved(juce::ValueTree& exParent, juce::ValueTree& tree, int /*index*/)
 {
     if (parent == exParent && isSuitableType(tree)) {
         int const oldIndex = indexOf(tree);
@@ -142,7 +158,8 @@ void ValueTreeObjectList<T>::valueTreeChildRemoved(juce::ValueTree& exParent, ju
 }
 
 template<typename T>
-void ValueTreeObjectList<T>::valueTreeChildOrderChanged(juce::ValueTree& tree, int /*oldIndex*/, int /*newIndex*/)
+void ValueTreeObjectList<
+    T>::valueTreeChildOrderChanged(juce::ValueTree& tree, int /*oldIndex*/, int /*newIndex*/)
 {
     if (tree == parent) {
         sortArray();
@@ -151,14 +168,13 @@ void ValueTreeObjectList<T>::valueTreeChildOrderChanged(juce::ValueTree& tree, i
 }
 
 template<typename T>
-void ValueTreeObjectList<T>::valueTreePropertyChanged(juce::ValueTree& /*tree*/, juce::Identifier const& /*property*/)
-{
-}
+void ValueTreeObjectList<
+    T>::valueTreePropertyChanged(juce::ValueTree& /*tree*/, juce::Identifier const& /*property*/)
+{}
 
 template<typename T>
 void ValueTreeObjectList<T>::valueTreeParentChanged(juce::ValueTree& /*tree*/)
-{
-}
+{}
 
 template<typename T>
 void ValueTreeObjectList<T>::valueTreeRedirected(juce::ValueTree& /*tree*/)
@@ -187,7 +203,9 @@ template<typename T>
 auto ValueTreeObjectList<T>::indexOf(juce::ValueTree const& v) const noexcept -> int
 {
     for (int i = 0; i < size(); ++i) {
-        if (objects.getUnchecked(i)->valueTree() == v) { return i; }
+        if (objects.getUnchecked(i)->valueTree() == v) {
+            return i;
+        }
     }
 
     return -1;

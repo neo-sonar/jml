@@ -5,9 +5,13 @@
 
 namespace jml::designer {
 
-ColorPropertyComponent::ColorPropertyComponent(juce::Value const& valueToControl, juce::String const& propertyName,
-                                               bool showAlpha)
-    : ValuePropertyComponent(valueToControl, propertyName), _container(value(), showAlpha)
+ColorPropertyComponent::ColorPropertyComponent(
+    juce::Value const& valueToControl,
+    juce::String const& propertyName,
+    bool showAlpha
+)
+    : ValuePropertyComponent(valueToControl, propertyName)
+    , _container(value(), showAlpha)
 {
     addAndMakeVisible(_container);
 }
@@ -40,7 +44,9 @@ auto ColorPropertyComponent::Container::paint(juce::Graphics& g) -> void
 
 auto ColorPropertyComponent::Container::mouseUp(juce::MouseEvent const& event) -> void
 {
-    if (not event.mouseWasClicked()) { return; }
+    if (not event.mouseWasClicked()) {
+        return;
+    }
 
     auto cs = std::make_unique<juce::ColourSelector>();
     cs->setSize(300, 280);
@@ -50,11 +56,14 @@ auto ColorPropertyComponent::Container::mouseUp(juce::MouseEvent const& event) -
     juce::CallOutBox::launchAsynchronously(std::move(cs), getScreenBounds(), nullptr);
 }
 
-auto ColorPropertyComponent::Container::changeListenerCallback(juce::ChangeBroadcaster* source) -> void
+auto ColorPropertyComponent::Container::changeListenerCallback(juce::ChangeBroadcaster* source)
+    -> void
 {
     auto* const cs = dynamic_cast<juce::ColourSelector*>(source);
     jassert(cs != nullptr);
-    if (cs == nullptr) { return; }
+    if (cs == nullptr) {
+        return;
+    }
     value = toVar(cs->getCurrentColour());
 }
 

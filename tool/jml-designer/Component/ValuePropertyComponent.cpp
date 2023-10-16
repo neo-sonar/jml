@@ -3,7 +3,8 @@
 namespace jml::designer {
 
 ValuePropertyComponent::ValuePropertyComponent(juce::Value value, juce::String const& name)
-    : PropertyComponent(name), _value(std::move(value))
+    : PropertyComponent(name)
+    , _value(std::move(value))
 {
     _value.addListener(this);
 }

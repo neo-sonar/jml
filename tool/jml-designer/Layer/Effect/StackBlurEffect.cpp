@@ -19,7 +19,8 @@ struct StackBlur
         auto const stackSize = std::pow(_blurRadius + 1.0, 2.0);
         auto stack           = static_cast<double>(pixels[0]) * stackSize;
 
-        for (auto sourceIndex = _stride; sourceIndex < (_numPixels + _blurRadius) * _stride; sourceIndex += _stride) {
+        for (auto sourceIndex = _stride; sourceIndex < (_numPixels + _blurRadius) * _stride;
+             sourceIndex += _stride) {
             auto const sourcePixel = pixels[juce::jlimit(0, (_numPixels - 1) * _stride, sourceIndex)];
             queue.add(sourcePixel);
 
@@ -28,8 +29,11 @@ struct StackBlur
             auto const targetIndex = sourceIndex - (_blurRadius * _stride);
 
             if (targetIndex >= 0) {
-                auto const alpha       = juce::jlimit(0.0, static_cast<double>(std::numeric_limits<juce::uint8>::max()),
-                                                      std::round(stack / stackSize));
+                auto const alpha = juce::jlimit(
+                    0.0,
+                    static_cast<double>(std::numeric_limits<juce::uint8>::max()),
+                    std::round(stack / stackSize)
+                );
                 auto const targetPixel = static_cast<juce::uint8>(alpha);
                 pixels[targetIndex]    = targetPixel;
             }
@@ -44,8 +48,7 @@ private:
             , _buffer(size + 1, initialValue)
             , _inBuffer{&_buffer[static_cast<std::size_t>(radius) + 1], radius + 1}
             , _outBuffer{_buffer.data(), radius + 1}
-        {
-        }
+        {}
 
         void add(juce::uint8 valueToAdd)
         {
@@ -53,7 +56,10 @@ private:
             _inBuffer.write(valueToAdd);
         }
 
-        [[nodiscard]] auto calculateStackDifference() const -> double { return _inBuffer.sum() - _outBuffer.sum(); }
+        [[nodiscard]] auto calculateStackDifference() const -> double
+        {
+            return _inBuffer.sum() - _outBuffer.sum();
+        }
 
         juce::uint64 const size;
 
@@ -62,19 +68,23 @@ private:
         {
             RingBuffer(juce::uint8* sourceData, int bufferSize)
                 : _data{sourceData, static_cast<std::size_t>(bufferSize)}
-            {
-            }
+            {}
 
             void write(juce::uint8 value)
             {
                 _data[_writeIndex] = value;
 
-                if (++_writeIndex >= _data.size()) { _writeIndex = 0; }
+                if (++_writeIndex >= _data.size()) {
+                    _writeIndex = 0;
+                }
             }
 
             [[nodiscard]] auto front() const -> juce::uint8 { return _data[_writeIndex]; }
 
-            [[nodiscard]] auto sum() const -> double { return std::accumulate(_data.begin(), _data.end(), 0.0); }
+            [[nodiscard]] auto sum() const -> double
+            {
+                return std::accumulate(_data.begin(), _data.end(), 0.0);
+            }
 
         private:
             std::span<juce::uint8> _data;
@@ -129,7 +139,8 @@ auto getNumColourChannels(juce::Image const& image) -> int
 }
 } // namespace
 
-auto StackBlurEffect::applyEffect(juce::Image& source, juce::Graphics& g, float scale, float alpha) -> void
+auto StackBlurEffect::applyEffect(juce::Image& source, juce::Graphics& g, float scale, float alpha)
+    -> void
 {
     // Create a copy of the image
     auto blurredImage = source.createCopy();

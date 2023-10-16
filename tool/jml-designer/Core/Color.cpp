@@ -5,4 +5,7 @@ auto juce::VariantConverter<juce::Colour>::fromVar(juce::var const& v) -> juce::
     return juce::Colour::fromString(v.toString());
 }
 
-auto juce::VariantConverter<juce::Colour>::toVar(juce::Colour const& c) -> juce::var { return c.toString(); }
+auto juce::VariantConverter<juce::Colour>::toVar(juce::Colour const& c) -> juce::var
+{
+    return c.toString();
+}

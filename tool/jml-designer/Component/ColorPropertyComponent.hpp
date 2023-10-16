@@ -6,7 +6,11 @@ namespace jml::designer {
 
 struct ColorPropertyComponent final : ValuePropertyComponent
 {
-    ColorPropertyComponent(juce::Value const& valueToControl, juce::String const& propertyName, bool showAlpha = false);
+    ColorPropertyComponent(
+        juce::Value const& valueToControl,
+        juce::String const& propertyName,
+        bool showAlpha = false
+    );
     ~ColorPropertyComponent() override = default;
 
     auto refresh() -> void override;

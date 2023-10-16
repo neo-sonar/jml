@@ -8,6 +8,7 @@ namespace jml::designer {
 struct RepaintOnExit
 {
     explicit RepaintOnExit(DocumentCanvas& canvas) : _canvas{canvas} {}
+
     ~RepaintOnExit() { _canvas.repaint(); }
 
 private:
@@ -30,7 +31,9 @@ auto SelectionTool::paintTool(juce::Graphics& g) -> void
 {
     auto const& selection = getLayerSelection();
     for (auto const& layer : selection.getLayers()) {
-        if (layer.get() == nullptr) { continue; }
+        if (layer.get() == nullptr) {
+            continue;
+        }
         auto const& lc = layer->getCanvas();
         g.setColour(juce::Colours::blue);
         g.drawRect(getDocumentCanvas().getLocalArea(&lc, lc.getLocalBounds()), 2);
@@ -43,7 +46,9 @@ auto SelectionTool::mouseDown(juce::MouseEvent const& event) -> void
 
     getLayerSelection().clear();
     auto* layerCanvas = dynamic_cast<Layer::Canvas*>(event.eventComponent);
-    if (layerCanvas == nullptr) { return; }
+    if (layerCanvas == nullptr) {
+        return;
+    }
     getLayerSelection().addOrRemove(&layerCanvas->layer());
 }
 
@@ -57,6 +62,7 @@ auto SelectionTool::getLayerSelection() -> LayerSelection&
 {
     return getDocumentCanvas().document().getLayerSelection();
 }
+
 auto SelectionTool::getLayerSelection() const -> LayerSelection const&
 {
     return getDocumentCanvas().document().getLayerSelection();

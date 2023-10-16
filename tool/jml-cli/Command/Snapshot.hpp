@@ -28,13 +28,17 @@ inline auto runSnapshotScript(JmlCommandline const& cli) -> juce::Result
 
     sol::object const obj = result;
     auto* component       = obj.as<juce::Component*>();
-    if (component == nullptr) { return juce::Result::fail("Failed to get juce::Component* from lua result"); }
+    if (component == nullptr) {
+        return juce::Result::fail("Failed to get juce::Component* from lua result");
+    }
 
     component->resized();
     auto snapshot = component->createComponentSnapshot(component->getBounds());
 
     auto snapShotFile = juce::File::getCurrentWorkingDirectory().getChildFile("snapshot.png");
-    if (snapShotFile.existsAsFile()) { snapShotFile.deleteFile(); }
+    if (snapShotFile.existsAsFile()) {
+        snapShotFile.deleteFile();
+    }
     auto out = snapShotFile.createOutputStream();
 
     auto jpg = juce::PNGImageFormat{};

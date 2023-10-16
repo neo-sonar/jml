@@ -8,6 +8,7 @@ auto LayerListener::layerPropertyChanged(Layer* layer, juce::Identifier const& p
 {
     juce::ignoreUnused(layer, property);
 }
+
 auto LayerListener::layerChildrenChanged(Layer* layer) -> void { juce::ignoreUnused(layer); }
 
 auto LayerListener::layerSelectionChanged(Layer* layer) -> void { juce::ignoreUnused(layer); }

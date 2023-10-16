@@ -20,7 +20,8 @@ struct Document
     [[nodiscard]] auto getUndoManager() const -> juce::UndoManager*;
 
     auto save(juce::File const& file) -> void;
-    [[nodiscard]] static auto load(juce::File const& file, juce::UndoManager* um) -> std::unique_ptr<Document>;
+    [[nodiscard]] static auto load(juce::File const& file, juce::UndoManager* um)
+        -> std::unique_ptr<Document>;
 
 private:
     juce::ValueTree _valueTree;

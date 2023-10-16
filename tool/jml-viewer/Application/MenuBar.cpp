@@ -27,18 +27,48 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
 
     if (index == MenuIndex::File) {
         auto menu = juce::PopupMenu{};
-        menu.addCommandItem(&_commandManager, CommandIDs::open, "Open", {} /*openIcon->createCopy()*/);
-        menu.addCommandItem(&_commandManager, CommandIDs::reload, "Reload", {} /*openIcon->createCopy()*/);
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::open,
+            "Open",
+            {} /*openIcon->createCopy()*/
+        );
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::reload,
+            "Reload",
+            {} /*openIcon->createCopy()*/
+        );
         menu.addSeparator();
-        menu.addCommandItem(&_commandManager, CommandIDs::save, "Save", {} /*saveIcon->createCopy()*/);
-        menu.addCommandItem(&_commandManager, CommandIDs::saveAs, "Save As", {} /*saveIcon->createCopy()*/);
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::save,
+            "Save",
+            {} /*saveIcon->createCopy()*/
+        );
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::saveAs,
+            "Save As",
+            {} /*saveIcon->createCopy()*/
+        );
         return menu;
     }
 
     if (index == MenuIndex::Edit) {
         auto menu = juce::PopupMenu{};
-        menu.addCommandItem(&_commandManager, CommandIDs::undo, "Undo", {} /*undoIcon->createCopy()*/);
-        menu.addCommandItem(&_commandManager, CommandIDs::redo, "Redo", {} /*redoIcon->createCopy()*/);
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::undo,
+            "Undo",
+            {} /*undoIcon->createCopy()*/
+        );
+        menu.addCommandItem(
+            &_commandManager,
+            CommandIDs::redo,
+            "Redo",
+            {} /*redoIcon->createCopy()*/
+        );
         return menu;
     }
 

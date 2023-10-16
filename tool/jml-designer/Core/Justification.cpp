@@ -50,7 +50,8 @@ auto makeJustificationProperty(juce::Value const& value, juce::String const& nam
 
 } // namespace jml::designer
 
-auto juce::VariantConverter<juce::Justification>::toVar(juce::Justification const& justification) -> juce::var
+auto juce::VariantConverter<juce::Justification>::toVar(juce::Justification const& justification)
+    -> juce::var
 {
     return justification.getFlags();
 }

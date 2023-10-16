@@ -23,7 +23,11 @@ auto main(int argc, char* argv[]) -> int // NOLINT(bugprone-exception-escape)
     auto cli = jml::cli::makeJmlCommandline();
     CLI11_PARSE(cli->app, argc, argv);
 
-    if (cli->app.got_subcommand("test")) { return run(jml::cli::runTestScript, *cli); }
-    if (cli->app.got_subcommand("snapshot")) { return run(jml::cli::runSnapshotScript, *cli); }
+    if (cli->app.got_subcommand("test")) {
+        return run(jml::cli::runTestScript, *cli);
+    }
+    if (cli->app.got_subcommand("snapshot")) {
+        return run(jml::cli::runSnapshotScript, *cli);
+    }
     return EXIT_SUCCESS;
 }

@@ -16,6 +16,7 @@ struct LayerTree final
     ~LayerTree() override;
 
     [[nodiscard]] auto getDocument() -> Document& { return _document; }
+
     [[nodiscard]] auto getDocument() const -> Document const& { return _document; }
 
 private:

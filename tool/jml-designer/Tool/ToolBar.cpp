@@ -48,11 +48,19 @@ auto ToolBar::resized() -> void
 auto ToolBar::updateTool() -> void
 {
     auto type = ToolType::invalid;
-    if (_select.getToggleState()) { type = ToolType::select; }
-    if (_rectangle.getToggleState()) { type = ToolType::rectangle; }
-    if (_ellipse.getToggleState()) { type = ToolType::ellipse; }
+    if (_select.getToggleState()) {
+        type = ToolType::select;
+    }
+    if (_rectangle.getToggleState()) {
+        type = ToolType::rectangle;
+    }
+    if (_ellipse.getToggleState()) {
+        type = ToolType::ellipse;
+    }
 
-    if (onToolChange) { onToolChange(type); }
+    if (onToolChange) {
+        onToolChange(type);
+    }
 }
 
 } // namespace jml::designer

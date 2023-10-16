@@ -79,7 +79,8 @@ struct Layer
     auto addListener(Listener* listener) -> void;
     auto removeListener(Listener* listener) -> void;
 
-    auto valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier const& property) -> void override;
+    auto valueTreePropertyChanged(juce::ValueTree& tree, juce::Identifier const& property)
+        -> void override;
 
 private:
     juce::ListenerList<Listener> _listeners;
