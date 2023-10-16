@@ -28,17 +28,17 @@ auto juce_ColourGradient(sol::table& state) -> void
     );
     // clang-format on
 
-    gradient["clearColours"]        = &juce::ColourGradient::clearColours;
-    gradient["addColour"]           = &juce::ColourGradient::addColour;
-    gradient["removeColour"]        = &juce::ColourGradient::removeColour;
-    gradient["multiplyOpacity"]     = &juce::ColourGradient::multiplyOpacity;
-    gradient["getNumColours"]       = &juce::ColourGradient::getNumColours;
-    gradient["getColourPosition"]   = &juce::ColourGradient::getColourPosition;
-    gradient["getColour"]           = &juce::ColourGradient::getColour;
-    gradient["setColour"]           = &juce::ColourGradient::setColour;
-    gradient["getColourAtPosition"] = &juce::ColourGradient::getColourAtPosition;
-    gradient["isOpaque"]            = &juce::ColourGradient::isOpaque;
-    gradient["isInvisible"]         = &juce::ColourGradient::isInvisible;
+    gradient["clearColours"]        = LUA_JUCE_C_CALL(&juce::ColourGradient::clearColours);
+    gradient["addColour"]           = LUA_JUCE_C_CALL(&juce::ColourGradient::addColour);
+    gradient["removeColour"]        = LUA_JUCE_C_CALL(&juce::ColourGradient::removeColour);
+    gradient["multiplyOpacity"]     = LUA_JUCE_C_CALL(&juce::ColourGradient::multiplyOpacity);
+    gradient["getNumColours"]       = LUA_JUCE_C_CALL(&juce::ColourGradient::getNumColours);
+    gradient["getColourPosition"]   = LUA_JUCE_C_CALL(&juce::ColourGradient::getColourPosition);
+    gradient["getColour"]           = LUA_JUCE_C_CALL(&juce::ColourGradient::getColour);
+    gradient["setColour"]           = LUA_JUCE_C_CALL(&juce::ColourGradient::setColour);
+    gradient["getColourAtPosition"] = LUA_JUCE_C_CALL(&juce::ColourGradient::getColourAtPosition);
+    gradient["isOpaque"]            = LUA_JUCE_C_CALL(&juce::ColourGradient::isOpaque);
+    gradient["isInvisible"]         = LUA_JUCE_C_CALL(&juce::ColourGradient::isInvisible);
 
     gradient["point1"]   = &juce::ColourGradient::point1;
     gradient["point2"]   = &juce::ColourGradient::point2;

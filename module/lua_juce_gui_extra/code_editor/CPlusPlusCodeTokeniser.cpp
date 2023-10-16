@@ -8,7 +8,7 @@ auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void
         sol::base_classes, sol::bases<juce::CodeTokeniser>()
     );
     // clang-format on
-    tokeniser["isReservedKeyword"] = &juce::CPlusPlusCodeTokeniser::isReservedKeyword;
+    tokeniser["isReservedKeyword"] = LUA_JUCE_C_CALL(&juce::CPlusPlusCodeTokeniser::isReservedKeyword);
 }
 
 } // namespace lua_juce

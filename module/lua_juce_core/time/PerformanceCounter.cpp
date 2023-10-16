@@ -9,9 +9,9 @@ auto juce_PerformanceCounter(sol::table& state) -> void
     );
     // clang-format on
 
-    pc["start"]                 = &juce::PerformanceCounter::start;
-    pc["stop"]                  = &juce::PerformanceCounter::stop;
-    pc["printStatistics"]       = &juce::PerformanceCounter::printStatistics;
-    pc["getStatisticsAndReset"] = &juce::PerformanceCounter::getStatisticsAndReset;
+    pc["start"]                 = LUA_JUCE_C_CALL(&juce::PerformanceCounter::start);
+    pc["stop"]                  = LUA_JUCE_C_CALL(&juce::PerformanceCounter::stop);
+    pc["printStatistics"]       = LUA_JUCE_C_CALL(&juce::PerformanceCounter::printStatistics);
+    pc["getStatisticsAndReset"] = LUA_JUCE_C_CALL(&juce::PerformanceCounter::getStatisticsAndReset);
 }
 } // namespace lua_juce

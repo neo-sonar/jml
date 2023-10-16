@@ -27,18 +27,18 @@ auto juce_AffineTransform(sol::table& state) -> void
         )
     );
     // clang-format on
-    transform["withAbsoluteTranslation"] = &Transform::withAbsoluteTranslation;
-    transform["sheared"]                 = &Transform::sheared;
-    transform["shear"]                   = &Transform::shear;
-    transform["verticalFlip"]            = &Transform::verticalFlip;
-    transform["inverted"]                = &Transform::inverted;
-    transform["followedBy"]              = &Transform::followedBy;
-    transform["isIdentity"]              = &Transform::isIdentity;
-    transform["isSingularity"]           = &Transform::isSingularity;
-    transform["isOnlyTranslation"]       = &Transform::isOnlyTranslation;
-    transform["getTranslationX"]         = &Transform::getTranslationX;
-    transform["getTranslationY"]         = &Transform::getTranslationY;
-    transform["getDeterminant"]          = &Transform::getDeterminant;
+    transform["withAbsoluteTranslation"] = LUA_JUCE_C_CALL(&Transform::withAbsoluteTranslation);
+    transform["sheared"]                 = LUA_JUCE_C_CALL(&Transform::sheared);
+    transform["shear"]                   = LUA_JUCE_C_CALL(&Transform::shear);
+    transform["verticalFlip"]            = LUA_JUCE_C_CALL(&Transform::verticalFlip);
+    transform["inverted"]                = LUA_JUCE_C_CALL(&Transform::inverted);
+    transform["followedBy"]              = LUA_JUCE_C_CALL(&Transform::followedBy);
+    transform["isIdentity"]              = LUA_JUCE_C_CALL(&Transform::isIdentity);
+    transform["isSingularity"]           = LUA_JUCE_C_CALL(&Transform::isSingularity);
+    transform["isOnlyTranslation"]       = LUA_JUCE_C_CALL(&Transform::isOnlyTranslation);
+    transform["getTranslationX"]         = LUA_JUCE_C_CALL(&Transform::getTranslationX);
+    transform["getTranslationY"]         = LUA_JUCE_C_CALL(&Transform::getTranslationY);
+    transform["getDeterminant"]          = LUA_JUCE_C_CALL(&Transform::getDeterminant);
 
     transform["mat00"] = &Transform::mat00;
     transform["mat01"] = &Transform::mat01;

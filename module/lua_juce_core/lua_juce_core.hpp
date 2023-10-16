@@ -23,6 +23,8 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_core/juce_core.h>
 #include <sol/sol.hpp>
 
+#define LUA_JUCE_C_CALL(x) sol::c_call<decltype(x), x> // NOLINT
+
 namespace juce {
 
 namespace lua_detail {
@@ -112,26 +114,26 @@ auto juce_ArrayImpl(sol::table& state, char const* name) -> void
 
     auto array = state.new_usertype<juce::Array<T>>(name, noOperators);
 
-    array["clear"]                    = &juce::Array<T>::clear;
-    array["clearQuick"]               = &juce::Array<T>::clearQuick;
-    array["fill"]                     = &juce::Array<T>::fill;
-    array["size"]                     = &juce::Array<T>::size;
-    array["isEmpty"]                  = &juce::Array<T>::isEmpty;
-    array["getUnchecked"]             = &juce::Array<T>::getUnchecked;
-    array["getFirst"]                 = &juce::Array<T>::getFirst;
-    array["getLast"]                  = &juce::Array<T>::getLast;
-    array["insert"]                   = &juce::Array<T>::insert;
-    array["insertMultiple"]           = &juce::Array<T>::insertMultiple;
-    array["set"]                      = &juce::Array<T>::set;
-    array["setUnchecked"]             = &juce::Array<T>::setUnchecked;
-    array["resize"]                   = &juce::Array<T>::resize;
-    array["removeAndReturn"]          = &juce::Array<T>::removeAndReturn;
-    array["removeRange"]              = &juce::Array<T>::removeRange;
-    array["removeLast"]               = &juce::Array<T>::removeLast;
-    array["swap"]                     = &juce::Array<T>::swap;
-    array["move"]                     = &juce::Array<T>::move;
-    array["minimiseStorageOverheads"] = &juce::Array<T>::minimiseStorageOverheads;
-    array["ensureStorageAllocated"]   = &juce::Array<T>::ensureStorageAllocated;
+    array["clear"]                    = LUA_JUCE_C_CALL(&juce::Array<T>::clear);
+    array["clearQuick"]               = LUA_JUCE_C_CALL(&juce::Array<T>::clearQuick);
+    array["fill"]                     = LUA_JUCE_C_CALL(&juce::Array<T>::fill);
+    array["size"]                     = LUA_JUCE_C_CALL(&juce::Array<T>::size);
+    array["isEmpty"]                  = LUA_JUCE_C_CALL(&juce::Array<T>::isEmpty);
+    array["getUnchecked"]             = LUA_JUCE_C_CALL(&juce::Array<T>::getUnchecked);
+    array["getFirst"]                 = LUA_JUCE_C_CALL(&juce::Array<T>::getFirst);
+    array["getLast"]                  = LUA_JUCE_C_CALL(&juce::Array<T>::getLast);
+    array["insert"]                   = LUA_JUCE_C_CALL(&juce::Array<T>::insert);
+    array["insertMultiple"]           = LUA_JUCE_C_CALL(&juce::Array<T>::insertMultiple);
+    array["set"]                      = LUA_JUCE_C_CALL(&juce::Array<T>::set);
+    array["setUnchecked"]             = LUA_JUCE_C_CALL(&juce::Array<T>::setUnchecked);
+    array["resize"]                   = LUA_JUCE_C_CALL(&juce::Array<T>::resize);
+    array["removeAndReturn"]          = LUA_JUCE_C_CALL(&juce::Array<T>::removeAndReturn);
+    array["removeRange"]              = LUA_JUCE_C_CALL(&juce::Array<T>::removeRange);
+    array["removeLast"]               = LUA_JUCE_C_CALL(&juce::Array<T>::removeLast);
+    array["swap"]                     = LUA_JUCE_C_CALL(&juce::Array<T>::swap);
+    array["move"]                     = LUA_JUCE_C_CALL(&juce::Array<T>::move);
+    array["minimiseStorageOverheads"] = LUA_JUCE_C_CALL(&juce::Array<T>::minimiseStorageOverheads);
+    array["ensureStorageAllocated"]   = LUA_JUCE_C_CALL(&juce::Array<T>::ensureStorageAllocated);
     array["add"]                      = [](juce::Array<T>* a, T const& t) { a->add(t); };
 
     // array["indexOf"]                  = &juce::Array<T>::indexOf;

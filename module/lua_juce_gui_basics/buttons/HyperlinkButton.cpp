@@ -18,11 +18,11 @@ auto juce_HyperlinkButton(sol::table& state) -> void
     );
     // clang-format on
 
-    button["setFont"]              = &juce::HyperlinkButton::setFont;
-    button["setURL"]               = &juce::HyperlinkButton::setURL;
-    button["getURL"]               = &juce::HyperlinkButton::getURL;
-    button["changeWidthToFitText"] = &juce::HyperlinkButton::changeWidthToFitText;
-    button["setJustificationType"] = &juce::HyperlinkButton::setJustificationType;
-    button["getJustificationType"] = &juce::HyperlinkButton::getJustificationType;
+    button["setFont"]              = LUA_JUCE_C_CALL(&juce::HyperlinkButton::setFont);
+    button["setURL"]               = LUA_JUCE_C_CALL(&juce::HyperlinkButton::setURL);
+    button["getURL"]               = LUA_JUCE_C_CALL(&juce::HyperlinkButton::getURL);
+    button["changeWidthToFitText"] = LUA_JUCE_C_CALL(&juce::HyperlinkButton::changeWidthToFitText);
+    button["setJustificationType"] = LUA_JUCE_C_CALL(&juce::HyperlinkButton::setJustificationType);
+    button["getJustificationType"] = LUA_JUCE_C_CALL(&juce::HyperlinkButton::getJustificationType);
 }
 } // namespace lua_juce

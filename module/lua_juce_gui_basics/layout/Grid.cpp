@@ -106,19 +106,19 @@ auto juce_Grid(sol::table& state) -> void
     );
     // clang-format on
 
-    ti["isAuto"]           = &juce::Grid::TrackInfo::isAuto;
-    ti["isFractional"]     = &juce::Grid::TrackInfo::isFractional;
-    ti["isPixels"]         = &juce::Grid::TrackInfo::isPixels;
-    ti["getStartLineName"] = &juce::Grid::TrackInfo::getStartLineName;
-    ti["getEndLineName"]   = &juce::Grid::TrackInfo::getEndLineName;
-    ti["getSize"]          = &juce::Grid::TrackInfo::getSize;
+    ti["isAuto"]           = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::isAuto);
+    ti["isFractional"]     = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::isFractional);
+    ti["isPixels"]         = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::isPixels);
+    ti["getStartLineName"] = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::getStartLineName);
+    ti["getEndLineName"]   = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::getEndLineName);
+    ti["getSize"]          = LUA_JUCE_C_CALL(&juce::Grid::TrackInfo::getSize);
 
     table["new"]               = []() { return juce::Grid{}; };
     auto grid                  = table.new_usertype<juce::Grid>("Grid");
-    grid["setGap"]             = &juce::Grid::setGap;
-    grid["performLayout"]      = &juce::Grid::performLayout;
-    grid["getNumberOfColumns"] = &juce::Grid::getNumberOfColumns;
-    grid["getNumberOfRows"]    = &juce::Grid::getNumberOfRows;
+    grid["setGap"]             = LUA_JUCE_C_CALL(&juce::Grid::setGap);
+    grid["performLayout"]      = LUA_JUCE_C_CALL(&juce::Grid::performLayout);
+    grid["getNumberOfColumns"] = LUA_JUCE_C_CALL(&juce::Grid::getNumberOfColumns);
+    grid["getNumberOfRows"]    = LUA_JUCE_C_CALL(&juce::Grid::getNumberOfRows);
     grid["justifyItems"]       = &juce::Grid::justifyItems;
     grid["alignItems"]         = &juce::Grid::alignItems;
     grid["justifyContent"]     = &juce::Grid::justifyContent;
@@ -153,15 +153,15 @@ auto juce_Grid(sol::table& state) -> void
         static_cast<GI (GI::*)(juce::String const&) const noexcept>(&GI::withArea) //
     );
 
-    gi["withRow"]         = &GI::withRow;
-    gi["withColumn"]      = &GI::withColumn;
-    gi["withAlignSelf"]   = &GI::withAlignSelf;
-    gi["withJustifySelf"] = &GI::withJustifySelf;
-    gi["withWidth"]       = &GI::withWidth;
-    gi["withHeight"]      = &GI::withHeight;
-    gi["withSize"]        = &GI::withSize;
-    gi["withMargin"]      = &GI::withMargin;
-    gi["withOrder"]       = &GI::withOrder;
+    gi["withRow"]         = LUA_JUCE_C_CALL(&GI::withRow);
+    gi["withColumn"]      = LUA_JUCE_C_CALL(&GI::withColumn);
+    gi["withAlignSelf"]   = LUA_JUCE_C_CALL(&GI::withAlignSelf);
+    gi["withJustifySelf"] = LUA_JUCE_C_CALL(&GI::withJustifySelf);
+    gi["withWidth"]       = LUA_JUCE_C_CALL(&GI::withWidth);
+    gi["withHeight"]      = LUA_JUCE_C_CALL(&GI::withHeight);
+    gi["withSize"]        = LUA_JUCE_C_CALL(&GI::withSize);
+    gi["withMargin"]      = LUA_JUCE_C_CALL(&GI::withMargin);
+    gi["withOrder"]       = LUA_JUCE_C_CALL(&GI::withOrder);
 
     gi["associatedComponent"] = &GI::associatedComponent;
     gi["order"]               = &GI::order;
@@ -248,12 +248,12 @@ auto juce_Grid(sol::table& state) -> void
     );
     // clang-format on
 
-    gridItemProperty["hasSpan"]     = &GI::Property::hasSpan;
-    gridItemProperty["hasAbsolute"] = &GI::Property::hasAbsolute;
-    gridItemProperty["hasAuto"]     = &GI::Property::hasAuto;
-    gridItemProperty["hasName"]     = &GI::Property::hasName;
-    gridItemProperty["getName"]     = &GI::Property::getName;
-    gridItemProperty["getNumber"]   = &GI::Property::getNumber;
+    gridItemProperty["hasSpan"]     = LUA_JUCE_C_CALL(&GI::Property::hasSpan);
+    gridItemProperty["hasAbsolute"] = LUA_JUCE_C_CALL(&GI::Property::hasAbsolute);
+    gridItemProperty["hasAuto"]     = LUA_JUCE_C_CALL(&GI::Property::hasAuto);
+    gridItemProperty["hasName"]     = LUA_JUCE_C_CALL(&GI::Property::hasName);
+    gridItemProperty["getName"]     = LUA_JUCE_C_CALL(&GI::Property::getName);
+    gridItemProperty["getNumber"]   = LUA_JUCE_C_CALL(&GI::Property::getNumber);
 
     // clang-format off
     auto gridItemSpan = giTable.new_usertype<GI::Span>(

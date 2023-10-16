@@ -17,11 +17,11 @@ auto juce_ShapeButton(sol::table& state) -> void
     );
     // clang-format on
 
-    button["setShape"]           = &juce::ShapeButton::setShape;
-    button["setColours"]         = &juce::ShapeButton::setColours;
-    button["setOnColours"]       = &juce::ShapeButton::setOnColours;
-    button["shouldUseOnColours"] = &juce::ShapeButton::shouldUseOnColours;
-    button["setOutline"]         = &juce::ShapeButton::setOutline;
-    button["setBorderSize"]      = &juce::ShapeButton::setBorderSize;
+    button["setShape"]           = LUA_JUCE_C_CALL(&juce::ShapeButton::setShape);
+    button["setColours"]         = LUA_JUCE_C_CALL(&juce::ShapeButton::setColours);
+    button["setOnColours"]       = LUA_JUCE_C_CALL(&juce::ShapeButton::setOnColours);
+    button["shouldUseOnColours"] = LUA_JUCE_C_CALL(&juce::ShapeButton::shouldUseOnColours);
+    button["setOutline"]         = LUA_JUCE_C_CALL(&juce::ShapeButton::setOutline);
+    button["setBorderSize"]      = LUA_JUCE_C_CALL(&juce::ShapeButton::setBorderSize);
 }
 } // namespace lua_juce

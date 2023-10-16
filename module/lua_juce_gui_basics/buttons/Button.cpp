@@ -15,10 +15,10 @@ auto juce_Button(sol::table& state) -> void
     // clang-format on
 
     button["onClick"]   = &juce::Button::onClick;
-    button["getBounds"] = &juce::Component::getBounds;
-    button["getWidth"]  = &juce::Component::getWidth;
-    button["getHeight"] = &juce::Component::getHeight;
-    button["getX"]      = &juce::Component::getX;
-    button["getY"]      = &juce::Component::getY;
+    button["getBounds"] = LUA_JUCE_C_CALL(&juce::Component::getBounds);
+    button["getWidth"]  = LUA_JUCE_C_CALL(&juce::Component::getWidth);
+    button["getHeight"] = LUA_JUCE_C_CALL(&juce::Component::getHeight);
+    button["getX"]      = LUA_JUCE_C_CALL(&juce::Component::getX);
+    button["getY"]      = LUA_JUCE_C_CALL(&juce::Component::getY);
 }
 } // namespace lua_juce

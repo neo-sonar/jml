@@ -4,21 +4,21 @@ auto juce_RelativeTime(sol::table& state) -> void
     auto t = state.new_usertype<juce::RelativeTime>("RelativeTime", sol::constructors<juce::RelativeTime(double)>());
 
     // members
-    t["inMilliseconds"]            = &juce::RelativeTime::inMilliseconds;
-    t["inSeconds"]                 = &juce::RelativeTime::inSeconds;
-    t["inMinutes"]                 = &juce::RelativeTime::inMinutes;
-    t["inHours"]                   = &juce::RelativeTime::inHours;
-    t["inDays"]                    = &juce::RelativeTime::inDays;
-    t["inWeeks"]                   = &juce::RelativeTime::inWeeks;
-    t["getDescription"]            = &juce::RelativeTime::getDescription;
-    t["getApproximateDescription"] = &juce::RelativeTime::getApproximateDescription;
+    t["inMilliseconds"]            = LUA_JUCE_C_CALL(&juce::RelativeTime::inMilliseconds);
+    t["inSeconds"]                 = LUA_JUCE_C_CALL(&juce::RelativeTime::inSeconds);
+    t["inMinutes"]                 = LUA_JUCE_C_CALL(&juce::RelativeTime::inMinutes);
+    t["inHours"]                   = LUA_JUCE_C_CALL(&juce::RelativeTime::inHours);
+    t["inDays"]                    = LUA_JUCE_C_CALL(&juce::RelativeTime::inDays);
+    t["inWeeks"]                   = LUA_JUCE_C_CALL(&juce::RelativeTime::inWeeks);
+    t["getDescription"]            = LUA_JUCE_C_CALL(&juce::RelativeTime::getDescription);
+    t["getApproximateDescription"] = LUA_JUCE_C_CALL(&juce::RelativeTime::getApproximateDescription);
 
     // static
     t["milliseconds"] = [](double v) { return juce::RelativeTime::milliseconds(static_cast<juce::int64>(v)); };
-    t["seconds"]      = &juce::RelativeTime::seconds;
-    t["minutes"]      = &juce::RelativeTime::minutes;
-    t["hours"]        = &juce::RelativeTime::hours;
-    t["days"]         = &juce::RelativeTime::days;
-    t["weeks"]        = &juce::RelativeTime::weeks;
+    t["seconds"]      = LUA_JUCE_C_CALL(&juce::RelativeTime::seconds);
+    t["minutes"]      = LUA_JUCE_C_CALL(&juce::RelativeTime::minutes);
+    t["hours"]        = LUA_JUCE_C_CALL(&juce::RelativeTime::hours);
+    t["days"]         = LUA_JUCE_C_CALL(&juce::RelativeTime::days);
+    t["weeks"]        = LUA_JUCE_C_CALL(&juce::RelativeTime::weeks);
 }
 } // namespace lua_juce

@@ -15,9 +15,9 @@ auto juce_ImageComponent(sol::table& state) -> void
     );
     // clang-format on
 
-    imgComponent["getImage"]          = &juce::ImageComponent::getImage;
-    imgComponent["setImagePlacement"] = &juce::ImageComponent::setImagePlacement;
-    imgComponent["getImagePlacement"] = &juce::ImageComponent::getImagePlacement;
+    imgComponent["getImage"]          = LUA_JUCE_C_CALL(&juce::ImageComponent::getImage);
+    imgComponent["setImagePlacement"] = LUA_JUCE_C_CALL(&juce::ImageComponent::setImagePlacement);
+    imgComponent["getImagePlacement"] = LUA_JUCE_C_CALL(&juce::ImageComponent::getImagePlacement);
     imgComponent["setImage"]          = sol::overload(                                                                          //
         [](juce::ImageComponent* comp, juce::Image const& img) { comp->setImage(img); },                               //
         [](juce::ImageComponent* comp, juce::Image const& img, juce::RectanglePlacement p) { comp->setImage(img, p); } //

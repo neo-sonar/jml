@@ -12,8 +12,8 @@ auto juce_MemoryInputStream(sol::table& state) -> void
     );
     // clang-format on
 
-    stream["getData"]     = &juce::MemoryInputStream::getData;
-    stream["getDataSize"] = &juce::MemoryInputStream::getDataSize;
+    stream["getData"]     = LUA_JUCE_C_CALL(&juce::MemoryInputStream::getData);
+    stream["getDataSize"] = LUA_JUCE_C_CALL(&juce::MemoryInputStream::getDataSize);
 }
 
 } // namespace lua_juce

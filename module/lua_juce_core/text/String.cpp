@@ -3,12 +3,12 @@ auto juce_String(sol::table& state) -> void
 {
     auto str = state.new_usertype<juce::String>("String", sol::constructors<juce::String(), juce::String(char const*)>());
 
-    str["isEmpty"]    = &juce::String::isEmpty;
-    str["isNotEmpty"] = &juce::String::isNotEmpty;
-    str["clear"]      = &juce::String::clear;
-    str["hashCode"]   = &juce::String::hashCode;
-    str["hashCode64"] = &juce::String::hashCode64;
-    str["hash"]       = &juce::String::hash;
-    str["length"]     = &juce::String::length;
+    str["isEmpty"]    = LUA_JUCE_C_CALL(&juce::String::isEmpty);
+    str["isNotEmpty"] = LUA_JUCE_C_CALL(&juce::String::isNotEmpty);
+    str["clear"]      = LUA_JUCE_C_CALL(&juce::String::clear);
+    str["hashCode"]   = LUA_JUCE_C_CALL(&juce::String::hashCode);
+    str["hashCode64"] = LUA_JUCE_C_CALL(&juce::String::hashCode64);
+    str["hash"]       = LUA_JUCE_C_CALL(&juce::String::hash);
+    str["length"]     = LUA_JUCE_C_CALL(&juce::String::length);
 }
 } // namespace lua_juce

@@ -19,11 +19,11 @@ auto juce_Font(sol::table& state) -> void
 
     // clang-format on
 
-    font["setTypefaceName"]    = &juce::Font::setTypefaceName;
-    font["getTypefaceName"]    = &juce::Font::getTypefaceName;
-    font["getTypefaceStyle"]   = &juce::Font::getTypefaceStyle;
-    font["setTypefaceStyle"]   = &juce::Font::setTypefaceStyle;
-    font["withTypefaceStyle"]  = &juce::Font::withTypefaceStyle;
-    font["getAvailableStyles"] = &juce::Font::getAvailableStyles;
+    font["setTypefaceName"]    = LUA_JUCE_C_CALL(&juce::Font::setTypefaceName);
+    font["getTypefaceName"]    = LUA_JUCE_C_CALL(&juce::Font::getTypefaceName);
+    font["getTypefaceStyle"]   = LUA_JUCE_C_CALL(&juce::Font::getTypefaceStyle);
+    font["setTypefaceStyle"]   = LUA_JUCE_C_CALL(&juce::Font::setTypefaceStyle);
+    font["withTypefaceStyle"]  = LUA_JUCE_C_CALL(&juce::Font::withTypefaceStyle);
+    font["getAvailableStyles"] = LUA_JUCE_C_CALL(&juce::Font::getAvailableStyles);
 }
 } // namespace lua_juce

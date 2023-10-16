@@ -60,20 +60,20 @@ auto juce_Component(sol::table& state) -> void
     );
     // clang-format on
 
-    comp["setColour"]         = &juce::Component::setColour;
-    comp["paint"]             = &juce::Component::paint;
-    comp["resized"]           = &juce::Component::resized;
-    comp["setSize"]           = &juce::Component::setSize;
-    comp["getName"]           = &juce::Component::getName;
-    comp["setName"]           = &juce::Component::setName;
-    comp["getComponentID"]    = &juce::Component::getComponentID;
-    comp["setComponentID"]    = &juce::Component::setComponentID;
-    comp["setVisible"]        = &juce::Component::setVisible;
-    comp["isVisible"]         = &juce::Component::isVisible;
-    comp["getBounds"]         = &juce::Component::getBounds;
-    comp["getLocalBounds"]    = &juce::Component::getLocalBounds;
-    comp["getBoundsInParent"] = &juce::Component::getBoundsInParent;
-    comp["getLookAndFeel"]    = &juce::Component::getLookAndFeel;
+    comp["setColour"]         = LUA_JUCE_C_CALL(&juce::Component::setColour);
+    comp["paint"]             = LUA_JUCE_C_CALL(&juce::Component::paint);
+    comp["resized"]           = LUA_JUCE_C_CALL(&juce::Component::resized);
+    comp["setSize"]           = LUA_JUCE_C_CALL(&juce::Component::setSize);
+    comp["getName"]           = LUA_JUCE_C_CALL(&juce::Component::getName);
+    comp["setName"]           = LUA_JUCE_C_CALL(&juce::Component::setName);
+    comp["getComponentID"]    = LUA_JUCE_C_CALL(&juce::Component::getComponentID);
+    comp["setComponentID"]    = LUA_JUCE_C_CALL(&juce::Component::setComponentID);
+    comp["setVisible"]        = LUA_JUCE_C_CALL(&juce::Component::setVisible);
+    comp["isVisible"]         = LUA_JUCE_C_CALL(&juce::Component::isVisible);
+    comp["getBounds"]         = LUA_JUCE_C_CALL(&juce::Component::getBounds);
+    comp["getLocalBounds"]    = LUA_JUCE_C_CALL(&juce::Component::getLocalBounds);
+    comp["getBoundsInParent"] = LUA_JUCE_C_CALL(&juce::Component::getBoundsInParent);
+    comp["getLookAndFeel"]    = LUA_JUCE_C_CALL(&juce::Component::getLookAndFeel);
     comp["setLookAndFeel"]    = [](juce::Component* self, sol::object obj) -> void {
         auto& objects = getSolObjectSet(self->getProperties());
         objects.add(obj);

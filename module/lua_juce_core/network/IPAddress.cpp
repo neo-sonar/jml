@@ -15,20 +15,20 @@ auto juce_IPAddress(sol::table& state) -> void
     );
     // clang-format on
 
-    ip["isNull"]   = &juce::IPAddress::isNull;
-    ip["toString"] = &juce::IPAddress::toString;
-    ip["compare"]  = &juce::IPAddress::compare;
+    ip["isNull"]   = LUA_JUCE_C_CALL(&juce::IPAddress::isNull);
+    ip["toString"] = LUA_JUCE_C_CALL(&juce::IPAddress::toString);
+    ip["compare"]  = LUA_JUCE_C_CALL(&juce::IPAddress::compare);
 
-    ip["any"]                            = &juce::IPAddress::any;
-    ip["broadcast"]                      = &juce::IPAddress::broadcast;
-    ip["findAllAddresses"]               = &juce::IPAddress::findAllAddresses;
-    ip["getAllAddresses"]                = &juce::IPAddress::getAllAddresses;
-    ip["getLocalAddress"]                = &juce::IPAddress::getLocalAddress;
-    ip["getFormattedAddress"]            = &juce::IPAddress::getFormattedAddress;
-    ip["isIPv4MappedAddress"]            = &juce::IPAddress::isIPv4MappedAddress;
-    ip["convertIPv4MappedAddressToIPv4"] = &juce::IPAddress::convertIPv4MappedAddressToIPv4;
-    ip["convertIPv4AddressToIPv4Mapped"] = &juce::IPAddress::convertIPv4AddressToIPv4Mapped;
-    ip["getInterfaceBroadcastAddress"]   = &juce::IPAddress::getInterfaceBroadcastAddress;
+    ip["any"]                            = LUA_JUCE_C_CALL(&juce::IPAddress::any);
+    ip["broadcast"]                      = LUA_JUCE_C_CALL(&juce::IPAddress::broadcast);
+    ip["findAllAddresses"]               = LUA_JUCE_C_CALL(&juce::IPAddress::findAllAddresses);
+    ip["getAllAddresses"]                = LUA_JUCE_C_CALL(&juce::IPAddress::getAllAddresses);
+    ip["getLocalAddress"]                = LUA_JUCE_C_CALL(&juce::IPAddress::getLocalAddress);
+    ip["getFormattedAddress"]            = LUA_JUCE_C_CALL(&juce::IPAddress::getFormattedAddress);
+    ip["isIPv4MappedAddress"]            = LUA_JUCE_C_CALL(&juce::IPAddress::isIPv4MappedAddress);
+    ip["convertIPv4MappedAddressToIPv4"] = LUA_JUCE_C_CALL(&juce::IPAddress::convertIPv4MappedAddressToIPv4);
+    ip["convertIPv4AddressToIPv4Mapped"] = LUA_JUCE_C_CALL(&juce::IPAddress::convertIPv4AddressToIPv4Mapped);
+    ip["getInterfaceBroadcastAddress"]   = LUA_JUCE_C_CALL(&juce::IPAddress::getInterfaceBroadcastAddress);
 
     ip["address"] = &juce::IPAddress::address;
     ip["isIPv6"]  = &juce::IPAddress::isIPv6;

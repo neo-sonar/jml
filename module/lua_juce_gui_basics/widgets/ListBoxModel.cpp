@@ -30,20 +30,20 @@ auto juce_LuaListBoxModel(sol::table& state) -> void
 auto juce_ListBoxModel(sol::table& state) -> void
 {
     auto model                        = state.new_usertype<juce::ListBoxModel>("InternalListBoxModel", sol::no_constructor);
-    model["getNumRows"]               = &juce::ListBoxModel::getNumRows;
-    model["paintListBoxItem"]         = &juce::ListBoxModel::paintListBoxItem;
-    model["refreshComponentForRow"]   = &juce::ListBoxModel::refreshComponentForRow;
-    model["getNameForRow"]            = &juce::ListBoxModel::getNameForRow;
-    model["listBoxItemClicked"]       = &juce::ListBoxModel::listBoxItemClicked;
-    model["listBoxItemDoubleClicked"] = &juce::ListBoxModel::listBoxItemDoubleClicked;
-    model["backgroundClicked"]        = &juce::ListBoxModel::backgroundClicked;
-    model["selectedRowsChanged"]      = &juce::ListBoxModel::selectedRowsChanged;
-    model["deleteKeyPressed"]         = &juce::ListBoxModel::deleteKeyPressed;
-    model["returnKeyPressed"]         = &juce::ListBoxModel::returnKeyPressed;
-    model["listWasScrolled"]          = &juce::ListBoxModel::listWasScrolled;
-    model["getDragSourceDescription"] = &juce::ListBoxModel::getDragSourceDescription;
-    model["getTooltipForRow"]         = &juce::ListBoxModel::getTooltipForRow;
-    model["getMouseCursorForRow"]     = &juce::ListBoxModel::getMouseCursorForRow;
+    model["getNumRows"]               = LUA_JUCE_C_CALL(&juce::ListBoxModel::getNumRows);
+    model["paintListBoxItem"]         = LUA_JUCE_C_CALL(&juce::ListBoxModel::paintListBoxItem);
+    model["refreshComponentForRow"]   = LUA_JUCE_C_CALL(&juce::ListBoxModel::refreshComponentForRow);
+    model["getNameForRow"]            = LUA_JUCE_C_CALL(&juce::ListBoxModel::getNameForRow);
+    model["listBoxItemClicked"]       = LUA_JUCE_C_CALL(&juce::ListBoxModel::listBoxItemClicked);
+    model["listBoxItemDoubleClicked"] = LUA_JUCE_C_CALL(&juce::ListBoxModel::listBoxItemDoubleClicked);
+    model["backgroundClicked"]        = LUA_JUCE_C_CALL(&juce::ListBoxModel::backgroundClicked);
+    model["selectedRowsChanged"]      = LUA_JUCE_C_CALL(&juce::ListBoxModel::selectedRowsChanged);
+    model["deleteKeyPressed"]         = LUA_JUCE_C_CALL(&juce::ListBoxModel::deleteKeyPressed);
+    model["returnKeyPressed"]         = LUA_JUCE_C_CALL(&juce::ListBoxModel::returnKeyPressed);
+    model["listWasScrolled"]          = LUA_JUCE_C_CALL(&juce::ListBoxModel::listWasScrolled);
+    model["getDragSourceDescription"] = LUA_JUCE_C_CALL(&juce::ListBoxModel::getDragSourceDescription);
+    model["getTooltipForRow"]         = LUA_JUCE_C_CALL(&juce::ListBoxModel::getTooltipForRow);
+    model["getMouseCursorForRow"]     = LUA_JUCE_C_CALL(&juce::ListBoxModel::getMouseCursorForRow);
 
     juce_LuaListBoxModel(state);
 }

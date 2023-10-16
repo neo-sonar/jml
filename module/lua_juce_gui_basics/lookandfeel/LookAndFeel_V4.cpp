@@ -18,9 +18,9 @@ auto juce_LookAndFeel_V4(sol::table& state) -> void
 
     // lnf["setColourScheme"]         = juce::LookAndFeel_V4::setColourScheme;
     // lnf["getCurrentColourScheme"]  = juce::LookAndFeel_V4::getCurrentColourScheme;
-    lnf["getDarkColourScheme"]     = juce::LookAndFeel_V4::getDarkColourScheme;
-    lnf["getMidnightColourScheme"] = juce::LookAndFeel_V4::getMidnightColourScheme;
-    lnf["getGreyColourScheme"]     = juce::LookAndFeel_V4::getGreyColourScheme;
-    lnf["getLightColourScheme"]    = juce::LookAndFeel_V4::getLightColourScheme;
+    lnf["getDarkColourScheme"]     = LUA_JUCE_C_CALL(&juce::LookAndFeel_V4::getDarkColourScheme);
+    lnf["getMidnightColourScheme"] = LUA_JUCE_C_CALL(&juce::LookAndFeel_V4::getMidnightColourScheme);
+    lnf["getGreyColourScheme"]     = LUA_JUCE_C_CALL(&juce::LookAndFeel_V4::getGreyColourScheme);
+    lnf["getLightColourScheme"]    = LUA_JUCE_C_CALL(&juce::LookAndFeel_V4::getLightColourScheme);
 }
 } // namespace lua_juce

@@ -18,6 +18,6 @@ auto juce_ToggleButton(sol::table& state) -> void
     );
     // clang-format on
 
-    button["changeWidthToFitText"] = &juce::ToggleButton::changeWidthToFitText;
+    button["changeWidthToFitText"] = LUA_JUCE_C_CALL(&juce::ToggleButton::changeWidthToFitText);
 }
 } // namespace lua_juce

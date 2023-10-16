@@ -4,12 +4,12 @@ auto juce_StatisticsAccumulatorImpl(sol::table& state, char const* name) -> void
 {
     using Accumulator            = juce::StatisticsAccumulator<T>;
     auto type                    = state.new_usertype<Accumulator>(name, sol::constructors<Accumulator()>());
-    type["getAverage"]           = &Accumulator::getAverage;
-    type["getVariance"]          = &Accumulator::getVariance;
-    type["getStandardDeviation"] = &Accumulator::getStandardDeviation;
-    type["getMinValue"]          = &Accumulator::getMinValue;
-    type["getMaxValue"]          = &Accumulator::getMaxValue;
-    type["getCount"]             = &Accumulator::getCount;
+    type["getAverage"]           = LUA_JUCE_C_CALL(&Accumulator::getAverage);
+    type["getVariance"]          = LUA_JUCE_C_CALL(&Accumulator::getVariance);
+    type["getStandardDeviation"] = LUA_JUCE_C_CALL(&Accumulator::getStandardDeviation);
+    type["getMinValue"]          = LUA_JUCE_C_CALL(&Accumulator::getMinValue);
+    type["getMaxValue"]          = LUA_JUCE_C_CALL(&Accumulator::getMaxValue);
+    type["getCount"]             = LUA_JUCE_C_CALL(&Accumulator::getCount);
 }
 
 auto juce_StatisticsAccumulator(sol::table& state) -> void

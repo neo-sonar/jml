@@ -15,11 +15,11 @@ auto juce_NormalisableRangeImpl(sol::table& state, char const* name) -> void
     );
     // clang-format on
 
-    range["convertTo0to1"]    = &juce::NormalisableRange<T>::convertTo0to1;
-    range["convertFrom0to1"]  = &juce::NormalisableRange<T>::convertFrom0to1;
-    range["snapToLegalValue"] = &juce::NormalisableRange<T>::snapToLegalValue;
-    range["getRange"]         = &juce::NormalisableRange<T>::getRange;
-    range["setSkewForCentre"] = &juce::NormalisableRange<T>::setSkewForCentre;
+    range["convertTo0to1"]    = LUA_JUCE_C_CALL(&juce::NormalisableRange<T>::convertTo0to1);
+    range["convertFrom0to1"]  = LUA_JUCE_C_CALL(&juce::NormalisableRange<T>::convertFrom0to1);
+    range["snapToLegalValue"] = LUA_JUCE_C_CALL(&juce::NormalisableRange<T>::snapToLegalValue);
+    range["getRange"]         = LUA_JUCE_C_CALL(&juce::NormalisableRange<T>::getRange);
+    range["setSkewForCentre"] = LUA_JUCE_C_CALL(&juce::NormalisableRange<T>::setSkewForCentre);
 
     range["start"]         = &juce::NormalisableRange<T>::start;
     range["end"]           = &juce::NormalisableRange<T>::end;

@@ -6,16 +6,16 @@ auto juce_Uuid(sol::table& state) -> void
         sol::constructors<juce::Uuid(), juce::Uuid(juce::String const&)>()
     );
     // clang-format on
-    uuid["isNull"]                 = &juce::Uuid::isNull;
-    uuid["toString"]               = &juce::Uuid::toString;
-    uuid["toDashedString"]         = &juce::Uuid::toDashedString;
-    uuid["getTimeLow"]             = &juce::Uuid::getTimeLow;
-    uuid["getTimeMid"]             = &juce::Uuid::getTimeMid;
-    uuid["getTimeHighAndVersion"]  = &juce::Uuid::getTimeHighAndVersion;
-    uuid["getClockSeqAndReserved"] = &juce::Uuid::getClockSeqAndReserved;
-    uuid["getClockSeqLow"]         = &juce::Uuid::getClockSeqLow;
-    uuid["getNode"]                = &juce::Uuid::getNode;
-    uuid["hash"]                   = &juce::Uuid::hash;
-    uuid["getRawData"]             = &juce::Uuid::getRawData;
+    uuid["isNull"]                 = LUA_JUCE_C_CALL(&juce::Uuid::isNull);
+    uuid["toString"]               = LUA_JUCE_C_CALL(&juce::Uuid::toString);
+    uuid["toDashedString"]         = LUA_JUCE_C_CALL(&juce::Uuid::toDashedString);
+    uuid["getTimeLow"]             = LUA_JUCE_C_CALL(&juce::Uuid::getTimeLow);
+    uuid["getTimeMid"]             = LUA_JUCE_C_CALL(&juce::Uuid::getTimeMid);
+    uuid["getTimeHighAndVersion"]  = LUA_JUCE_C_CALL(&juce::Uuid::getTimeHighAndVersion);
+    uuid["getClockSeqAndReserved"] = LUA_JUCE_C_CALL(&juce::Uuid::getClockSeqAndReserved);
+    uuid["getClockSeqLow"]         = LUA_JUCE_C_CALL(&juce::Uuid::getClockSeqLow);
+    uuid["getNode"]                = LUA_JUCE_C_CALL(&juce::Uuid::getNode);
+    uuid["hash"]                   = LUA_JUCE_C_CALL(&juce::Uuid::hash);
+    uuid["getRawData"]             = LUA_JUCE_C_CALL(&juce::Uuid::getRawData);
 }
 } // namespace lua_juce

@@ -17,9 +17,9 @@ auto juce_ImageButton(sol::table& state) -> void
     );
     // clang-format on
 
-    button["setImages"]      = &juce::ImageButton::setImages;
-    button["getNormalImage"] = &juce::ImageButton::getNormalImage;
-    button["getOverImage"]   = &juce::ImageButton::getOverImage;
-    button["getDownImage"]   = &juce::ImageButton::getDownImage;
+    button["setImages"]      = LUA_JUCE_C_CALL(&juce::ImageButton::setImages);
+    button["getNormalImage"] = LUA_JUCE_C_CALL(&juce::ImageButton::getNormalImage);
+    button["getOverImage"]   = LUA_JUCE_C_CALL(&juce::ImageButton::getOverImage);
+    button["getDownImage"]   = LUA_JUCE_C_CALL(&juce::ImageButton::getDownImage);
 }
 } // namespace lua_juce

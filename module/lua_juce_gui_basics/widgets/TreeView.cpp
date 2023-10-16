@@ -17,32 +17,32 @@ auto juce_TreeView(sol::table& state) -> void
     );
     // clang-format on
 
-    treeView["setRootItem"]                  = &juce::TreeView::setRootItem;
-    treeView["getRootItem"]                  = &juce::TreeView::getRootItem;
-    treeView["deleteRootItem"]               = &juce::TreeView::deleteRootItem;
-    treeView["setRootItemVisible"]           = &juce::TreeView::setRootItemVisible;
-    treeView["isRootItemVisible"]            = &juce::TreeView::isRootItemVisible;
-    treeView["setDefaultOpenness"]           = &juce::TreeView::setDefaultOpenness;
-    treeView["areItemsOpenByDefault"]        = &juce::TreeView::areItemsOpenByDefault;
-    treeView["setMultiSelectEnabled"]        = &juce::TreeView::setMultiSelectEnabled;
-    treeView["isMultiSelectEnabled"]         = &juce::TreeView::isMultiSelectEnabled;
-    treeView["setOpenCloseButtonsVisible"]   = &juce::TreeView::setOpenCloseButtonsVisible;
-    treeView["areOpenCloseButtonsVisible"]   = &juce::TreeView::areOpenCloseButtonsVisible;
-    treeView["clearSelectedItems"]           = &juce::TreeView::clearSelectedItems;
-    treeView["getNumSelectedItems"]          = &juce::TreeView::getNumSelectedItems;
-    treeView["getSelectedItem"]              = &juce::TreeView::getSelectedItem;
-    treeView["moveSelectedRow"]              = &juce::TreeView::moveSelectedRow;
-    treeView["getNumRowsInTree"]             = &juce::TreeView::getNumRowsInTree;
-    treeView["getItemOnRow"]                 = &juce::TreeView::getItemOnRow;
-    treeView["getItemAt"]                    = &juce::TreeView::getItemAt;
-    treeView["scrollToKeepItemVisible"]      = &juce::TreeView::scrollToKeepItemVisible;
-    treeView["getViewport"]                  = &juce::TreeView::getViewport;
-    treeView["getIndentSize"]                = &juce::TreeView::getIndentSize;
-    treeView["setIndentSize"]                = &juce::TreeView::setIndentSize;
-    treeView["findItemFromIdentifierString"] = &juce::TreeView::findItemFromIdentifierString;
-    treeView["getItemComponent"]             = &juce::TreeView::getItemComponent;
-    treeView["getOpennessState"]             = &juce::TreeView::getOpennessState;
-    treeView["restoreOpennessState"]         = &juce::TreeView::restoreOpennessState;
+    treeView["setRootItem"]                  = LUA_JUCE_C_CALL(&juce::TreeView::setRootItem);
+    treeView["getRootItem"]                  = LUA_JUCE_C_CALL(&juce::TreeView::getRootItem);
+    treeView["deleteRootItem"]               = LUA_JUCE_C_CALL(&juce::TreeView::deleteRootItem);
+    treeView["setRootItemVisible"]           = LUA_JUCE_C_CALL(&juce::TreeView::setRootItemVisible);
+    treeView["isRootItemVisible"]            = LUA_JUCE_C_CALL(&juce::TreeView::isRootItemVisible);
+    treeView["setDefaultOpenness"]           = LUA_JUCE_C_CALL(&juce::TreeView::setDefaultOpenness);
+    treeView["areItemsOpenByDefault"]        = LUA_JUCE_C_CALL(&juce::TreeView::areItemsOpenByDefault);
+    treeView["setMultiSelectEnabled"]        = LUA_JUCE_C_CALL(&juce::TreeView::setMultiSelectEnabled);
+    treeView["isMultiSelectEnabled"]         = LUA_JUCE_C_CALL(&juce::TreeView::isMultiSelectEnabled);
+    treeView["setOpenCloseButtonsVisible"]   = LUA_JUCE_C_CALL(&juce::TreeView::setOpenCloseButtonsVisible);
+    treeView["areOpenCloseButtonsVisible"]   = LUA_JUCE_C_CALL(&juce::TreeView::areOpenCloseButtonsVisible);
+    treeView["clearSelectedItems"]           = LUA_JUCE_C_CALL(&juce::TreeView::clearSelectedItems);
+    treeView["getNumSelectedItems"]          = LUA_JUCE_C_CALL(&juce::TreeView::getNumSelectedItems);
+    treeView["getSelectedItem"]              = LUA_JUCE_C_CALL(&juce::TreeView::getSelectedItem);
+    treeView["moveSelectedRow"]              = LUA_JUCE_C_CALL(&juce::TreeView::moveSelectedRow);
+    treeView["getNumRowsInTree"]             = LUA_JUCE_C_CALL(&juce::TreeView::getNumRowsInTree);
+    treeView["getItemOnRow"]                 = LUA_JUCE_C_CALL(&juce::TreeView::getItemOnRow);
+    treeView["getItemAt"]                    = LUA_JUCE_C_CALL(&juce::TreeView::getItemAt);
+    treeView["scrollToKeepItemVisible"]      = LUA_JUCE_C_CALL(&juce::TreeView::scrollToKeepItemVisible);
+    treeView["getViewport"]                  = LUA_JUCE_C_CALL(&juce::TreeView::getViewport);
+    treeView["getIndentSize"]                = LUA_JUCE_C_CALL(&juce::TreeView::getIndentSize);
+    treeView["setIndentSize"]                = LUA_JUCE_C_CALL(&juce::TreeView::setIndentSize);
+    treeView["findItemFromIdentifierString"] = LUA_JUCE_C_CALL(&juce::TreeView::findItemFromIdentifierString);
+    treeView["getItemComponent"]             = LUA_JUCE_C_CALL(&juce::TreeView::getItemComponent);
+    treeView["getOpennessState"]             = LUA_JUCE_C_CALL(&juce::TreeView::getOpennessState);
+    treeView["restoreOpennessState"]         = LUA_JUCE_C_CALL(&juce::TreeView::restoreOpennessState);
 }
 
 } // namespace lua_juce
