@@ -14,7 +14,8 @@ local function ContentHeader()
   local searchText = juce.String.new("Search")
   local search = juce.Label.new(searchText, searchText)
   search:setComponentID(searchText)
-  search:setJustificationType(juce.Justification.new(juce.JustificationFlags.centred))
+  search:setJustificationType(juce.Justification.new(
+                                juce.JustificationFlags.centred))
   search:setFont(juce.Font.new(24.0))
   component:addAndMakeVisible(search)
 

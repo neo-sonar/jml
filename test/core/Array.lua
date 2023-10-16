@@ -1,11 +1,11 @@
 local function test(arrayType)
-    local array = arrayType.new()
-    assert(array:isEmpty())
-    assert(array:size() == 0)
-    array:resize(42)
-    assert(not array:isEmpty())
-    assert(array:size() == 42)
-    return true
+  local array = arrayType.new()
+  assert(array:isEmpty())
+  assert(array:size() == 0)
+  array:resize(42)
+  assert(not array:isEmpty())
+  assert(array:size() == 42)
+  return true
 end
 
 assert(test(juce.Array_int))

@@ -4,7 +4,8 @@ local function makeMainComponent()
   local lnf = juce.LookAndFeel_V4.new()
   function lnf:drawButtonBackground(g, btn, color, highlighted, down)
     local b = btn:getBounds()
-    local bf = juce.RectangleInt.new(b:getX(), b:getY(), b:getWidth(), b:getHeight())
+    local bf = juce.RectangleInt.new(b:getX(), b:getY(), b:getWidth(),
+                                     b:getHeight())
     local c = highlighted and juce.Colours.red or juce.Colours.blue
     g:setColour(c)
     g:fillAll()
@@ -39,7 +40,8 @@ local function makeMainComponent()
   end
 
   function mainComponent:paint(g)
-    local gradient = juce.ColourGradient.vertical(topColor, bottomColor, mainComponent:getLocalBounds())
+    local gradient = juce.ColourGradient.vertical(topColor, bottomColor,
+                                                  mainComponent:getLocalBounds())
     g:setGradientFill(gradient)
     g:fillAll()
   end
