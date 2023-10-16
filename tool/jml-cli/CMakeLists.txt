@@ -31,6 +31,7 @@ target_compile_definitions(jml-cli
         SOL_ALL_SAFETIES_ON=1
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
+        JUCE_DISABLE_JUCE_VERSION_PRINTING=1
 )
 
 target_link_libraries(jml-cli
