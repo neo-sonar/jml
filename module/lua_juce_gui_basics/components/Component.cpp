@@ -48,43 +48,6 @@ auto LuaComponent::mouseMagnify(juce::MouseEvent const& event, float scaleFactor
 }
 
 namespace lua_juce {
-struct SolObjectSet final : juce::ReferenceCountedObject
-{
-    using Ptr = juce::ReferenceCountedObjectPtr<SolObjectSet>;
-
-    SolObjectSet()           = default;
-    ~SolObjectSet() override = default;
-
-    auto contains(sol::object obj) -> bool { return _objects.count(obj) == 1U; }
-
-    auto add(sol::object obj) -> void
-    {
-        if (_objects.count(obj) == 1U) { return; }
-        _objects.insert(std::move(obj));
-    }
-    auto remove(sol::object obj) -> void
-    {
-        jassert(_objects.count(obj) == 1U);
-        _objects.erase(obj);
-    }
-
-private:
-    std::unordered_set<sol::object, sol::reference_hash> _objects;
-};
-
-static auto getSolObjectSet(juce::NamedValueSet& properties) -> SolObjectSet&
-{
-    if (properties.contains("lua-objects")) {
-        auto const& v = properties["lua-objects"];
-        auto* objects = dynamic_cast<SolObjectSet*>(v.getObject());
-        jassert(objects != nullptr);
-        return *objects;
-    }
-
-    auto* objects = new SolObjectSet{};
-    properties.set("lua-objects", objects);
-    return *objects;
-}
 
 auto juce_Component(sol::table& state) -> void
 {
@@ -124,14 +87,14 @@ auto juce_Component(sol::table& state) -> void
     comp["getBoundsInParent"] = LUA_JUCE_C_CALL(&juce::Component::getBoundsInParent);
     comp["getLookAndFeel"]    = LUA_JUCE_C_CALL(&juce::Component::getLookAndFeel);
     comp["setLookAndFeel"]    = [](juce::Component* self, sol::object obj) -> void {
-        auto& objects = getSolObjectSet(self->getProperties());
+        auto& objects = getOrCreateSolObjectSet(self->getProperties());
         objects.add(obj);
 
         auto* lnf = obj.as<juce::LookAndFeel*>();
         self->setLookAndFeel(lnf);
     };
     comp["addAndMakeVisible"] = [](juce::Component* self, sol::object obj) -> void {
-        auto& objects = getSolObjectSet(self->getProperties());
+        auto& objects = getOrCreateSolObjectSet(self->getProperties());
         objects.add(obj);
 
         auto* component = obj.as<juce::Component*>();

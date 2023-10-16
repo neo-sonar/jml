@@ -164,4 +164,43 @@ auto juce_ArrayImpl(sol::table& state, char const* name) -> void
     // getLock
 }
 
+struct SolObjectSet final : juce::ReferenceCountedObject
+{
+    using Ptr = juce::ReferenceCountedObjectPtr<SolObjectSet>;
+
+    SolObjectSet()           = default;
+    ~SolObjectSet() override = default;
+
+    auto contains(sol::object obj) -> bool { return _objects.count(obj) == 1U; }
+
+    auto add(sol::object obj) -> void
+    {
+        if (_objects.count(obj) == 1U) { return; }
+        _objects.insert(std::move(obj));
+    }
+
+    auto remove(sol::object obj) -> void
+    {
+        jassert(_objects.count(obj) == 1U);
+        _objects.erase(obj);
+    }
+
+private:
+    std::unordered_set<sol::object, sol::reference_hash> _objects;
+};
+
+inline auto getOrCreateSolObjectSet(juce::NamedValueSet& properties) -> SolObjectSet&
+{
+    if (properties.contains("lua-objects")) {
+        auto const& v = properties["lua-objects"];
+        auto* objects = dynamic_cast<SolObjectSet*>(v.getObject());
+        jassert(objects != nullptr);
+        return *objects;
+    }
+
+    auto* objects = new SolObjectSet{};
+    properties.set("lua-objects", objects);
+    return *objects;
+}
+
 } // namespace lua_juce

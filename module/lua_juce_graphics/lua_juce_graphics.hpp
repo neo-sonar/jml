@@ -20,8 +20,11 @@ END_JUCE_MODULE_DECLARATION
     #define USE_LUA_JUCE_GRAPHICS
 #endif
 
-#include <juce_graphics/juce_graphics.h>
 #include <lua_juce_events/lua_juce_events.hpp>
+
+JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE("-Wfloat-equal")
+#include <juce_graphics/juce_graphics.h>
+JUCE_END_IGNORE_WARNINGS_GCC_LIKE
 
 namespace lua_juce {
 auto juce_Colour(sol::table& state) -> void;
