@@ -10,12 +10,8 @@ MainComponent::MainComponent()
     addKeyListener(_commandManager.getKeyMappings());
     setWantsKeyboardFocus(true);
 
-    _tabs.setTabBarDepth(50);
-    _tabs.addTab("Viewer", Colours::black, &_preview, false);
-    _tabs.addTab("Code", Colours::black, &_editor, false);
-
     addAndMakeVisible(_menuBar);
-    addAndMakeVisible(_tabs);
+    addAndMakeVisible(_documents);
 
     setLookAndFeel(&_lnf);
     setSize(1280, 720);
@@ -29,7 +25,7 @@ auto MainComponent::resized() -> void
 {
     auto area = getLocalBounds();
     _menuBar.setBounds(area.removeFromTop(getLookAndFeel().getDefaultMenuBarHeight()));
-    _tabs.setBounds(area);
+    _documents.setBounds(area);
 }
 
 auto MainComponent::getNextCommandTarget() -> juce::ApplicationCommandTarget*
@@ -98,7 +94,7 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
 {
     switch (info.commandID) {
         case CommandIDs::open: loadScriptPath(); break;
-        case CommandIDs::reload: doReload(_preview.getScriptFile()); break;
+        case CommandIDs::reload: _documents.reloadActiveScript(); break;
         case CommandIDs::save:
         case CommandIDs::saveAs: /*saveProject();*/ break;
         case CommandIDs::undo: _undoManager.undo(); break;
@@ -122,19 +118,13 @@ auto MainComponent::showAboutWindow() -> void
     juce::AlertWindow::showAsync(options, [](int /*button*/) {});
 }
 
-auto MainComponent::doReload(juce::File const& file) -> void
-{
-    _preview.setScriptFile(file);
-    _editor.file(file);
-}
-
 auto MainComponent::loadScriptPath() -> void
 {
     auto const* msg = "Please select the lua script you want to load...";
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
     _fileChooser    = std::make_unique<juce::FileChooser>(msg, dir, "*.lua");
     _fileChooser->launchAsync(juce::FileBrowserComponent::openMode, [this](auto const& chooser) {
-        if (auto results = chooser.getResults(); results.size() == 1) { doReload(results[0]); }
+        if (auto const result = chooser.getResult(); result.existsAsFile()) { _documents.openScript(result); }
     });
 }
 } // namespace jml::viewer

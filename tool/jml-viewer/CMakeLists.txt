@@ -30,6 +30,8 @@ set(sources
     "Viewer/FileChangeListener.hpp"
     "Viewer/LuaScriptViewer.cpp"
     "Viewer/LuaScriptViewer.hpp"
+    "Viewer/ScriptPanel.cpp"
+    "Viewer/ScriptPanel.hpp"
     "Viewer/ScriptViewport.cpp"
     "Viewer/ScriptViewport.hpp"
 )

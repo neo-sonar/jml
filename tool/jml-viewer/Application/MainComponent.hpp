@@ -3,12 +3,9 @@
 #include <juce_gui_extra/juce_gui_extra.h>
 
 #include "Application/MenuBar.hpp"
-#include "CodeEditor/CodeEditor.hpp"
 #include "LookAndFeel/Colours.hpp"
 #include "LookAndFeel/LookAndFeel.hpp"
-#include "Viewer/ComponentTree.hpp"
-#include "Viewer/FileChangeListener.hpp"
-#include "Viewer/LuaScriptViewer.hpp"
+#include "Viewer/ScriptPanel.hpp"
 
 namespace jml::viewer {
 
@@ -29,7 +26,6 @@ struct MainComponent
 
 private:
     auto showAboutWindow() -> void;
-    auto doReload(juce::File const& file) -> void;
     auto loadScriptPath() -> void;
 
     juce::ApplicationCommandManager _commandManager{};
@@ -37,9 +33,7 @@ private:
     LookAndFeel _lnf;
 
     MenuBar _menuBar{_commandManager};
-    juce::TabbedComponent _tabs{juce::TabbedButtonBar::TabsAtLeft};
-    LuaScriptViewer _preview;
-    CodeEditor _editor;
+    MultiScriptPanel _documents;
     std::unique_ptr<juce::FileChooser> _fileChooser;
 
     JUCE_LEAK_DETECTOR(MainComponent) // NOLINT
