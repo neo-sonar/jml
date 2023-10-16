@@ -1,3 +1,52 @@
+auto LuaComponent::self() -> std::reference_wrapper<LuaComponent> { return std::ref(*this); }
+
+auto LuaComponent::paint(juce::Graphics& g) -> void
+{
+    if (lua_paint.valid()) { lua_paint(self(), std::ref(g)); }
+}
+
+auto LuaComponent::resized() -> void
+{
+    if (lua_resized.valid()) { lua_resized(self()); }
+}
+
+auto LuaComponent::mouseMove(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseMove.valid()) { lua_mouseMove(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseEnter(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseEnter.valid()) { lua_mouseEnter(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseExit(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseExit.valid()) { lua_mouseExit(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseDown(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseDown.valid()) { lua_mouseDown(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseDrag(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseDrag.valid()) { lua_mouseDrag(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseUp(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseUp.valid()) { lua_mouseUp(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseDoubleClick(juce::MouseEvent const& event) -> void
+{
+    if (lua_mouseDoubleClick.valid()) { lua_mouseDoubleClick(self(), std::cref(event)); }
+}
+auto LuaComponent::mouseWheelMove(juce::MouseEvent const& event, juce::MouseWheelDetails const& wheel) -> void
+{
+    if (lua_mouseWheelMove.valid()) { lua_mouseWheelMove(self(), std::cref(event), std::cref(wheel)); }
+}
+auto LuaComponent::mouseMagnify(juce::MouseEvent const& event, float scaleFactor) -> void
+{
+    if (lua_mouseMagnify.valid()) { lua_mouseMagnify(self(), std::cref(event), scaleFactor); }
+}
+
 namespace lua_juce {
 struct SolObjectSet final : juce::ReferenceCountedObject
 {

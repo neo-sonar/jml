@@ -1,3 +1,12 @@
+
+auto LuaListBox::internal_setModel(std::shared_ptr<LuaListBoxModel> m) -> void
+{
+    if (m == _model) { return; }
+    if (m == nullptr) { return; }
+    setModel(m.get());
+    _model = std::move(m);
+}
+
 namespace lua_juce {
 
 auto juce_ListBox(sol::table& state) -> void

@@ -1,68 +1,53 @@
-namespace lua_juce {
-namespace {
-struct LuaComponentListener final : juce::ComponentListener
+auto LuaComponentListener::componentMovedOrResized(juce::Component& component, bool wasMoved, bool wasResized) -> void
 {
-    LuaComponentListener()           = default;
-    ~LuaComponentListener() override = default;
+    if (not lua_componentMovedOrResized.valid()) { return; }
+    lua_componentMovedOrResized(std::ref(*this), component, wasMoved, wasResized);
+}
 
-    auto componentMovedOrResized(juce::Component& component, bool wasMoved, bool wasResized) -> void override
-    {
-        if (not lua_componentMovedOrResized.valid()) { return; }
-        lua_componentMovedOrResized(std::ref(*this), component, wasMoved, wasResized);
-    }
+auto LuaComponentListener::componentBroughtToFront(juce::Component& component) -> void
+{
+    if (not lua_componentBroughtToFront.valid()) { return; }
+    lua_componentBroughtToFront(std::ref(*this), component);
+}
 
-    auto componentBroughtToFront(juce::Component& component) -> void override
-    {
-        if (not lua_componentBroughtToFront.valid()) { return; }
-        lua_componentBroughtToFront(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentVisibilityChanged(juce::Component& component) -> void
+{
+    if (not lua_componentVisibilityChanged.valid()) { return; }
+    lua_componentVisibilityChanged(std::ref(*this), component);
+}
 
-    auto componentVisibilityChanged(juce::Component& component) -> void override
-    {
-        if (not lua_componentVisibilityChanged.valid()) { return; }
-        lua_componentVisibilityChanged(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentChildrenChanged(juce::Component& component) -> void
+{
+    if (not lua_componentChildrenChanged.valid()) { return; }
+    lua_componentChildrenChanged(std::ref(*this), component);
+}
 
-    auto componentChildrenChanged(juce::Component& component) -> void override
-    {
-        if (not lua_componentChildrenChanged.valid()) { return; }
-        lua_componentChildrenChanged(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentParentHierarchyChanged(juce::Component& component) -> void
+{
+    if (not lua_componentParentHierarchyChanged.valid()) { return; }
+    lua_componentParentHierarchyChanged(std::ref(*this), component);
+}
 
-    auto componentParentHierarchyChanged(juce::Component& component) -> void override
-    {
-        if (not lua_componentParentHierarchyChanged.valid()) { return; }
-        lua_componentParentHierarchyChanged(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentNameChanged(juce::Component& component) -> void
+{
+    if (not lua_componentNameChanged.valid()) { return; }
+    lua_componentNameChanged(std::ref(*this), component);
+}
 
-    auto componentNameChanged(juce::Component& component) -> void override
-    {
-        if (not lua_componentNameChanged.valid()) { return; }
-        lua_componentNameChanged(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentBeingDeleted(juce::Component& component) -> void
+{
+    if (not lua_componentBeingDeleted.valid()) { return; }
+    lua_componentBeingDeleted(std::ref(*this), component);
+}
 
-    auto componentBeingDeleted(juce::Component& component) -> void override
-    {
-        if (not lua_componentBeingDeleted.valid()) { return; }
-        lua_componentBeingDeleted(std::ref(*this), component);
-    }
+auto LuaComponentListener::componentEnablementChanged(juce::Component& component) -> void
+{
+    if (not lua_componentEnablementChanged.valid()) { return; }
+    lua_componentEnablementChanged(std::ref(*this), component);
+}
 
-    auto componentEnablementChanged(juce::Component& component) -> void override
-    {
-        if (not lua_componentEnablementChanged.valid()) { return; }
-        lua_componentEnablementChanged(std::ref(*this), component);
-    }
+namespace lua_juce {
 
-    sol::safe_function lua_componentMovedOrResized;
-    sol::safe_function lua_componentBroughtToFront;
-    sol::safe_function lua_componentVisibilityChanged;
-    sol::safe_function lua_componentChildrenChanged;
-    sol::safe_function lua_componentParentHierarchyChanged;
-    sol::safe_function lua_componentNameChanged;
-    sol::safe_function lua_componentBeingDeleted;
-    sol::safe_function lua_componentEnablementChanged;
-};
-} // namespace
 auto juce_ComponentListener(sol::table& state) -> void
 {
     auto cl                               = state.new_usertype<juce::ComponentListener>("InternalComponentListener", sol::no_constructor);

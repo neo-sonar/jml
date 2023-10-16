@@ -45,56 +45,46 @@ struct LuaComponent final : juce::Component
     sol::safe_function lua_mouseMagnify;
 
 private:
-    auto self() -> std::reference_wrapper<LuaComponent> { return std::ref(*this); }
+    auto self() -> std::reference_wrapper<LuaComponent>;
 
     // juce::Component
-    auto paint(juce::Graphics& g) -> void override
-    {
-        if (lua_paint.valid()) { lua_paint(self(), std::ref(g)); }
-    }
-
-    auto resized() -> void override
-    {
-        if (lua_resized.valid()) { lua_resized(self()); }
-    }
+    auto paint(juce::Graphics& g) -> void override;
+    auto resized() -> void override;
 
     // juce::MouseListener
-    auto mouseMove(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseMove.valid()) { lua_mouseMove(self(), std::cref(event)); }
-    }
-    auto mouseEnter(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseEnter.valid()) { lua_mouseEnter(self(), std::cref(event)); }
-    }
-    auto mouseExit(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseExit.valid()) { lua_mouseExit(self(), std::cref(event)); }
-    }
-    auto mouseDown(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseDown.valid()) { lua_mouseDown(self(), std::cref(event)); }
-    }
-    auto mouseDrag(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseDrag.valid()) { lua_mouseDrag(self(), std::cref(event)); }
-    }
-    auto mouseUp(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseUp.valid()) { lua_mouseUp(self(), std::cref(event)); }
-    }
-    auto mouseDoubleClick(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_mouseDoubleClick.valid()) { lua_mouseDoubleClick(self(), std::cref(event)); }
-    }
-    auto mouseWheelMove(juce::MouseEvent const& event, juce::MouseWheelDetails const& wheel) -> void override
-    {
-        if (lua_mouseWheelMove.valid()) { lua_mouseWheelMove(self(), std::cref(event), std::cref(wheel)); }
-    }
-    auto mouseMagnify(juce::MouseEvent const& event, float scaleFactor) -> void override
-    {
-        if (lua_mouseMagnify.valid()) { lua_mouseMagnify(self(), std::cref(event), scaleFactor); }
-    }
+    auto mouseMove(juce::MouseEvent const& event) -> void;
+    auto mouseEnter(juce::MouseEvent const& event) -> void;
+    auto mouseExit(juce::MouseEvent const& event) -> void;
+    auto mouseDown(juce::MouseEvent const& event) -> void;
+    auto mouseDrag(juce::MouseEvent const& event) -> void;
+    auto mouseUp(juce::MouseEvent const& event) -> void;
+    auto mouseDoubleClick(juce::MouseEvent const& event) -> void;
+    auto mouseWheelMove(juce::MouseEvent const& event, juce::MouseWheelDetails const& wheel) -> void;
+    auto mouseMagnify(juce::MouseEvent const& event, float scaleFactor) -> void;
+};
+
+struct LuaComponentListener final : juce::ComponentListener
+{
+    LuaComponentListener()           = default;
+    ~LuaComponentListener() override = default;
+
+    auto componentMovedOrResized(juce::Component& component, bool wasMoved, bool wasResized) -> void override;
+    auto componentBroughtToFront(juce::Component& component) -> void override;
+    auto componentVisibilityChanged(juce::Component& component) -> void override;
+    auto componentChildrenChanged(juce::Component& component) -> void override;
+    auto componentParentHierarchyChanged(juce::Component& component) -> void override;
+    auto componentNameChanged(juce::Component& component) -> void override;
+    auto componentBeingDeleted(juce::Component& component) -> void override;
+    auto componentEnablementChanged(juce::Component& component) -> void override;
+
+    sol::safe_function lua_componentMovedOrResized;
+    sol::safe_function lua_componentBroughtToFront;
+    sol::safe_function lua_componentVisibilityChanged;
+    sol::safe_function lua_componentChildrenChanged;
+    sol::safe_function lua_componentParentHierarchyChanged;
+    sol::safe_function lua_componentNameChanged;
+    sol::safe_function lua_componentBeingDeleted;
+    sol::safe_function lua_componentEnablementChanged;
 };
 
 struct LuaListBoxModel final : juce::ListBoxModel
@@ -102,90 +92,22 @@ struct LuaListBoxModel final : juce::ListBoxModel
     LuaListBoxModel()           = default;
     ~LuaListBoxModel() override = default;
 
-    auto getNumRows() -> int override
-    {
-        if (lua_getNumRows.valid()) { return lua_getNumRows(self()); }
-        return 0;
-    }
+    auto self() -> std::reference_wrapper<LuaListBoxModel>;
 
-    auto paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected) -> void override
-    {
-        if (lua_paintListBoxItem.valid()) { lua_paintListBoxItem(self(), rowNumber, std::ref(g), width, height, rowIsSelected); }
-    }
-
-    auto refreshComponentForRow(int rowNumber, bool isRowSelected, juce::Component* existingComponentToUpdate) -> juce::Component* override
-    {
-        if (lua_refreshComponentForRow.valid()) { lua_refreshComponentForRow(self(), rowNumber, isRowSelected, existingComponentToUpdate); }
-        return juce::ListBoxModel::refreshComponentForRow(rowNumber, isRowSelected, existingComponentToUpdate);
-    }
-
-    auto getNameForRow(int rowNumber) -> juce::String override
-    {
-        if (lua_getNameForRow.valid()) { return lua_getNameForRow(self(), rowNumber); }
-        return juce::ListBoxModel::getNameForRow(rowNumber);
-    }
-
-    auto listBoxItemClicked(int row, juce::MouseEvent const& event) -> void override
-    {
-        if (lua_listBoxItemClicked.valid()) { lua_listBoxItemClicked(self(), row, std::cref(event)); }
-        return juce::ListBoxModel::listBoxItemClicked(row, event);
-    }
-
-    auto listBoxItemDoubleClicked(int row, juce::MouseEvent const& event) -> void override
-    {
-        if (lua_listBoxItemDoubleClicked.valid()) { lua_listBoxItemDoubleClicked(self(), row, std::cref(event)); }
-        return juce::ListBoxModel::listBoxItemDoubleClicked(row, event);
-    }
-
-    auto backgroundClicked(juce::MouseEvent const& event) -> void override
-    {
-        if (lua_backgroundClicked.valid()) { lua_backgroundClicked(self(), std::cref(event)); }
-        return juce::ListBoxModel::backgroundClicked(event);
-    }
-
-    auto selectedRowsChanged(int lastRowSelected) -> void override
-    {
-        if (lua_selectedRowsChanged.valid()) { lua_selectedRowsChanged(self(), lastRowSelected); }
-        return juce::ListBoxModel::selectedRowsChanged(lastRowSelected);
-    }
-
-    auto deleteKeyPressed(int lastRowSelected) -> void override
-    {
-        if (lua_deleteKeyPressed.valid()) { lua_deleteKeyPressed(self(), lastRowSelected); }
-        return juce::ListBoxModel::deleteKeyPressed(lastRowSelected);
-    }
-
-    auto returnKeyPressed(int lastRowSelected) -> void override
-    {
-        if (lua_returnKeyPressed.valid()) { lua_returnKeyPressed(self(), lastRowSelected); }
-        return juce::ListBoxModel::returnKeyPressed(lastRowSelected);
-    }
-
-    auto listWasScrolled() -> void override
-    {
-        if (lua_listWasScrolled.valid()) { lua_listWasScrolled(self()); }
-        return juce::ListBoxModel::listWasScrolled();
-    }
-
-    auto getDragSourceDescription(juce::SparseSet<int> const& rowsToDescribe) -> juce::var override
-    {
-        if (lua_getDragSourceDescription.valid()) { return lua_getDragSourceDescription(self(), std::cref(rowsToDescribe)); }
-        return juce::ListBoxModel::getDragSourceDescription(rowsToDescribe);
-    }
-
-    auto getTooltipForRow(int row) -> juce::String override
-    {
-        if (lua_getTooltipForRow.valid()) { return lua_getTooltipForRow(self(), row); }
-        return juce::ListBoxModel::getTooltipForRow(row);
-    }
-
-    auto getMouseCursorForRow(int row) -> juce::MouseCursor override
-    {
-        if (lua_getMouseCursorForRow.valid()) { return lua_getMouseCursorForRow(self(), row); }
-        return juce::ListBoxModel::getMouseCursorForRow(row);
-    }
-
-    auto self() -> std::reference_wrapper<LuaListBoxModel> { return std::ref(*this); }
+    auto getNumRows() -> int override;
+    auto paintListBoxItem(int rowNumber, juce::Graphics& g, int width, int height, bool rowIsSelected) -> void override;
+    auto refreshComponentForRow(int rowNumber, bool isRowSelected, juce::Component* existingComponentToUpdate) -> juce::Component* override;
+    auto getNameForRow(int rowNumber) -> juce::String override;
+    auto listBoxItemClicked(int row, juce::MouseEvent const& event) -> void override;
+    auto listBoxItemDoubleClicked(int row, juce::MouseEvent const& event) -> void override;
+    auto backgroundClicked(juce::MouseEvent const& event) -> void override;
+    auto selectedRowsChanged(int lastRowSelected) -> void override;
+    auto deleteKeyPressed(int lastRowSelected) -> void override;
+    auto returnKeyPressed(int lastRowSelected) -> void override;
+    auto listWasScrolled() -> void override;
+    auto getDragSourceDescription(juce::SparseSet<int> const& rowsToDescribe) -> juce::var override;
+    auto getTooltipForRow(int row) -> juce::String override;
+    auto getMouseCursorForRow(int row) -> juce::MouseCursor override;
 
     sol::safe_function lua_getNumRows;
     sol::safe_function lua_paintListBoxItem;
@@ -208,16 +130,29 @@ struct LuaListBox final : juce::ListBox
     LuaListBox() : juce::ListBox({}, nullptr) {}
     ~LuaListBox() override { setModel(nullptr); }
 
-    auto internal_setModel(std::shared_ptr<LuaListBoxModel> m) -> void
-    {
-        if (m == _model) { return; }
-        if (m == nullptr) { return; }
-        setModel(m.get());
-        _model = std::move(m);
-    }
+    auto internal_setModel(std::shared_ptr<LuaListBoxModel> m) -> void;
 
 private:
     std::shared_ptr<LuaListBoxModel> _model;
+};
+
+struct LuaLookAndFeel_V4 final : juce::LookAndFeel_V4
+{
+    LuaLookAndFeel_V4()           = default;
+    ~LuaLookAndFeel_V4() override = default;
+
+    // juce::Button
+    auto getTextButtonFont(juce::TextButton& btn, int buttonHeight) -> juce::Font override;
+    auto drawButtonBackground(juce::Graphics& g, juce::Button& btn, juce::Colour const& color, bool isHighlighted, bool isDown)
+        -> void override;
+    auto drawToggleButton(juce::Graphics& g, juce::ToggleButton& btn, bool isHighlighted, bool isDown) -> void override;
+
+    sol::safe_function lua_getTextButtonFont;
+    sol::safe_function lua_drawButtonBackground;
+    sol::safe_function lua_drawToggleButton;
+
+private:
+    auto self() -> std::reference_wrapper<LuaLookAndFeel_V4>;
 };
 
 SOL_BASE_CLASSES(juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
