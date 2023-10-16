@@ -18,7 +18,7 @@ struct CommandLine
     std::string scriptPath{};
 };
 
-[[nodiscard]] auto makeCommandLine(int argc, char const* const* argv)
+[[nodiscard]] auto parseCommandLine(juce::String const& args)
     -> std::pair<std::unique_ptr<CommandLine>, bool>;
 
 } // namespace jml::viewer

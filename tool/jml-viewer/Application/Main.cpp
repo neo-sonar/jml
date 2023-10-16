@@ -5,11 +5,6 @@
 #include "Command/Snapshot.hpp"
 #include "Command/Test.hpp"
 
-namespace juce {
-extern char const* const* juce_argv; // declared in juce_core
-extern int juce_argc;                // declared in juce_core
-} // namespace juce
-
 namespace {
 auto runCommand(auto const func, auto const& cli) -> void
 {
@@ -41,9 +36,7 @@ struct GuiAppApplication final : juce::JUCEApplication
 
     auto initialise(juce::String const& commandLine) -> void override
     {
-        juce::ignoreUnused(commandLine);
-
-        auto const [cli, shouldExit] = jml::viewer::makeCommandLine(juce::juce_argc, juce::juce_argv);
+        auto const [cli, shouldExit] = jml::viewer::parseCommandLine(commandLine);
         if (cli == nullptr or shouldExit) {
             setApplicationReturnValue(cli == nullptr ? EXIT_FAILURE : EXIT_SUCCESS);
             quit();

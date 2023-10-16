@@ -2,8 +2,7 @@
 
 namespace jml::viewer {
 
-auto makeCommandLine(int argc, char const* const* argv)
-    -> std::pair<std::unique_ptr<CommandLine>, bool>
+auto parseCommandLine(juce::String const& args) -> std::pair<std::unique_ptr<CommandLine>, bool>
 {
     auto cli = std::make_unique<CommandLine>();
     cli->app.add_flag("--verbose,-v", cli->verbose, "Print verbose output");
@@ -19,7 +18,7 @@ auto makeCommandLine(int argc, char const* const* argv)
         ->check(CLI::ExistingFile);
 
     try {
-        cli->app.parse(argc, argv);
+        cli->app.parse(args.toStdString());
     } catch (CLI::CallForHelp const& e) {
         std::cout << cli->app.help({}, CLI::AppFormatMode::Normal) << '\n';
         return std::pair{std::move(cli), true};
