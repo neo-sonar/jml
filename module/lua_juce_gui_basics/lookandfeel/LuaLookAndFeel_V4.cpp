@@ -13,8 +13,7 @@ auto LuaLookAndFeel_V4::getTextButtonFont(juce::TextButton& btn, int buttonHeigh
     }
 }
 
-auto LuaLookAndFeel_V4::drawButtonBackground(juce::Graphics& g, juce::Button& btn, juce::Colour const& color, bool isHighlighted,
-                                             bool isDown) -> void
+auto LuaLookAndFeel_V4::drawButtonBackground(juce::Graphics& g, juce::Button& btn, juce::Colour const& color, bool isHighlighted, bool isDown) -> void
 {
     if (lua_drawButtonBackground.valid()) {
         lua_drawButtonBackground(self(), std::ref(g), &btn, color, isHighlighted, isDown);

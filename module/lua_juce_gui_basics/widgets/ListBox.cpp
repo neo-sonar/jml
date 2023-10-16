@@ -65,9 +65,11 @@ auto juce_ListBox(sol::table& state) -> void
     // listBox["createSnapshotOfRows"]           = &juce::ListBox::createSnapshotOfRows;
 
     listBox["setHeaderComponent"] = [](juce::ListBox* lb, std::unique_ptr<juce::Component>& h) { lb->setHeaderComponent(std::move(h)); };
-    listBox["setSelectedRows"]    = sol::overload(
-        [](juce::ListBox* lb, juce::SparseSet<int> const& rows) { lb->setSelectedRows(rows, juce::NotificationType::sendNotification); },
-        [](juce::ListBox* lb, juce::SparseSet<int> const& rows, juce::NotificationType n) { lb->setSelectedRows(rows, n); });
+
+    listBox["setSelectedRows"] = sol::overload(                                                                                           //
+        [](juce::ListBox* lb, juce::SparseSet<int> const& rows) { lb->setSelectedRows(rows, juce::NotificationType::sendNotification); }, //
+        [](juce::ListBox* lb, juce::SparseSet<int> const& rows, juce::NotificationType n) { lb->setSelectedRows(rows, n); }               //
+    );
 
     // clang-format off
     auto luaListBox = state.new_usertype<LuaListBox>("ListBox",

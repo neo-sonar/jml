@@ -145,8 +145,7 @@ struct LuaLookAndFeel_V4 final : juce::LookAndFeel_V4
 
     // juce::Button
     auto getTextButtonFont(juce::TextButton& btn, int buttonHeight) -> juce::Font override;
-    auto drawButtonBackground(juce::Graphics& g, juce::Button& btn, juce::Colour const& color, bool isHighlighted, bool isDown)
-        -> void override;
+    auto drawButtonBackground(juce::Graphics& g, juce::Button& btn, juce::Colour const& color, bool isHighlighted, bool isDown) -> void override;
     auto drawToggleButton(juce::Graphics& g, juce::ToggleButton& btn, bool isHighlighted, bool isDown) -> void override;
 
     sol::safe_function lua_getTextButtonFont;
@@ -164,8 +163,7 @@ SOL_BASE_CLASSES(juce::Button, juce::Component, juce::MouseListener, juce::Setta
 SOL_BASE_CLASSES(juce::TextButton, juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 SOL_DERIVED_CLASSES(juce::Button, juce::TextButton);
 
-SOL_BASE_CLASSES(juce::ComboBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient,
-                 juce::Value::Listener);
+SOL_BASE_CLASSES(juce::ComboBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient, juce::Value::Listener);
 
 SOL_BASE_CLASSES(juce::Label, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 
@@ -177,8 +175,7 @@ SOL_DERIVED_CLASSES(juce::Component, lua_juce::LuaComponent);
 SOL_BASE_CLASSES(lua_juce::LuaListBoxModel, juce::ListBoxModel);
 SOL_DERIVED_CLASSES(juce::ListBoxModel, lua_juce::LuaListBoxModel);
 
-SOL_BASE_CLASSES(lua_juce::LuaListBox, juce::ListBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient,
-                 juce::TooltipClient);
+SOL_BASE_CLASSES(lua_juce::LuaListBox, juce::ListBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 
 namespace lua_juce {
 auto juce_ArrowButton(sol::table& state) -> void;
