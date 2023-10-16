@@ -54,15 +54,15 @@ private:
     auto resized() -> void override;
 
     // juce::MouseListener
-    auto mouseMove(juce::MouseEvent const& event) -> void;
-    auto mouseEnter(juce::MouseEvent const& event) -> void;
-    auto mouseExit(juce::MouseEvent const& event) -> void;
-    auto mouseDown(juce::MouseEvent const& event) -> void;
-    auto mouseDrag(juce::MouseEvent const& event) -> void;
-    auto mouseUp(juce::MouseEvent const& event) -> void;
-    auto mouseDoubleClick(juce::MouseEvent const& event) -> void;
-    auto mouseWheelMove(juce::MouseEvent const& event, juce::MouseWheelDetails const& wheel) -> void;
-    auto mouseMagnify(juce::MouseEvent const& event, float scaleFactor) -> void;
+    auto mouseMove(juce::MouseEvent const& event) -> void override;
+    auto mouseEnter(juce::MouseEvent const& event) -> void override;
+    auto mouseExit(juce::MouseEvent const& event) -> void override;
+    auto mouseDown(juce::MouseEvent const& event) -> void override;
+    auto mouseDrag(juce::MouseEvent const& event) -> void override;
+    auto mouseUp(juce::MouseEvent const& event) -> void override;
+    auto mouseDoubleClick(juce::MouseEvent const& event) -> void override;
+    auto mouseWheelMove(juce::MouseEvent const& event, juce::MouseWheelDetails const& wheel) -> void override;
+    auto mouseMagnify(juce::MouseEvent const& event, float scaleFactor) -> void override;
 };
 
 struct LuaComponentListener final : juce::ComponentListener
