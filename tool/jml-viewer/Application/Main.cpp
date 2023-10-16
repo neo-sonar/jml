@@ -4,6 +4,7 @@
 #include "Application/MainComponent.hpp"
 #include "Command/Snapshot.hpp"
 #include "Command/Test.hpp"
+#include "LookAndFeel/LookAndFeel.hpp"
 
 namespace {
 auto runCommand(auto const func, auto const& cli) -> void
@@ -50,10 +51,15 @@ struct GuiAppApplication final : juce::JUCEApplication
             return runCommand(jml::viewer::runSnapshotScript, *cli);
         }
 
+        juce::LookAndFeel::setDefaultLookAndFeel(&_lnf);
         _mainWindow = std::make_unique<MainWindow>(getApplicationName());
     }
 
-    auto shutdown() -> void override { _mainWindow = nullptr; }
+    auto shutdown() -> void override
+    {
+        _mainWindow = nullptr;
+        juce::LookAndFeel::setDefaultLookAndFeel(nullptr);
+    }
 
     auto systemRequestedQuit() -> void override { quit(); }
 
@@ -97,6 +103,7 @@ struct GuiAppApplication final : juce::JUCEApplication
     };
 
 private:
+    jml::viewer::LookAndFeel _lnf;
     std::unique_ptr<MainWindow> _mainWindow;
 };
 

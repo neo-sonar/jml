@@ -13,11 +13,10 @@ MainComponent::MainComponent()
     addAndMakeVisible(_menuBar);
     addAndMakeVisible(_documents);
 
-    setLookAndFeel(&_lnf);
     setSize(1280, 720);
 }
 
-MainComponent::~MainComponent() { setLookAndFeel(nullptr); }
+MainComponent::~MainComponent() = default;
 
 auto MainComponent::paint(juce::Graphics& g) -> void { g.fillAll(juce::Colours::white); }
 

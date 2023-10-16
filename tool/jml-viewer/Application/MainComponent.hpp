@@ -4,7 +4,6 @@
 
 #include "Application/MenuBar.hpp"
 #include "LookAndFeel/Colours.hpp"
-#include "LookAndFeel/LookAndFeel.hpp"
 #include "Viewer/ScriptPanel.hpp"
 
 namespace jml::viewer {
@@ -31,7 +30,6 @@ private:
 
     juce::ApplicationCommandManager _commandManager{};
     juce::UndoManager _undoManager;
-    LookAndFeel _lnf;
 
     MenuBar _menuBar{_commandManager};
     MultiScriptPanel _documents;
