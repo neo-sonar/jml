@@ -23,7 +23,7 @@ juce_add_binary_data(JMLDesigner_BinaryData
 
 juce_add_gui_app(jml-designer
     PRODUCT_NAME
-        "JML Designer"
+        "jml-designer"
 )
 
 set_target_properties(jml-designer

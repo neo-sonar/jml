@@ -8,7 +8,7 @@ juce_add_gui_app(jml-viewer
     # ICON_SMALL ...
     # DOCUMENT_EXTENSIONS ...           # Specify file extensions that should be associated with this app
     # COMPANY_NAME ...                  # Specify the name of the app's author
-    PRODUCT_NAME "JML Viewer"           # The name of the final executable, which can differ from the target name
+    PRODUCT_NAME "jml-viewer"           # The name of the final executable, which can differ from the target name
 )
 
 set(sources

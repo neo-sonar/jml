@@ -117,7 +117,7 @@ auto MainComponent::showAboutWindow() -> void
 {
     auto const options = juce::MessageBoxOptions()
                              .withTitle("About")
-                             .withMessage("JML Viewer - 0.1.0")
+                             .withMessage("JML-Viewer - 0.1.0")
                              .withIconType(juce::MessageBoxIconType::InfoIcon)
                              .withButton("Ok")
                              .withParentComponent(this);
