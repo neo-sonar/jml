@@ -24,6 +24,8 @@ END_JUCE_MODULE_DECLARATION
 #include <lua_juce_data_structures/lua_juce_data_structures.hpp>
 #include <lua_juce_graphics/lua_juce_graphics.hpp>
 
+namespace lua_juce {
+
 struct LuaComponent final : juce::Component
 {
     LuaComponent()           = default;
@@ -155,6 +157,8 @@ private:
     auto self() -> std::reference_wrapper<LuaLookAndFeel_V4>;
 };
 
+} // namespace lua_juce
+
 SOL_BASE_CLASSES(juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
 
 SOL_BASE_CLASSES(juce::TextButton, juce::Button, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
@@ -167,13 +171,14 @@ SOL_BASE_CLASSES(juce::Label, juce::Component, juce::MouseListener, juce::Settab
 
 SOL_BASE_CLASSES(juce::Slider, juce::MouseListener, juce::Component, juce::TooltipClient, juce::SettableTooltipClient);
 
-SOL_BASE_CLASSES(LuaComponent, juce::Component, juce::MouseListener);
-SOL_DERIVED_CLASSES(juce::Component, LuaComponent);
+SOL_BASE_CLASSES(lua_juce::LuaComponent, juce::Component, juce::MouseListener);
+SOL_DERIVED_CLASSES(juce::Component, lua_juce::LuaComponent);
 
-SOL_BASE_CLASSES(LuaListBoxModel, juce::ListBoxModel);
-SOL_DERIVED_CLASSES(juce::ListBoxModel, LuaListBoxModel);
+SOL_BASE_CLASSES(lua_juce::LuaListBoxModel, juce::ListBoxModel);
+SOL_DERIVED_CLASSES(juce::ListBoxModel, lua_juce::LuaListBoxModel);
 
-SOL_BASE_CLASSES(LuaListBox, juce::ListBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient, juce::TooltipClient);
+SOL_BASE_CLASSES(lua_juce::LuaListBox, juce::ListBox, juce::Component, juce::MouseListener, juce::SettableTooltipClient,
+                 juce::TooltipClient);
 
 namespace lua_juce {
 auto juce_ArrowButton(sol::table& state) -> void;

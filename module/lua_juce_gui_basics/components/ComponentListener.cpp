@@ -1,3 +1,6 @@
+
+namespace lua_juce {
+
 auto LuaComponentListener::componentMovedOrResized(juce::Component& component, bool wasMoved, bool wasResized) -> void
 {
     if (not lua_componentMovedOrResized.valid()) { return; }
@@ -45,8 +48,6 @@ auto LuaComponentListener::componentEnablementChanged(juce::Component& component
     if (not lua_componentEnablementChanged.valid()) { return; }
     lua_componentEnablementChanged(std::ref(*this), component);
 }
-
-namespace lua_juce {
 
 auto juce_ComponentListener(sol::table& state) -> void
 {

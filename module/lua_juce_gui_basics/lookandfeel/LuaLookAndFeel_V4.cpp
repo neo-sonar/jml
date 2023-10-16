@@ -1,3 +1,6 @@
+
+namespace lua_juce {
+
 auto LuaLookAndFeel_V4::self() -> std::reference_wrapper<LuaLookAndFeel_V4> { return std::ref(*this); }
 
 // juce::Button
@@ -28,8 +31,6 @@ auto LuaLookAndFeel_V4::drawToggleButton(juce::Graphics& g, juce::ToggleButton& 
         juce::LookAndFeel_V4::drawToggleButton(g, btn, isHighlighted, isDown);
     }
 }
-
-namespace lua_juce {
 
 auto juce_LuaLookAndFeel_V4(sol::table& state) -> void
 {

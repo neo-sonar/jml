@@ -1,4 +1,5 @@
 namespace lua_juce {
+
 auto juce_LuaComponent(sol::table& state) -> void
 {
     // clang-format off
@@ -20,4 +21,5 @@ auto juce_LuaComponent(sol::table& state) -> void
     comp["mouseWheelMove"]   = &LuaComponent::lua_mouseWheelMove;
     comp["mouseMagnify"]     = &LuaComponent::lua_mouseMagnify;
 }
+
 } // namespace lua_juce

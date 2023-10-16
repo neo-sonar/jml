@@ -1,3 +1,34 @@
+namespace lua_juce {
+
+namespace {
+
+auto juce_LuaListBoxModel(sol::table& state) -> void
+{
+    // clang-format off
+    auto model = state.new_usertype<LuaListBoxModel>("ListBoxModel",
+        sol::factories([] { return std::make_shared<LuaListBoxModel>(); }),
+        sol::base_classes, sol::bases<juce::ListBoxModel>{}
+    );
+    // clang-format on
+
+    model["getNumRows"]               = &LuaListBoxModel::lua_getNumRows;
+    model["paintListBoxItem"]         = &LuaListBoxModel::lua_paintListBoxItem;
+    model["refreshComponentForRow"]   = &LuaListBoxModel::lua_refreshComponentForRow;
+    model["getNameForRow"]            = &LuaListBoxModel::lua_getNameForRow;
+    model["listBoxItemClicked"]       = &LuaListBoxModel::lua_listBoxItemClicked;
+    model["listBoxItemDoubleClicked"] = &LuaListBoxModel::lua_listBoxItemDoubleClicked;
+    model["backgroundClicked"]        = &LuaListBoxModel::lua_backgroundClicked;
+    model["selectedRowsChanged"]      = &LuaListBoxModel::lua_selectedRowsChanged;
+    model["deleteKeyPressed"]         = &LuaListBoxModel::lua_deleteKeyPressed;
+    model["returnKeyPressed"]         = &LuaListBoxModel::lua_returnKeyPressed;
+    model["listWasScrolled"]          = &LuaListBoxModel::lua_listWasScrolled;
+    model["getDragSourceDescription"] = &LuaListBoxModel::lua_getDragSourceDescription;
+    model["getTooltipForRow"]         = &LuaListBoxModel::lua_getTooltipForRow;
+    model["getMouseCursorForRow"]     = &LuaListBoxModel::lua_getMouseCursorForRow;
+}
+
+} // namespace
+
 auto LuaListBoxModel::self() -> std::reference_wrapper<LuaListBoxModel> { return std::ref(*this); }
 
 auto LuaListBoxModel::getNumRows() -> int
@@ -84,35 +115,6 @@ auto LuaListBoxModel::getMouseCursorForRow(int row) -> juce::MouseCursor
     return juce::ListBoxModel::getMouseCursorForRow(row);
 }
 
-namespace lua_juce {
-
-namespace {
-auto juce_LuaListBoxModel(sol::table& state) -> void
-{
-    // clang-format off
-    auto model = state.new_usertype<LuaListBoxModel>("ListBoxModel",
-        sol::factories([] { return std::make_shared<LuaListBoxModel>(); }),
-        sol::base_classes, sol::bases<juce::ListBoxModel>{}
-    );
-    // clang-format on
-
-    model["getNumRows"]               = &LuaListBoxModel::lua_getNumRows;
-    model["paintListBoxItem"]         = &LuaListBoxModel::lua_paintListBoxItem;
-    model["refreshComponentForRow"]   = &LuaListBoxModel::lua_refreshComponentForRow;
-    model["getNameForRow"]            = &LuaListBoxModel::lua_getNameForRow;
-    model["listBoxItemClicked"]       = &LuaListBoxModel::lua_listBoxItemClicked;
-    model["listBoxItemDoubleClicked"] = &LuaListBoxModel::lua_listBoxItemDoubleClicked;
-    model["backgroundClicked"]        = &LuaListBoxModel::lua_backgroundClicked;
-    model["selectedRowsChanged"]      = &LuaListBoxModel::lua_selectedRowsChanged;
-    model["deleteKeyPressed"]         = &LuaListBoxModel::lua_deleteKeyPressed;
-    model["returnKeyPressed"]         = &LuaListBoxModel::lua_returnKeyPressed;
-    model["listWasScrolled"]          = &LuaListBoxModel::lua_listWasScrolled;
-    model["getDragSourceDescription"] = &LuaListBoxModel::lua_getDragSourceDescription;
-    model["getTooltipForRow"]         = &LuaListBoxModel::lua_getTooltipForRow;
-    model["getMouseCursorForRow"]     = &LuaListBoxModel::lua_getMouseCursorForRow;
-}
-} // namespace
-
 auto juce_ListBoxModel(sol::table& state) -> void
 {
     auto model                        = state.new_usertype<juce::ListBoxModel>("InternalListBoxModel", sol::no_constructor);
@@ -133,4 +135,5 @@ auto juce_ListBoxModel(sol::table& state) -> void
 
     juce_LuaListBoxModel(state);
 }
+
 } // namespace lua_juce

@@ -1,3 +1,6 @@
+
+namespace lua_juce {
+
 auto LuaComponent::self() -> std::reference_wrapper<LuaComponent> { return std::ref(*this); }
 
 auto LuaComponent::paint(juce::Graphics& g) -> void
@@ -46,8 +49,6 @@ auto LuaComponent::mouseMagnify(juce::MouseEvent const& event, float scaleFactor
 {
     if (lua_mouseMagnify.valid()) { lua_mouseMagnify(self(), std::cref(event), scaleFactor); }
 }
-
-namespace lua_juce {
 
 auto juce_Component(sol::table& state) -> void
 {
