@@ -1,9 +1,9 @@
 #pragma once
 
-#include "JmlCommandline.hpp"
+#include "Application/CommandLine.hpp"
 
-namespace jml::cli {
-inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
+namespace jml::viewer {
+inline auto runTestScript(CommandLine const& cli) -> juce::Result
 {
     auto state = sol::state{};
     state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
@@ -33,4 +33,4 @@ inline auto runTestScript(JmlCommandline const& cli) -> juce::Result
     }
     return juce::Result::ok();
 }
-} // namespace jml::cli
+} // namespace jml::viewer

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "JmlCommandline.hpp"
+#include "Application/CommandLine.hpp"
 
-namespace jml::cli {
+namespace jml::viewer {
 
-inline auto runSnapshotScript(JmlCommandline const& cli) -> juce::Result
+inline auto runSnapshotScript(CommandLine const& cli) -> juce::Result
 {
     auto state = sol::state{};
     state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
@@ -47,4 +47,4 @@ inline auto runSnapshotScript(JmlCommandline const& cli) -> juce::Result
     return juce::Result::ok();
 }
 
-} // namespace jml::cli
+} // namespace jml::viewer

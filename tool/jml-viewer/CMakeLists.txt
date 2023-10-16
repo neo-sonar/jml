@@ -1,5 +1,7 @@
 project(jml-viewer VERSION 0.1.0)
 
+find_package(CLI11 REQUIRED)
+
 juce_add_gui_app(jml-viewer
     # VERSION ...                       # Set this if the app version is different to the project version
     # ICON_BIG ...                      # ICON_* arguments specify a path to an image file to use as an icon
@@ -11,6 +13,8 @@ juce_add_gui_app(jml-viewer
 
 set(sources
     "Application/CommandIDs.hpp"
+    "Application/CommandLine.hpp"
+    "Application/CommandLine.cpp"
     "Application/Main.cpp"
     "Application/MainComponent.hpp"
     "Application/MainComponent.cpp"
@@ -19,6 +23,9 @@ set(sources
 
     "CodeEditor/CodeEditor.cpp"
     "CodeEditor/CodeEditor.hpp"
+
+    "Command/Snapshot.hpp"
+    "Command/Test.hpp"
 
     "LookAndFeel/Colours.hpp"
     "LookAndFeel/LookAndFeel.cpp"
@@ -62,6 +69,7 @@ target_link_libraries(jml-viewer
     PUBLIC
         lua::lua
         sol2::sol2
+        CLI11::CLI11
 
         juce::juce_recommended_config_flags
         # juce::juce_recommended_lto_flags

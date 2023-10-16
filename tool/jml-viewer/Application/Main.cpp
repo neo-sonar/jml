@@ -1,6 +1,29 @@
 #include <memory>
 
+#include "Application/CommandLine.hpp"
 #include "Application/MainComponent.hpp"
+#include "Command/Snapshot.hpp"
+#include "Command/Test.hpp"
+
+namespace juce {
+extern char const* const* juce_argv; // declared in juce_core
+extern int juce_argc;                // declared in juce_core
+} // namespace juce
+
+namespace {
+auto runCommand(auto const func, auto const& cli) -> void
+{
+    auto& app = *juce::JUCEApplication::getInstance();
+    app.setApplicationReturnValue(EXIT_SUCCESS);
+
+    if (auto const result = func(cli); result.failed()) {
+        std::cerr << result.getErrorMessage() << '\n';
+        app.setApplicationReturnValue(EXIT_FAILURE);
+    }
+
+    app.quit();
+}
+} // namespace
 
 struct GuiAppApplication final : juce::JUCEApplication
 {
@@ -19,6 +42,21 @@ struct GuiAppApplication final : juce::JUCEApplication
     auto initialise(juce::String const& commandLine) -> void override
     {
         juce::ignoreUnused(commandLine);
+
+        auto const [cli, shouldExit] = jml::viewer::makeCommandLine(juce::juce_argc, juce::juce_argv);
+        if (cli == nullptr or shouldExit) {
+            setApplicationReturnValue(cli == nullptr ? EXIT_FAILURE : EXIT_SUCCESS);
+            quit();
+            return;
+        }
+
+        if (cli->app.got_subcommand("test")) {
+            return runCommand(jml::viewer::runTestScript, *cli);
+        }
+        if (cli->app.got_subcommand("snapshot")) {
+            return runCommand(jml::viewer::runSnapshotScript, *cli);
+        }
+
         _mainWindow = std::make_unique<MainWindow>(getApplicationName());
     }
 

@@ -5,7 +5,7 @@ function(lua_juce_add_test _name)
         NAME
             "lua: ${_name}"
         COMMAND
-            $<TARGET_FILE:jml-cli> test -s "${_name}.lua"
+            $<TARGET_FILE:jml-viewer> test -s "${_name}.lua"
         WORKING_DIRECTORY
             ${PROJECT_SOURCE_DIR}
     )

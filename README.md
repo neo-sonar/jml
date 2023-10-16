@@ -5,7 +5,6 @@
 - [Usage](#usage)
   - [Bindings](#bindings)
 - [Tools](#tools)
-  - [jml-cli](#jml-cli)
   - [jml-viewer](#jml-viewer)
   - [jml-designer](#jml-designer)
 
@@ -48,14 +47,12 @@ lua_juce::allModules(state);
 
 ## Tools
 
-### jml-cli
-
-- Run unit tests. See [Test.hpp](./tool/jml-cli/Command/Test.hpp)
-- Create component snapshot images. See [Snapshot.hpp](./tool/jml-cli/Command/Snapshot.hpp)
-
 ### jml-viewer
 
-- ToDo
+#### Command-Line
+
+- Run unit tests. See [Test.hpp](./tool/jml-viewer/Command/Test.hpp)
+- Create component snapshot images. See [Snapshot.hpp](./tool/jml-viewer/Command/Snapshot.hpp)
 
 ### jml-designer
 

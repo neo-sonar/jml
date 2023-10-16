@@ -6,18 +6,19 @@ JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE("-Wimplicit-int-float-conversion")
 #include <CLI/CLI.hpp>
 JUCE_END_IGNORE_WARNINGS_GCC_LIKE
 
-namespace jml::cli {
+namespace jml::viewer {
 
-struct JmlCommandline
+struct CommandLine
 {
     // "root"
-    CLI::App app{"jml-cli"};
+    CLI::App app{"jml-viewer"};
     bool verbose{false};
 
     // "test"
     std::string scriptPath{};
 };
 
-[[nodiscard]] auto makeJmlCommandline() -> std::unique_ptr<JmlCommandline>;
+[[nodiscard]] auto makeCommandLine(int argc, char const* const* argv)
+    -> std::pair<std::unique_ptr<CommandLine>, bool>;
 
-} // namespace jml::cli
+} // namespace jml::viewer
