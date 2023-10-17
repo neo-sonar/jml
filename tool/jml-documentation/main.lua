@@ -53,7 +53,7 @@ local function formatTypeDocsAsMarkdownTable(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("| Name | Type | Description |\n")
   str = str .. string.format("| :--: | :--: | :---------: |\n")
-  for i=1,#doc.members do
+  for i = 1, #doc.members do
     member = doc.members[i]
     local fmt = "| `%s` | %s | %s |\n"
     str = str .. string.format(fmt, member, "Function", "help")
@@ -64,7 +64,7 @@ end
 local function formatTypeDocsAsLuaSnippet(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("```lua\n")
-  for i=1,#doc.members do
+  for i = 1, #doc.members do
     member = doc.members[i]
     if startsWith(member, "__") == false then
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
@@ -137,7 +137,7 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
   end
 end
 
-local file = io.open("doc.md", "w")
+local file = io.open("Documentation.md", "w")
 writeTypesDocsAsMarkdown(file, "snippets", {
   juce_core = {
     juce.BigInteger.new(),
