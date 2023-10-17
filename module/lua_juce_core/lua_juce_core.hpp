@@ -23,8 +23,8 @@ END_JUCE_MODULE_DECLARATION
 #include <juce_core/juce_core.h>
 #include <sol/sol.hpp>
 
-#define LUA_JUCE_WRAP(x) sol::wrap<decltype(x), x>     // NOLINT
-#define LUA_JUCE_C_CALL(x) sol::c_call<decltype(x), x> // NOLINT
+#define LUA_JUCE_WRAP(x) sol::wrap<decltype((x)), (x)>     // NOLINT
+#define LUA_JUCE_C_CALL(x) sol::c_call<decltype((x)), (x)> // NOLINT
 
 namespace juce {
 
