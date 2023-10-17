@@ -4,9 +4,17 @@ end
 
 local function parseType(obj)
   local meta = getmetatable(obj)
-
+  local name = meta.__name
   local doc = {}
-  doc["name"] = string.sub(meta.__name, 11) -- Remove "sol.juce::"
+
+  i, j = string.find(name, "lua_juce")
+  if i == nil or j == nil then
+    doc["name"] = string.sub(meta.__name, 11) -- Remove "sol.juce::"
+  else
+    doc["name"] = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
+  end
+  print(name)
+
   doc["members"] = {}
 
   for key, value in pairs(meta) do
@@ -114,9 +122,16 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.ColourGradient.new(),
   },
   ["juce_gui_basics"] = {
+    juce.ComponentListener.new(),
     juce.ComboBox.new(juce.String.new("")),
+    juce.Label.new(juce.String.new(""), juce.String.new("")),
+    juce.ImageComponent.new(juce.String.new("")),
     juce.Slider.new(),
+    -- juce.ArrowButton.new(juce.String.new("")),
+    juce.HyperlinkButton.new(),
     juce.TextButton.new(juce.String.new("")),
+    juce.ToggleButton.new(juce.String.new("")),
+    juce.TreeView.new(juce.String.new("")),
   },
 })
 file:close()
