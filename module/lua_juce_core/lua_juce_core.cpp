@@ -19,6 +19,7 @@
 #include "streams/OutputStream.cpp"        // NOLINT
 #include "text/String.cpp"                 // NOLINT
 #include "text/StringArray.cpp"            // NOLINT
+#include "text/StringRef.cpp"              // NOLINT
 #include "time/PerformanceCounter.cpp"     // NOLINT
 #include "time/RelativeTime.cpp"           // NOLINT
 #include "time/Time.cpp"                   // NOLINT

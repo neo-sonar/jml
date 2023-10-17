@@ -10,5 +10,6 @@ auto juce_String(sol::table& state) -> void
     str["hashCode64"] = LUA_JUCE_C_CALL(&juce::String::hashCode64);
     str["hash"]       = LUA_JUCE_C_CALL(&juce::String::hash);
     str["length"]     = LUA_JUCE_C_CALL(&juce::String::length);
+    str["trim"]       = LUA_JUCE_C_CALL(&juce::String::trim);
 }
 } // namespace lua_juce

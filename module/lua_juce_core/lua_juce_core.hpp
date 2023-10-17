@@ -100,6 +100,7 @@ auto juce_MemoryInputStream(sol::table& state) -> void;
 auto juce_MemoryOutputStream(sol::table& state) -> void;
 auto juce_OutputStream(sol::table& state) -> void;
 auto juce_String(sol::table& state) -> void;
+auto juce_StringRef(sol::table& state) -> void;
 auto juce_StringArray(sol::table& state) -> void;
 auto juce_PerformanceCounter(sol::table& state) -> void;
 auto juce_RelativeTime(sol::table& state) -> void;

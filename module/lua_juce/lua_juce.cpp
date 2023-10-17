@@ -24,6 +24,7 @@ auto allModules(sol::state& lua) -> void
     juce_Result(table);
     juce_StatisticsAccumulator(table);
     juce_String(table);
+    juce_StringRef(table);
     juce_StringArray(table);
     juce_Uuid(table);
     juce_PerformanceCounter(table);
