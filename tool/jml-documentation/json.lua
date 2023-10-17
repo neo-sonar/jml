@@ -100,7 +100,7 @@ local function encode_string(val)
 end
 
 local function encode_userdata(val)
-    return string.format('"%s"', tostring(val):gsub('"', '\\"'))
+  return string.format('"%s"', tostring(val):gsub('"', '\\"'))
 end
 
 local function encode_number(val)

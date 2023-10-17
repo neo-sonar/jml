@@ -5,7 +5,6 @@
 	- [MidiMessage](#MidiMessage)
 	- [MidiMessageSequence](#MidiMessageSequence)
 	- [MidiRPNDetector](#MidiRPNDetector)
-	- [MidiRPNMessage](#MidiRPNMessage)
 - [juce_core](#juce_core)
 	- [BigInteger](#BigInteger)
 	- [File](#File)
@@ -35,7 +34,6 @@
 	- [HyperlinkButton](#HyperlinkButton)
 	- [ImageComponent](#ImageComponent)
 	- [Label](#Label)
-	- [LookAndFeel_V4](#LookAndFeel_V4)
 	- [Slider](#Slider)
 	- [TextButton](#TextButton)
 	- [ToggleButton](#ToggleButton)
@@ -198,16 +196,6 @@ juce.MidiMessageSequence.updateMatchedPairs(...)
 juce.MidiRPNDetector.new(...)
 juce.MidiRPNDetector.reset(...)
 juce.MidiRPNDetector.tryParse(...)
-```
-## MidiRPNMessage
-
-```lua
-juce.MidiRPNMessage.channel(...)
-juce.MidiRPNMessage.is14BitValue(...)
-juce.MidiRPNMessage.isNRPN(...)
-juce.MidiRPNMessage.new(...)
-juce.MidiRPNMessage.parameterNumber(...)
-juce.MidiRPNMessage.value(...)
 ```
 ## juce_core
 
@@ -431,6 +419,7 @@ juce.String.isEmpty(...)
 juce.String.isNotEmpty(...)
 juce.String.length(...)
 juce.String.new(...)
+juce.String.toStdString(...)
 juce.String.trim(...)
 ```
 ## StringArray
@@ -867,14 +856,6 @@ juce.Label.setKeyboardType(...)
 juce.Label.setMinimumHorizontalScale(...)
 juce.Label.setText(...)
 juce.Label.showEditor(...)
-```
-## LookAndFeel_V4
-
-```lua
-juce.LookAndFeel_V4.drawButtonBackground(...)
-juce.LookAndFeel_V4.drawToggleButton(...)
-juce.LookAndFeel_V4.getTextButtonFont(...)
-juce.LookAndFeel_V4.new(...)
 ```
 ## Slider
 

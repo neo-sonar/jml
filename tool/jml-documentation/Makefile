@@ -5,7 +5,6 @@ all: generate
 
 .PHONY: generate
 generate: out
-	${JML_VIEWER} test -s xml.lua
 	${JML_VIEWER} test -s main.lua
 	ldoc .
 
@@ -16,4 +15,4 @@ out:
 
 .PHONY: clean
 clean:
-	rm -rf build doc
+	rm -rf out

@@ -1,3 +1,5 @@
+doxygen = require("doxygen")
+
 local function sortByKey(t)
   -- Collect the keys into an array
   local keys = {}
@@ -102,6 +104,8 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
   local docs, _ = parseTypeDocs(modules)
   for module_name, juce_module in pairs(docs) do
     for entity_name, entity in pairs(juce_module[2]) do
+      local doxygen_spec = doxygen.parse_xml(entity_name)
+
       -- Create lua file
       local file = io.open(dir .. "/" .. entity_name .. ".lua", "w")
       if file == nil then
@@ -117,14 +121,19 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
       file:write(string.format("local %s = {}\n\n", entity_name))
 
       -- For each member in entity
-      for member_name, member in pairs(entity.members) do
+      for _, member in pairs(entity.members) do
         -- Skip special functions
         if startsWith(member, "__") == false then
+          local doxygen_member = nil
+          for _, spec in pairs(doxygen_spec.members) do
+            if spec.name:toStdString() == member then
+              doxygen_member = spec
+            end
+          end
           file:write("--------------\n")
 
-          local member_brief = "Brief"
-          if member_brief ~= "" then
-            file:write(string.format("--- %s\n", member_brief))
+          if doxygen_member ~= nil then
+            file:write(string.format("--- %s\n", doxygen_member.brief))
           end
 
           local seperator = ":"
@@ -205,7 +214,7 @@ local classes = {
     juce.MidiMessage.new(),
     juce.MidiMessageSequence.new(),
     juce.MidiRPNDetector.new(),
-    juce.MidiRPNMessage.new(),
+    -- juce.MidiRPNMessage.new(),
   },
   juce_data_structures = {juce.UndoManager.new(0, 0), juce.ValueTree.new()},
   juce_graphics = {
@@ -220,7 +229,7 @@ local classes = {
     juce.ComponentListener.new(),
     juce.ComboBox.new(juce.String.new("")),
     juce.Label.new(juce.String.new(""), juce.String.new("")),
-    juce.LookAndFeel_V4.new(),
+    -- juce.LookAndFeel_V4.new(),
     juce.ImageComponent.new(juce.String.new("")),
     juce.Slider.new(),
     -- juce.ArrowButton.new(juce.String.new("")),
