@@ -25,5 +25,9 @@ END_JUCE_MODULE_DECLARATION
 
 namespace lua_juce {
 auto juce_AudioPlayHead(sol::table& state) -> void;
+auto juce_MidiFile(sol::table& state) -> void;
 auto juce_MidiMessage(sol::table& state) -> void;
+auto juce_MidiRPNDetector(sol::table& state) -> void;
+auto juce_MidiRPNMessage(sol::table& state) -> void;
+auto juce_MidiMessageSequence(sol::table& state) -> void;
 } // namespace lua_juce

@@ -155,7 +155,13 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.RelativeTime.seconds(1.0),
     juce.Time.new(),
   },
-  juce_audio_basics = {juce.MidiMessage.new()},
+  juce_audio_basics = {
+    juce.MidiFile.new(),
+    juce.MidiMessage.new(),
+    juce.MidiMessageSequence.new(),
+    juce.MidiRPNDetector.new(),
+    juce.MidiRPNMessage.new(),
+  },
   juce_data_structures = {juce.UndoManager.new(0, 0), juce.ValueTree.new()},
   juce_graphics = {
     juce.AffineTransform.new(),

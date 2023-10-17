@@ -1,7 +1,11 @@
 # JML Documentation
 
 - [juce_audio_basics](#juce_audio_basics)
+	- [MidiFile](#MidiFile)
 	- [MidiMessage](#MidiMessage)
+	- [MidiMessageSequence](#MidiMessageSequence)
+	- [MidiRPNDetector](#MidiRPNDetector)
+	- [MidiRPNMessage](#MidiRPNMessage)
 - [juce_core](#juce_core)
 	- [BigInteger](#BigInteger)
 	- [File](#File)
@@ -41,6 +45,25 @@
 
 ## juce_audio_basics
 
+## MidiFile
+
+```lua
+juce.MidiFile.addTrack(...)
+juce.MidiFile.clear(...)
+juce.MidiFile.convertTimestampTicksToSeconds(...)
+juce.MidiFile.findAllKeySigEvents(...)
+juce.MidiFile.findAllTempoEvents(...)
+juce.MidiFile.findAllTimeSigEvents(...)
+juce.MidiFile.getLastTimestamp(...)
+juce.MidiFile.getNumTracks(...)
+juce.MidiFile.getTimeFormat(...)
+juce.MidiFile.getTrack(...)
+juce.MidiFile.new(...)
+juce.MidiFile.readFrom(...)
+juce.MidiFile.setSmpteTimeFormat(...)
+juce.MidiFile.setTicksPerQuarterNote(...)
+juce.MidiFile.writeTo(...)
+```
 ## MidiMessage
 
 ```lua
@@ -142,6 +165,48 @@ juce.MidiMessage.tempoMetaEvent(...)
 juce.MidiMessage.textMetaEvent(...)
 juce.MidiMessage.timeSignatureMetaEvent(...)
 juce.MidiMessage.withTimeStamp(...)
+```
+## MidiMessageSequence
+
+```lua
+juce.MidiMessageSequence.addTimeToMessages(...)
+juce.MidiMessageSequence.clear(...)
+juce.MidiMessageSequence.createControllerUpdatesForTime(...)
+juce.MidiMessageSequence.deleteEvent(...)
+juce.MidiMessageSequence.deleteMidiChannelMessages(...)
+juce.MidiMessageSequence.deleteSysExMessages(...)
+juce.MidiMessageSequence.extractMidiChannelMessages(...)
+juce.MidiMessageSequence.extractSysExMessages(...)
+juce.MidiMessageSequence.getEndTime(...)
+juce.MidiMessageSequence.getEventPointer(...)
+juce.MidiMessageSequence.getEventTime(...)
+juce.MidiMessageSequence.getIndexOf(...)
+juce.MidiMessageSequence.getIndexOfMatchingKeyUp(...)
+juce.MidiMessageSequence.getNextIndexAtTime(...)
+juce.MidiMessageSequence.getNumEvents(...)
+juce.MidiMessageSequence.getStartTime(...)
+juce.MidiMessageSequence.getTimeOfMatchingKeyUp(...)
+juce.MidiMessageSequence.new(...)
+juce.MidiMessageSequence.sort(...)
+juce.MidiMessageSequence.swapWith(...)
+juce.MidiMessageSequence.updateMatchedPairs(...)
+```
+## MidiRPNDetector
+
+```lua
+juce.MidiRPNDetector.new(...)
+juce.MidiRPNDetector.reset(...)
+juce.MidiRPNDetector.tryParse(...)
+```
+## MidiRPNMessage
+
+```lua
+juce.MidiRPNMessage.channel(...)
+juce.MidiRPNMessage.is14BitValue(...)
+juce.MidiRPNMessage.isNRPN(...)
+juce.MidiRPNMessage.new(...)
+juce.MidiRPNMessage.parameterNumber(...)
+juce.MidiRPNMessage.value(...)
 ```
 ## juce_core
 

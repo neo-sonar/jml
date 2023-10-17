@@ -32,7 +32,11 @@ auto allModules(sol::state& lua) -> void
 
     // juce_audio_basics
     juce_AudioPlayHead(table);
+    juce_MidiFile(table);
     juce_MidiMessage(table);
+    juce_MidiMessageSequence(table);
+    juce_MidiRPNDetector(table);
+    juce_MidiRPNMessage(table);
 
     // juce_data_structures
     juce_UndoableAction(table);
