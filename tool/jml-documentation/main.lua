@@ -1,3 +1,22 @@
+local function sortByKey(t)
+  -- Collect the keys into an array
+  local keys = {}
+  for key in pairs(t) do
+    table.insert(keys, key)
+  end
+
+  -- Sort the keys
+  table.sort(keys)
+
+  -- Create a new table with sorted keys
+  local sorted = {}
+  for _, key in ipairs(keys) do
+    sorted[key] = t[key]
+  end
+
+  return sorted
+end
+
 local function startsWith(str, prefix)
   return string.sub(str, 1, string.len(prefix)) == prefix
 end
@@ -13,7 +32,7 @@ local function parseType(obj)
   else
     doc["name"] = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
   end
-  print(name)
+  assert(name ~= nil)
 
   doc["members"] = {}
 
@@ -21,7 +40,6 @@ local function parseType(obj)
     if type(value) == "function" then
       table.insert(doc.members, key)
       -- for k, v in pairs(debug.getinfo(value)) do
-      --   print(k, v)
       -- end
     end
 
@@ -46,7 +64,7 @@ local function formatTypeDocsAsLuaSnippet(doc)
   str = str .. string.format("```lua\n")
   for _, member in pairs(doc.members) do
     if startsWith(member, "__") == false then
-      str = str .. string.format("juce.%s.%s()\n", doc.name, member)
+      str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
     end
   end
   str = str .. string.format("```\n")
@@ -54,38 +72,68 @@ local function formatTypeDocsAsLuaSnippet(doc)
 end
 
 local function writeTypesDocsAsMarkdown(file, style, modules)
+  modules = sortByKey(modules)
+
   -- Parse types
   local docs = {}
-  for modName, mod in pairs(modules) do
-    local modDocs = {}
-    for _, value in pairs(mod) do
-      local doc = parseType(value)
-      modDocs[doc.name] = doc
+  local sortedModuleNames = {}
+
+  for moduleName, moduleContent in pairs(modules) do
+    local moduleDocs = {}
+    local sortedEntityNames = {}
+    for _, entity in pairs(moduleContent) do
+      local doc = parseType(entity)
+      table.insert(moduleDocs, doc)
+      table.insert(sortedEntityNames, doc.name)
     end
-    docs[modName] = modDocs
+
+    table.sort(sortedEntityNames)
+    moduleDocs["sortedEntityNames"] = sortedEntityNames
+
+    docs[moduleName] = moduleDocs
+    table.insert(sortedModuleNames, moduleName)
   end
 
-  table.sort(docs)
+  table.sort(sortedModuleNames)
 
   -- Write header
   file:write("# JML Documentation\n\n")
 
   -- Write TOC
-  for modName, modDocs in pairs(docs) do
-    file:write(string.format("- [%s](#%s)\n", modName, modName))
-    for _, doc in pairs(modDocs) do
-      file:write(string.format("\t- [%s](#%s)\n", doc.name, doc.name))
+  for moduleName, moduleDocs in pairs(docs) do
+    file:write(string.format("- [%s](#%s)\n", moduleName, moduleName))
+    for _, doc in pairs(moduleDocs) do
+      local n = doc.name
+      if n ~= nil then
+        file:write(string.format("\t- [%s](#%s)\n", n, n))
+      end
     end
   end
+  -- for i = 1, #sortedModuleNames do
+  --   local mn = sortedModuleNames[i]
+  --   local md = docs[mn]
+  --   local sn = md["sortedEntityNames"]
+  --   file:write(string.format("- [%s](#%s)\n", mn, mn))
+  --   for d = 1, #sn do
+  --     local entity = sn[d]
+  --     local doc = md[entity]
+  --     print(entity, doc)
+  --     -- if doc == nil then
+  --     -- else
+  --     --   file:write(string.format("\t- [%s](#%s)\n", doc.name, doc.name))
+  --     -- end
+  --   end
+  -- end
 
   -- Wrie Content
   file:write("\n\n")
-  for modName, modDocs in pairs(docs) do
+  for moduleName, moduleDocs in pairs(docs) do
     -- Header
-    file:write(string.format("## %s\n\n", modName))
+    file:write(string.format("## %s\n\n", moduleName))
 
     -- Members
-    for _, doc in pairs(modDocs) do
+    for i = 1, #moduleDocs do
+      local doc = moduleDocs[i]
       if style == "table" then
         file:write(formatTypeDocsAsMarkdownTable(doc))
       else
@@ -98,7 +146,7 @@ end
 
 local file = io.open("doc.md", "w")
 writeTypesDocsAsMarkdown(file, "snippets", {
-  ["juce_core"] = {
+  juce_core = {
     juce.BigInteger.new(),
     juce.File.new(),
     juce.IPAddress.new(),
@@ -114,14 +162,14 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.RelativeTime.seconds(1.0),
     juce.Time.new(),
   },
-  ["juce_audio_basics"] = {juce.MidiMessage.new()},
-  ["juce_graphics"] = {
+  juce_audio_basics = {juce.MidiMessage.new()},
+  juce_graphics = {
     juce.AffineTransform.new(),
     juce.Font.new(12.0),
     juce.Colour.new(0, 0, 0, 0),
     juce.ColourGradient.new(),
   },
-  ["juce_gui_basics"] = {
+  juce_gui_basics = {
     juce.ComponentListener.new(),
     juce.ComboBox.new(juce.String.new("")),
     juce.Label.new(juce.String.new(""), juce.String.new("")),
@@ -135,7 +183,3 @@ writeTypesDocsAsMarkdown(file, "snippets", {
   },
 })
 file:close()
-
--- for key, value in pairs(juce) do
---   print(key)
--- end
