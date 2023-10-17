@@ -132,10 +132,10 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
           end
           file:write("--------------\n")
 
-          if doxygen_member  then
+          if doxygen_member then
             file:write(string.format("--- %s\n", doxygen_member.brief))
           else
-            doxygen_member = {is_static=true}
+            doxygen_member = {is_static = true}
             file:write(string.format("--- %s\n", member))
           end
 
