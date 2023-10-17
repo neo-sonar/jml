@@ -29,6 +29,8 @@ auto allModules(sol::state& lua) -> void
     juce_PerformanceCounter(table);
     juce_RelativeTime(table);
     juce_Time(table);
+    juce_XmlDocument(table);
+    juce_XmlElement(table);
 
     // juce_audio_basics
     juce_AudioPlayHead(table);

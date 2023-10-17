@@ -104,6 +104,8 @@ auto juce_StringArray(sol::table& state) -> void;
 auto juce_PerformanceCounter(sol::table& state) -> void;
 auto juce_RelativeTime(sol::table& state) -> void;
 auto juce_Time(sol::table& state) -> void;
+auto juce_XmlDocument(sol::table& state) -> void;
+auto juce_XmlElement(sol::table& state) -> void;
 
 template<typename T>
 auto juce_ArrayImpl(sol::table& state, char const* name) -> void

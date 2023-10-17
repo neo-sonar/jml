@@ -22,3 +22,5 @@
 #include "time/PerformanceCounter.cpp"     // NOLINT
 #include "time/RelativeTime.cpp"           // NOLINT
 #include "time/Time.cpp"                   // NOLINT
+#include "xml/XmlDocument.cpp"             // NOLINT
+#include "xml/XmlElement.cpp"              // NOLINT
