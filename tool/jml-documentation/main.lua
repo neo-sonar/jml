@@ -88,6 +88,13 @@ writeTypesDocsAsMarkdown(file, "snippets", {
   juce.Uuid.new(),
   juce.RelativeTime.seconds(1.0),
   juce.Time.new(),
+
+  juce.MidiMessage.new(),
+
+  juce.Font.new(12.0),
+
+  juce.Slider.new(),
+  juce.ComboBox.new(juce.String.new("")),
 })
 file:close()
 
