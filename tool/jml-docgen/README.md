@@ -26,9 +26,12 @@
 	- [AffineTransform](#AffineTransform)
 	- [Colour](#Colour)
 	- [ColourGradient](#ColourGradient)
+	- [DropShadow](#DropShadow)
+	- [FillType](#FillType)
 	- [Font](#Font)
 	- [Graphics](#Graphics)
 	- [Image](#Image)
+	- [Path](#Path)
 - [juce_gui_basics](#juce_gui_basics)
 	- [ComboBox](#ComboBox)
 	- [ComponentListener](#ComponentListener)
@@ -675,6 +678,35 @@ juce.ColourGradient.removeColour(...)
 juce.ColourGradient.setColour(...)
 juce.ColourGradient.vertical(...)
 ```
+## DropShadow
+
+```lua
+juce.DropShadow.colour(...)
+juce.DropShadow.drawForImage(...)
+juce.DropShadow.drawForPath(...)
+juce.DropShadow.drawForRectangle(...)
+juce.DropShadow.new(...)
+juce.DropShadow.offset(...)
+juce.DropShadow.radius(...)
+```
+## FillType
+
+```lua
+juce.FillType.colour(...)
+juce.FillType.getOpacity(...)
+juce.FillType.image(...)
+juce.FillType.isColour(...)
+juce.FillType.isGradient(...)
+juce.FillType.isInvisible(...)
+juce.FillType.isTiledImage(...)
+juce.FillType.new(...)
+juce.FillType.setColour(...)
+juce.FillType.setGradient(...)
+juce.FillType.setOpacity(...)
+juce.FillType.setTiledImage(...)
+juce.FillType.transform(...)
+juce.FillType.transformed(...)
+```
 ## Font
 
 ```lua
@@ -764,6 +796,43 @@ juce.Image.multiplyAlphaAt(...)
 juce.Image.new(...)
 juce.Image.rescaled(...)
 juce.Image.setPixelAt(...)
+```
+## Path
+
+```lua
+juce.Path.addArc(...)
+juce.Path.addArrow(...)
+juce.Path.addBubble(...)
+juce.Path.addCentredArc(...)
+juce.Path.addLineSegment(...)
+juce.Path.addPolygon(...)
+juce.Path.addQuadrilateral(...)
+juce.Path.addStar(...)
+juce.Path.applyTransform(...)
+juce.Path.clear(...)
+juce.Path.closeSubPath(...)
+juce.Path.contains(...)
+juce.Path.createPathWithRoundedCorners(...)
+juce.Path.getBounds(...)
+juce.Path.getBoundsTransformed(...)
+juce.Path.getClippedLine(...)
+juce.Path.getCurrentPosition(...)
+juce.Path.getLength(...)
+juce.Path.getNearestPoint (...)
+juce.Path.getPointAlongPath(...)
+juce.Path.intersectsLine(...)
+juce.Path.isEmpty(...)
+juce.Path.isUsingNonZeroWinding(...)
+juce.Path.loadPathFromData(...)
+juce.Path.loadPathFromStream(...)
+juce.Path.new(...)
+juce.Path.preallocateSpace(...)
+juce.Path.restoreFromString(...)
+juce.Path.scaleToFit(...)
+juce.Path.setUsingNonZeroWinding(...)
+juce.Path.swapWithPath(...)
+juce.Path.toString(...)
+juce.Path.writePathToStream(...)
 ```
 ## juce_gui_basics
 

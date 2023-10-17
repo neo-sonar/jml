@@ -30,7 +30,9 @@ namespace lua_juce {
 auto juce_Colour(sol::table& state) -> void;
 auto juce_ColourGradient(sol::table& state) -> void;
 auto juce_Colours(sol::table& state) -> void;
+auto juce_DropShadow(sol::table& state) -> void;
 auto juce_Graphics(sol::table& state) -> void;
+auto juce_FillType(sol::table& state) -> void;
 auto juce_Font(sol::table& state) -> void;
 auto juce_AffineTransform(sol::table& state) -> void;
 auto juce_Line(sol::table& state) -> void;

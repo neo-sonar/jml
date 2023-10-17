@@ -229,11 +229,14 @@ local classes = {
   juce_data_structures = {juce.UndoManager.new(0, 0), juce.ValueTree.new()},
   juce_graphics = {
     juce.AffineTransform.new(),
-    juce.Font.new(12.0),
     juce.Colour.new(0, 0, 0, 0),
     juce.ColourGradient.new(),
+    juce.DropShadow.new(),
+    juce.FillType.new(),
+    juce.Font.new(12.0),
     juce.Image.new(),
     juce.Graphics.new(juce.Image.new()),
+    juce.Path.new(),
   },
   juce_gui_basics = {
     juce.ComponentListener.new(),

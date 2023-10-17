@@ -54,6 +54,8 @@ auto allModules(sol::state& lua) -> void
     juce_Colour(table);
     juce_ColourGradient(table);
     juce_Colours(table);
+    juce_DropShadow(table);
+    juce_FillType(table);
     juce_Font(table);
     juce_Graphics(table);
     juce_Image(table);
