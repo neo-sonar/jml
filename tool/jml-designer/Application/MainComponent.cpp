@@ -101,9 +101,13 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
 
 auto MainComponent::documentLoad() -> void
 {
+    using juce::FileBrowserComponent;
     auto const* msg = "Please select the jml-designer project you want to load...";
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
-    auto const load = [this](auto const& chooser) {
+    auto const mode = FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles;
+
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
+    _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         auto results = chooser.getResults();
         if (results.size() != 1) {
             return;
@@ -124,26 +128,23 @@ auto MainComponent::documentLoad() -> void
         jassert(_editor != nullptr);
         addAndMakeVisible(*_editor);
         resized();
-    };
-
-    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
-    _fileChooser->launchAsync(juce::FileBrowserComponent::openMode, load);
+    });
 }
 
 auto MainComponent::documentSaveAs() -> void
 {
     auto const* msg = "Please select the jml-designer project you want to save...";
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
-    auto const load = [this](auto const& chooser) {
+    auto const mode = juce::FileBrowserComponent::saveMode;
+
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
+    _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         auto results = chooser.getResults();
         if (results.size() != 1) {
             return;
         }
         _document->save(juce::File{results[0]});
-    };
-
-    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.jml-designer");
-    _fileChooser->launchAsync(juce::FileBrowserComponent::saveMode, load);
+    });
 }
 
 } // namespace jml::designer

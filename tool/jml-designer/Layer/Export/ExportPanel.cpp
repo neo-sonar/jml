@@ -53,19 +53,19 @@ auto ExportPanel::resized() -> void
 
 auto ExportPanel::launchExportFileChooser() -> void
 {
-    auto const format = fromVar<ImageExporter::Format>(_format);
+    using juce::FileBrowserComponent;
 
-    auto const* msg       = "Please select the image file you want to save to...";
-    auto const dir        = juce::File::getCurrentWorkingDirectory();
+    auto const format     = fromVar<ImageExporter::Format>(_format);
     auto const* const ext = format == ImageExporter::Format::png ? "*.png" : "*.jpg";
-    _fileChooser          = std::make_unique<juce::FileChooser>(msg, dir, ext);
 
-    auto const chooserFlags
-        = juce::FileBrowserComponent::saveMode | juce::FileBrowserComponent::warnAboutOverwriting;
-    auto const load = [this, format](juce::FileChooser const& chooser) {
+    auto const* msg = "Please select the image file you want to save to...";
+    auto const dir  = juce::File::getCurrentWorkingDirectory();
+    auto const mode = FileBrowserComponent::saveMode | FileBrowserComponent::warnAboutOverwriting;
+
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, ext);
+    _fileChooser->launchAsync(mode, [this, format](juce::FileChooser const& chooser) {
         exportToImage(chooser.getResult(), format);
-    };
-    _fileChooser->launchAsync(chooserFlags, load);
+    });
 }
 
 auto ExportPanel::exportToImage(juce::File const& file, ImageExporter::Format format) -> void

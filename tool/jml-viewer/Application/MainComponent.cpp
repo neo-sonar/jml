@@ -126,10 +126,14 @@ auto MainComponent::showAboutWindow() -> void
 
 auto MainComponent::loadScriptPath() -> void
 {
+    using juce::FileBrowserComponent;
+
     auto const* msg = "Please select the lua script you want to load...";
     auto const dir  = juce::File::getSpecialLocation(juce::File::currentApplicationFile);
-    _fileChooser    = std::make_unique<juce::FileChooser>(msg, dir, "*.lua");
-    _fileChooser->launchAsync(juce::FileBrowserComponent::openMode, [this](auto const& chooser) {
+    auto const mode = FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles;
+
+    _fileChooser = std::make_unique<juce::FileChooser>(msg, dir, "*.lua");
+    _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         if (auto const result = chooser.getResult(); result.existsAsFile()) {
             _documents.openScript(result);
         }
