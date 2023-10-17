@@ -77,7 +77,15 @@ auto LuaScriptViewer::timerCallback() -> void
 auto LuaScriptViewer::reloadLuaState() -> void
 {
     _lua = std::make_unique<LuaState>();
-    _lua->state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
+    _lua->state.open_libraries(
+        sol::lib::base,
+        sol::lib::debug,
+        sol::lib::io,
+        sol::lib::math,
+        sol::lib::package,
+        sol::lib::string,
+        sol::lib::table
+    );
     lua_juce::allModules(_lua->state);
 }
 

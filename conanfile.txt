@@ -6,6 +6,5 @@ sol2/3.3.1
 lua/*:compile_as_cpp=True
 sol2/*:with_lua=lua
 
-[generators]
-CMakeDeps
-CMakeToolchain
+[layout]
+cmake_layout

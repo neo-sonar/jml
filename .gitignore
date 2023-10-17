@@ -9,4 +9,5 @@
 /out
 /CMakeUserPresets.json
 
+*.pdf
 __pycache__

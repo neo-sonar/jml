@@ -7,7 +7,15 @@ namespace jml::viewer {
 inline auto runSnapshotScript(CommandLine const& cli) -> juce::Result
 {
     auto state = sol::state{};
-    state.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
+    state.open_libraries(
+        sol::lib::base,
+        sol::lib::debug,
+        sol::lib::io,
+        sol::lib::math,
+        sol::lib::package,
+        sol::lib::string,
+        sol::lib::table
+    );
     lua_juce::allModules(state);
 
     auto const scriptFile = juce::File{cli.scriptPath};
