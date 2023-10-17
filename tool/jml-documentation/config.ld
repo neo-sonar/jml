@@ -1,0 +1,10 @@
+project = 'JML'
+title = 'JML Documentation'
+description = 'JUCE meets Lua'
+full_description = 'Lua bindings for the JUCE C++ framework'
+dir = 'out/html'
+format = "discount"
+sort_modules = true
+file = './out/src'
+merge = true
+not_luadoc = true

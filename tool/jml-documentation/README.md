@@ -18,6 +18,7 @@
 	- [StringArray](#StringArray)
 	- [Time](#Time)
 	- [Uuid](#Uuid)
+	- [XmlElement](#XmlElement)
 - [juce_data_structures](#juce_data_structures)
 	- [UndoManager](#UndoManager)
 	- [ValueTree](#ValueTree)
@@ -430,6 +431,7 @@ juce.String.isEmpty(...)
 juce.String.isNotEmpty(...)
 juce.String.length(...)
 juce.String.new(...)
+juce.String.trim(...)
 ```
 ## StringArray
 
@@ -508,6 +510,40 @@ juce.Uuid.isNull(...)
 juce.Uuid.new(...)
 juce.Uuid.toDashedString(...)
 juce.Uuid.toString(...)
+```
+## XmlElement
+
+```lua
+juce.XmlElement.compareAttribute(...)
+juce.XmlElement.getAllSubText(...)
+juce.XmlElement.getAttributeName(...)
+juce.XmlElement.getAttributeValue(...)
+juce.XmlElement.getBoolAttribute(...)
+juce.XmlElement.getChildByAttribute(...)
+juce.XmlElement.getChildByName(...)
+juce.XmlElement.getChildElement(...)
+juce.XmlElement.getChildElementAllSubText(...)
+juce.XmlElement.getDoubleAttribute(...)
+juce.XmlElement.getFirstChildElement(...)
+juce.XmlElement.getIntAttribute(...)
+juce.XmlElement.getNamespace(...)
+juce.XmlElement.getNextElement(...)
+juce.XmlElement.getNextElementWithTagName(...)
+juce.XmlElement.getNumAttributes(...)
+juce.XmlElement.getNumChildElements(...)
+juce.XmlElement.getStringAttribute(...)
+juce.XmlElement.getTagName(...)
+juce.XmlElement.getTagNameWithoutNamespace(...)
+juce.XmlElement.getText(...)
+juce.XmlElement.hasAttribute(...)
+juce.XmlElement.hasTagName(...)
+juce.XmlElement.hasTagNameIgnoringNamespace(...)
+juce.XmlElement.isEquivalentTo (...)
+juce.XmlElement.new(...)
+juce.XmlElement.removeAllAttributes(...)
+juce.XmlElement.removeAttribute(...)
+juce.XmlElement.setTagName(...)
+juce.XmlElement.setText(...)
 ```
 ## juce_data_structures
 

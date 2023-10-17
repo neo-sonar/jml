@@ -74,10 +74,9 @@ local function formatTypeDocsAsLuaSnippet(doc)
   return str
 end
 
-local function writeTypesDocsAsMarkdown(file, style, modules)
+local function parseTypeDocs(modules)
   modules = sortByKey(modules)
 
-  -- Parse types
   local docs = {}
   local sortedModuleNames = {}
 
@@ -96,6 +95,52 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
   end
 
   table.sort(sortedModuleNames)
+  return docs, sortedModuleNames
+end
+
+local function writeTypesDocsAsLuaStubs(dir, modules)
+  local docs, _ = parseTypeDocs(modules)
+  for module_name, juce_module in pairs(docs) do
+    for entity_name, entity in pairs(juce_module[2]) do
+      -- Create lua file
+      local file = io.open(dir .. "/" .. entity_name .. ".lua", "w")
+      if file == nil then
+        print("error:", entity_name)
+      end
+
+      -- Write ldoc headers
+      local ns = "juce"
+      local brief = "Encapsulates a MIDI message."
+      file:write("--------------\n")
+      file:write(string.format("-- %s\n", brief))
+      file:write(string.format("-- @classmod %s.%s\n\n", ns, entity_name))
+      file:write(string.format("local %s = {}\n\n", entity_name))
+
+      -- For each member in entity
+      for member_name, member in pairs(entity.members) do
+        -- Skip special functions
+        if startsWith(member, "__") == false then
+          file:write("--------------\n")
+
+          local member_brief = "Brief"
+          if member_brief ~= "" then
+            file:write(string.format("--- %s\n", member_brief))
+          end
+
+          local seperator = ":"
+          local member_func = "function %s%s%s(...) end\n\n"
+          file:write(string.format(member_func, entity_name, seperator, member))
+        end
+      end
+
+      file:write(string.format("return %s\n", entity_name))
+      file:close()
+    end
+  end
+end
+
+local function writeTypesDocsAsMarkdown(file, style, modules)
+  local docs, sortedModuleNames = parseTypeDocs(modules)
 
   -- Write header
   file:write("# JML Documentation\n\n")
@@ -137,8 +182,7 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
   end
 end
 
-local file = io.open("Documentation.md", "w")
-writeTypesDocsAsMarkdown(file, "snippets", {
+local classes = {
   juce_core = {
     juce.BigInteger.new(),
     juce.File.new(),
@@ -154,6 +198,7 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.Uuid.new(),
     juce.RelativeTime.seconds(1.0),
     juce.Time.new(),
+    juce.XmlElement.new("TAG"),
   },
   juce_audio_basics = {
     juce.MidiFile.new(),
@@ -185,5 +230,10 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.TreeView.new(juce.String.new("")),
   },
   juce_gui_extra = {juce.CodeDocument.new()},
-})
+}
+
+local file = io.open("README.md", "w")
+writeTypesDocsAsMarkdown(file, "snippets", classes)
 file:close()
+
+writeTypesDocsAsLuaStubs("out/src", classes)
