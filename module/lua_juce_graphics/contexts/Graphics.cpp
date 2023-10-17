@@ -1,4 +1,19 @@
 namespace lua_juce {
+
+namespace {
+
+auto drawFittedText2(juce::Graphics const* g, juce::String const& s, int x, int y, int w, int h, juce::Justification j, int m) -> void { g->drawFittedText(s, x, y, w, h, j, m); }
+auto drawFittedText4(juce::Graphics const* g, juce::String const& s, juce::Rectangle<int> area, juce::Justification j, int m) -> void { g->drawFittedText(s, area, j, m); }
+
+auto drawText1(juce::Graphics const* g, juce::String const& s, int x, int y, int w, int h, juce::Justification j) -> void { g->drawText(s, x, y, w, h, j); }
+auto drawText3(juce::Graphics const* g, juce::String const& s, juce::Rectangle<int> area, juce::Justification j) -> void { g->drawText(s, area, j); }
+auto drawText5(juce::Graphics const* g, juce::String const& s, juce::Rectangle<float> area, juce::Justification j) -> void { g->drawText(s, area, j); }
+
+auto fillRoundedRectangle1(juce::Graphics* g, juce::Rectangle<int> r, double ra) -> void { g->fillRoundedRectangle(r.toFloat(), static_cast<float>(ra)); }
+auto fillRoundedRectangle2(juce::Graphics* g, juce::Rectangle<float> r, double ra) -> void { g->fillRoundedRectangle(r, static_cast<float>(ra)); }
+auto fillRoundedRectangle3(juce::Graphics* g, juce::Rectangle<double> r, double ra) -> void { g->fillRoundedRectangle(r.toFloat(), static_cast<float>(ra)); }
+
+} // namespace
 auto juce_Graphics(sol::table& state) -> void
 {
     using juce::Graphics;
@@ -45,20 +60,20 @@ auto juce_Graphics(sol::table& state) -> void
         LUA_JUCE_WRAP(static_cast<void (Graphics::*)(juce::Font const&)>(&Graphics::setFont)) //
         >;
 
-    g["drawFittedText"] = sol::c_call<                                                                                                                              //
-        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, int, float) const>(&Graphics::drawFittedText)),              //
-        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, int x, int y, int w, int h, Justification j, int m) { ctx->drawFittedText(s, x, y, w, h, j, m); }), //
-        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, int, float) const>(&Graphics::drawFittedText)),                  //
-        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<int> area, Justification j, int m) { ctx->drawFittedText(s, area, j, m); })               //
+    g["drawFittedText"] = sol::c_call<                                                                                                                 //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, int, float) const>(&Graphics::drawFittedText)), //
+        LUA_JUCE_WRAP(drawFittedText2),                                                                                                                //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, int, float) const>(&Graphics::drawFittedText)),     //
+        LUA_JUCE_WRAP(drawFittedText4)                                                                                                                 //
         >;
 
-    g["drawText"] = sol::c_call<                                                                                                                    //
-        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, bool) const>(&Graphics::drawText)),          //
-        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, int x, int y, int w, int h, Justification j) { ctx->drawText(s, x, y, w, h, j); }), //
-        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, bool) const>(&Graphics::drawText)),              //
-        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<int> area, Justification j) { ctx->drawText(s, area, j); }),              //
-        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<float>, Justification, bool) const>(&Graphics::drawText)),            //
-        LUA_JUCE_WRAP(+[](Graphics const* ctx, String const& s, Rectangle<float> area, Justification j) { ctx->drawText(s, area, j); })             //
+    g["drawText"] = sol::c_call<                                                                                                           //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, int, int, int, int, Justification, bool) const>(&Graphics::drawText)), //
+        LUA_JUCE_WRAP(drawText1),                                                                                                          //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<int>, Justification, bool) const>(&Graphics::drawText)),     //
+        LUA_JUCE_WRAP(drawText3),                                                                                                          //
+        LUA_JUCE_WRAP(static_cast<void (Graphics::*)(String const&, Rectangle<float>, Justification, bool) const>(&Graphics::drawText)),   //
+        LUA_JUCE_WRAP(drawText5)                                                                                                           //
         >;
 
     g["fillAll"] = sol::c_call<                                                                //
@@ -80,9 +95,9 @@ auto juce_Graphics(sol::table& state) -> void
 
     g["fillRoundedRectangle"] = sol::c_call<                                                                                      //
         LUA_JUCE_WRAP(static_cast<void (Graphics::*)(float, float, float, float, float) const>(&Graphics::fillRoundedRectangle)), //
-        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<int> r, double ra) { ctx->fillRoundedRectangle(r.toFloat(), float(ra)); }),    //
-        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<float> r, double ra) { ctx->fillRoundedRectangle(r, float(ra)); }),            //
-        LUA_JUCE_WRAP(+[](Graphics* ctx, Rectangle<double> r, double ra) { ctx->fillRoundedRectangle(r.toFloat(), float(ra)); })  //
+        LUA_JUCE_WRAP(fillRoundedRectangle1),                                                                                     //
+        LUA_JUCE_WRAP(fillRoundedRectangle2),                                                                                     //
+        LUA_JUCE_WRAP(fillRoundedRectangle3)                                                                                      //
         >;
 
     g["fillRectList"] = sol::c_call<                                                                                      //

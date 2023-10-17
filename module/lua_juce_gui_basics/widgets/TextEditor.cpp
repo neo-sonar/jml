@@ -1,5 +1,12 @@
 namespace lua_juce {
 
+namespace {
+auto moveCaretToEnd1(juce::TextEditor* te) -> void { return te->moveCaretToEnd(); }
+auto moveCaretToEnd2(juce::TextEditor* te, bool selecting) -> bool { return te->moveCaretToEnd(selecting); }
+auto getTextIndexAt1(juce::TextEditor const* te, int x, int y) -> int { return te->getTextIndexAt(x, y); }
+auto getTextIndexAt2(juce::TextEditor const* te, juce::Point<int> point) -> int { return te->getTextIndexAt(point); }
+} // namespace
+
 auto juce_TextEditor(sol::table& state) -> void
 {
     // clang-format off
@@ -109,14 +116,8 @@ auto juce_TextEditor(sol::table& state) -> void
     editor["setKeyboardType"]                        = LUA_JUCE_C_CALL(&juce::TextEditor::setKeyboardType);
     editor["setClicksOutsideDismissVirtualKeyboard"] = LUA_JUCE_C_CALL(&juce::TextEditor::setClicksOutsideDismissVirtualKeyboard);
     editor["getClicksOutsideDismissVirtualKeyboard"] = LUA_JUCE_C_CALL(&juce::TextEditor::getClicksOutsideDismissVirtualKeyboard);
-
-    static constexpr auto moveCaretToEnd_1 = +[](juce::TextEditor* te) { return te->moveCaretToEnd(); };
-    static constexpr auto moveCaretToEnd_2 = +[](juce::TextEditor* te, bool selecting) { return te->moveCaretToEnd(selecting); };
-    static constexpr auto getTextIndexAt_1 = +[](juce::TextEditor const* te, int x, int y) { return te->getTextIndexAt(x, y); };
-    static constexpr auto getTextIndexAt_2 = +[](juce::TextEditor const* te, juce::Point<int> point) { return te->getTextIndexAt(point); };
-
-    editor["moveCaretToEnd"] = sol::c_call<LUA_JUCE_WRAP(moveCaretToEnd_1), LUA_JUCE_WRAP(moveCaretToEnd_2)>;
-    editor["getTextIndexAt"] = sol::c_call<LUA_JUCE_WRAP(getTextIndexAt_1), LUA_JUCE_WRAP(getTextIndexAt_2)>;
+    editor["moveCaretToEnd"]                         = sol::c_call<LUA_JUCE_WRAP(moveCaretToEnd1), LUA_JUCE_WRAP(moveCaretToEnd2)>;
+    editor["getTextIndexAt"]                         = sol::c_call<LUA_JUCE_WRAP(getTextIndexAt1), LUA_JUCE_WRAP(getTextIndexAt2)>;
 }
 
 } // namespace lua_juce
