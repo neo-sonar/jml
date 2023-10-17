@@ -25,18 +25,23 @@ jobs:
         include:
           - name: Linux-GCC
             os: ubuntu-22.04
+            cmake_args: "-D CMAKE_C_COMPILER=gcc-12 -D CMAKE_CXX_COMPILER=g++-12"
 
           - name: Linux-Clang
             os: ubuntu-22.04
+            cmake_args: ""
 
           - name: macOS-Clang
             os: macos-13
+            cmake_args: ""
 
           - name: Windows-MSVC
             os: windows-latest
+            cmake_args: ""
 
           - name: Windows-Clang
             os: windows-latest
+            cmake_args: ""
 
     steps:
       - name: Check out code
@@ -105,6 +110,7 @@ jobs:
           -B build
           -D CMAKE_BUILD_TYPE=Release
           -D CMAKE_PROJECT_TOP_LEVEL_INCLUDES=external/cmake-conan/conan_provider.cmake
+          ${{ matrix.cmake_args }}
 
       - name: CMake build
         run: cmake --build build
