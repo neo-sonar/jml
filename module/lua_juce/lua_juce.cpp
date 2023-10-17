@@ -30,6 +30,10 @@ auto allModules(sol::state& lua) -> void
     juce_RelativeTime(table);
     juce_Time(table);
 
+    // juce_audio_basics
+    juce_AudioPlayHead(table);
+    juce_MidiMessage(table);
+
     // juce_data_structures
     juce_UndoableAction(table);
     juce_UndoManager(table);
