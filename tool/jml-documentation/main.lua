@@ -161,6 +161,8 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.Font.new(12.0),
     juce.Colour.new(0, 0, 0, 0),
     juce.ColourGradient.new(),
+    juce.Image.new(),
+    juce.Graphics.new(juce.Image.new()),
   },
   juce_gui_basics = {
     juce.ComponentListener.new(),

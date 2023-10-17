@@ -21,7 +21,7 @@ auto juce_Graphics(sol::table& state) -> void
     using juce::Rectangle;
     using juce::String;
 
-    auto g = state.new_usertype<Graphics>("Graphics");
+    auto g = state.new_usertype<Graphics>("Graphics", sol::constructors<juce::Graphics(juce::Image const&)>());
 
     g["setColour"]                 = LUA_JUCE_C_CALL(&Graphics::setColour);
     g["setOpacity"]                = LUA_JUCE_C_CALL(&Graphics::setOpacity);
