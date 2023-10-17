@@ -132,11 +132,21 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
           end
           file:write("--------------\n")
 
-          if doxygen_member ~= nil then
+          if doxygen_member  then
             file:write(string.format("--- %s\n", doxygen_member.brief))
+          else
+            doxygen_member = {is_static=true}
+            file:write(string.format("--- %s\n", member))
           end
 
-          local seperator = ":"
+          local seperator = nil
+          if doxygen_member.is_static then
+            seperator = "."
+            file:write(string.format("-- @static\n"))
+          else
+            seperator = ":"
+          end
+
           local member_func = "function %s%s%s(...) end\n\n"
           file:write(string.format(member_func, entity_name, seperator, member))
         end
