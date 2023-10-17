@@ -156,6 +156,7 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.Time.new(),
   },
   juce_audio_basics = {juce.MidiMessage.new()},
+  juce_data_structures = {juce.UndoManager.new(0, 0), juce.ValueTree.new()},
   juce_graphics = {
     juce.AffineTransform.new(),
     juce.Font.new(12.0),
@@ -168,6 +169,7 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.ComponentListener.new(),
     juce.ComboBox.new(juce.String.new("")),
     juce.Label.new(juce.String.new(""), juce.String.new("")),
+    juce.LookAndFeel_V4.new(),
     juce.ImageComponent.new(juce.String.new("")),
     juce.Slider.new(),
     -- juce.ArrowButton.new(juce.String.new("")),
@@ -176,5 +178,6 @@ writeTypesDocsAsMarkdown(file, "snippets", {
     juce.ToggleButton.new(juce.String.new("")),
     juce.TreeView.new(juce.String.new("")),
   },
+  juce_gui_extra = {juce.CodeDocument.new()},
 })
 file:close()

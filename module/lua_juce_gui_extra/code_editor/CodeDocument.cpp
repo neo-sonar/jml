@@ -2,9 +2,7 @@ namespace lua_juce {
 
 auto juce_CodeDocument(sol::table& state) -> void
 {
-    auto table = state["CodeDocument"].get_or_create<sol::table>();
-
-    auto doc                        = table.new_usertype<juce::CodeDocument>("CodeDocument", sol::constructors<juce::CodeDocument()>());
+    auto doc                        = state.new_usertype<juce::CodeDocument>("CodeDocument", sol::constructors<juce::CodeDocument()>());
     doc["getAllContent"]            = LUA_JUCE_C_CALL(&juce::CodeDocument::getAllContent);
     doc["getTextBetween"]           = LUA_JUCE_C_CALL(&juce::CodeDocument::getTextBetween);
     doc["getLine"]                  = LUA_JUCE_C_CALL(&juce::CodeDocument::getLine);
@@ -35,7 +33,7 @@ auto juce_CodeDocument(sol::table& state) -> void
     // doc["insertText"]               = &juce::CodeDocument::insertText;
     // doc["insertText"]               = &juce::CodeDocument::insertText;
 
-    table["new"] = [] { return std::unique_ptr<juce::CodeDocument>(); };
+    // table["new"] = [] { return std::unique_ptr<juce::CodeDocument>(); };
 }
 
 } // namespace lua_juce

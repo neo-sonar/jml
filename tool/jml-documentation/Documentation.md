@@ -14,6 +14,9 @@
 	- [StringArray](#StringArray)
 	- [Time](#Time)
 	- [Uuid](#Uuid)
+- [juce_data_structures](#juce_data_structures)
+	- [UndoManager](#UndoManager)
+	- [ValueTree](#ValueTree)
 - [juce_graphics](#juce_graphics)
 	- [AffineTransform](#AffineTransform)
 	- [Colour](#Colour)
@@ -27,10 +30,13 @@
 	- [HyperlinkButton](#HyperlinkButton)
 	- [ImageComponent](#ImageComponent)
 	- [Label](#Label)
+	- [LookAndFeel_V4](#LookAndFeel_V4)
 	- [Slider](#Slider)
 	- [TextButton](#TextButton)
 	- [ToggleButton](#ToggleButton)
 	- [TreeView](#TreeView)
+- [juce_gui_extra](#juce_gui_extra)
+	- [CodeDocument](#CodeDocument)
 
 
 ## juce_audio_basics
@@ -438,6 +444,82 @@ juce.Uuid.new(...)
 juce.Uuid.toDashedString(...)
 juce.Uuid.toString(...)
 ```
+## juce_data_structures
+
+## UndoManager
+
+```lua
+juce.UndoManager.beginNewTransaction(...)
+juce.UndoManager.canRedo(...)
+juce.UndoManager.canUndo(...)
+juce.UndoManager.clearUndoHistory(...)
+juce.UndoManager.getActionsInCurrentTransaction(...)
+juce.UndoManager.getCurrentTransactionName(...)
+juce.UndoManager.getNumActionsInCurrentTransaction(...)
+juce.UndoManager.getNumberOfUnitsTakenUpByStoredCommands(...)
+juce.UndoManager.getRedoDescription(...)
+juce.UndoManager.getRedoDescriptions(...)
+juce.UndoManager.getTimeOfRedoTransaction(...)
+juce.UndoManager.getTimeOfUndoTransaction(...)
+juce.UndoManager.getUndoDescription(...)
+juce.UndoManager.getUndoDescriptions(...)
+juce.UndoManager.isPerformingUndoRedo(...)
+juce.UndoManager.new(...)
+juce.UndoManager.perform(...)
+juce.UndoManager.redo(...)
+juce.UndoManager.setCurrentTransactionName(...)
+juce.UndoManager.setMaxNumberOfStoredUnits(...)
+juce.UndoManager.undo(...)
+juce.UndoManager.undoCurrentTransactionOnly(...)
+```
+## ValueTree
+
+```lua
+juce.ValueTree.addChild(...)
+juce.ValueTree.addListener(...)
+juce.ValueTree.appendChild(...)
+juce.ValueTree.copyPropertiesAndChildrenFrom(...)
+juce.ValueTree.copyPropertiesFrom(...)
+juce.ValueTree.createCopy(...)
+juce.ValueTree.createXml(...)
+juce.ValueTree.fromXml(...)
+juce.ValueTree.getChild(...)
+juce.ValueTree.getChildWithName(...)
+juce.ValueTree.getChildWithProperty(...)
+juce.ValueTree.getNumChildren(...)
+juce.ValueTree.getNumProperties(...)
+juce.ValueTree.getOrCreateChildWithName(...)
+juce.ValueTree.getParent(...)
+juce.ValueTree.getProperty(...)
+juce.ValueTree.getPropertyAsValue(...)
+juce.ValueTree.getPropertyName(...)
+juce.ValueTree.getPropertyPointer(...)
+juce.ValueTree.getReferenceCount(...)
+juce.ValueTree.getRoot(...)
+juce.ValueTree.getSibling(...)
+juce.ValueTree.getType(...)
+juce.ValueTree.hasProperty(...)
+juce.ValueTree.hasType(...)
+juce.ValueTree.indexOf(...)
+juce.ValueTree.isAChildOf(...)
+juce.ValueTree.isEquivalentTo(...)
+juce.ValueTree.isValid(...)
+juce.ValueTree.moveChild(...)
+juce.ValueTree.new(...)
+juce.ValueTree.readFromData(...)
+juce.ValueTree.readFromGZIPData(...)
+juce.ValueTree.readFromStream(...)
+juce.ValueTree.removeAllChildren(...)
+juce.ValueTree.removeAllProperties(...)
+juce.ValueTree.removeChild(...)
+juce.ValueTree.removeListener(...)
+juce.ValueTree.removeProperty(...)
+juce.ValueTree.sendPropertyChangeMessage(...)
+juce.ValueTree.setProperty(...)
+juce.ValueTree.setPropertyExcludingListener(...)
+juce.ValueTree.toXmlString(...)
+juce.ValueTree.writeToStream(...)
+```
 ## juce_graphics
 
 ## AffineTransform
@@ -685,6 +767,14 @@ juce.Label.setMinimumHorizontalScale(...)
 juce.Label.setText(...)
 juce.Label.showEditor(...)
 ```
+## LookAndFeel_V4
+
+```lua
+juce.LookAndFeel_V4.drawButtonBackground(...)
+juce.LookAndFeel_V4.drawToggleButton(...)
+juce.LookAndFeel_V4.getTextButtonFont(...)
+juce.LookAndFeel_V4.new(...)
+```
 ## Slider
 
 ```lua
@@ -803,4 +893,36 @@ juce.TreeView.setMultiSelectEnabled(...)
 juce.TreeView.setOpenCloseButtonsVisible(...)
 juce.TreeView.setRootItem(...)
 juce.TreeView.setRootItemVisible(...)
+```
+## juce_gui_extra
+
+## CodeDocument
+
+```lua
+juce.CodeDocument.addListener(...)
+juce.CodeDocument.applyChanges(...)
+juce.CodeDocument.clearUndoHistory(...)
+juce.CodeDocument.findLineContaining(...)
+juce.CodeDocument.findTokenContaining(...)
+juce.CodeDocument.findWordBreakBefore(...)
+juce.CodeDocument.getAllContent(...)
+juce.CodeDocument.getLine(...)
+juce.CodeDocument.getMaximumLineLength(...)
+juce.CodeDocument.getNewLineCharacters(...)
+juce.CodeDocument.getNumCharacters(...)
+juce.CodeDocument.getNumLines(...)
+juce.CodeDocument.getTextBetween(...)
+juce.CodeDocument.getUndoManager(...)
+juce.CodeDocument.hasChangedSinceSavePoint(...)
+juce.CodeDocument.loadFromStream(...)
+juce.CodeDocument.new(...)
+juce.CodeDocument.newTransaction(...)
+juce.CodeDocument.redo(...)
+juce.CodeDocument.removeListener(...)
+juce.CodeDocument.replaceAllContent(...)
+juce.CodeDocument.replaceSection(...)
+juce.CodeDocument.setNewLineCharacters(...)
+juce.CodeDocument.setSavePoint(...)
+juce.CodeDocument.undo(...)
+juce.CodeDocument.writeToStream(...)
 ```
