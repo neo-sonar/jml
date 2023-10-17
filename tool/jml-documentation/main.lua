@@ -45,6 +45,7 @@ local function parseType(obj)
 
   end
 
+  table.sort(doc.members)
   return doc
 end
 
@@ -52,9 +53,10 @@ local function formatTypeDocsAsMarkdownTable(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("| Name | Type | Description |\n")
   str = str .. string.format("| :--: | :--: | :---------: |\n")
-  for _, value in pairs(doc.members) do
+  for i=1,#doc.members do
+    member = doc.members[i]
     local fmt = "| `%s` | %s | %s |\n"
-    str = str .. string.format(fmt, value, "Function", "help")
+    str = str .. string.format(fmt, member, "Function", "help")
   end
   return str
 end
@@ -62,7 +64,8 @@ end
 local function formatTypeDocsAsLuaSnippet(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("```lua\n")
-  for _, member in pairs(doc.members) do
+  for i=1,#doc.members do
+    member = doc.members[i]
     if startsWith(member, "__") == false then
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
     end
@@ -83,15 +86,13 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
     local sortedEntityNames = {}
     for _, entity in pairs(moduleContent) do
       local doc = parseType(entity)
-      table.insert(moduleDocs, doc)
+      moduleDocs[doc.name] = doc
       table.insert(sortedEntityNames, doc.name)
     end
 
-    table.sort(sortedEntityNames)
-    moduleDocs["sortedEntityNames"] = sortedEntityNames
-
-    docs[moduleName] = moduleDocs
     table.insert(sortedModuleNames, moduleName)
+    table.sort(sortedEntityNames)
+    docs[moduleName] = {sortedEntityNames, moduleDocs}
   end
 
   table.sort(sortedModuleNames)
@@ -100,40 +101,32 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
   file:write("# JML Documentation\n\n")
 
   -- Write TOC
-  for moduleName, moduleDocs in pairs(docs) do
+  for i = 1, #sortedModuleNames do
+    local moduleName = sortedModuleNames[i]
+    local moduleDocs = docs[moduleName]
     file:write(string.format("- [%s](#%s)\n", moduleName, moduleName))
-    for _, doc in pairs(moduleDocs) do
-      local n = doc.name
-      if n ~= nil then
-        file:write(string.format("\t- [%s](#%s)\n", n, n))
+    for d = 1, #moduleDocs[1] do
+      local name = moduleDocs[1][d]
+      local entity = moduleDocs[2][name]
+      local name = entity.name
+      if name ~= nil then
+        file:write(string.format("\t- [%s](#%s)\n", name, name))
       end
     end
   end
-  -- for i = 1, #sortedModuleNames do
-  --   local mn = sortedModuleNames[i]
-  --   local md = docs[mn]
-  --   local sn = md["sortedEntityNames"]
-  --   file:write(string.format("- [%s](#%s)\n", mn, mn))
-  --   for d = 1, #sn do
-  --     local entity = sn[d]
-  --     local doc = md[entity]
-  --     print(entity, doc)
-  --     -- if doc == nil then
-  --     -- else
-  --     --   file:write(string.format("\t- [%s](#%s)\n", doc.name, doc.name))
-  --     -- end
-  --   end
-  -- end
 
   -- Wrie Content
   file:write("\n\n")
-  for moduleName, moduleDocs in pairs(docs) do
+  for i = 1, #sortedModuleNames do
+    local moduleName = sortedModuleNames[i]
+    local moduleDocs = docs[moduleName]
     -- Header
     file:write(string.format("## %s\n\n", moduleName))
 
     -- Members
-    for i = 1, #moduleDocs do
-      local doc = moduleDocs[i]
+    for d = 1, #moduleDocs[1] do
+      local name = moduleDocs[1][d]
+      local doc = moduleDocs[2][name]
       if style == "table" then
         file:write(formatTypeDocsAsMarkdownTable(doc))
       else
