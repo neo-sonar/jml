@@ -5,6 +5,7 @@
 	- [MidiMessage](#MidiMessage)
 	- [MidiMessageSequence](#MidiMessageSequence)
 	- [MidiRPNDetector](#MidiRPNDetector)
+	- [MidiRPNMessage](#MidiRPNMessage)
 - [juce_core](#juce_core)
 	- [BigInteger](#BigInteger)
 	- [File](#File)
@@ -196,6 +197,16 @@ juce.MidiMessageSequence.updateMatchedPairs(...)
 juce.MidiRPNDetector.new(...)
 juce.MidiRPNDetector.reset(...)
 juce.MidiRPNDetector.tryParse(...)
+```
+## MidiRPNMessage
+
+```lua
+juce.MidiRPNMessage.channel(...)
+juce.MidiRPNMessage.is14BitValue(...)
+juce.MidiRPNMessage.isNRPN(...)
+juce.MidiRPNMessage.new(...)
+juce.MidiRPNMessage.parameterNumber(...)
+juce.MidiRPNMessage.value(...)
 ```
 ## juce_core
 

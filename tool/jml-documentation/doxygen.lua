@@ -47,8 +47,17 @@ end
 function doxygen.parse_xml(entity_name)
   -- Paths
   local juce_path = "~/Developer/tobiashienzsch/JUCE"
-  local xml_path = string.format("%s/docs/doxygen/xml/class%s.xml", juce_path,
-                                 entity_name)
+  local class_path = string.format("%s/docs/doxygen/xml/class%s.xml", juce_path,
+                                   entity_name)
+  local struct_path = string.format("%s/docs/doxygen/xml/struct%s.xml",
+                                    juce_path, entity_name)
+
+  local xml_path = nil
+  if juce.File.new(juce.String.new(class_path)):existsAsFile() then
+    xml_path = class_path
+  else
+    xml_path = struct_path
+  end
 
   -- Xml file
   local xml_file = juce.File.new(juce.String.new(xml_path))

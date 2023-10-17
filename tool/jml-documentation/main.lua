@@ -214,7 +214,7 @@ local classes = {
     juce.MidiMessage.new(),
     juce.MidiMessageSequence.new(),
     juce.MidiRPNDetector.new(),
-    -- juce.MidiRPNMessage.new(),
+    juce.MidiRPNMessage.new(),
   },
   juce_data_structures = {juce.UndoManager.new(0, 0), juce.ValueTree.new()},
   juce_graphics = {
