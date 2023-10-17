@@ -45,56 +45,79 @@ local function formatTypeDocsAsLuaSnippet(doc)
   return str
 end
 
-local function writeTypesDocsAsMarkdown(file, style, types)
+local function writeTypesDocsAsMarkdown(file, style, modules)
   -- Parse types
   local docs = {}
-  for _, value in pairs(types) do
-    table.insert(docs, parseType(value))
+  for modName, mod in pairs(modules) do
+    local modDocs = {}
+    for _, value in pairs(mod) do
+      local doc = parseType(value)
+      modDocs[doc.name] = doc
+    end
+    docs[modName] = modDocs
   end
+
+  table.sort(docs)
 
   -- Write header
   file:write("# JML Documentation\n\n")
 
   -- Write TOC
-  for _, doc in pairs(docs) do
-    file:write(string.format("- [%s](#%s)\n", doc.name, doc.name))
+  for modName, modDocs in pairs(docs) do
+    file:write(string.format("- [%s](#%s)\n", modName, modName))
+    for _, doc in pairs(modDocs) do
+      file:write(string.format("\t- [%s](#%s)\n", doc.name, doc.name))
+    end
   end
 
   -- Wrie Content
   file:write("\n\n")
-  for _, doc in pairs(docs) do
-    if style == "table" then
-      file:write(formatTypeDocsAsMarkdownTable(doc))
-    else
-      assert(style == "snippets")
-      file:write(formatTypeDocsAsLuaSnippet(doc))
+  for modName, modDocs in pairs(docs) do
+    -- Header
+    file:write(string.format("## %s\n\n", modName))
+
+    -- Members
+    for _, doc in pairs(modDocs) do
+      if style == "table" then
+        file:write(formatTypeDocsAsMarkdownTable(doc))
+      else
+        assert(style == "snippets")
+        file:write(formatTypeDocsAsLuaSnippet(doc))
+      end
     end
   end
 end
 
 local file = io.open("doc.md", "w")
 writeTypesDocsAsMarkdown(file, "snippets", {
-  juce.BigInteger.new(),
-  juce.File.new(),
-  juce.IPAddress.new(),
-  juce.MemoryBlock.new(),
-  -- juce.NormalisableRangeDouble.new(),
-  juce.Random.new(),
-  -- juce.RangeDouble.new(0.0, 1.0),
-  juce.Result.ok(),
-  -- juce.StatisticsAccumulatorDouble.new(),
-  juce.String.new(),
-  juce.StringArray.new(),
-  juce.Uuid.new(),
-  juce.RelativeTime.seconds(1.0),
-  juce.Time.new(),
-
-  juce.MidiMessage.new(),
-
-  juce.Font.new(12.0),
-
-  juce.Slider.new(),
-  juce.ComboBox.new(juce.String.new("")),
+  ["juce_core"] = {
+    juce.BigInteger.new(),
+    juce.File.new(),
+    juce.IPAddress.new(),
+    juce.MemoryBlock.new(),
+    -- juce.NormalisableRangeDouble.new(),
+    juce.Random.new(),
+    -- juce.RangeDouble.new(0.0, 1.0),
+    juce.Result.ok(),
+    -- juce.StatisticsAccumulatorDouble.new(),
+    juce.String.new(),
+    juce.StringArray.new(),
+    juce.Uuid.new(),
+    juce.RelativeTime.seconds(1.0),
+    juce.Time.new(),
+  },
+  ["juce_audio_basics"] = {juce.MidiMessage.new()},
+  ["juce_graphics"] = {
+    juce.AffineTransform.new(),
+    juce.Font.new(12.0),
+    juce.Colour.new(0, 0, 0, 0),
+    juce.ColourGradient.new(),
+  },
+  ["juce_gui_basics"] = {
+    juce.ComboBox.new(juce.String.new("")),
+    juce.Slider.new(),
+    juce.TextButton.new(juce.String.new("")),
+  },
 })
 file:close()
 
