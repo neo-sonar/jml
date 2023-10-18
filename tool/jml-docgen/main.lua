@@ -1,74 +1,16 @@
 doxygen = require("doxygen")
+sol2 = require("sol2")
 
-local function sortByKey(t)
-  -- Collect the keys into an array
-  local keys = {}
-  for key in pairs(t) do
-    table.insert(keys, key)
-  end
-
-  -- Sort the keys
-  table.sort(keys)
-
-  -- Create a new table with sorted keys
-  local sorted = {}
-  for _, key in ipairs(keys) do
-    sorted[key] = t[key]
-  end
-
-  return sorted
-end
-
-local function startsWith(str, prefix)
+local function starts_with(str, prefix)
   return string.sub(str, 1, string.len(prefix)) == prefix
 end
 
-local function parseType(obj)
-  local meta = getmetatable(obj)
-  local name = meta.__name
-  local doc = {}
-
-  i, j = string.find(name, "lua_juce")
-  if i == nil or j == nil then
-    doc["name"] = string.sub(meta.__name, 11) -- Remove "sol.juce::"
-  else
-    doc["name"] = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
-  end
-  assert(name ~= nil)
-
-  doc["members"] = {}
-
-  for key, value in pairs(meta) do
-    if type(value) == "function" then
-      table.insert(doc.members, key)
-      -- for k, v in pairs(debug.getinfo(value)) do
-      -- end
-    end
-
-  end
-
-  table.sort(doc.members)
-  return doc
-end
-
-local function formatTypeDocsAsMarkdownTable(doc)
-  local str = string.format("## %s\n\n", doc.name)
-  str = str .. string.format("| Name | Type | Description |\n")
-  str = str .. string.format("| :--: | :--: | :---------: |\n")
-  for i = 1, #doc.members do
-    member = doc.members[i]
-    local fmt = "| `%s` | %s | %s |\n"
-    str = str .. string.format(fmt, member, "Function", "help")
-  end
-  return str
-end
-
-local function formatTypeDocsAsLuaSnippet(doc)
+local function format_usertype_docs_as_lua_stubs(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("```lua\n")
   for i = 1, #doc.members do
     member = doc.members[i]
-    if startsWith(member, "__") == false then
+    if starts_with(member, "__") == false then
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
     end
   end
@@ -76,32 +18,8 @@ local function formatTypeDocsAsLuaSnippet(doc)
   return str
 end
 
-local function parseTypeDocs(modules)
-  modules = sortByKey(modules)
-
-  local docs = {}
-  local sortedModuleNames = {}
-
-  for moduleName, moduleContent in pairs(modules) do
-    local moduleDocs = {}
-    local sortedEntityNames = {}
-    for _, entity in pairs(moduleContent) do
-      local doc = parseType(entity)
-      moduleDocs[doc.name] = doc
-      table.insert(sortedEntityNames, doc.name)
-    end
-
-    table.insert(sortedModuleNames, moduleName)
-    table.sort(sortedEntityNames)
-    docs[moduleName] = {sortedEntityNames, moduleDocs}
-  end
-
-  table.sort(sortedModuleNames)
-  return docs, sortedModuleNames
-end
-
-local function writeTypesDocsAsLuaStubs(dir, modules)
-  local docs, _ = parseTypeDocs(modules)
+local function write_usertype_docs_as_lua_stubs(dir, modules)
+  local docs, _ = sol2.parse_juce_types(modules)
   for module_name, juce_module in pairs(docs) do
     for entity_name, entity in pairs(juce_module[2]) do
       local doxygen_spec = doxygen.parse_xml(entity_name)
@@ -122,7 +40,7 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
       -- For each member in entity
       for _, member in pairs(entity.members) do
         -- Skip special functions
-        if startsWith(member, "__") == false then
+        if starts_with(member, "__") == false then
           local doxygen_member = nil
           for _, spec in pairs(doxygen_spec.members) do
             if spec.name:toStdString() == member then
@@ -181,20 +99,20 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
   end
 end
 
-local function writeTypesDocsAsMarkdown(file, style, modules)
-  local docs, sortedModuleNames = parseTypeDocs(modules)
+local function write_usertype_docs_as_markdown(file, modules)
+  local docs, sorted_modules_names = sol2.parse_juce_types(modules)
 
   -- Write header
   file:write("# JML Documentation\n\n")
 
   -- Write TOC
-  for i = 1, #sortedModuleNames do
-    local moduleName = sortedModuleNames[i]
-    local moduleDocs = docs[moduleName]
-    file:write(string.format("- [%s](#%s)\n", moduleName, moduleName))
-    for d = 1, #moduleDocs[1] do
-      local name = moduleDocs[1][d]
-      local entity = moduleDocs[2][name]
+  for i = 1, #sorted_modules_names do
+    local module_name = sorted_modules_names[i]
+    local module_docs = docs[module_name]
+    file:write(string.format("- [%s](#%s)\n", module_name, module_name))
+    for d = 1, #module_docs[1] do
+      local name = module_docs[1][d]
+      local entity = module_docs[2][name]
       local name = entity.name
       if name ~= nil then
         file:write(string.format("  - [%s](#%s)\n", name, name))
@@ -204,22 +122,17 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
 
   -- Wrie Content
   file:write("\n\n")
-  for i = 1, #sortedModuleNames do
-    local moduleName = sortedModuleNames[i]
-    local moduleDocs = docs[moduleName]
+  for i = 1, #sorted_modules_names do
+    local module_name = sorted_modules_names[i]
+    local module_docs = docs[module_name]
     -- Header
-    file:write(string.format("## %s\n\n", moduleName))
+    file:write(string.format("## %s\n\n", module_name))
 
     -- Members
-    for d = 1, #moduleDocs[1] do
-      local name = moduleDocs[1][d]
-      local doc = moduleDocs[2][name]
-      if style == "table" then
-        file:write(formatTypeDocsAsMarkdownTable(doc))
-      else
-        assert(style == "snippets")
-        file:write(formatTypeDocsAsLuaSnippet(doc))
-      end
+    for d = 1, #module_docs[1] do
+      local name = module_docs[1][d]
+      local doc = module_docs[2][name]
+      file:write(format_usertype_docs_as_lua_stubs(doc))
     end
   end
 end
@@ -277,8 +190,8 @@ local classes = {
   juce_gui_extra = {juce.CodeDocument.new()},
 }
 
-local file = io.open("README.md", "w")
-writeTypesDocsAsMarkdown(file, "snippets", classes)
-file:close()
+local readme = io.open("README.md", "w")
+write_usertype_docs_as_markdown(readme, classes)
+readme:close()
 
-writeTypesDocsAsLuaStubs("out/src", classes)
+write_usertype_docs_as_lua_stubs("out/src", classes)
