@@ -82,6 +82,7 @@ auto LuaScriptViewer::reloadLuaState() -> void
         sol::lib::debug,
         sol::lib::io,
         sol::lib::math,
+        sol::lib::os,
         sol::lib::package,
         sol::lib::string,
         sol::lib::table

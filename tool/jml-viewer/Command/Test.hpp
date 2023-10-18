@@ -11,6 +11,7 @@ inline auto runTestScript(CommandLine const& cli) -> juce::Result
         sol::lib::debug,
         sol::lib::io,
         sol::lib::math,
+        sol::lib::os,
         sol::lib::package,
         sol::lib::string,
         sol::lib::table
