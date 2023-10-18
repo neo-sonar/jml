@@ -114,9 +114,8 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
 
       -- Write ldoc headers
       local ns = "juce"
-      local brief = "Encapsulates a MIDI message."
-      file:write("--------------\n")
-      file:write(string.format("-- %s\n", brief))
+
+      file:write(string.format("--- %s\n", doxygen_spec.brief))
       file:write(string.format("-- @classmod %s.%s\n\n", ns, entity_name))
       file:write(string.format("local %s = {}\n\n", entity_name))
 
@@ -130,11 +129,11 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
               doxygen_member = spec
             end
           end
-          file:write("--------------\n")
 
           if doxygen_member == nil then
             doxygen_member = {
               brief = member,
+              detail = juce.String.new(""),
               is_static = true,
               parameter = {},
               return_type = nil,
@@ -142,6 +141,9 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
           end
 
           file:write(string.format("--- %s\n", doxygen_member.brief))
+          if doxygen_member.detail ~= juce.String.new("") then
+            file:write(string.format("-- %s\n", doxygen_member.detail))
+          end
 
           local seperator = nil
           if doxygen_member.is_static then
@@ -159,7 +161,7 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
           end
 
           if doxygen_member.return_type then
-            file:write(string.format("-- @return %s\n",
+            file:write(string.format("-- @treturn %s\n",
                                      doxygen_member.return_type))
           end
 

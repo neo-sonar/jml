@@ -22,19 +22,19 @@ end
 
 local function parse_member_function(e)
   -- assert e.attrib["kind"] == "function"
+  local empty = juce.String.new("")
 
   local name_tag = juce.StringRef.new("name")
-  local name = e:getChildElementAllSubText(name_tag, juce.String.new(""))
+  local name = e:getChildElementAllSubText(name_tag, empty)
 
   local brief_tag = juce.StringRef.new("briefdescription")
-  local brief = e:getChildElementAllSubText(brief_tag, juce.String.new(""))
+  local brief = e:getChildElementAllSubText(brief_tag, empty)
 
-  local detail_tag = juce.StringRef.new("detaildescription")
-  local detail = e:getChildElementAllSubText(detail_tag, juce.String.new(""))
+  local detail_tag = juce.StringRef.new("detaileddescription")
+  local detail = e:getChildElementAllSubText(detail_tag, empty)
 
   local return_t_tag = juce.StringRef.new("type")
-  local return_t =
-    e:getChildElementAllSubText(return_t_tag, juce.String.new(""))
+  local return_t = e:getChildElementAllSubText(return_t_tag, empty)
 
   local is_static_tag = juce.StringRef.new("static")
   local is_static = e:getBoolAttribute(is_static_tag, true)
@@ -48,10 +48,13 @@ local function parse_member_function(e)
   local is_virtual_tag = juce.StringRef.new("virt")
   local is_virtual = e:getBoolAttribute(is_virtual_tag, true)
 
+  local space = juce.StringRef.new(" ")
+  local new_line = juce.StringRef.new("\n")
+
   local mem_fun = {
-    name = name:trim(),
-    brief = brief:trim(),
-    detail = detail:trim(),
+    name = name:trim():replace(new_line, space, false),
+    brief = brief:trim():replace(new_line, space, false),
+    detail = detail:trim():replace(new_line, space, false),
     is_static = is_static,
     is_const = is_const,
     is_noexcept = is_noexcept,
@@ -92,7 +95,7 @@ function doxygen.parse_xml(entity_name)
   local kindAttribute = juce.String.new("kind")
 
   -- Results
-  local results = {name = "", members = {}}
+  local results = {name = "", brief = "", members = {}}
 
   -- For each child
   for i = 0, def:getNumChildElements() - 1 do
@@ -100,6 +103,8 @@ function doxygen.parse_xml(entity_name)
     if child:getTagName() == juce.String.new("compoundname") then
       -- Get name
       results["name"] = child:getAllSubText()
+    elseif child:getTagName() == juce.String.new("briefdescription") then
+      results["brief"] = child:getAllSubText()
     elseif child:getTagName() == juce.String.new("sectiondef") then
       local pub = child:getStringAttribute(juce.StringRef.new(kindAttribute))
       if pub == juce.String.new("public-func") then

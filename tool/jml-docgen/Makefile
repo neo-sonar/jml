@@ -1,12 +1,15 @@
 JML_VIEWER ?= ../../build/tool/jml-viewer/jml-viewer_artefacts/MinSizeRel/jml-viewer
 
 .PHONY: all
-all: generate
+all: stubs generate
 
 .PHONY: generate
 generate: out
-	${JML_VIEWER} test -s main.lua
 	ldoc .
+
+.PHONY: stubs
+stubs: out
+	${JML_VIEWER} test -s main.lua
 
 out:
 	mkdir -p out
