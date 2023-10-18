@@ -72,7 +72,7 @@ local function formatTypeDocsAsLuaSnippet(doc)
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
     end
   end
-  str = str .. string.format("```\n")
+  str = str .. string.format("```\n\n")
   return str
 end
 
@@ -132,12 +132,16 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
           end
           file:write("--------------\n")
 
-          if doxygen_member then
-            file:write(string.format("--- %s\n", doxygen_member.brief))
-          else
-            doxygen_member = {is_static = true}
-            file:write(string.format("--- %s\n", member))
+          if doxygen_member == nil then
+            doxygen_member = {
+              brief = member,
+              is_static = true,
+              parameter = {},
+              return_type = nil,
+            }
           end
+
+          file:write(string.format("--- %s\n", doxygen_member.brief))
 
           local seperator = nil
           if doxygen_member.is_static then
@@ -147,8 +151,25 @@ local function writeTypesDocsAsLuaStubs(dir, modules)
             seperator = ":"
           end
 
-          local member_func = "function %s%s%s(...) end\n\n"
-          file:write(string.format(member_func, entity_name, seperator, member))
+          for i = 1, #doxygen_member.parameter do
+            local param = doxygen_member.parameter[i]
+            if param.name ~= juce.String.new("") then
+              file:write(string.format("-- @param %s\n", param.name))
+            end
+          end
+
+          if doxygen_member.return_type then
+            file:write(string.format("-- @return %s\n",
+                                     doxygen_member.return_type))
+          end
+
+          if #doxygen_member.parameter == 0 then
+            local fmt = "function %s%s%s() end\n\n"
+            file:write(string.format(fmt, entity_name, seperator, member))
+          else
+            local fmt = "function %s%s%s(...) end\n\n"
+            file:write(string.format(fmt, entity_name, seperator, member))
+          end
         end
       end
 
@@ -174,7 +195,7 @@ local function writeTypesDocsAsMarkdown(file, style, modules)
       local entity = moduleDocs[2][name]
       local name = entity.name
       if name ~= nil then
-        file:write(string.format("\t- [%s](#%s)\n", name, name))
+        file:write(string.format("  - [%s](#%s)\n", name, name))
       end
     end
   end
@@ -245,7 +266,7 @@ local classes = {
     -- juce.LookAndFeel_V4.new(),
     juce.ImageComponent.new(juce.String.new("")),
     juce.Slider.new(),
-    -- juce.ArrowButton.new(juce.String.new("")),
+    juce.ArrowButton.new(juce.String.new(""), 1.0, juce.Colours.black),
     juce.HyperlinkButton.new(),
     juce.TextButton.new(juce.String.new("")),
     juce.ToggleButton.new(juce.String.new("")),

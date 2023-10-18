@@ -2,6 +2,24 @@ json = require("json")
 
 local doxygen = {}
 
+local function parse_function_parameter(func)
+  local empty = juce.String.new("")
+  local name_tag = juce.StringRef.new("declname")
+  local type_tag = juce.StringRef.new("type")
+
+  local parameter = {}
+  for j = 0, func:getNumChildElements() - 1 do
+    local param = func:getChildElement(j)
+    if param:getTagName() == juce.String.new("param") then
+      table.insert(parameter, {
+        name = param:getChildElementAllSubText(name_tag, empty):trim(),
+        type = param:getChildElementAllSubText(type_tag, empty):trim(),
+      })
+    end
+  end
+  return parameter
+end
+
 local function parse_member_function(e)
   -- assert e.attrib["kind"] == "function"
 
@@ -39,6 +57,7 @@ local function parse_member_function(e)
     is_noexcept = is_noexcept,
     is_virtual = is_virtual,
     return_type = return_t:trim(),
+    parameter = parse_function_parameter(e),
   }
 
   return mem_fun
@@ -100,7 +119,10 @@ function doxygen.parse_xml(entity_name)
 
   end
 
-  -- print(json.encode(results))
+  local f = io.open("out/docs.json", "w")
+  f:write(json.encode(results))
+  f:close()
+
   return results
 
 end

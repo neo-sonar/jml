@@ -1,50 +1,50 @@
 # JML Documentation
 
 - [juce_audio_basics](#juce_audio_basics)
-	- [MidiFile](#MidiFile)
-	- [MidiMessage](#MidiMessage)
-	- [MidiMessageSequence](#MidiMessageSequence)
-	- [MidiRPNDetector](#MidiRPNDetector)
-	- [MidiRPNMessage](#MidiRPNMessage)
+  - [MidiFile](#MidiFile)
+  - [MidiMessage](#MidiMessage)
+  - [MidiMessageSequence](#MidiMessageSequence)
+  - [MidiRPNDetector](#MidiRPNDetector)
+  - [MidiRPNMessage](#MidiRPNMessage)
 - [juce_core](#juce_core)
-	- [BigInteger](#BigInteger)
-	- [File](#File)
-	- [IPAddress](#IPAddress)
-	- [MemoryBlock](#MemoryBlock)
-	- [Random](#Random)
-	- [RelativeTime](#RelativeTime)
-	- [Result](#Result)
-	- [String](#String)
-	- [StringArray](#StringArray)
-	- [Time](#Time)
-	- [Uuid](#Uuid)
-	- [XmlElement](#XmlElement)
+  - [BigInteger](#BigInteger)
+  - [File](#File)
+  - [IPAddress](#IPAddress)
+  - [MemoryBlock](#MemoryBlock)
+  - [Random](#Random)
+  - [RelativeTime](#RelativeTime)
+  - [Result](#Result)
+  - [String](#String)
+  - [StringArray](#StringArray)
+  - [Time](#Time)
+  - [Uuid](#Uuid)
+  - [XmlElement](#XmlElement)
 - [juce_data_structures](#juce_data_structures)
-	- [UndoManager](#UndoManager)
-	- [ValueTree](#ValueTree)
+  - [UndoManager](#UndoManager)
+  - [ValueTree](#ValueTree)
 - [juce_graphics](#juce_graphics)
-	- [AffineTransform](#AffineTransform)
-	- [Colour](#Colour)
-	- [ColourGradient](#ColourGradient)
-	- [DropShadow](#DropShadow)
-	- [FillType](#FillType)
-	- [Font](#Font)
-	- [Graphics](#Graphics)
-	- [Image](#Image)
-	- [Path](#Path)
+  - [AffineTransform](#AffineTransform)
+  - [Colour](#Colour)
+  - [ColourGradient](#ColourGradient)
+  - [DropShadow](#DropShadow)
+  - [FillType](#FillType)
+  - [Font](#Font)
+  - [Graphics](#Graphics)
+  - [Image](#Image)
+  - [Path](#Path)
 - [juce_gui_basics](#juce_gui_basics)
-	- [ComboBox](#ComboBox)
-	- [ComponentListener](#ComponentListener)
-	- [HyperlinkButton](#HyperlinkButton)
-	- [ImageComponent](#ImageComponent)
-	- [Label](#Label)
-	- [Slider](#Slider)
-	- [TextButton](#TextButton)
-	- [ToggleButton](#ToggleButton)
-	- [TreeView](#TreeView)
+  - [ArrowButton](#ArrowButton)
+  - [ComboBox](#ComboBox)
+  - [ComponentListener](#ComponentListener)
+  - [HyperlinkButton](#HyperlinkButton)
+  - [ImageComponent](#ImageComponent)
+  - [Label](#Label)
+  - [Slider](#Slider)
+  - [TextButton](#TextButton)
+  - [ToggleButton](#ToggleButton)
+  - [TreeView](#TreeView)
 - [juce_gui_extra](#juce_gui_extra)
-	- [CodeDocument](#CodeDocument)
-
+  - [CodeDocument](#CodeDocument)
 
 ## juce_audio_basics
 
@@ -67,6 +67,7 @@ juce.MidiFile.setSmpteTimeFormat(...)
 juce.MidiFile.setTicksPerQuarterNote(...)
 juce.MidiFile.writeTo(...)
 ```
+
 ## MidiMessage
 
 ```lua
@@ -169,6 +170,7 @@ juce.MidiMessage.textMetaEvent(...)
 juce.MidiMessage.timeSignatureMetaEvent(...)
 juce.MidiMessage.withTimeStamp(...)
 ```
+
 ## MidiMessageSequence
 
 ```lua
@@ -194,6 +196,7 @@ juce.MidiMessageSequence.sort(...)
 juce.MidiMessageSequence.swapWith(...)
 juce.MidiMessageSequence.updateMatchedPairs(...)
 ```
+
 ## MidiRPNDetector
 
 ```lua
@@ -201,6 +204,7 @@ juce.MidiRPNDetector.new(...)
 juce.MidiRPNDetector.reset(...)
 juce.MidiRPNDetector.tryParse(...)
 ```
+
 ## MidiRPNMessage
 
 ```lua
@@ -211,6 +215,7 @@ juce.MidiRPNMessage.new(...)
 juce.MidiRPNMessage.parameterNumber(...)
 juce.MidiRPNMessage.value(...)
 ```
+
 ## juce_core
 
 ## BigInteger
@@ -251,6 +256,7 @@ juce.BigInteger.toInteger(...)
 juce.BigInteger.toMemoryBlock(...)
 juce.BigInteger.toString(...)
 ```
+
 ## File
 
 ```lua
@@ -336,6 +342,7 @@ juce.File.setReadOnly(...)
 juce.File.startAsProcess(...)
 juce.File.withFileExtension(...)
 ```
+
 ## IPAddress
 
 ```lua
@@ -356,6 +363,7 @@ juce.IPAddress.isNull(...)
 juce.IPAddress.new(...)
 juce.IPAddress.toString(...)
 ```
+
 ## MemoryBlock
 
 ```lua
@@ -381,6 +389,7 @@ juce.MemoryBlock.swapWith(...)
 juce.MemoryBlock.toBase64Encoding(...)
 juce.MemoryBlock.toString(...)
 ```
+
 ## Random
 
 ```lua
@@ -394,6 +403,7 @@ juce.Random.nextInt(...)
 juce.Random.nextInt64(...)
 juce.Random.setSeed(...)
 ```
+
 ## RelativeTime
 
 ```lua
@@ -413,6 +423,7 @@ juce.RelativeTime.new(...)
 juce.RelativeTime.seconds(...)
 juce.RelativeTime.weeks(...)
 ```
+
 ## Result
 
 ```lua
@@ -422,6 +433,7 @@ juce.Result.getErrorMessage(...)
 juce.Result.ok(...)
 juce.Result.wasOk(...)
 ```
+
 ## String
 
 ```lua
@@ -436,6 +448,7 @@ juce.String.new(...)
 juce.String.toStdString(...)
 juce.String.trim(...)
 ```
+
 ## StringArray
 
 ```lua
@@ -462,6 +475,7 @@ juce.StringArray.size(...)
 juce.StringArray.swapWith(...)
 juce.StringArray.trim(...)
 ```
+
 ## Time
 
 ```lua
@@ -498,6 +512,7 @@ juce.Time.toMilliseconds(...)
 juce.Time.toString(...)
 juce.Time.waitForMillisecondCounter(...)
 ```
+
 ## Uuid
 
 ```lua
@@ -514,6 +529,7 @@ juce.Uuid.new(...)
 juce.Uuid.toDashedString(...)
 juce.Uuid.toString(...)
 ```
+
 ## XmlElement
 
 ```lua
@@ -548,6 +564,7 @@ juce.XmlElement.removeAttribute(...)
 juce.XmlElement.setTagName(...)
 juce.XmlElement.setText(...)
 ```
+
 ## juce_data_structures
 
 ## UndoManager
@@ -576,6 +593,7 @@ juce.UndoManager.setMaxNumberOfStoredUnits(...)
 juce.UndoManager.undo(...)
 juce.UndoManager.undoCurrentTransactionOnly(...)
 ```
+
 ## ValueTree
 
 ```lua
@@ -624,6 +642,7 @@ juce.ValueTree.setPropertyExcludingListener(...)
 juce.ValueTree.toXmlString(...)
 juce.ValueTree.writeToStream(...)
 ```
+
 ## juce_graphics
 
 ## AffineTransform
@@ -652,11 +671,13 @@ juce.AffineTransform.sheared(...)
 juce.AffineTransform.verticalFlip(...)
 juce.AffineTransform.withAbsoluteTranslation(...)
 ```
+
 ## Colour
 
 ```lua
 juce.Colour.new(...)
 ```
+
 ## ColourGradient
 
 ```lua
@@ -678,6 +699,7 @@ juce.ColourGradient.removeColour(...)
 juce.ColourGradient.setColour(...)
 juce.ColourGradient.vertical(...)
 ```
+
 ## DropShadow
 
 ```lua
@@ -689,6 +711,7 @@ juce.DropShadow.new(...)
 juce.DropShadow.offset(...)
 juce.DropShadow.radius(...)
 ```
+
 ## FillType
 
 ```lua
@@ -707,6 +730,7 @@ juce.FillType.setTiledImage(...)
 juce.FillType.transform(...)
 juce.FillType.transformed(...)
 ```
+
 ## Font
 
 ```lua
@@ -718,6 +742,7 @@ juce.Font.setTypefaceName(...)
 juce.Font.setTypefaceStyle(...)
 juce.Font.withTypefaceStyle(...)
 ```
+
 ## Graphics
 
 ```lua
@@ -765,6 +790,7 @@ juce.Graphics.setOpacity(...)
 juce.Graphics.setTiledImageFill(...)
 juce.Graphics.strokePath(...)
 ```
+
 ## Image
 
 ```lua
@@ -797,6 +823,7 @@ juce.Image.new(...)
 juce.Image.rescaled(...)
 juce.Image.setPixelAt(...)
 ```
+
 ## Path
 
 ```lua
@@ -834,7 +861,14 @@ juce.Path.swapWithPath(...)
 juce.Path.toString(...)
 juce.Path.writePathToStream(...)
 ```
+
 ## juce_gui_basics
+
+## ArrowButton
+
+```lua
+juce.ArrowButton.new(...)
+```
 
 ## ComboBox
 
@@ -873,6 +907,7 @@ juce.ComboBox.setTooltip(...)
 juce.ComboBox.showEditor(...)
 juce.ComboBox.showPopup(...)
 ```
+
 ## ComponentListener
 
 ```lua
@@ -886,6 +921,7 @@ juce.ComponentListener.componentParentHierarchyChanged(...)
 juce.ComponentListener.componentVisibilityChanged(...)
 juce.ComponentListener.new(...)
 ```
+
 ## HyperlinkButton
 
 ```lua
@@ -897,6 +933,7 @@ juce.HyperlinkButton.setFont(...)
 juce.HyperlinkButton.setJustificationType(...)
 juce.HyperlinkButton.setURL(...)
 ```
+
 ## ImageComponent
 
 ```lua
@@ -906,6 +943,7 @@ juce.ImageComponent.new(...)
 juce.ImageComponent.setImage(...)
 juce.ImageComponent.setImagePlacement(...)
 ```
+
 ## Label
 
 ```lua
@@ -937,6 +975,7 @@ juce.Label.setMinimumHorizontalScale(...)
 juce.Label.setText(...)
 juce.Label.showEditor(...)
 ```
+
 ## Slider
 
 ```lua
@@ -1014,17 +1053,20 @@ juce.Slider.updateText(...)
 juce.Slider.valueChanged(...)
 juce.Slider.valueToProportionOfLength(...)
 ```
+
 ## TextButton
 
 ```lua
 juce.TextButton.new(...)
 ```
+
 ## ToggleButton
 
 ```lua
 juce.ToggleButton.changeWidthToFitText(...)
 juce.ToggleButton.new(...)
 ```
+
 ## TreeView
 
 ```lua
@@ -1056,6 +1098,7 @@ juce.TreeView.setOpenCloseButtonsVisible(...)
 juce.TreeView.setRootItem(...)
 juce.TreeView.setRootItemVisible(...)
 ```
+
 ## juce_gui_extra
 
 ## CodeDocument
