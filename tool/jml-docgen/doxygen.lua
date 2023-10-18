@@ -108,7 +108,7 @@ function doxygen.parse_xml(entity_name)
     end
   end
 
-  local f = io.open("out/docs.json", "w")
+  local f = io.open(string.format("out/json/%s.json", entity_name), "w")
   f:write(json.encode(results))
   f:close()
 
@@ -117,3 +117,18 @@ function doxygen.parse_xml(entity_name)
 end
 
 return doxygen
+
+-- --- Describes the layout and colours that should be used to paint a colour gradient.
+-- -- @classmod juce.ColourGradient
+-- -- @usage
+-- -- local gradient = juce.ColourGradient.vertical(1.0, 2.0)
+-- -- gradient.isRadial = true
+-- local ColourGradient = {}
+
+-- ----
+-- -- Public variables of the class
+-- -- @table public
+-- -- @field Point point1
+-- -- @field Point point2
+-- -- @field bool isRadial
+-- -- @usage local p = gradient.point1

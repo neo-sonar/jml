@@ -194,4 +194,4 @@ local readme = io.open("README.md", "w")
 write_usertype_docs_as_markdown(readme, classes)
 readme:close()
 
-write_usertype_docs_as_lua_stubs("out/src", classes)
+write_usertype_docs_as_lua_stubs("out/lua", classes)

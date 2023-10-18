@@ -13,7 +13,8 @@ stubs: out
 
 out:
 	mkdir -p out
-	mkdir -p out/src
+	mkdir -p out/lua
+	mkdir -p out/json
 	mkdir -p out/html
 
 .PHONY: clean
