@@ -2,18 +2,41 @@ json = require("json")
 
 local doxygen = {}
 
-local function parse_function_parameter(func)
-  local empty = juce.String.new("")
-  local name_tag = juce.StringRef.new("declname")
-  local type_tag = juce.StringRef.new("type")
+local function select_xml_file(entity)
+  local juce_root = "~/Developer/tobiashienzsch/JUCE"
+  local xml = string.format("%s/docs/doxygen/xml", juce_root)
 
+  local class = string.format("%s/class%s.xml", xml, entity)
+  local file = juce.File.new(juce.String.new(class))
+  if file:existsAsFile() then
+    return file
+  end
+
+  local struct = string.format("%s/struct%s.xml", xml, entity)
+  return juce.File.new(juce.String.new(struct))
+end
+
+local function get_all_text(element, tag)
+  local tag_ref = juce.StringRef.new(tag)
+  local txt = element:getChildElementAllSubText(tag_ref, juce.String.new(""))
+  local space = juce.StringRef.new(" ")
+  local new_line = juce.StringRef.new("\n")
+  return tostring(txt:trim():replace(new_line, space, false))
+end
+
+local function get_bool(element, tag)
+  local tag_ref = juce.StringRef.new(tag)
+  return element:getBoolAttribute(tag_ref, false)
+end
+
+local function parse_function_parameter(func)
   local parameter = {}
-  for j = 0, func:getNumChildElements() - 1 do
-    local param = func:getChildElement(j)
-    if param:getTagName() == juce.String.new("param") then
+  for i = 0, func:getNumChildElements() - 1 do
+    local p = func:getChildElement(i)
+    if tostring(p:getTagName()) == "param" then
       table.insert(parameter, {
-        name = param:getChildElementAllSubText(name_tag, empty):trim(),
-        type = param:getChildElementAllSubText(type_tag, empty):trim(),
+        name = get_all_text(p, "declname"),
+        type = get_all_text(p, "type"),
       })
     end
   end
@@ -21,45 +44,21 @@ local function parse_function_parameter(func)
 end
 
 local function parse_member_function(e)
-  -- assert e.attrib["kind"] == "function"
   local empty = juce.String.new("")
 
-  local name_tag = juce.StringRef.new("name")
-  local name = e:getChildElementAllSubText(name_tag, empty)
-
-  local brief_tag = juce.StringRef.new("briefdescription")
-  local brief = e:getChildElementAllSubText(brief_tag, empty)
-
-  local detail_tag = juce.StringRef.new("detaileddescription")
-  local detail = e:getChildElementAllSubText(detail_tag, empty)
-
-  local return_t_tag = juce.StringRef.new("type")
-  local return_t = e:getChildElementAllSubText(return_t_tag, empty)
-
-  local is_static_tag = juce.StringRef.new("static")
-  local is_static = e:getBoolAttribute(is_static_tag, true)
-
-  local is_const_tag = juce.StringRef.new("const")
-  local is_const = e:getBoolAttribute(is_const_tag, false)
-
-  local is_noexcept_tag = juce.StringRef.new("noexcept")
-  local is_noexcept = e:getBoolAttribute(is_noexcept_tag, false)
-
-  local is_virtual_tag = juce.StringRef.new("virt")
-  local is_virtual = e:getBoolAttribute(is_virtual_tag, true)
-
-  local space = juce.StringRef.new(" ")
-  local new_line = juce.StringRef.new("\n")
+  local kind_tag = juce.String.new("kind")
+  local kind = e:getStringAttribute(juce.StringRef.new(kind_tag))
+  assert(tostring(kind) == "function")
 
   local mem_fun = {
-    name = name:trim():replace(new_line, space, false),
-    brief = brief:trim():replace(new_line, space, false),
-    detail = detail:trim():replace(new_line, space, false),
-    is_static = is_static,
-    is_const = is_const,
-    is_noexcept = is_noexcept,
-    is_virtual = is_virtual,
-    return_type = return_t:trim(),
+    name = get_all_text(e, "name"),
+    brief = get_all_text(e, "briefdescription"),
+    detail = get_all_text(e, "detaileddescription"),
+    is_static = get_bool(e, "static"),
+    is_const = get_bool(e, "const"),
+    is_noexcept = get_bool(e, "noexcept"),
+    is_virtual = get_bool(e, "virt"),
+    return_type = get_all_text(e, "type"),
     parameter = parse_function_parameter(e),
   }
 
@@ -67,32 +66,18 @@ local function parse_member_function(e)
 end
 
 function doxygen.parse_xml(entity_name)
-  -- Paths
-  local juce_path = "~/Developer/tobiashienzsch/JUCE"
-  local class_path = string.format("%s/docs/doxygen/xml/class%s.xml", juce_path,
-                                   entity_name)
-  local struct_path = string.format("%s/docs/doxygen/xml/struct%s.xml",
-                                    juce_path, entity_name)
-
-  local xml_path = nil
-  if juce.File.new(juce.String.new(class_path)):existsAsFile() then
-    xml_path = class_path
-  else
-    xml_path = struct_path
-  end
-
   -- Xml file
-  local xml_file = juce.File.new(juce.String.new(xml_path))
+  local xml_file = select_xml_file(entity_name)
   local xml_doc = juce.XmlDocument.parse(xml_file)
   if xml_doc == nil then
-    print("error loading xml from " .. xml_path)
+    print("error loading xml from " .. tostring(xml_file:getFullPathName()))
   end
 
   -- Root element
   local def = xml_doc:getFirstChildElement()
-  assert(def:getTagName() == juce.String.new("compounddef"))
+  assert(tostring(def:getTagName()) == "compounddef")
 
-  local kindAttribute = juce.String.new("kind")
+  local kind_tag = juce.String.new("kind")
 
   -- Results
   local results = {name = "", brief = "", members = {}}
@@ -100,28 +85,27 @@ function doxygen.parse_xml(entity_name)
   -- For each child
   for i = 0, def:getNumChildElements() - 1 do
     local child = def:getChildElement(i)
-    if child:getTagName() == juce.String.new("compoundname") then
+    local tag = tostring(child:getTagName())
+    if tag == "compoundname" then
       -- Get name
-      results["name"] = child:getAllSubText()
-    elseif child:getTagName() == juce.String.new("briefdescription") then
-      results["brief"] = child:getAllSubText()
-    elseif child:getTagName() == juce.String.new("sectiondef") then
-      local pub = child:getStringAttribute(juce.StringRef.new(kindAttribute))
-      if pub == juce.String.new("public-func") then
+      results["name"] = tostring(child:getAllSubText())
+    elseif tag == "briefdescription" then
+      -- Get brief
+      results["brief"] = tostring(child:getAllSubText())
+    elseif tag == "sectiondef" then
+      -- Get sections
+      local section = child:getStringAttribute(juce.StringRef.new(kind_tag))
+      if tostring(section) == "public-func" then
+        -- Public functions
         for j = 0, child:getNumChildElements() - 1 do
           local members = child:getChildElement(j)
-          if members:getTagName() == juce.String.new("memberdef") then
+          if tostring(members:getTagName()) == "memberdef" then
             local func = parse_member_function(members)
             table.insert(results.members, func)
-            -- print(results.name, func.name, func.brief)
-
           end
         end
       end
-      -- Get public section
-      -- print(child:getAllSubText())
     end
-
   end
 
   local f = io.open("out/docs.json", "w")

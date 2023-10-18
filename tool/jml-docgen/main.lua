@@ -43,7 +43,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
         if starts_with(member, "__") == false then
           local doxygen_member = nil
           for _, spec in pairs(doxygen_spec.members) do
-            if spec.name:toStdString() == member then
+            if spec.name == member then
               doxygen_member = spec
             end
           end
@@ -51,7 +51,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
           if doxygen_member == nil then
             doxygen_member = {
               brief = member,
-              detail = juce.String.new(""),
+              detail = "",
               is_static = true,
               parameter = {},
               return_type = nil,
@@ -59,7 +59,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
           end
 
           file:write(string.format("--- %s\n", doxygen_member.brief))
-          if doxygen_member.detail ~= juce.String.new("") then
+          if doxygen_member.detail ~= "" then
             file:write(string.format("-- %s\n", doxygen_member.detail))
           end
 
@@ -73,7 +73,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
 
           for i = 1, #doxygen_member.parameter do
             local param = doxygen_member.parameter[i]
-            if param.name ~= juce.String.new("") then
+            if param.name ~= "" then
               file:write(string.format("-- @param %s\n", param.name))
             end
           end
