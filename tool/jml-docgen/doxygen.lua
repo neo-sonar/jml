@@ -3,6 +3,7 @@ json = require("json")
 local doxygen = {}
 
 local function select_xml_file(entity)
+  entity = entity:gsub('_', '__')
   local juce_root = "~/Developer/tobiashienzsch/JUCE"
   local xml = string.format("%s/docs/doxygen/xml", juce_root)
 
@@ -68,6 +69,7 @@ end
 function doxygen.parse_xml(entity_name)
   -- Xml file
   local xml_file = select_xml_file(entity_name)
+  assert(xml_file:existsAsFile())
   local xml_doc = juce.XmlDocument.parse(xml_file)
   if xml_doc == nil then
     print("error loading xml from " .. tostring(xml_file:getFullPathName()))
@@ -95,7 +97,8 @@ function doxygen.parse_xml(entity_name)
     elseif tag == "sectiondef" then
       -- Get sections
       local section = child:getStringAttribute(juce.StringRef.new(kind_tag))
-      if tostring(section) == "public-func" then
+      section = tostring(section)
+      if (section == "public-func" or section == "public-static-func") then
         -- Public functions
         for j = 0, child:getNumChildElements() - 1 do
           local members = child:getChildElement(j)

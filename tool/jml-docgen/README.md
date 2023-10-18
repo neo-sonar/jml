@@ -10,7 +10,11 @@
   - [BigInteger](#BigInteger)
   - [File](#File)
   - [IPAddress](#IPAddress)
+  - [InputStream](#InputStream)
   - [MemoryBlock](#MemoryBlock)
+  - [MemoryInputStream](#MemoryInputStream)
+  - [MemoryOutputStream](#MemoryOutputStream)
+  - [OutputStream](#OutputStream)
   - [Random](#Random)
   - [RelativeTime](#RelativeTime)
   - [Result](#Result)
@@ -22,6 +26,8 @@
 - [juce_data_structures](#juce_data_structures)
   - [UndoManager](#UndoManager)
   - [ValueTree](#ValueTree)
+- [juce_events](#juce_events)
+  - [Timer](#Timer)
 - [juce_graphics](#juce_graphics)
   - [AffineTransform](#AffineTransform)
   - [Colour](#Colour)
@@ -34,17 +40,22 @@
   - [Path](#Path)
 - [juce_gui_basics](#juce_gui_basics)
   - [ArrowButton](#ArrowButton)
+  - [Button](#Button)
   - [ComboBox](#ComboBox)
   - [ComponentListener](#ComponentListener)
+  - [Grid](#Grid)
   - [HyperlinkButton](#HyperlinkButton)
   - [ImageComponent](#ImageComponent)
   - [Label](#Label)
+  - [LookAndFeel](#LookAndFeel)
+  - [LookAndFeel_V4](#LookAndFeel_V4)
   - [Slider](#Slider)
   - [TextButton](#TextButton)
   - [ToggleButton](#ToggleButton)
   - [TreeView](#TreeView)
 - [juce_gui_extra](#juce_gui_extra)
   - [CodeDocument](#CodeDocument)
+
 
 ## juce_audio_basics
 
@@ -364,6 +375,35 @@ juce.IPAddress.new(...)
 juce.IPAddress.toString(...)
 ```
 
+## InputStream
+
+```lua
+juce.InputStream.getNumBytesRemaining(...)
+juce.InputStream.getPosition(...)
+juce.InputStream.getTotalLength(...)
+juce.InputStream.isExhausted(...)
+juce.InputStream.new(...)
+juce.InputStream.readBool(...)
+juce.InputStream.readByte(...)
+juce.InputStream.readCompressedInt(...)
+juce.InputStream.readDouble(...)
+juce.InputStream.readDoubleBigEndian(...)
+juce.InputStream.readEntireStreamAsString(...)
+juce.InputStream.readFloat(...)
+juce.InputStream.readFloatBigEndian(...)
+juce.InputStream.readInt(...)
+juce.InputStream.readInt64(...)
+juce.InputStream.readInt64BigEndian(...)
+juce.InputStream.readIntBigEndian(...)
+juce.InputStream.readIntoMemoryBlock(...)
+juce.InputStream.readNextLine(...)
+juce.InputStream.readShort(...)
+juce.InputStream.readShortBigEndian(...)
+juce.InputStream.readString(...)
+juce.InputStream.setPosition(...)
+juce.InputStream.skipNextBytes(...)
+```
+
 ## MemoryBlock
 
 ```lua
@@ -388,6 +428,57 @@ juce.MemoryBlock.setSize(...)
 juce.MemoryBlock.swapWith(...)
 juce.MemoryBlock.toBase64Encoding(...)
 juce.MemoryBlock.toString(...)
+```
+
+## MemoryInputStream
+
+```lua
+juce.MemoryInputStream.getData(...)
+juce.MemoryInputStream.getDataSize(...)
+juce.MemoryInputStream.new(...)
+```
+
+## MemoryOutputStream
+
+```lua
+juce.MemoryOutputStream.appendUTF8Char(...)
+juce.MemoryOutputStream.getData(...)
+juce.MemoryOutputStream.getDataSize(...)
+juce.MemoryOutputStream.getMemoryBlock(...)
+juce.MemoryOutputStream.new(...)
+juce.MemoryOutputStream.preallocate(...)
+juce.MemoryOutputStream.reset(...)
+juce.MemoryOutputStream.toString(...)
+juce.MemoryOutputStream.toUTF8(...)
+```
+
+## OutputStream
+
+```lua
+juce.OutputStream.flush(...)
+juce.OutputStream.getNewLineString(...)
+juce.OutputStream.getPosition(...)
+juce.OutputStream.new(...)
+juce.OutputStream.setNewLineString(...)
+juce.OutputStream.setPosition(...)
+juce.OutputStream.write(...)
+juce.OutputStream.writeBool(...)
+juce.OutputStream.writeByte(...)
+juce.OutputStream.writeCompressedInt(...)
+juce.OutputStream.writeDouble(...)
+juce.OutputStream.writeDoubleBigEndian(...)
+juce.OutputStream.writeFloat(...)
+juce.OutputStream.writeFloatBigEndian(...)
+juce.OutputStream.writeFromInputStream(...)
+juce.OutputStream.writeInt(...)
+juce.OutputStream.writeInt64(...)
+juce.OutputStream.writeInt64BigEndian(...)
+juce.OutputStream.writeIntBigEndian(...)
+juce.OutputStream.writeRepeatedByte(...)
+juce.OutputStream.writeShort(...)
+juce.OutputStream.writeShortBigEndian(...)
+juce.OutputStream.writeString(...)
+juce.OutputStream.writeText(...)
 ```
 
 ## Random
@@ -693,6 +784,15 @@ juce.ValueTree.toXmlString(...)
 juce.ValueTree.writeToStream(...)
 ```
 
+## juce_events
+
+## Timer
+
+```lua
+juce.Timer.new(...)
+juce.Timer.timerCallback(...)
+```
+
 ## juce_graphics
 
 ## AffineTransform
@@ -920,6 +1020,18 @@ juce.Path.writePathToStream(...)
 juce.ArrowButton.new(...)
 ```
 
+## Button
+
+```lua
+juce.Button.getBounds(...)
+juce.Button.getHeight(...)
+juce.Button.getWidth(...)
+juce.Button.getX(...)
+juce.Button.getY(...)
+juce.Button.new(...)
+juce.Button.onClick(...)
+```
+
 ## ComboBox
 
 ```lua
@@ -970,6 +1082,29 @@ juce.ComponentListener.componentNameChanged(...)
 juce.ComponentListener.componentParentHierarchyChanged(...)
 juce.ComponentListener.componentVisibilityChanged(...)
 juce.ComponentListener.new(...)
+```
+
+## Grid
+
+```lua
+juce.Grid.alignContent(...)
+juce.Grid.alignItems(...)
+juce.Grid.autoColumns(...)
+juce.Grid.autoFlow(...)
+juce.Grid.autoRows(...)
+juce.Grid.columnGap(...)
+juce.Grid.getNumberOfColumns(...)
+juce.Grid.getNumberOfRows(...)
+juce.Grid.items(...)
+juce.Grid.justifyContent(...)
+juce.Grid.justifyItems(...)
+juce.Grid.new(...)
+juce.Grid.performLayout(...)
+juce.Grid.rowGap(...)
+juce.Grid.setGap(...)
+juce.Grid.templateAreas(...)
+juce.Grid.templateColumns(...)
+juce.Grid.templateRows(...)
 ```
 
 ## HyperlinkButton
@@ -1024,6 +1159,35 @@ juce.Label.setKeyboardType(...)
 juce.Label.setMinimumHorizontalScale(...)
 juce.Label.setText(...)
 juce.Label.showEditor(...)
+```
+
+## LookAndFeel
+
+```lua
+juce.LookAndFeel.createDropShadowerForComponent(...)
+juce.LookAndFeel.createGraphicsContext(...)
+juce.LookAndFeel.drawSpinningWaitAnimation(...)
+juce.LookAndFeel.findColour(...)
+juce.LookAndFeel.getCrossShape(...)
+juce.LookAndFeel.getMouseCursorFor(...)
+juce.LookAndFeel.getTickShape(...)
+juce.LookAndFeel.isColourSpecified(...)
+juce.LookAndFeel.isUsingNativeAlertWindows(...)
+juce.LookAndFeel.new(...)
+juce.LookAndFeel.playAlertSound(...)
+juce.LookAndFeel.setColour(...)
+juce.LookAndFeel.setDefaultSansSerifTypeface(...)
+juce.LookAndFeel.setDefaultSansSerifTypefaceName(...)
+juce.LookAndFeel.setUsingNativeAlertWindows(...)
+```
+
+## LookAndFeel_V4
+
+```lua
+juce.LookAndFeel_V4.drawButtonBackground(...)
+juce.LookAndFeel_V4.drawToggleButton(...)
+juce.LookAndFeel_V4.getTextButtonFont(...)
+juce.LookAndFeel_V4.new(...)
 ```
 
 ## Slider

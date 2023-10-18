@@ -22,25 +22,23 @@ end
 local function parse_usertype(obj)
   local meta = getmetatable(obj)
   local name = meta.__name
-  local doc = {}
+  local doc = {name = nil, members = {}}
 
   i, j = string.find(name, "lua_juce")
   if i == nil or j == nil then
-    doc["name"] = string.sub(meta.__name, 11) -- Remove "sol.juce::"
+    doc.name = string.sub(meta.__name, 11) -- Remove "sol.juce::"
   else
-    doc["name"] = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
+    doc.name = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
   end
-  assert(name ~= nil)
 
-  doc["members"] = {}
+  doc.name = doc.name:gsub("*", "")
+  doc.name = doc.name:gsub("&", "")
+  assert(doc.name ~= nil)
 
   for key, value in pairs(meta) do
     if type(value) == "function" then
       table.insert(doc.members, key)
-      -- for k, v in pairs(debug.getinfo(value)) do
-      -- end
     end
-
   end
 
   table.sort(doc.members)
@@ -71,4 +69,15 @@ function sol2.parse_juce_types(modules)
   return docs, sorted_names
 end
 
+local function test()
+  assert(parse_usertype(juce.String.new()).name == "String")
+  assert(parse_usertype(dummyButton).name == "Button")
+  assert(parse_usertype(dummyLNF).name == "LookAndFeel")
+
+  --   for k, v in pairs(juce) do
+  --     print(k)
+  --   end
+end
+
+test()
 return sol2

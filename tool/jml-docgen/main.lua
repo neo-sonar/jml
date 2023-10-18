@@ -18,11 +18,14 @@ local function format_usertype_docs_as_lua_stubs(doc)
   return str
 end
 
-local function write_usertype_docs_as_lua_stubs(dir, modules)
+local function write_usertype_as_lua_stubs(dir, modules)
   local docs, _ = sol2.parse_juce_types(modules)
   for module_name, juce_module in pairs(docs) do
     for entity_name, entity in pairs(juce_module[2]) do
       local doxygen_spec = doxygen.parse_xml(entity_name)
+      if doxygen_spec == nil then
+        doxygen_spec = {brief = entity_name, members = {}}
+      end
 
       -- Create lua file
       local file = io.open(dir .. "/" .. entity_name .. ".lua", "w")
@@ -60,7 +63,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
 
           file:write(string.format("--- %s\n", doxygen_member.brief))
           if doxygen_member.detail ~= "" then
-            file:write(string.format("-- %s\n", doxygen_member.detail))
+            file:write(string.format("--\n-- %s\n", doxygen_member.detail))
           end
 
           local seperator = nil
@@ -99,7 +102,7 @@ local function write_usertype_docs_as_lua_stubs(dir, modules)
   end
 end
 
-local function write_usertype_docs_as_markdown(file, modules)
+local function write_usertype_as_markdown(file, modules)
   local docs, sorted_modules_names = sol2.parse_juce_types(modules)
 
   -- Write header
@@ -125,6 +128,7 @@ local function write_usertype_docs_as_markdown(file, modules)
   for i = 1, #sorted_modules_names do
     local module_name = sorted_modules_names[i]
     local module_docs = docs[module_name]
+
     -- Header
     file:write(string.format("## %s\n\n", module_name))
 
@@ -141,6 +145,8 @@ local classes = {
   juce_core = {
     juce.BigInteger.new(),
     juce.File.new(),
+    dummyInputStream,
+    dummyMemoryInputStream,
     juce.IPAddress.new(),
     juce.MemoryBlock.new(),
     -- juce.NormalisableRangeDouble.new(),
@@ -148,6 +154,8 @@ local classes = {
     -- juce.RangeDouble.new(0.0, 1.0),
     juce.Result.ok(),
     -- juce.StatisticsAccumulatorDouble.new(),
+    dummyOutputStream,
+    dummyMemoryOutputStream,
     juce.String.new(),
     juce.StringArray.new(),
     juce.Uuid.new(),
@@ -155,6 +163,7 @@ local classes = {
     juce.Time.new(),
     juce.XmlElement.new("TAG"),
   },
+  juce_events = {juce.Timer.new()},
   juce_audio_basics = {
     juce.MidiFile.new(),
     juce.MidiMessage.new(),
@@ -175,10 +184,13 @@ local classes = {
     juce.Path.new(),
   },
   juce_gui_basics = {
+    dummyButton,
     juce.ComponentListener.new(),
     juce.ComboBox.new(juce.String.new("")),
+    juce.Grid.new(),
     juce.Label.new(juce.String.new(""), juce.String.new("")),
-    -- juce.LookAndFeel_V4.new(),
+    dummyLNF,
+    juce.LookAndFeel_V4.new(),
     juce.ImageComponent.new(juce.String.new("")),
     juce.Slider.new(),
     juce.ArrowButton.new(juce.String.new(""), 1.0, juce.Colours.black),
@@ -191,7 +203,7 @@ local classes = {
 }
 
 local readme = io.open("README.md", "w")
-write_usertype_docs_as_markdown(readme, classes)
+write_usertype_as_markdown(readme, classes)
 readme:close()
 
-write_usertype_docs_as_lua_stubs("out/lua", classes)
+write_usertype_as_lua_stubs("out/lua", classes)
