@@ -1,17 +1,32 @@
 doxygen = require("doxygen")
 sol2 = require("sol2")
 
+local function table_length(T)
+  local count = 0
+  for _ in pairs(T) do
+    count = count + 1
+  end
+  return count
+end
+
 local function starts_with(str, prefix)
   return string.sub(str, 1, string.len(prefix)) == prefix
 end
 
 local function format_usertype_docs_as_lua_stubs(doc)
+  local ignored_functions = {
+    ["__gc"] = true,
+    ["__pairs"] = true,
+    ["__newindex"] = true,
+    ["__index"] = true,
+  }
+
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("```lua\n")
   for i = 1, #doc.members do
-    member = doc.members[i]
-    if starts_with(member, "__") == false then
-      str = str .. string.format("juce.%s.%s(...)\n", doc.name, member)
+    func = doc.members[i]
+    if ignored_functions[func] == nil then
+      str = str .. string.format("juce.%s.%s(...)\n", doc.name, func)
     end
   end
   str = str .. string.format("```\n\n")
@@ -21,29 +36,53 @@ end
 local function write_usertype_as_lua_stubs(dir, modules)
   local docs, _ = sol2.parse_juce_types(modules)
   for module_name, juce_module in pairs(docs) do
-    for entity_name, entity in pairs(juce_module[2]) do
-      local doxygen_spec = doxygen.parse_xml(entity_name)
+    for class_name, class in pairs(juce_module[2]) do
+      local doxygen_spec = doxygen.parse_xml(class_name)
       if doxygen_spec == nil then
-        doxygen_spec = {brief = entity_name, members = {}}
+        doxygen_spec = {brief = class_name, members = {}, variables = {}}
       end
 
       -- Create lua file
-      local file = io.open(dir .. "/" .. entity_name .. ".lua", "w")
+      local path = string.format("%s/%s.lua", dir, class_name, ".lua")
+      local file = io.open(path, "w")
       if file == nil then
-        print("error:", entity_name)
+        print("error:", class_name)
       end
 
       -- Write ldoc headers
-      local ns = "juce"
-
+      local namespace = "juce"
       file:write(string.format("--- %s\n", doxygen_spec.brief))
-      file:write(string.format("-- @classmod %s.%s\n\n", ns, entity_name))
-      file:write(string.format("local %s = {}\n\n", entity_name))
+      file:write(string.format("-- @classmod %s.%s\n\n", namespace, class_name))
+      file:write(string.format("local %s = {}\n\n", class_name))
 
-      -- For each member in entity
-      for _, member in pairs(entity.members) do
+      -- For each variable in class
+      local members_variables = {}
+      for _, variable in pairs(doxygen_spec.variables) do
+        for _, member_name in pairs(class.members) do
+          if member_name == variable.name then
+            members_variables[member_name] = true
+          end
+        end
+      end
+
+      if table_length(members_variables) > 0 then
+        file:write("--- Public variables of the class\n")
+        file:write("-- @table Variables\n")
+        for name, var in pairs(members_variables) do
+          file:write(string.format("-- @field %s\n", name))
+        end
+        file:write("\n\n")
+      end
+
+      -- For each member in class
+      for _, member in pairs(class.members) do
+        local skip = false
+        if members_variables[member] then
+          skip = true
+        end
+
         -- Skip special functions
-        if starts_with(member, "__") == false then
+        if not skip then
           local doxygen_member = nil
           for _, spec in pairs(doxygen_spec.members) do
             if spec.name == member then
@@ -88,15 +127,15 @@ local function write_usertype_as_lua_stubs(dir, modules)
 
           if #doxygen_member.parameter == 0 then
             local fmt = "function %s%s%s() end\n\n"
-            file:write(string.format(fmt, entity_name, seperator, member))
+            file:write(string.format(fmt, class_name, seperator, member))
           else
             local fmt = "function %s%s%s(...) end\n\n"
-            file:write(string.format(fmt, entity_name, seperator, member))
+            file:write(string.format(fmt, class_name, seperator, member))
           end
         end
       end
 
-      file:write(string.format("return %s\n", entity_name))
+      file:write(string.format("return %s\n", class_name))
       file:close()
     end
   end

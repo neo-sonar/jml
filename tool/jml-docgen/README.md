@@ -62,6 +62,7 @@
 ## MidiFile
 
 ```lua
+juce.MidiFile.__eq(...)
 juce.MidiFile.addTrack(...)
 juce.MidiFile.clear(...)
 juce.MidiFile.convertTimestampTicksToSeconds(...)
@@ -82,6 +83,7 @@ juce.MidiFile.writeTo(...)
 ## MidiMessage
 
 ```lua
+juce.MidiMessage.__eq(...)
 juce.MidiMessage.addToTimeStamp(...)
 juce.MidiMessage.aftertouchChange(...)
 juce.MidiMessage.allControllersOff(...)
@@ -185,6 +187,7 @@ juce.MidiMessage.withTimeStamp(...)
 ## MidiMessageSequence
 
 ```lua
+juce.MidiMessageSequence.__eq(...)
 juce.MidiMessageSequence.addTimeToMessages(...)
 juce.MidiMessageSequence.clear(...)
 juce.MidiMessageSequence.createControllerUpdatesForTime(...)
@@ -211,6 +214,7 @@ juce.MidiMessageSequence.updateMatchedPairs(...)
 ## MidiRPNDetector
 
 ```lua
+juce.MidiRPNDetector.__eq(...)
 juce.MidiRPNDetector.new(...)
 juce.MidiRPNDetector.reset(...)
 juce.MidiRPNDetector.tryParse(...)
@@ -219,6 +223,7 @@ juce.MidiRPNDetector.tryParse(...)
 ## MidiRPNMessage
 
 ```lua
+juce.MidiRPNMessage.__eq(...)
 juce.MidiRPNMessage.channel(...)
 juce.MidiRPNMessage.is14BitValue(...)
 juce.MidiRPNMessage.isNRPN(...)
@@ -232,6 +237,9 @@ juce.MidiRPNMessage.value(...)
 ## BigInteger
 
 ```lua
+juce.BigInteger.__eq(...)
+juce.BigInteger.__le(...)
+juce.BigInteger.__lt(...)
 juce.BigInteger.clear(...)
 juce.BigInteger.clearBit(...)
 juce.BigInteger.compare(...)
@@ -271,6 +279,8 @@ juce.BigInteger.toString(...)
 ## File
 
 ```lua
+juce.File.__eq(...)
+juce.File.__lt(...)
 juce.File.addTrailingSeparator(...)
 juce.File.appendData(...)
 juce.File.appendText(...)
@@ -357,6 +367,10 @@ juce.File.withFileExtension(...)
 ## IPAddress
 
 ```lua
+juce.IPAddress.__eq(...)
+juce.IPAddress.__le(...)
+juce.IPAddress.__lt(...)
+juce.IPAddress.__tostring(...)
 juce.IPAddress.address(...)
 juce.IPAddress.any(...)
 juce.IPAddress.broadcast(...)
@@ -378,6 +392,7 @@ juce.IPAddress.toString(...)
 ## InputStream
 
 ```lua
+juce.InputStream.__eq(...)
 juce.InputStream.getNumBytesRemaining(...)
 juce.InputStream.getPosition(...)
 juce.InputStream.getTotalLength(...)
@@ -407,6 +422,10 @@ juce.InputStream.skipNextBytes(...)
 ## MemoryBlock
 
 ```lua
+juce.MemoryBlock.__eq(...)
+juce.MemoryBlock.__le(...)
+juce.MemoryBlock.__lt(...)
+juce.MemoryBlock.__tostring(...)
 juce.MemoryBlock.append(...)
 juce.MemoryBlock.copyFrom(...)
 juce.MemoryBlock.copyTo(...)
@@ -433,6 +452,7 @@ juce.MemoryBlock.toString(...)
 ## MemoryInputStream
 
 ```lua
+juce.MemoryInputStream.__eq(...)
 juce.MemoryInputStream.getData(...)
 juce.MemoryInputStream.getDataSize(...)
 juce.MemoryInputStream.new(...)
@@ -441,6 +461,8 @@ juce.MemoryInputStream.new(...)
 ## MemoryOutputStream
 
 ```lua
+juce.MemoryOutputStream.__eq(...)
+juce.MemoryOutputStream.__tostring(...)
 juce.MemoryOutputStream.appendUTF8Char(...)
 juce.MemoryOutputStream.getData(...)
 juce.MemoryOutputStream.getDataSize(...)
@@ -455,6 +477,7 @@ juce.MemoryOutputStream.toUTF8(...)
 ## OutputStream
 
 ```lua
+juce.OutputStream.__eq(...)
 juce.OutputStream.flush(...)
 juce.OutputStream.getNewLineString(...)
 juce.OutputStream.getPosition(...)
@@ -484,6 +507,7 @@ juce.OutputStream.writeText(...)
 ## Random
 
 ```lua
+juce.Random.__eq(...)
 juce.Random.getSeed(...)
 juce.Random.getSystemRandom(...)
 juce.Random.new(...)
@@ -498,6 +522,9 @@ juce.Random.setSeed(...)
 ## RelativeTime
 
 ```lua
+juce.RelativeTime.__eq(...)
+juce.RelativeTime.__le(...)
+juce.RelativeTime.__lt(...)
 juce.RelativeTime.days(...)
 juce.RelativeTime.getApproximateDescription(...)
 juce.RelativeTime.getDescription(...)
@@ -518,6 +545,7 @@ juce.RelativeTime.weeks(...)
 ## Result
 
 ```lua
+juce.Result.__eq(...)
 juce.Result.fail(...)
 juce.Result.failed(...)
 juce.Result.getErrorMessage(...)
@@ -528,6 +556,10 @@ juce.Result.wasOk(...)
 ## String
 
 ```lua
+juce.String.__eq(...)
+juce.String.__le(...)
+juce.String.__lt(...)
+juce.String.__tostring(...)
 juce.String.append(...)
 juce.String.clear(...)
 juce.String.compareIgnoreCase(...)
@@ -593,6 +625,10 @@ juce.String.upToLastOccurrenceOf(...)
 ## StringArray
 
 ```lua
+juce.StringArray.__eq(...)
+juce.StringArray.__le(...)
+juce.StringArray.__len(...)
+juce.StringArray.__lt(...)
 juce.StringArray.add(...)
 juce.StringArray.addLines(...)
 juce.StringArray.appendNumbersToDuplicates(...)
@@ -620,6 +656,9 @@ juce.StringArray.trim(...)
 ## Time
 
 ```lua
+juce.Time.__eq(...)
+juce.Time.__le(...)
+juce.Time.__lt(...)
 juce.Time.currentTimeMillis(...)
 juce.Time.formatted(...)
 juce.Time.fromISO8601(...)
@@ -657,6 +696,10 @@ juce.Time.waitForMillisecondCounter(...)
 ## Uuid
 
 ```lua
+juce.Uuid.__eq(...)
+juce.Uuid.__le(...)
+juce.Uuid.__lt(...)
+juce.Uuid.__tostring(...)
 juce.Uuid.getClockSeqAndReserved(...)
 juce.Uuid.getClockSeqLow(...)
 juce.Uuid.getNode(...)
@@ -674,6 +717,8 @@ juce.Uuid.toString(...)
 ## XmlElement
 
 ```lua
+juce.XmlElement.__eq(...)
+juce.XmlElement.__tostring(...)
 juce.XmlElement.compareAttribute(...)
 juce.XmlElement.getAllSubText(...)
 juce.XmlElement.getAttributeName(...)
@@ -711,6 +756,7 @@ juce.XmlElement.setText(...)
 ## UndoManager
 
 ```lua
+juce.UndoManager.__eq(...)
 juce.UndoManager.beginNewTransaction(...)
 juce.UndoManager.canRedo(...)
 juce.UndoManager.canUndo(...)
@@ -738,6 +784,7 @@ juce.UndoManager.undoCurrentTransactionOnly(...)
 ## ValueTree
 
 ```lua
+juce.ValueTree.__eq(...)
 juce.ValueTree.addChild(...)
 juce.ValueTree.addListener(...)
 juce.ValueTree.appendChild(...)
@@ -789,6 +836,7 @@ juce.ValueTree.writeToStream(...)
 ## Timer
 
 ```lua
+juce.Timer.__eq(...)
 juce.Timer.new(...)
 juce.Timer.timerCallback(...)
 ```
@@ -798,6 +846,7 @@ juce.Timer.timerCallback(...)
 ## AffineTransform
 
 ```lua
+juce.AffineTransform.__eq(...)
 juce.AffineTransform.followedBy(...)
 juce.AffineTransform.getDeterminant(...)
 juce.AffineTransform.getTranslationX(...)
@@ -825,12 +874,15 @@ juce.AffineTransform.withAbsoluteTranslation(...)
 ## Colour
 
 ```lua
+juce.Colour.__eq(...)
+juce.Colour.__tostring(...)
 juce.Colour.new(...)
 ```
 
 ## ColourGradient
 
 ```lua
+juce.ColourGradient.__eq(...)
 juce.ColourGradient.addColour(...)
 juce.ColourGradient.clearColours(...)
 juce.ColourGradient.getColour(...)
@@ -853,6 +905,7 @@ juce.ColourGradient.vertical(...)
 ## DropShadow
 
 ```lua
+juce.DropShadow.__eq(...)
 juce.DropShadow.colour(...)
 juce.DropShadow.drawForImage(...)
 juce.DropShadow.drawForPath(...)
@@ -865,6 +918,7 @@ juce.DropShadow.radius(...)
 ## FillType
 
 ```lua
+juce.FillType.__eq(...)
 juce.FillType.colour(...)
 juce.FillType.getOpacity(...)
 juce.FillType.image(...)
@@ -884,6 +938,8 @@ juce.FillType.transformed(...)
 ## Font
 
 ```lua
+juce.Font.__eq(...)
+juce.Font.__tostring(...)
 juce.Font.getAvailableStyles(...)
 juce.Font.getTypefaceName(...)
 juce.Font.getTypefaceStyle(...)
@@ -896,6 +952,7 @@ juce.Font.withTypefaceStyle(...)
 ## Graphics
 
 ```lua
+juce.Graphics.__eq(...)
 juce.Graphics.addTransform(...)
 juce.Graphics.beginTransparencyLayer(...)
 juce.Graphics.clipRegionIntersects(...)
@@ -944,6 +1001,7 @@ juce.Graphics.strokePath(...)
 ## Image
 
 ```lua
+juce.Image.__eq(...)
 juce.Image.clear(...)
 juce.Image.convertedToFormat(...)
 juce.Image.createCopy(...)
@@ -977,6 +1035,8 @@ juce.Image.setPixelAt(...)
 ## Path
 
 ```lua
+juce.Path.__eq(...)
+juce.Path.__tostring(...)
 juce.Path.addArc(...)
 juce.Path.addArrow(...)
 juce.Path.addBubble(...)
@@ -1017,12 +1077,14 @@ juce.Path.writePathToStream(...)
 ## ArrowButton
 
 ```lua
+juce.ArrowButton.__eq(...)
 juce.ArrowButton.new(...)
 ```
 
 ## Button
 
 ```lua
+juce.Button.__eq(...)
 juce.Button.getBounds(...)
 juce.Button.getHeight(...)
 juce.Button.getWidth(...)
@@ -1035,6 +1097,7 @@ juce.Button.onClick(...)
 ## ComboBox
 
 ```lua
+juce.ComboBox.__eq(...)
 juce.ComboBox.addItem(...)
 juce.ComboBox.addItemList(...)
 juce.ComboBox.addListener(...)
@@ -1073,6 +1136,7 @@ juce.ComboBox.showPopup(...)
 ## ComponentListener
 
 ```lua
+juce.ComponentListener.__eq(...)
 juce.ComponentListener.componentBeingDeleted(...)
 juce.ComponentListener.componentBroughtToFront(...)
 juce.ComponentListener.componentChildrenChanged(...)
@@ -1087,6 +1151,7 @@ juce.ComponentListener.new(...)
 ## Grid
 
 ```lua
+juce.Grid.__eq(...)
 juce.Grid.alignContent(...)
 juce.Grid.alignItems(...)
 juce.Grid.autoColumns(...)
@@ -1110,6 +1175,7 @@ juce.Grid.templateRows(...)
 ## HyperlinkButton
 
 ```lua
+juce.HyperlinkButton.__eq(...)
 juce.HyperlinkButton.changeWidthToFitText(...)
 juce.HyperlinkButton.getJustificationType(...)
 juce.HyperlinkButton.getURL(...)
@@ -1122,6 +1188,7 @@ juce.HyperlinkButton.setURL(...)
 ## ImageComponent
 
 ```lua
+juce.ImageComponent.__eq(...)
 juce.ImageComponent.getImage(...)
 juce.ImageComponent.getImagePlacement(...)
 juce.ImageComponent.new(...)
@@ -1132,6 +1199,7 @@ juce.ImageComponent.setImagePlacement(...)
 ## Label
 
 ```lua
+juce.Label.__eq(...)
 juce.Label.addListener(...)
 juce.Label.attachToComponent(...)
 juce.Label.doesLossOfFocusDiscardChanges(...)
@@ -1164,6 +1232,7 @@ juce.Label.showEditor(...)
 ## LookAndFeel
 
 ```lua
+juce.LookAndFeel.__eq(...)
 juce.LookAndFeel.createDropShadowerForComponent(...)
 juce.LookAndFeel.createGraphicsContext(...)
 juce.LookAndFeel.drawSpinningWaitAnimation(...)
@@ -1184,6 +1253,7 @@ juce.LookAndFeel.setUsingNativeAlertWindows(...)
 ## LookAndFeel_V4
 
 ```lua
+juce.LookAndFeel_V4.__eq(...)
 juce.LookAndFeel_V4.drawButtonBackground(...)
 juce.LookAndFeel_V4.drawToggleButton(...)
 juce.LookAndFeel_V4.getTextButtonFont(...)
@@ -1193,6 +1263,7 @@ juce.LookAndFeel_V4.new(...)
 ## Slider
 
 ```lua
+juce.Slider.__eq(...)
 juce.Slider.addListener(...)
 juce.Slider.getCurrentPopupDisplay(...)
 juce.Slider.getDoubleClickReturnValue(...)
@@ -1271,12 +1342,14 @@ juce.Slider.valueToProportionOfLength(...)
 ## TextButton
 
 ```lua
+juce.TextButton.__eq(...)
 juce.TextButton.new(...)
 ```
 
 ## ToggleButton
 
 ```lua
+juce.ToggleButton.__eq(...)
 juce.ToggleButton.changeWidthToFitText(...)
 juce.ToggleButton.new(...)
 ```
@@ -1284,6 +1357,7 @@ juce.ToggleButton.new(...)
 ## TreeView
 
 ```lua
+juce.TreeView.__eq(...)
 juce.TreeView.areItemsOpenByDefault(...)
 juce.TreeView.areOpenCloseButtonsVisible(...)
 juce.TreeView.clearSelectedItems(...)
@@ -1318,6 +1392,7 @@ juce.TreeView.setRootItemVisible(...)
 ## CodeDocument
 
 ```lua
+juce.CodeDocument.__eq(...)
 juce.CodeDocument.addListener(...)
 juce.CodeDocument.applyChanges(...)
 juce.CodeDocument.clearUndoHistory(...)

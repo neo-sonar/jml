@@ -2,6 +2,12 @@ json = require("json")
 
 local doxygen = {}
 
+local function has_kind(e, expected_kind)
+  local tag = juce.String.new("kind")
+  local kind = e:getStringAttribute(juce.StringRef.new(tag))
+  return tostring(kind) == expected_kind
+end
+
 local function select_xml_file(entity)
   entity = entity:gsub('_', '__')
   local juce_root = "~/Developer/tobiashienzsch/JUCE"
@@ -45,13 +51,9 @@ local function parse_function_parameter(func)
 end
 
 local function parse_member_function(e)
-  local empty = juce.String.new("")
+  assert(has_kind(e, "function"))
 
-  local kind_tag = juce.String.new("kind")
-  local kind = e:getStringAttribute(juce.StringRef.new(kind_tag))
-  assert(tostring(kind) == "function")
-
-  local mem_fun = {
+  return {
     name = get_all_text(e, "name"),
     brief = get_all_text(e, "briefdescription"),
     detail = get_all_text(e, "detaileddescription"),
@@ -62,11 +64,37 @@ local function parse_member_function(e)
     return_type = get_all_text(e, "type"),
     parameter = parse_function_parameter(e),
   }
+end
 
-  return mem_fun
+local function parse_member_variable(e)
+  assert(has_kind(e, "variable"))
+
+  return {
+    name = get_all_text(e, "name"),
+    type = get_all_text(e, "type"),
+    brief = get_all_text(e, "briefdescription"),
+    detail = get_all_text(e, "detaileddescription"),
+    is_static = get_bool(e, "static"),
+  }
 end
 
 function doxygen.parse_xml(entity_name)
+  -- Results
+  local results = {name = "", brief = "", members = {}, variables = {}}
+
+  local add_function = function(e)
+    table.insert(results.members, parse_member_function(e))
+  end
+  local add_variable = function(e)
+    table.insert(results.variables, parse_member_variable(e))
+  end
+  local section_parsers = {
+    ["public-func"] = add_function,
+    ["public-static-func"] = add_function,
+    ["public-attrib"] = add_variable,
+    ["public-static-attrib"] = add_variable,
+  }
+
   -- Xml file
   local xml_file = select_xml_file(entity_name)
   assert(xml_file:existsAsFile())
@@ -81,30 +109,25 @@ function doxygen.parse_xml(entity_name)
 
   local kind_tag = juce.String.new("kind")
 
-  -- Results
-  local results = {name = "", brief = "", members = {}}
-
   -- For each child
   for i = 0, def:getNumChildElements() - 1 do
     local child = def:getChildElement(i)
     local tag = tostring(child:getTagName())
     if tag == "compoundname" then
       -- Get name
-      results["name"] = tostring(child:getAllSubText())
+      results["name"] = tostring(child:getAllSubText()):gsub("\n", " ")
     elseif tag == "briefdescription" then
       -- Get brief
-      results["brief"] = tostring(child:getAllSubText())
+      results["brief"] = tostring(child:getAllSubText()):gsub("\n", " ")
     elseif tag == "sectiondef" then
-      -- Get sections
+      -- Sections
       local section = child:getStringAttribute(juce.StringRef.new(kind_tag))
-      section = tostring(section)
-      if (section == "public-func" or section == "public-static-func") then
-        -- Public functions
+      local parser = section_parsers[tostring(section)]
+      if parser then
         for j = 0, child:getNumChildElements() - 1 do
           local members = child:getChildElement(j)
           if tostring(members:getTagName()) == "memberdef" then
-            local func = parse_member_function(members)
-            table.insert(results.members, func)
+            parser(members)
           end
         end
       end
@@ -129,8 +152,8 @@ return doxygen
 -- local ColourGradient = {}
 
 -- ----
--- -- Public variables of the class
--- -- @table public
+-- Public variables of the class
+-- @table public
 -- -- @field Point point1
 -- -- @field Point point2
 -- -- @field bool isRadial
