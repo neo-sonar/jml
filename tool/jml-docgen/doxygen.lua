@@ -2,6 +2,13 @@ json = require("json")
 
 local doxygen = {}
 
+local function assert_file_exists(file)
+  if not file:existsAsFile() then
+    print(file:getFullPathName())
+    assert(false)
+  end
+end
+
 local function has_kind(e, expected_kind)
   local tag = juce.String.new("kind")
   local kind = e:getStringAttribute(juce.StringRef.new(tag))
@@ -10,6 +17,7 @@ end
 
 local function select_xml_file(entity)
   entity = entity:gsub('_', '__')
+  entity = entity:gsub('%.', '_1_1')
   local juce_root = "~/Developer/tobiashienzsch/JUCE"
   local xml = string.format("%s/docs/doxygen/xml", juce_root)
 
@@ -97,7 +105,8 @@ function doxygen.parse_xml(entity_name)
 
   -- Xml file
   local xml_file = select_xml_file(entity_name)
-  assert(xml_file:existsAsFile())
+  assert_file_exists(xml_file)
+
   local xml_doc = juce.XmlDocument.parse(xml_file)
   if xml_doc == nil then
     print("error loading xml from " .. tostring(xml_file:getFullPathName()))
@@ -143,18 +152,3 @@ function doxygen.parse_xml(entity_name)
 end
 
 return doxygen
-
--- --- Describes the layout and colours that should be used to paint a colour gradient.
--- -- @classmod juce.ColourGradient
--- -- @usage
--- -- local gradient = juce.ColourGradient.vertical(1.0, 2.0)
--- -- gradient.isRadial = true
--- local ColourGradient = {}
-
--- ----
--- Public variables of the class
--- @table public
--- -- @field Point point1
--- -- @field Point point2
--- -- @field bool isRadial
--- -- @usage local p = gradient.point1

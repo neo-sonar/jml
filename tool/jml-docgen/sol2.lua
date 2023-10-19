@@ -33,6 +33,7 @@ local function parse_usertype(obj)
 
   doc.name = doc.name:gsub("*", "")
   doc.name = doc.name:gsub("&", "")
+  doc.name = doc.name:gsub("::", ".")
   assert(doc.name ~= nil)
 
   for key, value in pairs(meta) do
@@ -70,9 +71,20 @@ function sol2.parse_juce_types(modules)
 end
 
 local function test()
-  assert(parse_usertype(juce.String.new()).name == "String")
-  assert(parse_usertype(juce.abstract.Button).name == "Button")
-  assert(parse_usertype(juce.abstract.LookAndFeel).name == "LookAndFeel")
+  local assert_usertype_name = function(v, name)
+    local actual = parse_usertype(v).name
+    if actual ~= name then
+      local msg = "NAME MISMATCH: should be '%s', but is '%s'"
+      print(string.format(msg, name, actual))
+      assert(false)
+    end
+  end
+
+  assert_usertype_name(juce.String.new(), "String")
+  assert_usertype_name(juce.abstract.Button, "Button")
+  assert_usertype_name(juce.abstract.LookAndFeel, "LookAndFeel")
+  assert_usertype_name(juce.Grid.Px.new(1), "Grid.Px")
+  assert_usertype_name(juce.GridItem.Margin.new(), "GridItem.Margin")
 
   local types = io.open("out/types.txt", "w")
   for k, v in pairs(juce) do

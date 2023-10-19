@@ -44,8 +44,16 @@
   - [ArrowButton](#ArrowButton)
   - [Button](#Button)
   - [ComboBox](#ComboBox)
+  - [Component](#Component)
   - [ComponentListener](#ComponentListener)
   - [Grid](#Grid)
+  - [Grid.Fr](#Grid.Fr)
+  - [Grid.Px](#Grid.Px)
+  - [Grid.TrackInfo](#Grid.TrackInfo)
+  - [GridItem](#GridItem)
+  - [GridItem.Margin](#GridItem.Margin)
+  - [GridItem.Property](#GridItem.Property)
+  - [GridItem.Span](#GridItem.Span)
   - [HyperlinkButton](#HyperlinkButton)
   - [ImageComponent](#ImageComponent)
   - [Label](#Label)
@@ -1179,6 +1187,24 @@ juce.ComboBox.showEditor(...)
 juce.ComboBox.showPopup(...)
 ```
 
+## Component
+
+```lua
+juce.Component.__eq(...)
+juce.Component.mouseDoubleClick(...)
+juce.Component.mouseDown(...)
+juce.Component.mouseDrag(...)
+juce.Component.mouseEnter(...)
+juce.Component.mouseExit(...)
+juce.Component.mouseMagnify(...)
+juce.Component.mouseMove(...)
+juce.Component.mouseUp(...)
+juce.Component.mouseWheelMove(...)
+juce.Component.new(...)
+juce.Component.paint(...)
+juce.Component.resized(...)
+```
+
 ## ComponentListener
 
 ```lua
@@ -1216,6 +1242,101 @@ juce.Grid.setGap(...)
 juce.Grid.templateAreas(...)
 juce.Grid.templateColumns(...)
 juce.Grid.templateRows(...)
+```
+
+## Grid.Fr
+
+```lua
+juce.Grid.Fr.__eq(...)
+juce.Grid.Fr.fraction(...)
+juce.Grid.Fr.new(...)
+```
+
+## Grid.Px
+
+```lua
+juce.Grid.Px.__eq(...)
+juce.Grid.Px.new(...)
+juce.Grid.Px.pixels(...)
+```
+
+## Grid.TrackInfo
+
+```lua
+juce.Grid.TrackInfo.__eq(...)
+juce.Grid.TrackInfo.getEndLineName(...)
+juce.Grid.TrackInfo.getSize(...)
+juce.Grid.TrackInfo.getStartLineName(...)
+juce.Grid.TrackInfo.isAuto(...)
+juce.Grid.TrackInfo.isFractional(...)
+juce.Grid.TrackInfo.isPixels(...)
+juce.Grid.TrackInfo.new(...)
+```
+
+## GridItem
+
+```lua
+juce.GridItem.__eq(...)
+juce.GridItem.alignSelf(...)
+juce.GridItem.area(...)
+juce.GridItem.associatedComponent(...)
+juce.GridItem.column(...)
+juce.GridItem.currentBounds(...)
+juce.GridItem.height(...)
+juce.GridItem.justifySelf(...)
+juce.GridItem.margin(...)
+juce.GridItem.maxHeight(...)
+juce.GridItem.maxWidth(...)
+juce.GridItem.minHeight(...)
+juce.GridItem.minWidth(...)
+juce.GridItem.new(...)
+juce.GridItem.order(...)
+juce.GridItem.row(...)
+juce.GridItem.setArea(...)
+juce.GridItem.width(...)
+juce.GridItem.withAlignSelf(...)
+juce.GridItem.withArea(...)
+juce.GridItem.withColumn(...)
+juce.GridItem.withHeight(...)
+juce.GridItem.withJustifySelf(...)
+juce.GridItem.withMargin(...)
+juce.GridItem.withOrder(...)
+juce.GridItem.withRow(...)
+juce.GridItem.withSize(...)
+juce.GridItem.withWidth(...)
+```
+
+## GridItem.Margin
+
+```lua
+juce.GridItem.Margin.__eq(...)
+juce.GridItem.Margin.bottom(...)
+juce.GridItem.Margin.left(...)
+juce.GridItem.Margin.new(...)
+juce.GridItem.Margin.right(...)
+juce.GridItem.Margin.top(...)
+```
+
+## GridItem.Property
+
+```lua
+juce.GridItem.Property.__eq(...)
+juce.GridItem.Property.getName(...)
+juce.GridItem.Property.getNumber(...)
+juce.GridItem.Property.hasAbsolute(...)
+juce.GridItem.Property.hasAuto(...)
+juce.GridItem.Property.hasName(...)
+juce.GridItem.Property.hasSpan(...)
+juce.GridItem.Property.new(...)
+```
+
+## GridItem.Span
+
+```lua
+juce.GridItem.Span.__eq(...)
+juce.GridItem.Span.name(...)
+juce.GridItem.Span.new(...)
+juce.GridItem.Span.number(...)
 ```
 
 ## HyperlinkButton
