@@ -92,6 +92,9 @@ auto allModules(sol::state& lua) -> void
     // juce_gui_extra
     juce_CodeDocument(table);
 
+    // juce_audio_processors
+    juce_AudioProcessor(table);
+
     // xtensions
     juce_LuaComponent(table);
     juce_LuaLookAndFeel_V4(table);

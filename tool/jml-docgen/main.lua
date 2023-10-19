@@ -239,6 +239,8 @@ local classes = {
     juce.TreeView.new(juce.String.new("")),
   },
   juce_gui_extra = {juce.CodeDocument.new()},
+  juce_audio_processors = {juce.abstract.AudioProcessor},
+
 }
 
 local readme = io.open("README.md", "w")

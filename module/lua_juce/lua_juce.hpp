@@ -6,7 +6,7 @@ BEGIN_JUCE_MODULE_DECLARATION
     version:            0.1.0
     name:               Lua bindings for all JUCE modules
     description:        Lua/Sol2 bindings for all JUCE modules
-    dependencies:       lua_juce_gui_extra, lua_juce_audio_basics
+    dependencies:       lua_juce_gui_extra, lua_juce_audio_processors
     website:            http://github.com/neo-sonar/jml
     license:            GPL/Commercial
     minimumCppStandard: 20
@@ -21,6 +21,7 @@ END_JUCE_MODULE_DECLARATION
 #endif
 
 #include <lua_juce_audio_basics/lua_juce_audio_basics.hpp>
+#include <lua_juce_audio_processors/lua_juce_audio_processors.hpp>
 #include <lua_juce_core/lua_juce_core.hpp>
 #include <lua_juce_data_structures/lua_juce_data_structures.hpp>
 #include <lua_juce_events/lua_juce_events.hpp>
