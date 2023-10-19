@@ -18,16 +18,18 @@ inline auto runTestScript(CommandLine const& cli) -> juce::Result
     );
     lua_juce::allModules(state);
 
-    auto in                          = juce::MemoryInputStream{juce::MemoryBlock{32}, true};
-    auto out                         = juce::MemoryOutputStream{0};
-    auto button                      = juce::TextButton{};
-    auto& lnf                        = juce::Desktop::getInstance().getDefaultLookAndFeel();
-    state["dummyMemoryInputStream"]  = static_cast<juce::MemoryInputStream*>(&in);
-    state["dummyMemoryOutputStream"] = static_cast<juce::MemoryOutputStream*>(&out);
-    state["dummyInputStream"]        = static_cast<juce::InputStream*>(&in);
-    state["dummyOutputStream"]       = static_cast<juce::OutputStream*>(&out);
-    state["dummyButton"]             = static_cast<juce::Button*>(&button);
-    state["dummyLNF"]                = static_cast<juce::LookAndFeel*>(&lnf);
+    auto in     = juce::MemoryInputStream{juce::MemoryBlock{32}, true};
+    auto out    = juce::MemoryOutputStream{0};
+    auto button = juce::TextButton{};
+    auto& lnf   = juce::Desktop::getInstance().getDefaultLookAndFeel();
+
+    auto doc                  = state[sol::create_if_nil]["juce"]["abstract"];
+    doc["MemoryInputStream"]  = static_cast<juce::MemoryInputStream*>(&in);
+    doc["MemoryOutputStream"] = static_cast<juce::MemoryOutputStream*>(&out);
+    doc["InputStream"]        = static_cast<juce::InputStream*>(&in);
+    doc["OutputStream"]       = static_cast<juce::OutputStream*>(&out);
+    doc["Button"]             = static_cast<juce::Button*>(&button);
+    doc["LookAndFeel"]        = static_cast<juce::LookAndFeel*>(&lnf);
 
     auto const scriptFile = juce::File{cli.scriptPath};
     if (cli.verbose) {

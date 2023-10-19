@@ -71,12 +71,15 @@ end
 
 local function test()
   assert(parse_usertype(juce.String.new()).name == "String")
-  assert(parse_usertype(dummyButton).name == "Button")
-  assert(parse_usertype(dummyLNF).name == "LookAndFeel")
+  assert(parse_usertype(juce.abstract.Button).name == "Button")
+  assert(parse_usertype(juce.abstract.LookAndFeel).name == "LookAndFeel")
 
-  --   for k, v in pairs(juce) do
-  --     print(k)
-  --   end
+  local types = io.open("out/types.txt", "w")
+  for k, v in pairs(juce) do
+    types:write(string.format("%s\n", k))
+  end
+  types:close()
+
 end
 
 test()
