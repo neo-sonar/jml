@@ -34,6 +34,9 @@ local function parse_usertype(obj)
   doc.name = doc.name:gsub("*", "")
   doc.name = doc.name:gsub("&", "")
   doc.name = doc.name:gsub("::", ".")
+  doc.name = doc.name:gsub('<int>', '')
+  doc.name = doc.name:gsub('<float>', '')
+  doc.name = doc.name:gsub('<double>', '')
   assert(doc.name ~= nil)
 
   for key, value in pairs(meta) do
@@ -95,4 +98,5 @@ local function test()
 end
 
 test()
+
 return sol2

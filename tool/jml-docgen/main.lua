@@ -35,6 +35,7 @@ end
 
 local function write_usertype_as_lua_stubs(dir, modules)
   local docs, _ = sol2.parse_juce_types(modules)
+
   for module_name, juce_module in pairs(docs) do
     for class_name, class in pairs(juce_module[2]) do
       local doxygen_spec = doxygen.parse_xml(class_name)
@@ -43,7 +44,7 @@ local function write_usertype_as_lua_stubs(dir, modules)
       end
 
       -- Create lua file
-      local path = string.format("%s/%s.lua", dir, class_name, ".lua")
+      local path = string.format("%s/%s.lua", dir, class_name)
       local file = io.open(path, "w")
       if file == nil then
         print("error:", class_name)
@@ -139,6 +140,31 @@ local function write_usertype_as_lua_stubs(dir, modules)
       file:close()
     end
   end
+
+  -- --- Represents a colour, also including a transparency value.
+  -- -- @module juce
+
+  -- --- Constant colors
+  -- -- @table Colours
+  -- -- @field black HTML black
+  -- Colours = {
+  --   black = ""
+  -- }
+
+  local colours = io.open(string.format("%s/Colours.lua", dir), "w")
+  colours:write("--- JUCE framework\n")
+  colours:write("-- @module juce\n\n")
+  colours:write("--- Contains a set of predefined named colours\n")
+  colours:write("-- @table Colours\n")
+  for k, v in pairs(juce.Colours) do
+    colours:write(string.format("-- @field %s 0x%s\n", k, v))
+  end
+  colours:write("Colours = {\n")
+  for k, v in pairs(juce.Colours) do
+    colours:write(string.format("\t%-20s = 0x%s\n", k, v))
+  end
+  colours:write("}\n\n")
+
 end
 
 local function write_usertype_as_markdown(file, modules)
@@ -182,17 +208,18 @@ end
 
 local classes = {
   juce_core = {
+    -- juce.Array_double.new(),
     juce.BigInteger.new(),
     juce.File.new(),
     juce.abstract.InputStream,
     juce.abstract.MemoryInputStream,
     juce.IPAddress.new(),
     juce.MemoryBlock.new(),
-    -- juce.NormalisableRange_double.new(),
+    juce.NormalisableRange_double.new(),
     juce.Random.new(),
-    -- juce.Range_double.new(0.0, 1.0),
+    juce.Range_double.new(0.0, 1.0),
     juce.Result.ok(),
-    -- juce.StatisticsAccumulatorDouble.new(),
+    juce.StatisticsAccumulator.new(),
     juce.abstract.OutputStream,
     juce.abstract.MemoryOutputStream,
     juce.String.new(),
@@ -220,7 +247,10 @@ local classes = {
     juce.Font.new(12.0),
     juce.Image.new(),
     juce.Graphics.new(juce.Image.new()),
+    juce.Line_double.new(),
+    juce.Point_double.new(),
     juce.Path.new(),
+    juce.Rectangle_double.new(),
   },
   juce_gui_basics = {
     juce.abstract.Button,

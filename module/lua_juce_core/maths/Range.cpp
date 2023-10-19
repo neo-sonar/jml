@@ -1,16 +1,12 @@
 namespace lua_juce {
+
 template<typename T>
 auto juce_RangeImpl(sol::table& state, char const* name) -> void
 {
-    // clang-format off
-    auto range = state.new_usertype<juce::Range<T>>(name,
-        sol::constructors<juce::Range<T>(), juce::Range<T>(T, T)>(),
-        "start",
-        sol::property(&juce::Range<T>::getStart, &juce::Range<T>::setStart),
-        "end",
-        sol::property(&juce::Range<T>::getEnd, &juce::Range<T>::setEnd)
-    );
-    // clang-format on
+    auto range = state.new_usertype<juce::Range<T>>(name, sol::constructors<juce::Range<T>(), juce::Range<T>(T, T)>());
+
+    range["getStart"] = LUA_JUCE_C_CALL(&juce::Range<T>::getStart);
+    range["getEnd"]   = LUA_JUCE_C_CALL(&juce::Range<T>::getEnd);
 }
 
 auto juce_Range(sol::table& state) -> void

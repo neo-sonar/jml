@@ -16,10 +16,13 @@
   - [MemoryBlock](#MemoryBlock)
   - [MemoryInputStream](#MemoryInputStream)
   - [MemoryOutputStream](#MemoryOutputStream)
+  - [NormalisableRange](#NormalisableRange)
   - [OutputStream](#OutputStream)
   - [Random](#Random)
+  - [Range](#Range)
   - [RelativeTime](#RelativeTime)
   - [Result](#Result)
+  - [StatisticsAccumulator](#StatisticsAccumulator)
   - [String](#String)
   - [StringArray](#StringArray)
   - [Time](#Time)
@@ -39,7 +42,10 @@
   - [Font](#Font)
   - [Graphics](#Graphics)
   - [Image](#Image)
+  - [Line](#Line)
   - [Path](#Path)
+  - [Point](#Point)
+  - [Rectangle](#Rectangle)
 - [juce_gui_basics](#juce_gui_basics)
   - [ArrowButton](#ArrowButton)
   - [Button](#Button)
@@ -528,6 +534,23 @@ juce.MemoryOutputStream.toString(...)
 juce.MemoryOutputStream.toUTF8(...)
 ```
 
+## NormalisableRange
+
+```lua
+juce.NormalisableRange.__eq(...)
+juce.NormalisableRange.convertFrom0to1(...)
+juce.NormalisableRange.convertTo0to1(...)
+juce.NormalisableRange.end(...)
+juce.NormalisableRange.getRange(...)
+juce.NormalisableRange.interval(...)
+juce.NormalisableRange.new(...)
+juce.NormalisableRange.setSkewForCentre(...)
+juce.NormalisableRange.skew(...)
+juce.NormalisableRange.snapToLegalValue(...)
+juce.NormalisableRange.start(...)
+juce.NormalisableRange.symmetricSkew(...)
+```
+
 ## OutputStream
 
 ```lua
@@ -573,6 +596,15 @@ juce.Random.nextInt64(...)
 juce.Random.setSeed(...)
 ```
 
+## Range
+
+```lua
+juce.Range.__eq(...)
+juce.Range.getEnd(...)
+juce.Range.getStart(...)
+juce.Range.new(...)
+```
+
 ## RelativeTime
 
 ```lua
@@ -605,6 +637,19 @@ juce.Result.failed(...)
 juce.Result.getErrorMessage(...)
 juce.Result.ok(...)
 juce.Result.wasOk(...)
+```
+
+## StatisticsAccumulator
+
+```lua
+juce.StatisticsAccumulator.__eq(...)
+juce.StatisticsAccumulator.getAverage(...)
+juce.StatisticsAccumulator.getCount(...)
+juce.StatisticsAccumulator.getMaxValue(...)
+juce.StatisticsAccumulator.getMinValue(...)
+juce.StatisticsAccumulator.getStandardDeviation(...)
+juce.StatisticsAccumulator.getVariance(...)
+juce.StatisticsAccumulator.new(...)
 ```
 
 ## String
@@ -1086,6 +1131,13 @@ juce.Image.rescaled(...)
 juce.Image.setPixelAt(...)
 ```
 
+## Line
+
+```lua
+juce.Line.__eq(...)
+juce.Line.new(...)
+```
+
 ## Path
 
 ```lua
@@ -1124,6 +1176,122 @@ juce.Path.setUsingNonZeroWinding(...)
 juce.Path.swapWithPath(...)
 juce.Path.toString(...)
 juce.Path.writePathToStream(...)
+```
+
+## Point
+
+```lua
+juce.Point.__eq(...)
+juce.Point.__tostring(...)
+juce.Point.addXY(...)
+juce.Point.applyTransform(...)
+juce.Point.getAngleToPoint(...)
+juce.Point.getDistanceFrom(...)
+juce.Point.getDistanceFromOrigin(...)
+juce.Point.getDistanceSquaredFrom(...)
+juce.Point.getDistanceSquaredFromOrigin(...)
+juce.Point.getX(...)
+juce.Point.getY(...)
+juce.Point.isFinite(...)
+juce.Point.isOrigin(...)
+juce.Point.new(...)
+juce.Point.roundToInt(...)
+juce.Point.setX(...)
+juce.Point.setXY(...)
+juce.Point.setY(...)
+juce.Point.toDouble(...)
+juce.Point.toFloat(...)
+juce.Point.toInt(...)
+juce.Point.toString(...)
+juce.Point.transformedBy(...)
+juce.Point.translated(...)
+juce.Point.withX(...)
+juce.Point.withY(...)
+```
+
+## Rectangle
+
+```lua
+juce.Rectangle.__eq(...)
+juce.Rectangle.__tostring(...)
+juce.Rectangle.constrainedWithin(...)
+juce.Rectangle.enlargeIfAdjacent(...)
+juce.Rectangle.expand(...)
+juce.Rectangle.findAreaContainingPoints(...)
+juce.Rectangle.fromString(...)
+juce.Rectangle.getAspectRatio(...)
+juce.Rectangle.getBottom(...)
+juce.Rectangle.getBottomLeft(...)
+juce.Rectangle.getBottomRight(...)
+juce.Rectangle.getCentre(...)
+juce.Rectangle.getCentreX(...)
+juce.Rectangle.getCentreY(...)
+juce.Rectangle.getConstrainedPoint(...)
+juce.Rectangle.getHeight(...)
+juce.Rectangle.getHorizontalRange(...)
+juce.Rectangle.getIntersection(...)
+juce.Rectangle.getPosition(...)
+juce.Rectangle.getRelativePoint(...)
+juce.Rectangle.getRight(...)
+juce.Rectangle.getSmallestIntegerContainer(...)
+juce.Rectangle.getTopLeft(...)
+juce.Rectangle.getTopRight(...)
+juce.Rectangle.getUnion(...)
+juce.Rectangle.getVerticalRange(...)
+juce.Rectangle.getWidth(...)
+juce.Rectangle.getX(...)
+juce.Rectangle.getY(...)
+juce.Rectangle.isEmpty(...)
+juce.Rectangle.isFinite(...)
+juce.Rectangle.leftTopRightBottom(...)
+juce.Rectangle.new(...)
+juce.Rectangle.proportionOfHeight(...)
+juce.Rectangle.proportionOfWidth(...)
+juce.Rectangle.reduce(...)
+juce.Rectangle.reduceIfPartlyContainedIn(...)
+juce.Rectangle.reduced(...)
+juce.Rectangle.removeFromBottom(...)
+juce.Rectangle.removeFromLeft(...)
+juce.Rectangle.removeFromRight(...)
+juce.Rectangle.removeFromTop(...)
+juce.Rectangle.setBottom(...)
+juce.Rectangle.setBounds(...)
+juce.Rectangle.setHeight(...)
+juce.Rectangle.setHorizontalRange(...)
+juce.Rectangle.setLeft(...)
+juce.Rectangle.setRight(...)
+juce.Rectangle.setSize(...)
+juce.Rectangle.setTop(...)
+juce.Rectangle.setVerticalRange(...)
+juce.Rectangle.setWidth(...)
+juce.Rectangle.setX(...)
+juce.Rectangle.setY(...)
+juce.Rectangle.toDouble(...)
+juce.Rectangle.toFloat(...)
+juce.Rectangle.toNearestInt(...)
+juce.Rectangle.toNearestIntEdges(...)
+juce.Rectangle.toString(...)
+juce.Rectangle.transformedBy(...)
+juce.Rectangle.translate(...)
+juce.Rectangle.translated(...)
+juce.Rectangle.withBottom(...)
+juce.Rectangle.withBottomY(...)
+juce.Rectangle.withCentre(...)
+juce.Rectangle.withHeight(...)
+juce.Rectangle.withLeft(...)
+juce.Rectangle.withRight(...)
+juce.Rectangle.withRightX(...)
+juce.Rectangle.withSize(...)
+juce.Rectangle.withSizeKeepingCentre(...)
+juce.Rectangle.withTop(...)
+juce.Rectangle.withTrimmedBottom(...)
+juce.Rectangle.withTrimmedLeft(...)
+juce.Rectangle.withTrimmedRight(...)
+juce.Rectangle.withTrimmedTop(...)
+juce.Rectangle.withWidth(...)
+juce.Rectangle.withX(...)
+juce.Rectangle.withY(...)
+juce.Rectangle.withZeroOrigin(...)
 ```
 
 ## juce_gui_basics

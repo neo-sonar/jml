@@ -18,6 +18,9 @@ end
 local function select_xml_file(entity)
   entity = entity:gsub('_', '__')
   entity = entity:gsub('%.', '_1_1')
+  entity = entity:gsub('<int>', '')
+  entity = entity:gsub('<float>', '')
+  entity = entity:gsub('<double>', '')
   local juce_root = "~/Developer/tobiashienzsch/JUCE"
   local xml = string.format("%s/docs/doxygen/xml", juce_root)
 
