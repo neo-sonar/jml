@@ -15,10 +15,10 @@ auto juce_RangeImpl(sol::table& state, char const* name) -> void
 
 auto juce_Range(sol::table& state) -> void
 {
-    juce_RangeImpl<int>(state, "RangeInt");
-    juce_RangeImpl<juce::int64>(state, "RangeInt64");
+    juce_RangeImpl<int>(state, "Range_int");
+    juce_RangeImpl<juce::int64>(state, "Range_int64");
 
-    juce_RangeImpl<float>(state, "RangeFloat");
-    juce_RangeImpl<double>(state, "RangeDouble");
+    juce_RangeImpl<float>(state, "Range_float");
+    juce_RangeImpl<double>(state, "Range_double");
 }
 } // namespace lua_juce

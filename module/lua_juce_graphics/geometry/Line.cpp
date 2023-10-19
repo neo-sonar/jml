@@ -39,8 +39,8 @@ auto juce_LineImpl(sol::table& state, char const* name) -> void
 
 auto juce_Line(sol::table& state) -> void
 {
-    juce_LineImpl<int>(state, "LineInt");
-    juce_LineImpl<float>(state, "LineFloat");
-    juce_LineImpl<double>(state, "LineDouble");
+    juce_LineImpl<int>(state, "Line_int");
+    juce_LineImpl<float>(state, "Line_float");
+    juce_LineImpl<double>(state, "Line_double");
 }
 } // namespace lua_juce

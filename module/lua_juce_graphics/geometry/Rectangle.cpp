@@ -110,8 +110,8 @@ auto juce_RectangleImpl(sol::table& state, char const* name) -> void
 
 auto juce_Rectangle(sol::table& state) -> void
 {
-    juce_RectangleImpl<int>(state, "RectangleInt");
-    juce_RectangleImpl<float>(state, "RectangleFloat");
-    juce_RectangleImpl<double>(state, "RectangleDouble");
+    juce_RectangleImpl<int>(state, "Rectangle_int");
+    juce_RectangleImpl<float>(state, "Rectangle_float");
+    juce_RectangleImpl<double>(state, "Rectangle_double");
 }
 } // namespace lua_juce

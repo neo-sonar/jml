@@ -58,7 +58,6 @@
 - [juce_gui_extra](#juce_gui_extra)
   - [CodeDocument](#CodeDocument)
 
-
 ## juce_audio_basics
 
 ## MidiFile

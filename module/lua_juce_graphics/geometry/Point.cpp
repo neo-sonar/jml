@@ -36,8 +36,8 @@ auto juce_PointImpl(sol::table& state, char const* name) -> void
 
 auto juce_Point(sol::table& state) -> void
 {
-    juce_PointImpl<int>(state, "PointInt");
-    juce_PointImpl<float>(state, "PointFloat");
-    juce_PointImpl<double>(state, "PointDouble");
+    juce_PointImpl<int>(state, "Point_int");
+    juce_PointImpl<float>(state, "Point_float");
+    juce_PointImpl<double>(state, "Point_double");
 }
 } // namespace lua_juce

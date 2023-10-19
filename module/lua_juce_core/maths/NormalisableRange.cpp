@@ -30,7 +30,7 @@ auto juce_NormalisableRangeImpl(sol::table& state, char const* name) -> void
 
 auto juce_NormalisableRange(sol::table& state) -> void
 {
-    juce_NormalisableRangeImpl<float>(state, "NormalisableRangeFloat");
-    juce_NormalisableRangeImpl<double>(state, "NormalisableRangeDouble");
+    juce_NormalisableRangeImpl<float>(state, "NormalisableRange_float");
+    juce_NormalisableRangeImpl<double>(state, "NormalisableRange_double");
 }
 } // namespace lua_juce

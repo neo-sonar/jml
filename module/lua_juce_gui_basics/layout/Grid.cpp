@@ -10,7 +10,7 @@ auto juce_Grid(sol::table& state) -> void
     auto table = state["Grid"].get_or_create<sol::table>();
 
     juce_ArrayImpl<juce::GridItem>(state, "Array_GridItem");
-    juce_ArrayImpl<juce::Grid::TrackInfo>(state, "Array_GridTrackInfo");
+    juce_ArrayImpl<juce::Grid::TrackInfo>(state, "Array_Grid_TrackInfo");
 
     // juce::Grid::JustifyItems
     table.new_enum(                       //
