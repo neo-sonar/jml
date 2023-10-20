@@ -63,6 +63,7 @@ auto allModules(sol::state& lua) -> void
     juce_Justification(table);
     juce_Line(table);
     juce_Path(table);
+    juce_PixelARGB(table);
     juce_Point(table);
     juce_Rectangle(table);
 

@@ -4,6 +4,7 @@
 #include "colour/ColourGradient.cpp"    // NOLINT
 #include "colour/Colours.cpp"           // NOLINT
 #include "colour/FillType.cpp"          // NOLINT
+#include "colour/PixelARGB.cpp"         // NOLINT
 #include "contexts/Graphics.cpp"        // NOLINT
 #include "effects/DropShadow.cpp"       // NOLINT
 #include "font/Font.cpp"                // NOLINT

@@ -248,8 +248,9 @@ local classes = {
     juce.Image.new(),
     juce.Graphics.new(juce.Image.new()),
     juce.Line_double.new(),
-    juce.Point_double.new(),
     juce.Path.new(),
+    juce.PixelARGB.new(),
+    juce.Point_double.new(),
     juce.Rectangle_double.new(),
   },
   juce_gui_basics = {

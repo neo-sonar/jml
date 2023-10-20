@@ -37,6 +37,7 @@ auto juce_Font(sol::table& state) -> void;
 auto juce_AffineTransform(sol::table& state) -> void;
 auto juce_Line(sol::table& state) -> void;
 auto juce_Path(sol::table& state) -> void;
+auto juce_PixelARGB(sol::table& state) -> void;
 auto juce_Point(sol::table& state) -> void;
 auto juce_Rectangle(sol::table& state) -> void;
 auto juce_Image(sol::table& state) -> void;
