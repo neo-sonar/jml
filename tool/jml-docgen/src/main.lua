@@ -1,5 +1,5 @@
-ldoc = require("ldoc")
-markdown = require("markdown")
+local ldoc = require("ldoc")
+local markdown = require("markdown")
 
 local classes = {
   juce_core = {

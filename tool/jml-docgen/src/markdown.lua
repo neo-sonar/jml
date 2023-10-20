@@ -1,3 +1,5 @@
+local sol2 = require("sol2")
+
 local markdown = {}
 
 local function format_usertype_as_code_block(doc)
@@ -11,7 +13,7 @@ local function format_usertype_as_code_block(doc)
   local str = string.format("## %s\n\n", doc.name)
   str = str .. string.format("```lua\n")
   for i = 1, #doc.members do
-    func = doc.members[i]
+    local func = doc.members[i]
     if ignored_functions[func] == nil then
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, func)
     end
@@ -37,9 +39,8 @@ function markdown.write_usertype(file, modules)
     for d = 1, #module_docs[1] do
       local name = module_docs[1][d]
       local class = module_docs[2][name]
-      local name = class.name
-      if name ~= nil then
-        file:write(string.format("  - [%s](#%s)\n", name, name))
+      if class.name ~= nil then
+        file:write(string.format("  - [%s](#%s)\n", class.name, class.name))
       end
     end
   end

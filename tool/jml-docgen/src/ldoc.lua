@@ -1,14 +1,14 @@
-doxygen = require("doxygen")
-sol2 = require("sol2")
-strings = require("strings")
-tables = require("tables")
+local doxygen = require("doxygen")
+local sol2 = require("sol2")
+local strings = require("strings")
+local tables = require("tables")
 
 local ldoc = {}
 
 function ldoc.write_usertype_stubs(dir, modules)
   local docs, _ = sol2.parse_juce_types(modules)
 
-  for module_name, juce_module in pairs(docs) do
+  for _, juce_module in pairs(docs) do
     for class_name, class in pairs(juce_module[2]) do
       local doxygen_spec = doxygen.parse_xml(class_name)
       if doxygen_spec == nil then
@@ -41,7 +41,7 @@ function ldoc.write_usertype_stubs(dir, modules)
       if tables.length(members_variables) > 0 then
         file:write("--- Public variables of the class\n")
         file:write("-- @table Variables\n")
-        for name, var in pairs(members_variables) do
+        for name, _ in pairs(members_variables) do
           file:write(string.format("-- @field %s\n", name))
         end
         file:write("\n\n")
@@ -88,12 +88,10 @@ function ldoc.write_usertype_stubs(dir, modules)
           end
 
           -- Static or member function
-          local seperator = nil
+          local seperator = ":"
           if member_dox.is_static then
             seperator = "."
             file:write(string.format("-- @static\n"))
-          else
-            seperator = ":"
           end
 
           -- Function parameter

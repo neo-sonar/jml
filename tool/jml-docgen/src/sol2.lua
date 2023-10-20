@@ -24,6 +24,8 @@ local function parse_usertype(obj)
   local name = meta.__name
   local doc = {name = nil, members = {}}
 
+  local i
+  local j
   i, j = string.find(name, "lua_juce")
   if i == nil or j == nil then
     doc.name = string.sub(meta.__name, 11) -- Remove "sol.juce::"
@@ -94,7 +96,7 @@ end
 
 local function write_all_juce_types(file_path)
   local types = io.open(file_path, "w")
-  for k, v in pairs(juce) do
+  for k, _ in pairs(juce) do
     types:write(string.format("%s\n", k))
   end
   types:close()

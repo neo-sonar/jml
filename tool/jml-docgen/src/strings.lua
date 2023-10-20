@@ -1,4 +1,4 @@
-testing = require("testing")
+local testing = require("testing")
 
 local strings = {}
 
@@ -11,11 +11,9 @@ function strings.trim(str)
 end
 
 function strings.remove_last(str, substr)
-  local start, stop
   local last_pos = 0
-
   repeat
-    start, stop = str:find(substr, last_pos + 1)
+    local start, _ = str:find(substr, last_pos + 1)
     if start then
       last_pos = start
     end

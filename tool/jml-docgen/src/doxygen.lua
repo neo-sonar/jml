@@ -1,6 +1,6 @@
-json = require("json")
-strings = require("strings")
-testing = require("testing")
+local json = require("json")
+local strings = require("strings")
+local testing = require("testing")
 
 local juce_root = "~/Developer/tobiashienzsch/JUCE"
 
@@ -69,7 +69,7 @@ local function parse_return_type(e)
 
   for _, template in pairs({"std::unique_ptr", "std::optional"}) do
     if string.find(ret_type, template) then
-      template_arg = nil
+      local template_arg = nil
       ret_type:gsub("<([%w%s_]+)>", function(captured)
         template_arg = captured
       end)
