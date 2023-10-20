@@ -101,6 +101,6 @@ local function write_all_juce_types(file_path)
 end
 
 test()
-write_all_juce_types("out/types.txt")
+write_all_juce_types("../out/types.txt")
 
 return sol2

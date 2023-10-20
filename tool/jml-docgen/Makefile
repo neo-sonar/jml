@@ -9,7 +9,7 @@ generate: out
 
 .PHONY: stubs
 stubs: out
-	@${JML_VIEWER} test -s main.lua
+	@${JML_VIEWER} test -s src/main.lua
 
 out:
 	@mkdir -p out

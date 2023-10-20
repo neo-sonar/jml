@@ -77,8 +77,8 @@ local classes = {
 
 }
 
-local readme = io.open("README.md", "w")
+local readme = io.open("../README.md", "w")
 markdown.write_usertype(readme, classes)
 readme:close()
 
-ldoc.write_usertype_stubs("out/lua", classes)
+ldoc.write_usertype_stubs("../out/lua", classes)

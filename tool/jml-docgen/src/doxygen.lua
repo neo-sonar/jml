@@ -74,12 +74,7 @@ local function parse_return_type(e)
         template_arg = captured
       end)
 
-      if not template_arg then
-        print(ret_type)
-        assert(false)
-      end
-
-      print(template_arg, ret_type)
+      assert(template_arg)
       return strings.trim(template_arg)
     end
   end
@@ -172,7 +167,7 @@ function doxygen.parse_xml(type_name)
     end
   end
 
-  local f = io.open(string.format("out/json/%s.json", type_name), "w")
+  local f = io.open(string.format("../out/json/%s.json", type_name), "w")
   f:write(json.encode(results))
   f:close()
 
