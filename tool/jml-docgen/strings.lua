@@ -1,7 +1,27 @@
+testing = require("testing")
+
 local strings = {}
 
 function strings.starts_with(str, prefix)
   return string.sub(str, 1, string.len(prefix)) == prefix
+end
+
+function strings.remove_last(str, substr)
+  local start, stop
+  local last_pos = 0
+
+  repeat
+    start, stop = str:find(substr, last_pos + 1)
+    if start then
+      last_pos = start
+    end
+  until not start
+
+  if last_pos > 0 then
+    return str:sub(1, last_pos - 1) .. str:sub(last_pos + #substr)
+  else
+    return str
+  end
 end
 
 function strings.break_into_lines(str, length, line_prefix)
@@ -34,6 +54,10 @@ local function test()
   -- starts_with
   assert(strings.starts_with("foobar", "foo"))
   assert(not strings.starts_with("foobar", "bar"))
+
+  -- remove_last
+  testing.eq(strings.remove_last("foofoo", "foo"), "foo")
+  testing.eq(strings.remove_last("foofoo", "bar"), "foofoo")
 
   -- break_into_lines
   local lines = strings.break_into_lines("foo bar baz", 4)

@@ -31,12 +31,11 @@ local function parse_usertype(obj)
     doc.name = string.sub(meta.__name, 18) -- Remove "sol.lua_juce::Lua"
   end
 
+  doc.name = doc.name:gsub("<[ %w_]+>", "")
+  doc.name = doc.name:gsub("::", ".")
   doc.name = doc.name:gsub("*", "")
   doc.name = doc.name:gsub("&", "")
-  doc.name = doc.name:gsub("::", ".")
-  doc.name = doc.name:gsub('<int>', '')
-  doc.name = doc.name:gsub('<float>', '')
-  doc.name = doc.name:gsub('<double>', '')
+
   assert(doc.name ~= nil)
 
   for key, value in pairs(meta) do
@@ -74,7 +73,7 @@ function sol2.parse_juce_types(modules)
 end
 
 local function test()
-  local assert_usertype_name = function(v, name)
+  local test_usertype_name = function(v, name)
     local actual = parse_usertype(v).name
     if actual ~= name then
       local msg = "NAME MISMATCH: should be '%s', but is '%s'"
@@ -83,20 +82,25 @@ local function test()
     end
   end
 
-  assert_usertype_name(juce.String.new(), "String")
-  assert_usertype_name(juce.abstract.Button, "Button")
-  assert_usertype_name(juce.abstract.LookAndFeel, "LookAndFeel")
-  assert_usertype_name(juce.Grid.Px.new(1), "Grid.Px")
-  assert_usertype_name(juce.GridItem.Margin.new(), "GridItem.Margin")
+  test_usertype_name(juce.File.new(), "File")
+  test_usertype_name(juce.String.new(), "String")
+  test_usertype_name(juce.abstract.Button, "Button")
+  test_usertype_name(juce.abstract.LookAndFeel, "LookAndFeel")
+  test_usertype_name(juce.Grid.Px.new(1), "Grid.Px")
+  test_usertype_name(juce.GridItem.Margin.new(), "GridItem.Margin")
+  test_usertype_name(juce.Line_double.new(), "Line")
+  test_usertype_name(juce.Line_float.new(), "Line")
+end
 
-  local types = io.open("out/types.txt", "w")
+local function write_all_juce_types(file_path)
+  local types = io.open(file_path, "w")
   for k, v in pairs(juce) do
     types:write(string.format("%s\n", k))
   end
   types:close()
-
 end
 
 test()
+write_all_juce_types("out/types.txt")
 
 return sol2

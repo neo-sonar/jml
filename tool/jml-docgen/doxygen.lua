@@ -1,4 +1,7 @@
 json = require("json")
+testing = require("testing")
+
+local juce_root = "~/Developer/tobiashienzsch/JUCE"
 
 local doxygen = {}
 
@@ -21,7 +24,6 @@ local function select_xml_file(entity)
   entity = entity:gsub('<int>', '')
   entity = entity:gsub('<float>', '')
   entity = entity:gsub('<double>', '')
-  local juce_root = "~/Developer/tobiashienzsch/JUCE"
   local xml = string.format("%s/docs/doxygen/xml", juce_root)
 
   local class = string.format("%s/class%s.xml", xml, entity)
@@ -89,7 +91,7 @@ local function parse_member_variable(e)
   }
 end
 
-function doxygen.parse_xml(entity_name)
+function doxygen.parse_xml(type_name)
   -- Results
   local results = {name = "", brief = "", members = {}, variables = {}}
 
@@ -107,7 +109,7 @@ function doxygen.parse_xml(entity_name)
   }
 
   -- Xml file
-  local xml_file = select_xml_file(entity_name)
+  local xml_file = select_xml_file(type_name)
   assert_file_exists(xml_file)
 
   local xml_doc = juce.XmlDocument.parse(xml_file)
@@ -127,10 +129,10 @@ function doxygen.parse_xml(entity_name)
     local tag = tostring(child:getTagName())
     if tag == "compoundname" then
       -- Get name
-      results["name"] = tostring(child:getAllSubText()):gsub("\n", " ")
+      results["name"] = tostring(child:getAllSubText():trim()):gsub("\n", " ")
     elseif tag == "briefdescription" then
       -- Get brief
-      results["brief"] = tostring(child:getAllSubText()):gsub("\n", " ")
+      results["brief"] = tostring(child:getAllSubText():trim()):gsub("\n", " ")
     elseif tag == "sectiondef" then
       -- Sections
       local section = child:getStringAttribute(juce.StringRef.new(kind_tag))
@@ -146,7 +148,7 @@ function doxygen.parse_xml(entity_name)
     end
   end
 
-  local f = io.open(string.format("out/json/%s.json", entity_name), "w")
+  local f = io.open(string.format("out/json/%s.json", type_name), "w")
   f:write(json.encode(results))
   f:close()
 
@@ -154,4 +156,27 @@ function doxygen.parse_xml(entity_name)
 
 end
 
+local function test()
+  local file = doxygen.parse_xml("File")
+  testing.eq(file.name, "File")
+  testing.eq(file.brief, "Represents a local file or directory.")
+
+  local create = nil
+  for _, v in pairs(file.members) do
+    if v["name"] == "createInputStream" then
+      create = v
+    end
+  end
+
+  assert(create)
+  testing.eq(create.is_static, false)
+  testing.eq(create.is_const, true)
+  testing.eq(create.is_noexcept, false)
+  testing.eq(create.is_virtual, false)
+  testing.eq(#create.parameter, 0)
+  testing.eq(create.return_type, "std::unique_ptr< FileInputStream >")
+  testing.eq(create.brief, "Creates a stream to read from this file.")
+end
+
+test()
 return doxygen

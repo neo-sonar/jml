@@ -16,8 +16,8 @@ local function format_usertype_as_code_block(doc)
       str = str .. string.format("juce.%s.%s(...)\n", doc.name, func)
     end
   end
-  str = str .. string.format("```\n\n")
-  return str
+
+  return str .. string.format("```\n\n")
 end
 
 function markdown.write_usertype(file, modules)
@@ -45,7 +45,7 @@ function markdown.write_usertype(file, modules)
   end
 
   -- Wrie Content
-  file:write("\n\n")
+  file:write("\n")
   for i = 1, #sorted_modules_names do
     local module_name = sorted_modules_names[i]
     local module_docs = docs[module_name]
