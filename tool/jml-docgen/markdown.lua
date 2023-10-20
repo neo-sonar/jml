@@ -17,7 +17,7 @@ local function format_usertype_as_code_block(doc)
     end
   end
 
-  return str .. string.format("```\n\n")
+  return str .. string.format("```\n")
 end
 
 function markdown.write_usertype(file, modules)
@@ -45,18 +45,18 @@ function markdown.write_usertype(file, modules)
   end
 
   -- Wrie Content
-  file:write("\n")
   for i = 1, #sorted_modules_names do
     local module_name = sorted_modules_names[i]
     local module_docs = docs[module_name]
 
     -- Header
-    file:write(string.format("## %s\n\n", module_name))
+    file:write(string.format("\n## %s\n", module_name))
 
     -- Members
-    for d = 1, #module_docs[1] do
-      local name = module_docs[1][d]
+    for j = 1, #module_docs[1] do
+      local name = module_docs[1][j]
       local doc = module_docs[2][name]
+      file:write("\n")
       file:write(format_usertype_as_code_block(doc))
     end
   end
