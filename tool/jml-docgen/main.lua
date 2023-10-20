@@ -1,17 +1,7 @@
 doxygen = require("doxygen")
 sol2 = require("sol2")
-
-local function table_length(T)
-  local count = 0
-  for _ in pairs(T) do
-    count = count + 1
-  end
-  return count
-end
-
-local function starts_with(str, prefix)
-  return string.sub(str, 1, string.len(prefix)) == prefix
-end
+strings = require("strings")
+tables = require("tables")
 
 local function format_usertype_docs_as_lua_stubs(doc)
   local ignored_functions = {
@@ -66,7 +56,7 @@ local function write_usertype_as_lua_stubs(dir, modules)
         end
       end
 
-      if table_length(members_variables) > 0 then
+      if tables.length(members_variables) > 0 then
         file:write("--- Public variables of the class\n")
         file:write("-- @table Variables\n")
         for name, var in pairs(members_variables) do
@@ -77,6 +67,7 @@ local function write_usertype_as_lua_stubs(dir, modules)
 
       -- For each member in class
       for _, member in pairs(class.members) do
+        -- Skip function body for variables
         local skip = false
         if members_variables[member] then
           skip = true
@@ -84,15 +75,17 @@ local function write_usertype_as_lua_stubs(dir, modules)
 
         -- Skip special functions
         if not skip then
-          local doxygen_member = nil
+          local member_dox = nil
+          -- Match doxygen to sol names
           for _, spec in pairs(doxygen_spec.members) do
             if spec.name == member then
-              doxygen_member = spec
+              member_dox = spec
             end
           end
 
-          if doxygen_member == nil then
-            doxygen_member = {
+          -- Fallback if doxygen not available
+          if member_dox == nil then
+            member_dox = {
               brief = member,
               detail = "",
               is_static = true,
@@ -101,32 +94,42 @@ local function write_usertype_as_lua_stubs(dir, modules)
             }
           end
 
-          file:write(string.format("--- %s\n", doxygen_member.brief))
-          if doxygen_member.detail ~= "" then
-            file:write(string.format("--\n-- %s\n", doxygen_member.detail))
+          -- Brief
+          local brief = strings.break_into_lines(member_dox.brief, 70, "-- ")
+          file:write(string.format("-%s\n", brief))
+
+          -- Detail
+          if member_dox.detail ~= "" then
+            local detail =
+              strings.break_into_lines(member_dox.detail, 70, "-- ")
+            file:write(string.format("--\n%s\n--\n", detail))
           end
 
+          -- Static or member function
           local seperator = nil
-          if doxygen_member.is_static then
+          if member_dox.is_static then
             seperator = "."
             file:write(string.format("-- @static\n"))
           else
             seperator = ":"
           end
 
-          for i = 1, #doxygen_member.parameter do
-            local param = doxygen_member.parameter[i]
+          -- Function parameter
+          for i = 1, #member_dox.parameter do
+            local param = member_dox.parameter[i]
             if param.name ~= "" then
               file:write(string.format("-- @param %s\n", param.name))
             end
           end
 
-          if doxygen_member.return_type then
-            file:write(string.format("-- @treturn %s\n",
-                                     doxygen_member.return_type))
+          -- Function return type
+          if member_dox.return_type then
+            local name_only = member_dox.return_type:gsub("<[ %w_]+>", "")
+            file:write(string.format("-- @treturn %s\n", name_only))
           end
 
-          if #doxygen_member.parameter == 0 then
+          -- Function definition
+          if #member_dox.parameter == 0 then
             local fmt = "function %s%s%s() end\n\n"
             file:write(string.format(fmt, class_name, seperator, member))
           else
@@ -136,6 +139,7 @@ local function write_usertype_as_lua_stubs(dir, modules)
         end
       end
 
+      -- Return module/class
       file:write(string.format("return %s\n", class_name))
       file:close()
     end
@@ -152,16 +156,19 @@ local function write_usertype_as_lua_stubs(dir, modules)
   -- }
 
   local colours = io.open(string.format("%s/Colours.lua", dir), "w")
-  colours:write("--- JUCE framework\n")
-  colours:write("-- @module juce\n\n")
-  colours:write("--- Contains a set of predefined named colours\n")
-  colours:write("-- @table Colours\n")
-  for k, v in pairs(juce.Colours) do
-    colours:write(string.format("-- @field %s 0x%s\n", k, v))
+  colours:write([[--- JUCE framework
+-- @module juce
+
+--- Contains a set of predefined named colours
+-- @table Colours
+]])
+
+  for name, colour in pairs(juce.Colours) do
+    colours:write(string.format("-- @field %s 0x%s\n", name, colour))
   end
   colours:write("Colours = {\n")
-  for k, v in pairs(juce.Colours) do
-    colours:write(string.format("\t%-20s = 0x%s\n", k, v))
+  for name, colour in pairs(juce.Colours) do
+    colours:write(string.format("\t%-20s = 0x%s\n", name, colour))
   end
   colours:write("}\n\n")
 
