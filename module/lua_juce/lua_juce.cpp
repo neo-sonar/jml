@@ -92,6 +92,10 @@ auto allModules(sol::state& lua) -> void
 
     // juce_gui_extra
     juce_CodeDocument(table);
+    juce_CodeTokeniser(table);
+    juce_CPlusPlusCodeTokeniser(table);
+    juce_LuaTokeniser(table);
+    juce_XmlTokeniser(table);
 
     // juce_audio_processors
     juce_AudioProcessor(table);

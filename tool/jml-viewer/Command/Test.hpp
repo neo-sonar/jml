@@ -69,6 +69,7 @@ inline auto runTestScript(CommandLine const& cli) -> juce::Result
     auto button = juce::TextButton{};
     auto& lnf   = juce::Desktop::getInstance().getDefaultLookAndFeel();
     auto proc   = NullAudioProcessor{};
+    auto token  = juce::LuaTokeniser{};
 
     auto doc                  = state[sol::create_if_nil]["juce"]["abstract"];
     doc["MemoryInputStream"]  = static_cast<juce::MemoryInputStream*>(&in);
@@ -78,6 +79,7 @@ inline auto runTestScript(CommandLine const& cli) -> juce::Result
     doc["Button"]             = static_cast<juce::Button*>(&button);
     doc["LookAndFeel"]        = static_cast<juce::LookAndFeel*>(&lnf);
     doc["AudioProcessor"]     = static_cast<juce::AudioProcessor*>(&proc);
+    doc["CodeTokeniser"]      = static_cast<juce::CodeTokeniser*>(&token);
 
     auto const scriptFile = juce::File{cli.scriptPath};
     if (cli.verbose) {
