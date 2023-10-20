@@ -25,8 +25,8 @@ END_JUCE_MODULE_DECLARATION
 
 namespace lua_juce {
 auto juce_CodeDocument(sol::table& state) -> void;
-auto juce_CodeTokeniser(sol::table& state) -> void;
-auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void;
-auto juce_LuaTokeniser(sol::table& state) -> void;
-auto juce_XmlTokeniser(sol::table& state) -> void;
+// auto juce_CodeTokeniser(sol::table& state) -> void;
+// auto juce_CPlusPlusCodeTokeniser(sol::table& state) -> void;
+// auto juce_LuaTokeniser(sol::table& state) -> void;
+// auto juce_XmlTokeniser(sol::table& state) -> void;
 } // namespace lua_juce

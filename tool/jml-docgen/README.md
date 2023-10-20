@@ -71,11 +71,7 @@
   - [ToggleButton](#ToggleButton)
   - [TreeView](#TreeView)
 - [juce_gui_extra](#juce_gui_extra)
-  - [CPlusPlusCodeTokeniser](#CPlusPlusCodeTokeniser)
   - [CodeDocument](#CodeDocument)
-  - [CodeTokeniser](#CodeTokeniser)
-  - [LuaTokeniser](#LuaTokeniser)
-  - [XmlTokeniser](#XmlTokeniser)
 
 ## juce_audio_basics
 
@@ -1793,14 +1789,6 @@ juce.TreeView.setRootItemVisible(...)
 
 ## juce_gui_extra
 
-## CPlusPlusCodeTokeniser
-
-```lua
-juce.CPlusPlusCodeTokeniser.__eq(...)
-juce.CPlusPlusCodeTokeniser.isReservedKeyword(...)
-juce.CPlusPlusCodeTokeniser.new(...)
-```
-
 ## CodeDocument
 
 ```lua
@@ -1831,26 +1819,4 @@ juce.CodeDocument.setNewLineCharacters(...)
 juce.CodeDocument.setSavePoint(...)
 juce.CodeDocument.undo(...)
 juce.CodeDocument.writeToStream(...)
-```
-
-## CodeTokeniser
-
-```lua
-juce.CodeTokeniser.__eq(...)
-juce.CodeTokeniser.getDefaultColourScheme(...)
-juce.CodeTokeniser.new(...)
-```
-
-## LuaTokeniser
-
-```lua
-juce.LuaTokeniser.__eq(...)
-juce.LuaTokeniser.new(...)
-```
-
-## XmlTokeniser
-
-```lua
-juce.XmlTokeniser.__eq(...)
-juce.XmlTokeniser.new(...)
 ```

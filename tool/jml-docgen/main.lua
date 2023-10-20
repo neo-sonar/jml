@@ -72,13 +72,7 @@ local classes = {
     juce.ToggleButton.new(juce.String.new("")),
     juce.TreeView.new(juce.String.new("")),
   },
-  juce_gui_extra = {
-    juce.CodeDocument.new(),
-    juce.abstract.CodeTokeniser,
-    juce.CPlusPlusCodeTokeniser.new(),
-    juce.LuaTokeniser.new(),
-    juce.XmlTokeniser.new(),
-  },
+  juce_gui_extra = {juce.CodeDocument.new()},
   juce_audio_processors = {juce.abstract.AudioProcessor},
 
 }
