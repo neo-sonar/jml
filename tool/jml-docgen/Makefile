@@ -5,18 +5,18 @@ all: stubs generate
 
 .PHONY: generate
 generate: out
-	ldoc .
+	@ldoc .
 
 .PHONY: stubs
 stubs: out
-	${JML_VIEWER} test -s main.lua
+	@${JML_VIEWER} test -s main.lua
 
 out:
-	mkdir -p out
-	mkdir -p out/lua
-	mkdir -p out/json
-	mkdir -p out/html
+	@mkdir -p out
+	@mkdir -p out/lua
+	@mkdir -p out/json
+	@mkdir -p out/html
 
 .PHONY: clean
 clean:
-	rm -rf out
+	@rm -rf out
