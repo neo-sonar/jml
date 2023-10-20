@@ -1,4 +1,5 @@
 json = require("json")
+strings = require("strings")
 testing = require("testing")
 
 local juce_root = "~/Developer/tobiashienzsch/JUCE"
@@ -63,6 +64,29 @@ local function parse_function_parameter(func)
   return parameter
 end
 
+local function parse_return_type(e)
+  local ret_type = strings.trim(get_all_text(e, "type"))
+
+  for _, template in pairs({"std::unique_ptr", "std::optional"}) do
+    if string.find(ret_type, template) then
+      template_arg = nil
+      ret_type:gsub("<([%w%s_]+)>", function(captured)
+        template_arg = captured
+      end)
+
+      if not template_arg then
+        print(ret_type)
+        assert(false)
+      end
+
+      print(template_arg, ret_type)
+      return strings.trim(template_arg)
+    end
+  end
+
+  return ret_type
+end
+
 local function parse_member_function(e)
   assert(has_kind(e, "function"))
 
@@ -74,7 +98,7 @@ local function parse_member_function(e)
     is_const = get_bool(e, "const"),
     is_noexcept = get_bool(e, "noexcept"),
     is_virtual = get_bool(e, "virt"),
-    return_type = get_all_text(e, "type"),
+    return_type = parse_return_type(e),
     parameter = parse_function_parameter(e),
   }
 end
@@ -174,7 +198,7 @@ local function test()
   testing.eq(create.is_noexcept, false)
   testing.eq(create.is_virtual, false)
   testing.eq(#create.parameter, 0)
-  testing.eq(create.return_type, "std::unique_ptr< FileInputStream >")
+  testing.eq(create.return_type, "FileInputStream")
   testing.eq(create.brief, "Creates a stream to read from this file.")
 end
 

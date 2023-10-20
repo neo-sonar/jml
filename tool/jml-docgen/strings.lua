@@ -6,6 +6,10 @@ function strings.starts_with(str, prefix)
   return string.sub(str, 1, string.len(prefix)) == prefix
 end
 
+function strings.trim(str)
+  return str:gsub("^%s*(.-)%s*$", "%1")
+end
+
 function strings.remove_last(str, substr)
   local start, stop
   local last_pos = 0
@@ -54,6 +58,15 @@ local function test()
   -- starts_with
   assert(strings.starts_with("foobar", "foo"))
   assert(not strings.starts_with("foobar", "bar"))
+
+  -- trim
+  testing.eq(strings.trim("foofoo"), "foofoo")
+  testing.eq(strings.trim(" foofoo"), "foofoo")
+  testing.eq(strings.trim("  foofoo"), "foofoo")
+  testing.eq(strings.trim("foofoo "), "foofoo")
+  testing.eq(strings.trim("foofoo  "), "foofoo")
+  testing.eq(strings.trim(" foofoo "), "foofoo")
+  testing.eq(strings.trim(" foo foo "), "foo foo")
 
   -- remove_last
   testing.eq(strings.remove_last("foofoo", "foo"), "foo")
