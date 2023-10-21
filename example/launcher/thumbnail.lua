@@ -19,7 +19,7 @@ function thumbnail.new(name)
   this.tag2:setComponentID(juce.String.new("tag2"))
   this.tag3:setComponentID(juce.String.new("tag3"))
 
-  local imageArea = juce.RectangleInt.new(0, 0, 0, 0)
+  local imageArea = juce.Rectangle_int.new(0, 0, 0, 0)
 
   function this.component:paint(g)
     g:setColour(Theme.black)

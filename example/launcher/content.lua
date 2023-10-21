@@ -67,7 +67,7 @@ function content.new()
 
   function listModel:paintListBoxItem(rowNumber, g, width, height, rowIsSelected)
     g:setColour(juce.Colours.black)
-    g:fillRect(juce.RectangleInt.new(0, 0, width, height):reduced(2))
+    g:fillRect(juce.Rectangle_int.new(0, 0, width, height):reduced(2))
   end
 
   local list = juce.ListBox.new()
