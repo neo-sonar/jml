@@ -1,4 +1,4 @@
-jml = require("jml")
+local jml = require("jml")
 
 local ui = jml.Component{
   id = "Main Window",

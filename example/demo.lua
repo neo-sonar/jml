@@ -13,12 +13,8 @@ end
 
 local function makeMainComponent()
   local lnf = juce.LookAndFeel_V4.new()
-  function lnf:drawButtonBackground(g, btn, color, highlighted, down)
-    local b = btn:getBounds()
-    local bf = juce.Rectangle_int.new(b:getX(), b:getY(), b:getWidth(),
-                                      b:getHeight())
-    local c = highlighted and juce.Colours.red or juce.Colours.blue
-    g:setColour(c)
+  function lnf:drawButtonBackground(g, btn, colour, highlighted, down)
+    g:setColour(highlighted and colour or juce.Colours.blue)
     g:fillAll()
   end
 

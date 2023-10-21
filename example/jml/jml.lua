@@ -15,21 +15,10 @@ end
 local function getTableSize(t)
   assert(isTable(t))
   local count = 0
-  for k in pairs(t) do
+  for _ in pairs(t) do
     count = count + 1
   end
   return count
-end
-
-local function max(lhs, rhs)
-  assert(isNumber(lhs))
-  assert(isNumber(rhs))
-
-  if lhs > rhs then
-    return lhs
-  end
-
-  return rhs
 end
 
 local function setEmptyProperties(spec, properties)
@@ -45,7 +34,7 @@ local function setEmptyProperties(spec, properties)
     {"margin", 0},
   }
 
-  local addProperty = function(k, v)
+  local addProperty = function(_, v)
     local id = v[1]
     local value = v[2]
     if spec[id] == nil then
@@ -64,19 +53,19 @@ local function setEmptyProperties(spec, properties)
   return spec
 end
 
-function isPercentageString(str)
+local function isPercentageString(str)
   if type(str) == "string" then
     return str:sub(-1) == "%"
   end
   return false
 end
 
-function parsePercentageToFraction(str)
+local function parsePercentageToFraction(str)
   assert(isString(str))
   return tonumber(str:sub(1, -2)) / 100.0
 end
 
-function calculatePercentageBasedSize(parentSize, children, property)
+local function calculatePercentageBasedSize(parentSize, children, property)
   assert(isNumber(parentSize))
   assert(isTable(children))
   assert(isString(property))
@@ -156,7 +145,7 @@ function jml.Component(spec)
     component:setComponentID(juce.String.new(spec.id))
 
     -- CHILDREN
-    for k, child in ipairs(spec.children) do
+    for _, child in ipairs(spec.children) do
       child.component = child.build()
       component:addAndMakeVisible(child.component)
     end
