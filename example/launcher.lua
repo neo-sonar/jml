@@ -1,10 +1,10 @@
-local Theme = {}
-
-Theme.black = juce.Colour.new(0, 0, 0, 255)
-Theme.grey = juce.Colour.new(53, 54, 59, 255)
-Theme.lightViolet = juce.Colour.new(93, 152, 255, 255)
-Theme.lightBlue = juce.Colour.new(82, 178, 225, 255)
-Theme.lightGreen = juce.Colour.new(120, 192, 206, 255)
+local Theme = {
+  black = juce.Colour.new(0, 0, 0, 255),
+  grey = juce.Colour.new(53, 54, 59, 255),
+  lightViolet = juce.Colour.new(93, 152, 255, 255),
+  lightBlue = juce.Colour.new(82, 178, 225, 255),
+  lightGreen = juce.Colour.new(120, 192, 206, 255),
+}
 
 local PluginThumbnail = {}
 
@@ -146,7 +146,6 @@ function Content.new()
 
   return component
 end
-
 
 local Sidebar = {}
 

@@ -1,4 +1,15 @@
-color = require("color")
+local color = {}
+
+function color.randomWithAlpha(alpha)
+  local r = juce.Random.getSystemRandom():nextInt(255)
+  local g = juce.Random.getSystemRandom():nextInt(255)
+  local b = juce.Random.getSystemRandom():nextInt(255)
+  return juce.Colour.new(r, g, b, alpha)
+end
+
+function color.random()
+  return color.randomWithAlpha(255)
+end
 
 local function makeMainComponent()
   local lnf = juce.LookAndFeel_V4.new()
