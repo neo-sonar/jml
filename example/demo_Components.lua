@@ -5,7 +5,7 @@ local function makeMainComponent()
   function lnf:drawButtonBackground(g, btn, color, highlighted, down)
     local b = btn:getBounds()
     local bf = juce.Rectangle_int.new(b:getX(), b:getY(), b:getWidth(),
-                                     b:getHeight())
+                                      b:getHeight())
     local c = highlighted and juce.Colours.red or juce.Colours.blue
     g:setColour(c)
     g:fillAll()
