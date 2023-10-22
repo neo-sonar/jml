@@ -17,7 +17,7 @@ local ui = jml.Component{
     jml.ComboBox{id = "ComboBox", margin = 4, choices = {"Foo", "Bar", "Baz"}},
     jml.Slider{
       id = "Slider",
-      style = juce.SliderStyle.LinearHorizontal,
+      style = juce.Slider.Style.LinearHorizontal,
       margin = 4,
       range = {start = 0.0, stop = 500.0, interval = 10.0},
     },

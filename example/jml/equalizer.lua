@@ -5,8 +5,8 @@ local eq = {}
 function eq.Rotary(spec)
   local custom = {}
   local root = jml.Slider{
-    style = juce.SliderStyle.RotaryHorizontalVerticalDrag,
-    textbox = juce.SliderTextEntryBoxPosition.NoTextBox,
+    style = juce.Slider.Style.RotaryHorizontalVerticalDrag,
+    textbox = juce.Slider.TextEntryBoxPosition.NoTextBox,
     margin = 4,
   }
 

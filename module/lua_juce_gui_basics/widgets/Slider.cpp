@@ -1,14 +1,15 @@
 namespace lua_juce {
 auto juce_Slider(sol::table& state) -> void
 {
+    auto table = state["Slider"].get_or_create<sol::table>();
 
-    auto params                 = state.new_usertype<juce::Slider::RotaryParameters>("SliderRotaryParameters");
+    auto params                 = table.new_usertype<juce::Slider::RotaryParameters>("RotaryParameters");
     params["startAngleRadians"] = &juce::Slider::RotaryParameters::startAngleRadians;
     params["endAngleRadians"]   = &juce::Slider::RotaryParameters::endAngleRadians;
     params["stopAtEnd"]         = &juce::Slider::RotaryParameters::stopAtEnd;
 
     // clang-format off
-    state.new_enum("SliderColourIds",
+    table.new_enum("ColourIds",
         "backgroundColourId",           juce::Slider::ColourIds::backgroundColourId,
         "thumbColourId",                juce::Slider::ColourIds::thumbColourId,
         "trackColourId",                juce::Slider::ColourIds::trackColourId,
@@ -20,7 +21,7 @@ auto juce_Slider(sol::table& state) -> void
         "textBoxTextColourId",          juce::Slider::ColourIds::textBoxTextColourId
     );
 
-    state.new_enum("SliderStyle",
+    table.new_enum("Style",
         "LinearHorizontal",             juce::Slider::SliderStyle::LinearHorizontal,
         "LinearVertical",               juce::Slider::SliderStyle::LinearVertical,
         "LinearBar",                    juce::Slider::SliderStyle::LinearBar,
@@ -36,7 +37,7 @@ auto juce_Slider(sol::table& state) -> void
         "ThreeValueVertical",           juce::Slider::SliderStyle::ThreeValueVertical
     );
 
-    state.new_enum("SliderTextEntryBoxPosition",
+    table.new_enum("TextEntryBoxPosition",
         "NoTextBox",    juce::Slider::TextEntryBoxPosition::NoTextBox,
         "TextBoxLeft",  juce::Slider::TextEntryBoxPosition::TextBoxLeft,
         "TextBoxRight", juce::Slider::TextEntryBoxPosition::TextBoxRight,
@@ -44,18 +45,19 @@ auto juce_Slider(sol::table& state) -> void
         "TextBoxBelow", juce::Slider::TextEntryBoxPosition::TextBoxBelow
     );
 
-    state.new_enum("SliderDragMode",
+    table.new_enum("DragMode",
         "notDragging",  juce::Slider::DragMode::notDragging,
         "absoluteDrag", juce::Slider::DragMode::absoluteDrag,
         "velocityDrag", juce::Slider::DragMode::velocityDrag
     );
 
-    auto slider = state.new_usertype<juce::Slider>("Slider",
-        sol::constructors<
-            juce::Slider(),
-            juce::Slider(juce::String const&),
-            juce::Slider(juce::Slider::SliderStyle, juce::Slider::TextEntryBoxPosition)
-        >(),
+    table["new"] = sol::overload(
+        []() { return std::make_unique<juce::Slider>(); },
+        [](juce::String const& name) { return std::make_unique<juce::Slider>(name); },
+        [](juce::Slider::SliderStyle style, juce::Slider::TextEntryBoxPosition pos) { return std::make_unique<juce::Slider>(style, pos); }
+    );
+
+    auto slider = table.new_usertype<juce::Slider>("Slider",
         sol::base_classes,
         sol::bases<
             juce::MouseListener,
@@ -64,6 +66,7 @@ auto juce_Slider(sol::table& state) -> void
             juce::SettableTooltipClient
         >()
     );
+
     slider["setRange"] =  sol::overload(
             static_cast<void (juce::Slider::*)(juce::Range<double>, double)>(&juce::Slider::setRange),
             static_cast<void (juce::Slider::*)(double, double, double)>(&juce::Slider::setRange),

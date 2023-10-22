@@ -5,10 +5,16 @@ local function MainComponent()
   local button = juce.TextButton.new(juce.String.new("Button"))
   local combo = juce.ComboBox.new(juce.String.new("Baz"))
   local slider = juce.Slider.new()
-  local rotary = juce.Slider.new(juce.SliderStyle.RotaryHorizontalVerticalDrag,
-                                 juce.SliderTextEntryBoxPosition.TextBoxBelow)
+  local rotary = juce.Slider.new(juce.Slider.Style.RotaryHorizontalVerticalDrag,
+                                 juce.Slider.TextEntryBoxPosition.TextBoxBelow)
   local singleLine = juce.TextEditor.new(juce.String.new("Single-Line"), 0x0)
   local password = juce.TextEditor.new(juce.String.new("Password"), 0x2022)
+
+  local centred = juce.Justification.new(juce.JustificationFlags.centred)
+  singleLine:setFont(juce.Font.new(32.0))
+  password:setFont(juce.Font.new(32.0))
+  singleLine:setJustification(centred)
+  password:setJustification(centred)
 
   button:setComponentID(juce.String.new("Button"))
   combo:setComponentID(juce.String.new("Combo-Box"))

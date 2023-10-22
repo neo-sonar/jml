@@ -37,7 +37,7 @@ local function makeMainComponent()
   mainComponent:addAndMakeVisible(slider_1)
 
   slider_1.onValueChange = function()
-    slider_1:setColour(juce.SliderColourIds.thumbColourId, color.random())
+    slider_1:setColour(juce.Slider.ColourIds.thumbColourId, color.random())
   end
 
   btn_1.onClick = function()
