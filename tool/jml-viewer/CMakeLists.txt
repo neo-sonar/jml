@@ -2,6 +2,32 @@ project(jml-viewer VERSION 0.1.0)
 
 find_package(CLI11 REQUIRED)
 
+juce_add_binary_data(jml-viewer_BinaryData
+    HEADER_NAME
+        "BinaryData.hpp"
+    NAMESPACE
+        BinaryData
+    SOURCES
+        "Asset/Icon/autorenew_black_48dp.svg"
+        "Asset/Icon/close_black_48dp.svg"
+        "Asset/Icon/content_copy_black_48dp.svg"
+        "Asset/Icon/content_cut_black_48dp.svg"
+        "Asset/Icon/content_paste_black_48dp.svg"
+        "Asset/Icon/data_object_black_48dp.svg"
+        "Asset/Icon/delete_black_48dp.svg"
+        "Asset/Icon/deselect_black_48dp.svg"
+        "Asset/Icon/help_outline_black_48dp.svg"
+        "Asset/Icon/info_black_48dp.svg"
+        "Asset/Icon/launch_black_48dp.svg"
+        "Asset/Icon/palette_black_48dp.svg"
+        "Asset/Icon/redo_black_48dp.svg"
+        "Asset/Icon/save_as_black_48dp.svg"
+        "Asset/Icon/save_black_48dp.svg"
+        "Asset/Icon/select_all_black_48dp.svg"
+        "Asset/Icon/settings_black_48dp.svg"
+        "Asset/Icon/undo_black_48dp.svg"
+)
+
 juce_add_gui_app(jml-viewer
     # VERSION ...                       # Set this if the app version is different to the project version
     # ICON_BIG ...                      # ICON_* arguments specify a path to an image file to use as an icon
@@ -26,6 +52,9 @@ set(sources
 
     "Command/Snapshot.hpp"
     "Command/Test.hpp"
+
+    "Core/Graphics.cpp"
+    "Core/Graphics.hpp"
 
     "LookAndFeel/Colours.hpp"
     "LookAndFeel/LookAndFeel.cpp"
@@ -67,6 +96,8 @@ target_link_libraries(jml-viewer
         lua_juce::lua_juce
 
     PUBLIC
+        jml-viewer_BinaryData
+
         lua::lua
         sol2::sol2
         CLI11::CLI11

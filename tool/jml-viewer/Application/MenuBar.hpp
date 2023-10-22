@@ -25,7 +25,7 @@ private:
         Help,
     };
 
-    juce::ApplicationCommandManager& _commandManager;
+    juce::ApplicationCommandManager& _commands;
     juce::MenuBarComponent _menu{this};
 };
 

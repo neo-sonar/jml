@@ -18,7 +18,10 @@ MainComponent::MainComponent()
 
 MainComponent::~MainComponent() = default;
 
-auto MainComponent::paint(juce::Graphics& g) -> void { g.fillAll(juce::Colours::white); }
+auto MainComponent::paint(juce::Graphics& g) -> void
+{
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+}
 
 auto MainComponent::resized() -> void
 {
@@ -39,6 +42,7 @@ auto MainComponent::getAllCommands(juce::Array<juce::CommandID>& c) -> void
         CommandIDs::reload,
         CommandIDs::save,
         CommandIDs::saveAs,
+        CommandIDs::settings,
         CommandIDs::redo,
         CommandIDs::undo,
         CommandIDs::about,
@@ -51,41 +55,43 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
     using juce::KeyPress;
     using juce::ModifierKeys;
 
+    auto const cmd   = ModifierKeys::commandModifier;
+    auto const shift = ModifierKeys::shiftModifier;
+
     switch (commandID) {
         case CommandIDs::open: {
             result.setInfo("Open", "Opens a script file", "File", 0);
-            result.addDefaultKeypress('o', ModifierKeys::commandModifier);
+            result.addDefaultKeypress('o', cmd);
             break;
         }
         case CommandIDs::reload: {
             result.setInfo("Reload", "Reload script file", "File", 0);
-            result.addDefaultKeypress('r', ModifierKeys::commandModifier);
+            result.addDefaultKeypress('r', cmd);
             break;
         }
         case CommandIDs::save: {
             result.setInfo("Save", "Saves a script file", "File", 0);
-            result.addDefaultKeypress('s', ModifierKeys::commandModifier);
+            result.addDefaultKeypress('s', cmd);
             break;
         }
         case CommandIDs::saveAs: {
             result.setInfo("Save As", "Saves a script file to a new location", "File", 0);
-            result.addDefaultKeypress(
-                's',
-                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
-            );
+            result.addDefaultKeypress('s', cmd | shift);
+            break;
+        }
+        case CommandIDs::settings: {
+            result.setInfo("Settings", "Open settings", "Edit", 0);
+            result.addDefaultKeypress(',', cmd);
             break;
         }
         case CommandIDs::undo: {
             result.setInfo("Undo", "Undo one step", "Edit", 0);
-            result.addDefaultKeypress('z', ModifierKeys::commandModifier);
+            result.addDefaultKeypress('z', cmd);
             break;
         }
         case CommandIDs::redo: {
             result.setInfo("Redo", "Redo one step", "Edit", 0);
-            result.addDefaultKeypress(
-                'z',
-                ModifierKeys::commandModifier | ModifierKeys::shiftModifier
-            );
+            result.addDefaultKeypress('z', cmd | shift);
             break;
         }
         case CommandIDs::about: {
@@ -103,6 +109,7 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
         case CommandIDs::reload: _documents.reloadActiveScript(); break;
         case CommandIDs::save:
         case CommandIDs::saveAs: /*saveProject();*/ break;
+        case CommandIDs::settings: showSettingsWindow(); break;
         case CommandIDs::undo: _undoManager.undo(); break;
         case CommandIDs::redo: _undoManager.redo(); break;
         case CommandIDs::about: showAboutWindow(); break;
@@ -110,6 +117,16 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
     }
 
     return true;
+}
+
+auto MainComponent::showSettingsWindow() -> void
+{
+    _settings.showInDialogBox(
+        "Settings",
+        640,
+        400,
+        getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)
+    );
 }
 
 auto MainComponent::showAboutWindow() -> void
