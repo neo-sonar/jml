@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/ValueTree.hpp"
 #include "Layer/Export/ImageExporter.hpp"
 #include "Layer/LayerSelection.hpp"
 
+#include <jml_tools/jml_tools.hpp>
 #include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::designer {

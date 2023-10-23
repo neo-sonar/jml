@@ -1,9 +1,9 @@
 #include "ShapeTool.hpp"
 
-#include "Core/Color.hpp"
-#include "Core/ValueTree.hpp"
 #include "Document/DocumentCanvas.hpp"
 #include "Layers/ShapeLayer.hpp"
+
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::designer {
 

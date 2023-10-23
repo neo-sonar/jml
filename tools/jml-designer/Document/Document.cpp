@@ -1,9 +1,10 @@
 #include "Document.hpp"
 
-#include "Core/ValueTree.hpp"
 #include "Layers/GroupLayer.hpp"
 #include "Layers/ShapeLayer.hpp"
 #include "Layers/TextLayer.hpp"
+
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::designer {
 

@@ -46,12 +46,8 @@ set(sources
     "Component/ValuePropertyComponent.cpp"
     "Component/ValuePropertyComponent.hpp"
 
-    "Core/Color.cpp"
-    "Core/Color.hpp"
     "Core/Justification.cpp"
     "Core/Justification.hpp"
-    "Core/ValueTree.cpp"
-    "Core/ValueTree.hpp"
     "Core/ValueTreeObject.hpp"
     "Core/ValueTreeObjectList.hpp"
 
@@ -139,7 +135,12 @@ target_include_directories(jml-designer
 target_link_libraries(jml-designer
     PRIVATE
         juce::juce_gui_extra
+        jml::jml_tools
+
     PUBLIC
+        lua::lua
+        sol2::sol2
+
         JMLDesigner_BinaryData
         juce::juce_recommended_warning_flags
 )

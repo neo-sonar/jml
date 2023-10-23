@@ -1,6 +1,4 @@
-#include "ValueTree.hpp"
-
-namespace jml::designer {
+namespace jml {
 
 auto loadValueTree(juce::File const& file, bool asXml) -> juce::ValueTree
 {
@@ -42,4 +40,4 @@ auto saveValueTree(juce::ValueTree const& v, juce::File const& file, bool asXml)
     return false;
 }
 
-} // namespace jml::designer
+} // namespace jml

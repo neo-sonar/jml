@@ -1,5 +1,3 @@
-#include "Color.hpp"
-
 auto juce::VariantConverter<juce::Colour>::fromVar(juce::var const& v) -> juce::Colour
 {
     return juce::Colour::fromString(v.toString());

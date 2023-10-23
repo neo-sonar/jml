@@ -1,7 +1,5 @@
 #pragma once
 
-#include <juce_graphics/juce_graphics.h>
-
 template<>
 struct juce::VariantConverter<juce::Colour>
 {

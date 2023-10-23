@@ -22,4 +22,6 @@ END_JUCE_MODULE_DECLARATION
 
 #include <lua_juce/lua_juce.hpp>
 
+#include "graphics/Color.hpp"
 #include "graphics/Drawable.hpp"
+#include "value/ValueTree.hpp"

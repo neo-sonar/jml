@@ -1,8 +1,6 @@
 #pragma once
 
-#include <juce_data_structures/juce_data_structures.h>
-
-namespace jml::designer {
+namespace jml {
 
 template<typename T>
 [[nodiscard]] auto toVar(T const& v) -> juce::var
@@ -25,4 +23,4 @@ template<typename T>
 [[nodiscard]] auto loadValueTree(juce::File const& file, bool asXml) -> juce::ValueTree;
 auto saveValueTree(juce::ValueTree const& v, juce::File const& file, bool asXml) -> bool;
 
-} // namespace jml::designer
+} // namespace jml
