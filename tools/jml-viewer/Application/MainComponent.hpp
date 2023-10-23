@@ -45,12 +45,13 @@ struct SettingsWindow final : juce::PreferencesPanel
         }
 
         if (pageName == "Look") {
-            auto num   = tree.getPropertyAsValue("num", nullptr);
-            auto text  = tree.getPropertyAsValue("text", nullptr);
+            auto theme        = tree.getPropertyAsValue("theme", nullptr);
+            auto themeOptions = FilePropertyComponent::Options{.pattern = "*.lua"};
+
             auto panel = std::make_unique<juce::PropertyPanel>();
             panel->addProperties(juce::Array<juce::PropertyComponent*>{
-                std::make_unique<juce::SliderPropertyComponent>(num, "Num", 0.0, 1.0, 0.0).release(),
-                std::make_unique<juce::TextPropertyComponent>(text, "Text", 32, false).release(),
+                std::make_unique<FilePropertyComponent>(theme, "Theme", themeOptions).release(),
+                std::make_unique<CallbackPropertyComponent>("Reload", [] {}).release(),
             });
             return panel.release();
         }

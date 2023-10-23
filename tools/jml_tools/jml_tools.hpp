@@ -26,6 +26,7 @@ END_JUCE_MODULE_DECLARATION
 #include "graphics/Color.hpp"
 #include "graphics/Drawable.hpp"
 #include "value/ValueTree.hpp"
+#include "property/CallbackPropertyComponent.hpp"
 #include "property/ValuePropertyComponent.hpp"
 #include "property/ColourPropertyComponent.hpp"
 #include "property/FilePropertyComponent.hpp"
