@@ -11,22 +11,43 @@ namespace jml::viewer {
 
 struct SettingsWindow final : juce::PreferencesPanel
 {
-    SettingsWindow()
+    explicit SettingsWindow(juce::ApplicationCommandManager& commandManager)
+        : _commandManager{commandManager}
     {
-        auto code = getIcon("data_object_black_48dp_svg");
-        auto look = getIcon("palette_black_48dp_svg");
+        auto code     = getIcon("data_object_black_48dp_svg");
+        auto look     = getIcon("palette_black_48dp_svg");
+        auto shortcut = getIcon("keyboard_black_48dp_svg");
         addSettingsPage("Code", code.get(), code.get(), code.get());
         addSettingsPage("Look", look.get(), look.get(), look.get());
+        addSettingsPage("Shortcut", shortcut.get(), shortcut.get(), shortcut.get());
     }
 
-    ~SettingsWindow() override = default;
+    ~SettingsWindow() override
+    {
+        DBG(_commandManager.getKeyMappings()->createXml(false)->toString());
+    }
 
     auto createComponentForPage(juce::String const& pageName) -> juce::Component* override
     {
-        if (pageName == "Look") {
-            auto num  = tree.getPropertyAsValue("num", nullptr);
-            auto text = tree.getPropertyAsValue("text", nullptr);
+        if (pageName == "Code") {
+            auto foo   = tree.getPropertyAsValue("foo", nullptr);
+            auto bar   = tree.getPropertyAsValue("bar", nullptr);
+            auto panel = std::make_unique<juce::PropertyPanel>();
+            panel->addProperties(juce::Array<juce::PropertyComponent*>{
+                std::make_unique<juce::SliderPropertyComponent>(foo, "Foo", 0.0, 1.0, 0.0).release(),
+                std::make_unique<juce::TextPropertyComponent>(bar, "Bar", 32, false).release(),
+            });
+            return panel.release();
+        }
 
+        if (pageName == "Shortcut") {
+            auto& mappings = *_commandManager.getKeyMappings();
+            return std::make_unique<juce::KeyMappingEditorComponent>(mappings, true).release();
+        }
+
+        if (pageName == "Look") {
+            auto num   = tree.getPropertyAsValue("num", nullptr);
+            auto text  = tree.getPropertyAsValue("text", nullptr);
             auto panel = std::make_unique<juce::PropertyPanel>();
             panel->addProperties(juce::Array<juce::PropertyComponent*>{
                 std::make_unique<juce::SliderPropertyComponent>(num, "Num", 0.0, 1.0, 0.0).release(),
@@ -35,18 +56,12 @@ struct SettingsWindow final : juce::PreferencesPanel
             return panel.release();
         }
 
-        auto foo = tree.getPropertyAsValue("foo", nullptr);
-        auto bar = tree.getPropertyAsValue("bar", nullptr);
-
-        auto panel = std::make_unique<juce::PropertyPanel>();
-        panel->addProperties(juce::Array<juce::PropertyComponent*>{
-            std::make_unique<juce::SliderPropertyComponent>(foo, "Foo", 0.0, 1.0, 0.0).release(),
-            std::make_unique<juce::TextPropertyComponent>(bar, "Bar", 32, false).release(),
-        });
-        return panel.release();
+        jassertfalse;
+        return nullptr;
     }
 
 private:
+    juce::ApplicationCommandManager& _commandManager;
     juce::ValueTree tree{"Settings"};
 };
 
@@ -82,7 +97,7 @@ private:
 
     MenuBar _menuBar{_commandManager};
     MultiScriptPanel _documents{_commandManager};
-    SettingsWindow _settings;
+    SettingsWindow _settings{_commandManager};
     std::unique_ptr<juce::FileChooser> _fileChooser;
 
     JUCE_LEAK_DETECTOR(MainComponent) // NOLINT

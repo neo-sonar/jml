@@ -18,6 +18,7 @@ juce_add_binary_data(jml-viewer_BinaryData
         "Asset/Icon/deselect_black_48dp.svg"
         "Asset/Icon/help_outline_black_48dp.svg"
         "Asset/Icon/info_black_48dp.svg"
+        "Asset/Icon/keyboard_black_48dp.svg"
         "Asset/Icon/launch_black_48dp.svg"
         "Asset/Icon/palette_black_48dp.svg"
         "Asset/Icon/redo_black_48dp.svg"
