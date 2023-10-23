@@ -1,7 +1,8 @@
 #include "MenuBar.hpp"
 
 #include "Application/CommandIDs.hpp"
-#include "Core/Graphics.hpp"
+
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::viewer {
 

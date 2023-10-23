@@ -54,9 +54,6 @@ set(sources
     "Command/Snapshot.hpp"
     "Command/Test.hpp"
 
-    "Core/Graphics.cpp"
-    "Core/Graphics.hpp"
-
     "LookAndFeel/Colours.hpp"
     "LookAndFeel/LookAndFeel.cpp"
     "LookAndFeel/LookAndFeel.hpp"
@@ -94,7 +91,7 @@ target_compile_definitions(jml-viewer
 
 target_link_libraries(jml-viewer
     PRIVATE
-        lua_juce::lua_juce
+        jml::jml_tools
 
     PUBLIC
         jml-viewer_BinaryData

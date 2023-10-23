@@ -1,9 +1,8 @@
 #pragma once
 
-#include <juce_gui_extra/juce_gui_extra.h>
+#include <jml_tools/jml_tools.hpp>
 
 #include "Application/MenuBar.hpp"
-#include "Core/Graphics.hpp"
 #include "LookAndFeel/Colours.hpp"
 #include "Viewer/ScriptPanel.hpp"
 

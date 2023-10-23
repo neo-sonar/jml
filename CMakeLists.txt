@@ -32,6 +32,5 @@ set_directory_properties(PROPERTIES JUCE_COMPANY_COPYRIGHT "Copyright 2023 neo-s
 set_directory_properties(PROPERTIES JUCE_COMPANY_NAME "neo-sonar")
 
 add_subdirectory(module)
-add_subdirectory(tool/jml-viewer)
-add_subdirectory(tool/jml-designer)
+add_subdirectory(tool)
 add_subdirectory(test)

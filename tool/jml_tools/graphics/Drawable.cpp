@@ -1,8 +1,4 @@
-#include "Graphics.hpp"
-
-#include "BinaryData.hpp"
-
-namespace jml::viewer {
+namespace jml {
 
 auto getIcon(char const* name) -> std::unique_ptr<juce::Drawable>
 {
@@ -15,4 +11,4 @@ auto getIcon(char const* name) -> std::unique_ptr<juce::Drawable>
     return svg;
 }
 
-} // namespace jml::viewer
+} // namespace jml
