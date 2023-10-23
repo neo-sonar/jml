@@ -1,11 +1,22 @@
 #pragma once
 
+#include <juce_gui_basics/juce_gui_basics.h>
+
 namespace jml::viewer {
 struct CommandIDs
 {
     enum Values
     {
-        unknown,
+        quit        = juce::StandardApplicationCommandIDs::quit,
+        del         = juce::StandardApplicationCommandIDs::del,
+        cut         = juce::StandardApplicationCommandIDs::cut,
+        copy        = juce::StandardApplicationCommandIDs::copy,
+        paste       = juce::StandardApplicationCommandIDs::paste,
+        selectAll   = juce::StandardApplicationCommandIDs::selectAll,
+        deselectAll = juce::StandardApplicationCommandIDs::deselectAll,
+        undo        = juce::StandardApplicationCommandIDs::undo,
+        redo        = juce::StandardApplicationCommandIDs::redo,
+
         // File
         open,
         reload,
@@ -14,8 +25,6 @@ struct CommandIDs
         settings,
 
         // Edit
-        undo,
-        redo,
 
         // Help
         about,

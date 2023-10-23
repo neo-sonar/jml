@@ -29,10 +29,11 @@ auto makeCodeEditorColorScheme() -> juce::CodeEditorComponent::ColourScheme
 }
 } // namespace
 
-CodeEditor::CodeEditor()
+CodeEditor::CodeEditor(juce::ApplicationCommandManager& commandManager)
 {
     _editor.setLineNumbersShown(true);
     _editor.setColourScheme(makeCodeEditorColorScheme());
+    _editor.setCommandManager(&commandManager);
     addAndMakeVisible(_editor);
 }
 

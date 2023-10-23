@@ -6,7 +6,7 @@ namespace jml::viewer {
 
 struct CodeEditor : juce::Component
 {
-    CodeEditor();
+    explicit CodeEditor(juce::ApplicationCommandManager& commandManager);
     ~CodeEditor() override = default;
 
     auto file(juce::File file) -> void;

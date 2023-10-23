@@ -4,7 +4,9 @@
 
 namespace jml::viewer {
 
-ScriptPanel::ScriptPanel() : juce::Component{"Script Panel"}
+ScriptPanel::ScriptPanel(juce::ApplicationCommandManager& commandManager)
+    : juce::Component{"Script Panel"}
+    , _editor{commandManager}
 {
     _tabs.setTabBarDepth(50);
     _tabs.addTab("Viewer", Colours::black, &_preview, false);
@@ -23,7 +25,8 @@ auto ScriptPanel::reloadScriptFile() -> void { setScriptFile(_preview.getScriptF
 
 auto ScriptPanel::resized() -> void { _tabs.setBounds(getLocalBounds()); }
 
-MultiScriptPanel::MultiScriptPanel()
+MultiScriptPanel::MultiScriptPanel(juce::ApplicationCommandManager& commandManager)
+    : _commandManager{commandManager}
 {
     setLayoutMode(juce::MultiDocumentPanel::LayoutMode::MaximisedWindowsWithTabs);
     setBackgroundColour(juce::Colours::white);
@@ -32,7 +35,7 @@ MultiScriptPanel::MultiScriptPanel()
 
 auto MultiScriptPanel::openScript(juce::File const& script) -> void
 {
-    auto panel = std::make_unique<ScriptPanel>();
+    auto panel = std::make_unique<ScriptPanel>(_commandManager);
     panel->setScriptFile(script);
     addDocument(panel.release(), juce::Colours::white, true);
 }

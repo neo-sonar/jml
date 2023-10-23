@@ -43,6 +43,14 @@ auto MainComponent::getAllCommands(juce::Array<juce::CommandID>& c) -> void
         CommandIDs::save,
         CommandIDs::saveAs,
         CommandIDs::settings,
+        CommandIDs::quit,
+        CommandIDs::undo,
+        CommandIDs::redo,
+        CommandIDs::cut,
+        CommandIDs::copy,
+        CommandIDs::paste,
+        CommandIDs::selectAll,
+        // CommandIDs::deselectAll,
         CommandIDs::redo,
         CommandIDs::undo,
         CommandIDs::about,
@@ -80,8 +88,13 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
             break;
         }
         case CommandIDs::settings: {
-            result.setInfo("Settings", "Open settings", "Edit", 0);
-            result.addDefaultKeypress(',', cmd);
+            result.setInfo("Settings", "Open settings", "File", 0);
+            result.addDefaultKeypress('p', cmd);
+            break;
+        }
+        case CommandIDs::quit: {
+            result.setInfo("Quit", "Quit application", "File", 0);
+            result.addDefaultKeypress('q', cmd);
             break;
         }
         case CommandIDs::undo: {
@@ -92,6 +105,26 @@ auto MainComponent::getCommandInfo(juce::CommandID commandID, juce::ApplicationC
         case CommandIDs::redo: {
             result.setInfo("Redo", "Redo one step", "Edit", 0);
             result.addDefaultKeypress('z', cmd | shift);
+            break;
+        }
+        case CommandIDs::cut: {
+            result.setInfo("Cut", "Cut to clipboard", "Edit", 0);
+            result.addDefaultKeypress('x', cmd);
+            break;
+        }
+        case CommandIDs::copy: {
+            result.setInfo("Copy", "Copy to clipboard", "Edit", 0);
+            result.addDefaultKeypress('c', cmd);
+            break;
+        }
+        case CommandIDs::paste: {
+            result.setInfo("Paste", "Paste from clipboard", "Edit", 0);
+            result.addDefaultKeypress('v', cmd);
+            break;
+        }
+        case CommandIDs::selectAll: {
+            result.setInfo("Select All", "Select all text", "Edit", 0);
+            result.addDefaultKeypress('a', cmd);
             break;
         }
         case CommandIDs::about: {
@@ -117,6 +150,22 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
     }
 
     return true;
+}
+
+auto MainComponent::isInterestedInFileDrag(juce::StringArray const& files) -> bool
+{
+    if (files.size() != 1) {
+        return false;
+    }
+
+    auto const file = juce::File{files[0]};
+    return file.existsAsFile() and file.hasFileExtension(".lua");
+}
+
+auto MainComponent::filesDropped(juce::StringArray const& files, int /*x*/, int /*y*/) -> void
+{
+    jassert(files.size() == 1);
+    _documents.openScript(juce::File{files[0]});
 }
 
 auto MainComponent::showSettingsWindow() -> void

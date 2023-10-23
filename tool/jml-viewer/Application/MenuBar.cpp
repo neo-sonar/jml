@@ -38,6 +38,8 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
         menu.addCommandItem(cmd, IDs::saveAs, "Save As", getIcon("save_as_black_48dp_svg"));
         menu.addSeparator();
         menu.addCommandItem(cmd, IDs::settings, "Settings", getIcon("settings_black_48dp_svg"));
+        menu.addSeparator();
+        menu.addCommandItem(cmd, IDs::quit, "Quit", getIcon("close_black_48dp_svg"));
         return menu;
     }
 
@@ -45,6 +47,13 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(cmd, IDs::undo, "Undo", getIcon("undo_black_48dp_svg"));
         menu.addCommandItem(cmd, IDs::redo, "Redo", getIcon("redo_black_48dp_svg"));
+        menu.addSeparator();
+        menu.addCommandItem(cmd, IDs::cut, "Cut", getIcon("content_cut_black_48dp_svg"));
+        menu.addCommandItem(cmd, IDs::copy, "Copy", getIcon("content_copy_black_48dp_svg"));
+        menu.addCommandItem(cmd, IDs::paste, "Paste", getIcon("content_paste_black_48dp_svg"));
+        menu.addSeparator();
+        menu.addCommandItem(cmd, IDs::selectAll, "Select All", getIcon("select_all_black_48dp_svg"));
+        menu.addCommandItem(cmd, IDs::deselectAll, "Deselect", getIcon("deselect_black_48dp_svg"));
         return menu;
     }
 

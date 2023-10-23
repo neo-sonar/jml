@@ -9,7 +9,7 @@ namespace jml::viewer {
 
 struct ScriptPanel final : juce::Component
 {
-    ScriptPanel();
+    explicit ScriptPanel(juce::ApplicationCommandManager& commandManager);
     ~ScriptPanel() override = default;
 
     auto setScriptFile(juce::File const& file) -> void;
@@ -25,7 +25,7 @@ private:
 
 struct MultiScriptPanel final : juce::MultiDocumentPanel
 {
-    MultiScriptPanel();
+    explicit MultiScriptPanel(juce::ApplicationCommandManager& commandManager);
     ~MultiScriptPanel() override = default;
 
     auto openScript(juce::File const& script) -> void;
@@ -35,6 +35,7 @@ struct MultiScriptPanel final : juce::MultiDocumentPanel
         -> void override;
 
 private:
+    juce::ApplicationCommandManager& _commandManager;
 };
 
 } // namespace jml::viewer
