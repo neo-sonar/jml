@@ -1,4 +1,4 @@
-project(test)
+project(tests)
 
 function(lua_juce_add_test _name)
     add_test(

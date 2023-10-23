@@ -33,4 +33,4 @@ set_directory_properties(PROPERTIES JUCE_COMPANY_NAME "neo-sonar")
 
 add_subdirectory(modules)
 add_subdirectory(tool)
-add_subdirectory(test)
+add_subdirectory(tests)
