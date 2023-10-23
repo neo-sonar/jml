@@ -4,7 +4,7 @@
 
 namespace jml::viewer {
 namespace {
-constexpr auto const* DefaultScriptPath = R"(~/Developer/neo-sonar/jml/example/Components.lua)";
+constexpr auto const* DefaultScriptPath = R"(~/Developer/neo-sonar/jml/examples/Components.lua)";
 }
 
 LuaScriptViewer::LuaScriptViewer() : _scriptFile(DefaultScriptPath)
