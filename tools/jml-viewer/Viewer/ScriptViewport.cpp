@@ -1,5 +1,7 @@
 #include "ScriptViewport.hpp"
 
+#include <jml_tools/jml_tools.hpp>
+
 namespace jml::viewer {
 
 auto ScriptViewport::setViewedComponent(juce::Component* component) -> void
@@ -15,7 +17,7 @@ auto ScriptViewport::setViewedComponent(juce::Component* component) -> void
 
 auto ScriptViewport::paint(juce::Graphics& g) -> void
 {
-    g.fillAll(juce::Colour::fromRGB(240, 240, 240));
+    g.fillAll(getSchemeWidgetBackgroundColour());
 }
 
 auto ScriptViewport::resized() -> void

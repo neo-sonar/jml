@@ -57,7 +57,10 @@ auto LuaScriptViewer::setScriptFile(juce::File const& file) -> void
     _componentTree.restoreOpennessState(*componentTreeState, false);
 }
 
-auto LuaScriptViewer::paint(juce::Graphics& g) -> void { g.fillAll(juce::Colours::white); }
+auto LuaScriptViewer::paint(juce::Graphics& g) -> void
+{
+    g.fillAll(getSchemeWindowBackgroundColour());
+}
 
 auto LuaScriptViewer::resized() -> void
 {

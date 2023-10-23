@@ -3,6 +3,8 @@
 #include "Component/TreeView.hpp"
 #include "Layer/LayerTree.hpp"
 
+#include <jml_tools/jml_tools.hpp>
+
 namespace jml::designer {
 
 namespace {
@@ -33,8 +35,12 @@ auto LayerTreeItem::mightContainSubItems() -> bool { return _layer.getNumChildre
 
 auto LayerTreeItem::paintItem(juce::Graphics& g, int width, int height) -> void
 {
-    g.fillAll(isSelected() ? juce::Colours::black : juce::Colours::lightgrey);
-    g.setColour(isSelected() ? juce::Colours::white : juce::Colours::black);
+    auto highlight  = isSelected();
+    auto text       = highlight ? getSchemeHighlightTextColour() : getSchemeDefaultTextColour();
+    auto background = highlight ? getSchemeDefaultFillColour() : getSchemeHighlightFillColour();
+
+    g.fillAll(background);
+    g.setColour(text);
     g.setFont(15.0F);
     g.drawText(getDisplayText(), 4, 0, width - 4, height, juce::Justification::centredLeft, true);
 }

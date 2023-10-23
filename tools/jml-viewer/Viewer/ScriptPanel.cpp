@@ -9,8 +9,8 @@ ScriptPanel::ScriptPanel(juce::ApplicationCommandManager& commandManager)
     , _editor{commandManager}
 {
     _tabs.setTabBarDepth(50);
-    _tabs.addTab("Viewer", Colours::black, &_preview, false);
-    _tabs.addTab("Code", Colours::black, &_editor, false);
+    _tabs.addTab("Viewer", getSchemeWidgetBackgroundColour(), &_preview, false);
+    _tabs.addTab("Code", getSchemeWidgetBackgroundColour(), &_editor, false);
     addAndMakeVisible(_tabs);
 }
 
@@ -27,10 +27,10 @@ auto ScriptPanel::resized() -> void { _tabs.setBounds(getLocalBounds()); }
 
 MultiScriptPanel::MultiScriptPanel(juce::ApplicationCommandManager& commandManager)
     : _commandManager{commandManager}
+    , _openIcon{getIcon("launch_black_48dp_svg")}
 {
-    auto background = getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId);
     setLayoutMode(juce::MultiDocumentPanel::LayoutMode::MaximisedWindowsWithTabs);
-    setBackgroundColour(background);
+    setBackgroundColour(getSchemeWindowBackgroundColour());
     useFullscreenWhenOneDocument(true);
 }
 
@@ -46,6 +46,27 @@ auto MultiScriptPanel::reloadActiveScript() -> void
     if (auto* panel = dynamic_cast<ScriptPanel*>(getActiveDocument()); panel != nullptr) {
         panel->reloadScriptFile();
     }
+}
+
+auto MultiScriptPanel::paint(juce::Graphics& g) -> void
+{
+    jassert(_openIcon != nullptr);
+
+    MultiDocumentPanel::paint(g);
+
+    if (getNumDocuments() != 0) {
+        return;
+    }
+
+    auto area = getLocalBounds().reduced(proportionOfWidth(0.25F), proportionOfHeight(0.25F));
+
+    auto const iconArea = area.removeFromTop(area.proportionOfHeight(0.5));
+    auto const text     = juce::String{R"(Drop lua script or go to File -> Open)"};
+
+    _openIcon->drawWithin(g, iconArea.toFloat(), juce::RectanglePlacement::centred, 1.0);
+    g.setColour(getSchemeDefaultTextColour());
+    g.setFont(32.0F);
+    g.drawText(text, area, juce::Justification::centred, false);
 }
 
 auto MultiScriptPanel::tryToCloseDocumentAsync(

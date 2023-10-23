@@ -2,6 +2,8 @@
 
 #include "Application/CommandIDs.hpp"
 
+#include <jml_tools/jml_tools.hpp>
+
 namespace jml::viewer {
 
 MainComponent::MainComponent()
@@ -18,10 +20,7 @@ MainComponent::MainComponent()
 
 MainComponent::~MainComponent() = default;
 
-auto MainComponent::paint(juce::Graphics& g) -> void
-{
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-}
+auto MainComponent::paint(juce::Graphics& g) -> void { g.fillAll(getSchemeWindowBackgroundColour()); }
 
 auto MainComponent::resized() -> void
 {
@@ -170,12 +169,8 @@ auto MainComponent::filesDropped(juce::StringArray const& files, int /*x*/, int 
 
 auto MainComponent::showSettingsWindow() -> void
 {
-    _settings.showInDialogBox(
-        "Settings",
-        640,
-        400,
-        getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)
-    );
+    auto const background = getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId);
+    _settings.showInDialogBox("Settings", 640, 400, background);
 }
 
 auto MainComponent::showAboutWindow() -> void

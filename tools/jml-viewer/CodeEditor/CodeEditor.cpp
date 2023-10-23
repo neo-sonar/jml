@@ -45,7 +45,7 @@ auto CodeEditor::file(juce::File file) -> void
     }
 }
 
-auto CodeEditor::paint(juce::Graphics& g) -> void { g.fillAll(Colours::whiteDirt); }
+auto CodeEditor::paint(juce::Graphics& g) -> void { g.fillAll(getSchemeWidgetBackgroundColour()); }
 
 auto CodeEditor::resized() -> void { _editor.setBounds(getLocalBounds().reduced(16)); }
 

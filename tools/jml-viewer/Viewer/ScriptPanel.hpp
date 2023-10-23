@@ -31,11 +31,14 @@ struct MultiScriptPanel final : juce::MultiDocumentPanel
     auto openScript(juce::File const& script) -> void;
     auto reloadActiveScript() -> void;
 
+    // juce::MultiDocumentPanel
+    auto paint(juce::Graphics& g) -> void override;
     auto tryToCloseDocumentAsync(juce::Component* component, std::function<void(bool)> callback)
         -> void override;
 
 private:
     juce::ApplicationCommandManager& _commandManager;
+    std::unique_ptr<juce::Drawable> _openIcon;
 };
 
 } // namespace jml::viewer

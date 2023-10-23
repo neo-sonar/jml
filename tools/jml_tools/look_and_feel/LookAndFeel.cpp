@@ -66,4 +66,46 @@ LookAndFeel::LookAndFeel() : juce::LookAndFeel_V4{makeColourScheme(true)}
     // setColour(juce::Slider::thumbColourId, Colours::black);
 }
 
+auto getSchemeColour(juce::LookAndFeel_V4::ColourScheme::UIColour id) -> juce::Colour
+{
+    auto& lnf = juce::LookAndFeel::getDefaultLookAndFeel();
+    if (auto* v4 = dynamic_cast<juce::LookAndFeel_V4*>(&lnf); v4 != nullptr) {
+        return v4->getCurrentColourScheme().getUIColour(id);
+    }
+
+    // You need juce::LookAndFeel_V4 to be a base of the global LNF
+    jassertfalse;
+    return {};
+}
+
+auto getSchemeWindowBackgroundColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::windowBackground);
+}
+
+auto getSchemeWidgetBackgroundColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::widgetBackground);
+}
+
+auto getSchemeDefaultFillColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::defaultFill);
+}
+
+auto getSchemeDefaultTextColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::defaultText);
+}
+
+auto getSchemeHighlightFillColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::highlightedFill);
+}
+
+auto getSchemeHighlightTextColour() -> juce::Colour
+{
+    return getSchemeColour(juce::LookAndFeel_V4::ColourScheme::highlightedText);
+}
+
 } // namespace jml

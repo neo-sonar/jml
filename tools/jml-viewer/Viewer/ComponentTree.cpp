@@ -51,10 +51,11 @@ auto ComponentTree::Item::itemSelectionChanged(bool isNowSelected) -> void
 auto ComponentTree::Item::paintItem(juce::Graphics& g, int width, int height) -> void
 {
     auto const bounds = juce::Rectangle{0, 0, width, height}.reduced(1);
-    g.setColour(Colours::whiteDirt);
+
+    g.setColour(getSchemeWidgetBackgroundColour());
     g.fillRect(bounds);
 
-    g.setColour(Colours::black);
+    g.setColour(getSchemeDefaultTextColour());
     g.drawText(getUniqueName(), bounds.toFloat(), juce::Justification::centred, false);
 }
 
