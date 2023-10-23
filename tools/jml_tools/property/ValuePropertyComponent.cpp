@@ -1,6 +1,6 @@
 #include "ValuePropertyComponent.hpp"
 
-namespace jml::designer {
+namespace jml {
 
 ValuePropertyComponent::ValuePropertyComponent(juce::Value value, juce::String const& name)
     : PropertyComponent(name)
@@ -9,10 +9,10 @@ ValuePropertyComponent::ValuePropertyComponent(juce::Value value, juce::String c
     _value.addListener(this);
 }
 
-auto ValuePropertyComponent::value() -> juce::Value& { return _value; }
+auto ValuePropertyComponent::getValue() -> juce::Value& { return _value; }
 
-auto ValuePropertyComponent::value() const -> juce::Value const& { return _value; }
+auto ValuePropertyComponent::getValue() const -> juce::Value const& { return _value; }
 
 auto ValuePropertyComponent::valueChanged(juce::Value& /*value*/) -> void { refresh(); }
 
-} // namespace jml::designer
+} // namespace jml

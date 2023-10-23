@@ -1,8 +1,6 @@
 #pragma once
 
-#include <juce_gui_extra/juce_gui_extra.h>
-
-namespace jml::designer {
+namespace jml {
 
 struct ValuePropertyComponent
     : juce::PropertyComponent
@@ -12,8 +10,8 @@ struct ValuePropertyComponent
     ValuePropertyComponent(juce::Value value, juce::String const& name);
     ~ValuePropertyComponent() override = default;
 
-    [[nodiscard]] auto value() -> juce::Value&;
-    [[nodiscard]] auto value() const -> juce::Value const&;
+    [[nodiscard]] auto getValue() -> juce::Value&;
+    [[nodiscard]] auto getValue() const -> juce::Value const&;
 
 private:
     auto valueChanged(juce::Value& /*value*/) -> void override;
@@ -21,4 +19,4 @@ private:
     juce::Value _value;
 };
 
-} // namespace jml::designer
+} // namespace jml

@@ -1,23 +1,19 @@
-#include "ColorPropertyComponent.hpp"
+namespace jml {
 
-#include <jml_tools/jml_tools.hpp>
-
-namespace jml::designer {
-
-ColorPropertyComponent::ColorPropertyComponent(
+ColourPropertyComponent::ColourPropertyComponent(
     juce::Value const& valueToControl,
     juce::String const& propertyName,
     bool showAlpha
 )
     : ValuePropertyComponent(valueToControl, propertyName)
-    , _container(value(), showAlpha)
+    , _container(getValue(), showAlpha)
 {
     addAndMakeVisible(_container);
 }
 
-auto ColorPropertyComponent::refresh() -> void { repaint(); }
+auto ColourPropertyComponent::refresh() -> void { repaint(); }
 
-auto ColorPropertyComponent::paint(juce::Graphics& g) -> void
+auto ColourPropertyComponent::paint(juce::Graphics& g) -> void
 {
     PropertyComponent::paint(g);
 
@@ -28,9 +24,9 @@ auto ColorPropertyComponent::paint(juce::Graphics& g) -> void
     g.drawRect(_container.getBounds());
 }
 
-ColorPropertyComponent::Container::Container(juce::Value& v, bool a) : value(v), alpha(a) {}
+ColourPropertyComponent::Container::Container(juce::Value& v, bool a) : value(v), alpha(a) {}
 
-auto ColorPropertyComponent::Container::paint(juce::Graphics& g) -> void
+auto ColourPropertyComponent::Container::paint(juce::Graphics& g) -> void
 {
     auto const color = fromVar<juce::Colour>(value);
 
@@ -41,7 +37,7 @@ auto ColorPropertyComponent::Container::paint(juce::Graphics& g) -> void
     g.drawText(color.toDisplayString(alpha), getLocalBounds(), juce::Justification::centred);
 }
 
-auto ColorPropertyComponent::Container::mouseUp(juce::MouseEvent const& event) -> void
+auto ColourPropertyComponent::Container::mouseUp(juce::MouseEvent const& event) -> void
 {
     if (not event.mouseWasClicked()) {
         return;
@@ -55,7 +51,7 @@ auto ColorPropertyComponent::Container::mouseUp(juce::MouseEvent const& event) -
     juce::CallOutBox::launchAsynchronously(std::move(cs), getScreenBounds(), nullptr);
 }
 
-auto ColorPropertyComponent::Container::changeListenerCallback(juce::ChangeBroadcaster* source)
+auto ColourPropertyComponent::Container::changeListenerCallback(juce::ChangeBroadcaster* source)
     -> void
 {
     auto* const cs = dynamic_cast<juce::ColourSelector*>(source);
@@ -66,4 +62,4 @@ auto ColorPropertyComponent::Container::changeListenerCallback(juce::ChangeBroad
     value = toVar(cs->getCurrentColour());
 }
 
-} // namespace jml::designer
+} // namespace jml

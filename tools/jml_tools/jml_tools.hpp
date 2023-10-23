@@ -22,6 +22,11 @@ END_JUCE_MODULE_DECLARATION
 
 #include <lua_juce/lua_juce.hpp>
 
+// clang-format off
 #include "graphics/Color.hpp"
 #include "graphics/Drawable.hpp"
 #include "value/ValueTree.hpp"
+#include "property/ValuePropertyComponent.hpp"
+#include "property/ColourPropertyComponent.hpp"
+#include "property/FilePropertyComponent.hpp"
+// clang-format on

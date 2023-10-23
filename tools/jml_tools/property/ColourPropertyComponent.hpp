@@ -1,17 +1,15 @@
 #pragma once
 
-#include "Component/ValuePropertyComponent.hpp"
+namespace jml {
 
-namespace jml::designer {
-
-struct ColorPropertyComponent final : ValuePropertyComponent
+struct ColourPropertyComponent final : ValuePropertyComponent
 {
-    ColorPropertyComponent(
+    ColourPropertyComponent(
         juce::Value const& valueToControl,
         juce::String const& propertyName,
         bool showAlpha = false
     );
-    ~ColorPropertyComponent() override = default;
+    ~ColourPropertyComponent() override = default;
 
     auto refresh() -> void override;
     auto paint(juce::Graphics& g) -> void override;
@@ -34,4 +32,4 @@ private:
 
     Container _container;
 };
-} // namespace jml::designer
+} // namespace jml

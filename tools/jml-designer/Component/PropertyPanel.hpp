@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Component/ColorPropertyComponent.hpp"
-
+#include <jml_tools/jml_tools.hpp>
 #include <juce_gui_extra/juce_gui_extra.h>
 
 namespace jml::designer {
@@ -27,7 +26,7 @@ auto makeSliderProperty(
 auto makeColorProperty(auto& vt, auto const& id, auto const& name, bool showAlpha)
 {
     auto value = vt.getPropertyAsValue(id, nullptr);
-    return std::make_unique<ColorPropertyComponent>(value, name, showAlpha);
+    return std::make_unique<ColourPropertyComponent>(value, name, showAlpha);
 }
 
 } // namespace jml::designer
