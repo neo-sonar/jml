@@ -1,10 +1,9 @@
 #pragma once
 
-#include <jml_tools/jml_tools.hpp>
-
 #include "Application/MenuBar.hpp"
-#include "LookAndFeel/Colours.hpp"
 #include "Viewer/ScriptPanel.hpp"
+
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::viewer {
 

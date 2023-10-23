@@ -1,10 +1,9 @@
-#include <memory>
-
 #include "Application/CommandLine.hpp"
 #include "Application/MainComponent.hpp"
 #include "Command/Snapshot.hpp"
 #include "Command/Test.hpp"
-#include "LookAndFeel/LookAndFeel.hpp"
+
+#include <jml_tools/jml_tools.hpp>
 
 namespace {
 auto runCommand(auto const func, auto const& cli) -> void
@@ -103,7 +102,7 @@ struct GuiAppApplication final : juce::JUCEApplication
     };
 
 private:
-    jml::viewer::LookAndFeel _lnf;
+    jml::LookAndFeel _lnf;
     std::unique_ptr<MainWindow> _mainWindow;
 };
 

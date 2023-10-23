@@ -54,10 +54,6 @@ set(sources
     "Command/Snapshot.hpp"
     "Command/Test.hpp"
 
-    "LookAndFeel/Colours.hpp"
-    "LookAndFeel/LookAndFeel.cpp"
-    "LookAndFeel/LookAndFeel.hpp"
-
     "Viewer/ComponentTree.cpp"
     "Viewer/ComponentTree.hpp"
     "Viewer/FileChangeListener.cpp"

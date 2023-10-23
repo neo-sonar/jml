@@ -1,7 +1,6 @@
 #pragma once
 
-#include "LookAndFeel/Colours.hpp"
-
+#include <jml_tools/jml_tools.hpp>
 #include <juce_gui_basics/juce_gui_basics.h>
 
 namespace jml::viewer {

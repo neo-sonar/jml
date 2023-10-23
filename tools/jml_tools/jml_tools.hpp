@@ -30,4 +30,6 @@ END_JUCE_MODULE_DECLARATION
 #include "property/ValuePropertyComponent.hpp"
 #include "property/ColourPropertyComponent.hpp"
 #include "property/FilePropertyComponent.hpp"
+#include "look_and_feel/Colours.hpp"
+#include "look_and_feel/LookAndFeel.hpp"
 // clang-format on

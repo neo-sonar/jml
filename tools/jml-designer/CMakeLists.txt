@@ -95,8 +95,6 @@ set(sources
     "Layers/TextLayer.cpp"
     "Layers/TextLayer.hpp"
 
-    "LookAndFeel/LookAndFeel.hpp"
-
     "Menu/CommandIDs.hpp"
     "Menu/MenuBar.cpp"
     "Menu/MenuBar.hpp"

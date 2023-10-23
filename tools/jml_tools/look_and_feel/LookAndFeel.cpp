@@ -1,8 +1,6 @@
 #include "LookAndFeel.hpp"
 
-#include "LookAndFeel/Colours.hpp"
-
-namespace jml::viewer {
+namespace jml {
 
 juce::Colour const Colours::black       = juce::Colours::black;
 juce::Colour const Colours::transparent = juce::Colours::transparentBlack;
@@ -68,4 +66,4 @@ LookAndFeel::LookAndFeel() : juce::LookAndFeel_V4{makeColourScheme(true)}
     // setColour(juce::Slider::thumbColourId, Colours::black);
 }
 
-} // namespace jml::viewer
+} // namespace jml

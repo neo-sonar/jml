@@ -1,6 +1,5 @@
 #include "MainComponent.hpp"
 
-#include "LookAndFeel/LookAndFeel.hpp"
 #include "Menu/CommandIDs.hpp"
 
 namespace jml::designer {
@@ -14,7 +13,6 @@ MainComponent::MainComponent()
     addAndMakeVisible(_menuBar);
     addAndMakeVisible(*_editor);
 
-    setComponentColors(getLookAndFeel(), DefaultColorScheme);
     setSize(1280, 720);
 }
 

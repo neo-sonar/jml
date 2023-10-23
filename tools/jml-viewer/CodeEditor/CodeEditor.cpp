@@ -1,6 +1,6 @@
 #include "CodeEditor.hpp"
 
-#include "LookAndFeel/Colours.hpp"
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::viewer {
 

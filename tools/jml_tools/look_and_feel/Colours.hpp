@@ -1,8 +1,6 @@
 #pragma once
 
-#include <juce_graphics/juce_graphics.h>
-
-namespace jml::viewer {
+namespace jml {
 
 struct Colours
 {
@@ -31,4 +29,4 @@ struct OneLightColours
     static juce::Colour const codePunctuation;
 };
 
-} // namespace jml::viewer
+} // namespace jml

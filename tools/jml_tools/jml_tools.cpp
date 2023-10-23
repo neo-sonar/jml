@@ -4,6 +4,7 @@
 
 #include "graphics/Color.cpp"                     // NOLINT
 #include "graphics/Drawable.cpp"                  // NOLINT
+#include "look_and_feel/LookAndFeel.cpp"          // NOLINT
 #include "property/CallbackPropertyComponent.cpp" // NOLINT
 #include "property/ColourPropertyComponent.cpp"   // NOLINT
 #include "property/FilePropertyComponent.cpp"     // NOLINT

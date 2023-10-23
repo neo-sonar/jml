@@ -2,7 +2,7 @@
 
 #include "Application/MainComponent.hpp"
 
-#include "LookAndFeel/LookAndFeel.hpp"
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::designer {
 
@@ -21,7 +21,7 @@ struct Application final : juce::JUCEApplication
     auto anotherInstanceStarted(juce::String const& commandLine) -> void override;
 
 private:
-    juce::LookAndFeel_V4 _lnf{makeColorScheme(DefaultColorScheme)};
+    jml::LookAndFeel _lnf;
     std::unique_ptr<juce::DocumentWindow> _mainWindow{nullptr};
 };
 

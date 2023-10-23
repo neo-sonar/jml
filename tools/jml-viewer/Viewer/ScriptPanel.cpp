@@ -1,6 +1,6 @@
 #include "ScriptPanel.hpp"
 
-#include "LookAndFeel/Colours.hpp"
+#include <jml_tools/jml_tools.hpp>
 
 namespace jml::viewer {
 
@@ -28,8 +28,9 @@ auto ScriptPanel::resized() -> void { _tabs.setBounds(getLocalBounds()); }
 MultiScriptPanel::MultiScriptPanel(juce::ApplicationCommandManager& commandManager)
     : _commandManager{commandManager}
 {
+    auto background = getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId);
     setLayoutMode(juce::MultiDocumentPanel::LayoutMode::MaximisedWindowsWithTabs);
-    setBackgroundColour(juce::Colours::white);
+    setBackgroundColour(background);
     useFullscreenWhenOneDocument(true);
 }
 
