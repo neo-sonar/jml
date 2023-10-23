@@ -1,4 +1,4 @@
-project(tool)
+project(tools)
 
 juce_add_modules(ALIAS_NAMESPACE jml jml_tools)
 
