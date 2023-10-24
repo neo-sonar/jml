@@ -60,10 +60,13 @@ auto MultiScriptPanel::paint(juce::Graphics& g) -> void
 
     auto area = getLocalBounds().reduced(proportionOfWidth(0.25F), proportionOfHeight(0.25F));
 
-    auto const iconArea = area.removeFromTop(area.proportionOfHeight(0.5));
-    auto const text     = juce::String{R"(Drop lua script or go to File -> Open)"};
+    auto const iconColor = getLookAndFeel().findColour(juce::PopupMenu::textColourId);
+    auto const iconArea  = area.removeFromTop(area.proportionOfHeight(0.5));
+    auto const text      = juce::String{R"(Drop lua script or go to File -> Open)"};
 
-    _openIcon->drawWithin(g, iconArea.toFloat(), juce::RectanglePlacement::centred, 1.0);
+    auto icon = _openIcon->createCopy();
+    icon->replaceColour(juce::Colours::black, iconColor);
+    icon->drawWithin(g, iconArea.toFloat(), juce::RectanglePlacement::centred, 1.0);
     g.setColour(getSchemeDefaultTextColour());
     g.setFont(32.0F);
     g.drawText(text, area, juce::Justification::centred, false);

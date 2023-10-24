@@ -11,4 +11,11 @@ auto getIcon(char const* name) -> std::unique_ptr<juce::Drawable>
     return svg;
 }
 
+auto getIcon(char const* name, juce::Colour colour) -> std::unique_ptr<juce::Drawable>
+{
+    auto icon = getIcon(name);
+    icon->replaceColour(juce::Colours::black, colour);
+    return icon;
+}
+
 } // namespace jml
