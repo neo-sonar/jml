@@ -13,6 +13,7 @@ namespace jml::viewer {
 struct LuaScriptViewer final
     : juce::Component
     , juce::Timer
+    , juce::Value::Listener
 {
     LuaScriptViewer();
     ~LuaScriptViewer() override = default;
@@ -24,6 +25,7 @@ struct LuaScriptViewer final
     auto paint(juce::Graphics& g) -> void override;
     auto resized() -> void override;
     auto timerCallback() -> void override;
+    auto valueChanged(juce::Value& value) -> void override;
 
 private:
     struct LuaState
@@ -37,8 +39,12 @@ private:
     static auto handleLuaError(sol::error const& error) -> void;
 
     std::unique_ptr<LuaState> _lua;
+
     ScriptViewport _viewport;
     ComponentTree _componentTree;
+    juce::PropertyPanel _viewportProperties;
+
+    juce::Value _viewportColour;
 
     juce::File _scriptFile;
     std::unique_ptr<FileChangeListener> _fileListener;

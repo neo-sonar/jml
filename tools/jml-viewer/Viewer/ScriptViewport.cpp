@@ -4,6 +4,8 @@
 
 namespace jml::viewer {
 
+ScriptViewport::ScriptViewport() : _background{getSchemeWidgetBackgroundColour()} {}
+
 auto ScriptViewport::setViewedComponent(juce::Component* component) -> void
 {
     if (_component != nullptr) {
@@ -15,10 +17,13 @@ auto ScriptViewport::setViewedComponent(juce::Component* component) -> void
     }
 }
 
-auto ScriptViewport::paint(juce::Graphics& g) -> void
+auto ScriptViewport::setBackgroundColour(juce::Colour colour) -> void
 {
-    g.fillAll(getSchemeWidgetBackgroundColour());
+    _background = colour;
+    repaint();
 }
+
+auto ScriptViewport::paint(juce::Graphics& g) -> void { g.fillAll(_background); }
 
 auto ScriptViewport::resized() -> void
 {

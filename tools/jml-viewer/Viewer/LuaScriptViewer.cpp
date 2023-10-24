@@ -9,8 +9,16 @@ constexpr auto const* DefaultScriptPath = R"(~/Developer/neo-sonar/jml/examples/
 
 LuaScriptViewer::LuaScriptViewer() : _scriptFile(DefaultScriptPath)
 {
+    _viewportColour.setValue(toVar(getSchemeWidgetBackgroundColour()));
+    _viewportProperties.addProperties(juce::Array<juce::PropertyComponent*>{
+        std::make_unique<ColourPropertyComponent>(_viewportColour, "Background").release(),
+    });
+
+    _viewportColour.addListener(this);
+
     addAndMakeVisible(_viewport);
     addAndMakeVisible(_componentTree);
+    addAndMakeVisible(_viewportProperties);
     startTimer(2000);
 }
 
@@ -64,8 +72,11 @@ auto LuaScriptViewer::paint(juce::Graphics& g) -> void
 
 auto LuaScriptViewer::resized() -> void
 {
-    auto area = getLocalBounds();
-    _componentTree.setBounds(area.removeFromRight(area.proportionOfWidth(0.2)));
+    auto area     = getLocalBounds();
+    auto treeArea = area.removeFromRight(area.proportionOfWidth(0.2));
+
+    _viewportProperties.setBounds(treeArea.removeFromBottom(treeArea.proportionOfHeight(0.15)));
+    _componentTree.setBounds(treeArea);
     _viewport.setBounds(area);
 }
 
@@ -75,6 +86,13 @@ auto LuaScriptViewer::timerCallback() -> void
         return;
     }
     _lua->state.collect_garbage();
+}
+
+auto LuaScriptViewer::valueChanged(juce::Value& value) -> void
+{
+    if (value.refersToSameSourceAs(_viewportColour)) {
+        _viewport.setBackgroundColour(fromVar<juce::Colour>(_viewportColour));
+    }
 }
 
 auto LuaScriptViewer::reloadLuaState() -> void
