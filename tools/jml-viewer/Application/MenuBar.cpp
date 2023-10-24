@@ -33,7 +33,7 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
 
     if (index == MenuIndex::File) {
         auto files = juce::PopupMenu{};
-        for (auto const& filePath : getApplicationSettings().getRecentOpenFiles()) {
+        for (auto const& filePath : getApplicationSettings().getRecentFiles()) {
             auto const file = juce::File{filePath};
             files.addItem(file.getFileNameWithoutExtension(), [this, file] {
                 if (onFileLoad) {

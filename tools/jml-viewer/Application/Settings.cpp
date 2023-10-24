@@ -33,28 +33,36 @@ auto createSettingsOptions() -> juce::PropertiesFile::Options
 
 } // namespace
 
-Settings::Settings() { _settings.setStorageParameters(createSettingsOptions()); }
-
-auto Settings::getRecentOpenFiles() -> juce::StringArray
+Settings::Settings()
 {
-    auto& settings      = *_settings.getUserSettings();
-    auto const property = settings.getValue("recent_open_files", "");
-    return juce::StringArray::fromTokens(property, ";", "");
+    _settings.setStorageParameters(createSettingsOptions());
+    _recentFiles.setMaxNumberOfItems(10);
+}
+
+auto Settings::getRecentFiles() -> juce::StringArray
+{
+    auto& settings = *_settings.getUserSettings();
+    _recentFiles.restoreFromString(settings.getValue("recent_open_files", ""));
+    _recentFiles.removeNonExistentFiles();
+    return _recentFiles.getAllFilenames();
 }
 
 auto Settings::appendToRecentOpenFiles(juce::File const& file) -> void
 {
-    auto fileList = getRecentOpenFiles();
-    fileList.addIfNotAlreadyThere(file.getFullPathName());
-
-    auto& settings = *_settings.getUserSettings();
-    settings.setValue("recent_open_files", fileList.joinIntoString(";"));
+    _recentFiles.addFile(file);
+    saveRecentFiles();
 }
 
 auto Settings::clearRecentOpenFiles() -> void
 {
+    _recentFiles.clear();
+    saveRecentFiles();
+}
+
+auto Settings::saveRecentFiles() -> void
+{
     auto& settings = *_settings.getUserSettings();
-    settings.setValue("recent_open_files", "");
+    settings.setValue("recent_open_files", _recentFiles.toString());
 }
 
 } // namespace jml::viewer

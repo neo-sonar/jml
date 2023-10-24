@@ -8,12 +8,14 @@ struct Settings
 {
     Settings();
 
-    [[nodiscard]] auto getRecentOpenFiles() -> juce::StringArray;
+    [[nodiscard]] auto getRecentFiles() -> juce::StringArray;
     auto appendToRecentOpenFiles(juce::File const& file) -> void;
     auto clearRecentOpenFiles() -> void;
 
 private:
+    auto saveRecentFiles() -> void;
     juce::ApplicationProperties _settings;
+    juce::RecentlyOpenedFilesList _recentFiles;
 };
 
 struct SettingsWindow final : juce::PreferencesPanel
