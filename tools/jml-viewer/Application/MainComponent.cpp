@@ -9,7 +9,8 @@ namespace jml::viewer {
 
 MainComponent::MainComponent()
 {
-    _menuBar.onFileLoad = [this](auto const& file) { _documents.openScript(file); };
+    _settings.onThemeChange = [this] { getTopLevelComponent()->repaint(); };
+    _menuBar.onFileLoad     = [this](auto const& file) { _documents.openScript(file); };
 
     _commandManager.registerAllCommandsForTarget(this);
     addKeyListener(_commandManager.getKeyMappings());

@@ -27,7 +27,6 @@ auto createSettingsOptions() -> juce::PropertiesFile::Options
     options.folderName = "neo-sonar/" + juce::String{name};
 #endif
 
-    DBG(options.getDefaultFile().getFullPathName());
     return options;
 }
 
@@ -72,6 +71,16 @@ auto Settings::setKeyMapping(juce::XmlElement const& xml) -> void
     settings.setValue("key_mapping", &xml);
 }
 
+auto Settings::getThemeFile() -> juce::File
+{
+    return juce::File{_settings.getUserSettings()->getValue("theme_file")};
+}
+
+auto Settings::setThemeFile(juce::File const& file) -> void
+{
+    _settings.getUserSettings()->setValue("theme_file", file.getFullPathName());
+}
+
 auto Settings::saveRecentFiles() -> void
 {
     auto& settings = *_settings.getUserSettings();
@@ -96,8 +105,8 @@ SettingsWindow::~SettingsWindow() { _commandManager.getKeyMappings()->removeChan
 auto SettingsWindow::createComponentForPage(juce::String const& pageName) -> juce::Component*
 {
     if (pageName == "Code") {
-        auto foo   = tree.getPropertyAsValue("foo", nullptr);
-        auto bar   = tree.getPropertyAsValue("bar", nullptr);
+        auto foo   = _tree.getPropertyAsValue("foo", nullptr);
+        auto bar   = _tree.getPropertyAsValue("bar", nullptr);
         auto panel = std::make_unique<juce::PropertyPanel>();
         panel->addProperties(juce::Array<juce::PropertyComponent*>{
             std::make_unique<juce::SliderPropertyComponent>(foo, "Foo", 0.0, 1.0, 0.0).release(),
@@ -112,13 +121,17 @@ auto SettingsWindow::createComponentForPage(juce::String const& pageName) -> juc
     }
 
     if (pageName == "Look") {
-        auto theme        = tree.getPropertyAsValue("theme", nullptr);
-        auto themeOptions = FilePropertyComponent::Options{.pattern = "*.lua"};
+        auto themeOptions = FilePropertyComponent::Options{.pattern = "*.xml"};
+        auto theme        = _tree.getPropertyAsValue("theme_file", nullptr);
+        if (auto file = getApplicationSettings().getThemeFile(); file.existsAsFile()) {
+            theme.setValue(file.getFullPathName());
+        }
 
         auto panel = std::make_unique<juce::PropertyPanel>();
         panel->addProperties(juce::Array<juce::PropertyComponent*>{
             std::make_unique<FilePropertyComponent>(theme, "Theme", themeOptions).release(),
-            std::make_unique<CallbackPropertyComponent>("Reload", [] {}).release(),
+            std::make_unique<CallbackPropertyComponent>("Reload", [this] { remapColours(); })
+                .release(),
         });
         return panel.release();
     }
@@ -133,6 +146,23 @@ auto SettingsWindow::changeListenerCallback(juce::ChangeBroadcaster* source) -> 
         auto xml = mapping->createXml(true);
         getApplicationSettings().setKeyMapping(*xml);
     }
+}
+
+auto SettingsWindow::remapColours() -> void
+{
+    auto const file  = fromVar<juce::File>(_tree["theme_file"]);
+    auto const theme = loadTheme(file);
+    if (not theme) {
+        return;
+    }
+
+    apply(*theme, getLookAndFeel());
+    getTopLevelComponent()->repaint();
+    if (onThemeChange) {
+        onThemeChange();
+    }
+
+    getApplicationSettings().setThemeFile(file);
 }
 
 } // namespace jml::viewer

@@ -38,7 +38,7 @@ auto MultiScriptPanel::openScript(juce::File const& script) -> void
 {
     auto panel = std::make_unique<ScriptPanel>(_commandManager);
     panel->setScriptFile(script);
-    addDocument(panel.release(), juce::Colours::white, true);
+    addDocument(panel.release(), getSchemeWindowBackgroundColour(), true);
 }
 
 auto MultiScriptPanel::reloadActiveScript() -> void

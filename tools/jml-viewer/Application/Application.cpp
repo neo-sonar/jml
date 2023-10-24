@@ -54,6 +54,10 @@ auto Application::initialise(juce::String const& commandLine) -> void
     }
 
     juce::LookAndFeel::setDefaultLookAndFeel(&_lnf);
+    if (auto const theme = loadTheme(getApplicationSettings().getThemeFile()); theme) {
+        apply(*theme, _lnf);
+    }
+
     _mainWindow = std::make_unique<MainWindow>(getApplicationName());
 }
 
