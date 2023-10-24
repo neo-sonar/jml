@@ -14,6 +14,10 @@ MainComponent::MainComponent()
     _commandManager.registerAllCommandsForTarget(this);
     addKeyListener(_commandManager.getKeyMappings());
     setWantsKeyboardFocus(true);
+    if (auto const xml = getApplicationSettings().getKeyMapping(); xml != nullptr) {
+        auto const success = _commandManager.getKeyMappings()->restoreFromXml(*xml);
+        jassertquiet(success);
+    }
 
     addAndMakeVisible(_menuBar);
     addAndMakeVisible(_documents);
@@ -201,7 +205,7 @@ auto MainComponent::loadScriptPath() -> void
     _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         if (auto const result = chooser.getResult(); result.existsAsFile()) {
             _documents.openScript(result);
-            getApplicationSettings().appendToRecentOpenFiles(result);
+            getApplicationSettings().appendToRecentFiles(result);
         }
     });
 }

@@ -47,22 +47,92 @@ auto Settings::getRecentFiles() -> juce::StringArray
     return _recentFiles.getAllFilenames();
 }
 
-auto Settings::appendToRecentOpenFiles(juce::File const& file) -> void
+auto Settings::appendToRecentFiles(juce::File const& file) -> void
 {
     _recentFiles.addFile(file);
     saveRecentFiles();
 }
 
-auto Settings::clearRecentOpenFiles() -> void
+auto Settings::clearRecentFiles() -> void
 {
     _recentFiles.clear();
     saveRecentFiles();
+}
+
+auto Settings::getKeyMapping() -> std::unique_ptr<juce::XmlElement>
+{
+    auto& settings = *_settings.getUserSettings();
+    auto xml       = settings.getXmlValue("key_mapping");
+    return xml;
+}
+
+auto Settings::setKeyMapping(juce::XmlElement const& xml) -> void
+{
+    auto& settings = *_settings.getUserSettings();
+    settings.setValue("key_mapping", &xml);
 }
 
 auto Settings::saveRecentFiles() -> void
 {
     auto& settings = *_settings.getUserSettings();
     settings.setValue("recent_open_files", _recentFiles.toString());
+}
+
+SettingsWindow::SettingsWindow(juce::ApplicationCommandManager& commandManager)
+    : _commandManager{commandManager}
+{
+    auto code     = getIcon("data_object_black_48dp_svg");
+    auto look     = getIcon("palette_black_48dp_svg");
+    auto shortcut = getIcon("keyboard_black_48dp_svg");
+    addSettingsPage("Code", code.get(), code.get(), code.get());
+    addSettingsPage("Look", look.get(), look.get(), look.get());
+    addSettingsPage("Shortcut", shortcut.get(), shortcut.get(), shortcut.get());
+
+    _commandManager.getKeyMappings()->addChangeListener(this);
+}
+
+SettingsWindow::~SettingsWindow() { _commandManager.getKeyMappings()->removeChangeListener(this); }
+
+auto SettingsWindow::createComponentForPage(juce::String const& pageName) -> juce::Component*
+{
+    if (pageName == "Code") {
+        auto foo   = tree.getPropertyAsValue("foo", nullptr);
+        auto bar   = tree.getPropertyAsValue("bar", nullptr);
+        auto panel = std::make_unique<juce::PropertyPanel>();
+        panel->addProperties(juce::Array<juce::PropertyComponent*>{
+            std::make_unique<juce::SliderPropertyComponent>(foo, "Foo", 0.0, 1.0, 0.0).release(),
+            std::make_unique<juce::TextPropertyComponent>(bar, "Bar", 32, false).release(),
+        });
+        return panel.release();
+    }
+
+    if (pageName == "Shortcut") {
+        auto& mappings = *_commandManager.getKeyMappings();
+        return std::make_unique<juce::KeyMappingEditorComponent>(mappings, true).release();
+    }
+
+    if (pageName == "Look") {
+        auto theme        = tree.getPropertyAsValue("theme", nullptr);
+        auto themeOptions = FilePropertyComponent::Options{.pattern = "*.lua"};
+
+        auto panel = std::make_unique<juce::PropertyPanel>();
+        panel->addProperties(juce::Array<juce::PropertyComponent*>{
+            std::make_unique<FilePropertyComponent>(theme, "Theme", themeOptions).release(),
+            std::make_unique<CallbackPropertyComponent>("Reload", [] {}).release(),
+        });
+        return panel.release();
+    }
+
+    jassertfalse;
+    return nullptr;
+}
+
+auto SettingsWindow::changeListenerCallback(juce::ChangeBroadcaster* source) -> void
+{
+    if (auto* mapping = _commandManager.getKeyMappings(); mapping == source) {
+        auto xml = mapping->createXml(true);
+        getApplicationSettings().setKeyMapping(*xml);
+    }
 }
 
 } // namespace jml::viewer

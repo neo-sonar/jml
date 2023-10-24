@@ -42,7 +42,7 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
             });
         }
         files.addSeparator();
-        files.addItem("Clear", [] { getApplicationSettings().clearRecentOpenFiles(); });
+        files.addItem("Clear", [] { getApplicationSettings().clearRecentFiles(); });
 
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(cmd, IDs::open, "Open", getIcon("launch_black_48dp_svg"));
