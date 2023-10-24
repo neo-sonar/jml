@@ -24,8 +24,9 @@ auto FilePropertyComponent::launchFileChooser() -> void
 {
     using juce::FileBrowserComponent;
 
-    auto options = _options.selectDirectory ? FileBrowserComponent::canSelectDirectories
-                                            : FileBrowserComponent::openMode;
+    auto options = static_cast<int>(FileBrowserComponent::openMode);
+    options |= _options.selectDirectory ? FileBrowserComponent::canSelectDirectories
+                                        : FileBrowserComponent::canSelectFiles;
 
     auto dir = juce::File{getValue().toString()};
     if (not dir.isDirectory()) {
