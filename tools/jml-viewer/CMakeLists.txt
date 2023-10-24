@@ -22,6 +22,7 @@ juce_add_binary_data(jml-viewer_BinaryData
         "Asset/Icon/launch_black_48dp.svg"
         "Asset/Icon/palette_black_48dp.svg"
         "Asset/Icon/redo_black_48dp.svg"
+        "Asset/Icon/restore_black_48dp.svg"
         "Asset/Icon/save_as_black_48dp.svg"
         "Asset/Icon/save_black_48dp.svg"
         "Asset/Icon/select_all_black_48dp.svg"
@@ -39,6 +40,8 @@ juce_add_gui_app(jml-viewer
 )
 
 set(sources
+    "Application/Application.hpp"
+    "Application/Application.cpp"
     "Application/CommandIDs.hpp"
     "Application/CommandLine.hpp"
     "Application/CommandLine.cpp"

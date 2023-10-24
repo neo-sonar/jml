@@ -1,5 +1,6 @@
 #include "MainComponent.hpp"
 
+#include "Application/Application.hpp"
 #include "Application/CommandIDs.hpp"
 
 #include <jml_tools/jml_tools.hpp>
@@ -8,6 +9,8 @@ namespace jml::viewer {
 
 MainComponent::MainComponent()
 {
+    _menuBar.onFileLoad = [this](auto const& file) { _documents.openScript(file); };
+
     _commandManager.registerAllCommandsForTarget(this);
     addKeyListener(_commandManager.getKeyMappings());
     setWantsKeyboardFocus(true);
@@ -142,6 +145,7 @@ auto MainComponent::perform(juce::ApplicationCommandTarget::InvocationInfo const
         case CommandIDs::save:
         case CommandIDs::saveAs: /*saveProject();*/ break;
         case CommandIDs::settings: showSettingsWindow(); break;
+        case CommandIDs::quit: getApplication().quit(); break;
         case CommandIDs::undo: _undoManager.undo(); break;
         case CommandIDs::redo: _undoManager.redo(); break;
         case CommandIDs::about: showAboutWindow(); break;
@@ -197,6 +201,7 @@ auto MainComponent::loadScriptPath() -> void
     _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         if (auto const result = chooser.getResult(); result.existsAsFile()) {
             _documents.openScript(result);
+            appendToRecentOpenFiles(result);
         }
     });
 }

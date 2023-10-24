@@ -1,5 +1,6 @@
 #include "MenuBar.hpp"
 
+#include "Application/Application.hpp"
 #include "Application/CommandIDs.hpp"
 
 #include <jml_tools/jml_tools.hpp>
@@ -31,9 +32,22 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
     auto const index = static_cast<MenuIndex>(menuIndex);
 
     if (index == MenuIndex::File) {
+        auto files = juce::PopupMenu{};
+        for (auto const& filePath : getRecentOpenFiles()) {
+            auto const file = juce::File{filePath};
+            files.addItem(file.getFileNameWithoutExtension(), [this, file] {
+                if (onFileLoad) {
+                    onFileLoad(file);
+                }
+            });
+        }
+        files.addSeparator();
+        files.addItem("Clear", [] { clearRecentOpenFiles(); });
+
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(cmd, IDs::open, "Open", getIcon("launch_black_48dp_svg"));
         menu.addCommandItem(cmd, IDs::reload, "Reload", getIcon("autorenew_black_48dp_svg"));
+        menu.addSubMenu("Recent Files", files, true, getIcon("restore_black_48dp_svg"));
         menu.addSeparator();
         menu.addCommandItem(cmd, IDs::save, "Save", getIcon("save_black_48dp_svg"));
         menu.addCommandItem(cmd, IDs::saveAs, "Save As", getIcon("save_as_black_48dp_svg"));

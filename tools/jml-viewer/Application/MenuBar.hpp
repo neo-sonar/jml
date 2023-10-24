@@ -17,6 +17,8 @@ struct MenuBar final
     auto getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -> juce::PopupMenu override;
     auto menuItemSelected(int /*menuItemID*/, int /*topLevelMenuIndex*/) -> void override;
 
+    std::function<void(juce::File const&)> onFileLoad;
+
 private:
     enum struct MenuIndex
     {
