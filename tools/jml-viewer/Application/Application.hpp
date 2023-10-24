@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Application/Settings.hpp"
+
 #include <jml_tools/jml_tools.hpp>
 #include <juce_gui_basics/juce_gui_basics.h>
 
@@ -7,10 +9,10 @@ namespace jml::viewer {
 
 struct Application final : juce::JUCEApplication
 {
-    Application();
+    Application()           = default;
     ~Application() override = default;
 
-    auto getSettings() -> juce::ApplicationProperties&;
+    auto getSettings() -> Settings&;
 
     auto getApplicationName() -> juce::String const override;
     auto getApplicationVersion() -> juce::String const override;
@@ -31,16 +33,12 @@ struct Application final : juce::JUCEApplication
     };
 
 private:
-    juce::ApplicationProperties _settings;
+    Settings _settings;
     jml::LookAndFeel _lnf;
     std::unique_ptr<MainWindow> _mainWindow;
 };
 
 [[nodiscard]] auto getApplication() -> Application&;
-[[nodiscard]] auto getApplicationSettings() -> juce::PropertiesFile&;
-
-[[nodiscard]] auto getRecentOpenFiles() -> juce::StringArray;
-auto appendToRecentOpenFiles(juce::File const& file) -> void;
-auto clearRecentOpenFiles() -> void;
+[[nodiscard]] auto getApplicationSettings() -> Settings&;
 
 } // namespace jml::viewer

@@ -11,31 +11,6 @@ namespace jml::viewer {
 
 namespace {
 
-auto createSettingsOptions() -> juce::PropertiesFile::Options
-{
-    auto const name = getApplication().getApplicationName();
-
-    auto options                     = juce::PropertiesFile::Options{};
-    options.applicationName          = "settings";
-    options.filenameSuffix           = ".xml";
-    options.commonToAllUsers         = false;
-    options.ignoreCaseOfKeyNames     = false;
-    options.doNotSave                = false;
-    options.millisecondsBeforeSaving = 3'000;
-    options.storageFormat            = juce::PropertiesFile::StorageFormat::storeAsXML;
-    options.processLock              = nullptr;
-    options.osxLibrarySubFolder      = "Application Support";
-
-#if JUCE_LINUX
-    options.folderName = ".config/neo-sonar/" + juce::String{name};
-#else
-    options.folderName = "neo-sonar/" + juce::String{name};
-#endif
-
-    DBG(options.getDefaultFile().getFullPathName());
-    return options;
-}
-
 auto runCommand(auto const func, auto const& cli) -> void
 {
     auto& app = *juce::JUCEApplication::getInstance();
@@ -51,9 +26,7 @@ auto runCommand(auto const func, auto const& cli) -> void
 
 } // namespace
 
-Application::Application() { _settings.setStorageParameters(createSettingsOptions()); }
-
-auto Application::getSettings() -> juce::ApplicationProperties& { return _settings; }
+auto Application::getSettings() -> Settings& { return _settings; }
 
 auto Application::getApplicationName() -> juce::String const { return JUCE_APPLICATION_NAME_STRING; }
 
@@ -131,27 +104,6 @@ auto getApplication() -> Application&
     return *app;
 }
 
-auto getApplicationSettings() -> juce::PropertiesFile&
-{
-    auto* settings = getApplication().getSettings().getUserSettings();
-    jassert(settings != nullptr);
-    return *settings;
-}
-
-auto getRecentOpenFiles() -> juce::StringArray
-{
-    auto& settings      = getApplicationSettings();
-    auto const property = settings.getValue("recent_open_files", "");
-    return juce::StringArray::fromTokens(property, ";", "");
-}
-
-auto appendToRecentOpenFiles(juce::File const& file) -> void
-{
-    auto fileList = getRecentOpenFiles();
-    fileList.addIfNotAlreadyThere(file.getFullPathName());
-    getApplicationSettings().setValue("recent_open_files", fileList.joinIntoString(";"));
-}
-
-auto clearRecentOpenFiles() -> void { getApplicationSettings().setValue("recent_open_files", ""); }
+auto getApplicationSettings() -> Settings& { return getApplication().getSettings(); }
 
 } // namespace jml::viewer

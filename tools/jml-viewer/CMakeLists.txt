@@ -50,6 +50,8 @@ set(sources
     "Application/MainComponent.cpp"
     "Application/MenuBar.hpp"
     "Application/MenuBar.cpp"
+    "Application/Settings.hpp"
+    "Application/Settings.cpp"
 
     "CodeEditor/CodeEditor.cpp"
     "CodeEditor/CodeEditor.hpp"

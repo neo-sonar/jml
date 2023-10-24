@@ -33,7 +33,7 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
 
     if (index == MenuIndex::File) {
         auto files = juce::PopupMenu{};
-        for (auto const& filePath : getRecentOpenFiles()) {
+        for (auto const& filePath : getApplicationSettings().getRecentOpenFiles()) {
             auto const file = juce::File{filePath};
             files.addItem(file.getFileNameWithoutExtension(), [this, file] {
                 if (onFileLoad) {
@@ -42,7 +42,7 @@ auto MenuBar::getMenuForIndex(int menuIndex, juce::String const& /*menuName*/) -
             });
         }
         files.addSeparator();
-        files.addItem("Clear", [] { clearRecentOpenFiles(); });
+        files.addItem("Clear", [] { getApplicationSettings().clearRecentOpenFiles(); });
 
         auto menu = juce::PopupMenu{};
         menu.addCommandItem(cmd, IDs::open, "Open", getIcon("launch_black_48dp_svg"));

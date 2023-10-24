@@ -201,7 +201,7 @@ auto MainComponent::loadScriptPath() -> void
     _fileChooser->launchAsync(mode, [this](auto const& chooser) {
         if (auto const result = chooser.getResult(); result.existsAsFile()) {
             _documents.openScript(result);
-            appendToRecentOpenFiles(result);
+            getApplicationSettings().appendToRecentOpenFiles(result);
         }
     });
 }
