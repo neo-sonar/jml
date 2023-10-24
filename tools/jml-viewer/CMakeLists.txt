@@ -105,11 +105,9 @@ target_link_libraries(jml-viewer
         juce::juce_recommended_warning_flags
 )
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    if(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 15)
-        target_link_options(jml-viewer
-            PRIVATE
-                -Wl,-weak_reference_mismatches,weak
-        )
-    endif()
+if((${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND (${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 15))
+    target_link_options(jml-viewer
+        PRIVATE
+            -Wl,-weak_reference_mismatches,weak
+    )
 endif()
